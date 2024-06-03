@@ -6,19 +6,31 @@ const Navbar = () => {
       <header>
         <nav className="navigation">
           <div className="left">
-            <div className="logo">
+            <h1 className="logo">
               Lo<span style={{ color: "#397A71" }}>go</span>
-            </div>
+            </h1>
           </div>
           <div className="center">
-            <a href="/" className="navigation-item">Home</a>
-            <a href="#" className="navigation-item">Courses</a>
-            <a href="#" className="navigation-item">Testimonial</a>
-            <a href="#" className="navigation-item">Mentor</a>
+            <a href="/" className="navigation-item">
+              Home
+            </a>
+            <a href="#" className="navigation-item">
+              Courses
+            </a>
+            <a href="#" className="navigation-item">
+              Testimonial
+            </a>
+            <a href="#" className="navigation-item">
+              Mentor
+            </a>
           </div>
           <div className="right">
-            <a href="#" className="sign-in">Sign In</a>
-            <a href="" className="sign-up">Sign Up</a>
+            <button className="btn-sign sign-in">
+              <span>Sign In</span>
+            </button>
+            <button className="btn-sign sign-up">
+              <span>Sign Up</span>
+            </button>
           </div>
         </nav>
       </header>
