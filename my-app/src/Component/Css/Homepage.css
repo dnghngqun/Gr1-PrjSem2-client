@@ -1,0 +1,25 @@
+/* reset css 1 for all page */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+section#introduce .intro-container {
+  display: flex;
+  width: var(--widthAllPage);
+  margin: 0 auto;
+  padding-top: 80px;
+}
+
+section#introduce .intro-container > .intro-left {
+  width: 55%;
+}
+
+section#introduce .intro-container > .intro-right {
+  width: 45%;
+}
+
+.intro-container .intro-right > img {
+  width: 100%;
+}
