@@ -8,26 +8,32 @@ const Homepage = () => {
       <section id="introduce">
         <div className="intro-container">
           <div className="intro-left">
-            <h1 className="title">
-              <mark className="Improve">
+            <h2 className="title">
+              <mark className="improve">
                 Improve
-                <img src="assets/svg/headline-curve.svg" alt="svg" />
+                <img
+                  className="headline"
+                  src="assets/svg/headline-curve.svg"
+                  alt="svg"
+                />
               </mark>
-              your
-              <span>Skill</span>
+              <span className="title-left-svg"> your Skill
               <img
+              className="svg-top-skill"
                 src="assets/svg/svgexport-2.svg"
                 style={{ width: "23px", height: "26px" }}
                 alt="svg-top-skill"
               />
-            </h1>
+              </span>
+              <br />
+              with Different Way
+            </h2>
           </div>
           <div className="intro-right">
             <img src="assets/img/home-hero.webp" alt="intro-image" />
           </div>
         </div>
       </section>
-      
     </div>
   );
 };
