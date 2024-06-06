@@ -48,7 +48,7 @@ const Homepage = () => {
             </div>
           </div>
           <div className="intro-right">
-            <img src="assets/img/home-hero.webp" alt="intro-image" />
+            <img src="assets/img/home-hero.webp" alt="..." />
           </div>
         </div>
         <div className="intro-bottom">
