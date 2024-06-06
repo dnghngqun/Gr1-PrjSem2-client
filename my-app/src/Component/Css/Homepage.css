@@ -5,19 +5,24 @@
   box-sizing: border-box;
 }
 
+/* this function using to test, delete if you like */
+section#introduce {
+  height: 1000px;
+}
+
 section#introduce .intro-container {
   display: flex;
-  width: var(--widthAllPage);
+  max-width: var(--widthAllPage);
   margin: 0 auto;
   padding-top: 80px;
 }
 
 section#introduce .intro-container > .intro-left {
-  width: 55%;
+  width: 60%;
 }
 
 section#introduce .intro-container > .intro-right {
-  width: 45%;
+  width: 40%;
 }
 
 .intro-container .intro-right > img {
@@ -43,7 +48,7 @@ section#introduce h2.title {
   font-weight: 700;
   letter-spacing: 1.5px;
   line-height: 1.3;
-  padding-top: 15px;
+  padding-top: 30px;
 }
 h2.title span.title-left-svg {
   position: relative;
@@ -53,4 +58,70 @@ h2.title img.svg-top-skill {
   position: absolute;
   top: -5px;
   right: -20px;
+}
+
+section#introduce .intro-left p.content {
+  color: #717171;
+  width: 74.5%;
+  font-size: 15.5px;
+  line-height: 1.5;
+  margin: 25px 0;
+}
+section#introduce .intro-left .button {
+  height: 45px;
+  border: 2px solid #397a71;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+}
+section#introduce .intro-left .button.btn1 {
+  width: 124px;
+  margin-right: 16px;
+  margin-left: 2px;
+  color: #fff;
+  background-color: #397a71;
+}
+section#introduce .intro-left .button.btn2 {
+  width: 156px;
+  background-color: #fff;
+  color: #397a71;
+}
+
+section#introduce .intro-bottom {
+  max-width: var(--widthAllPage);
+  box-shadow: 0px 10px 15px 0 rgba(0, 0, 0, 0.209);
+  margin: 0 auto;
+  border-radius: 15px;
+}
+
+.intro-bottom .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  padding: 25px 0;
+}
+
+.intro-bottom .left,
+.intro-bottom .right,
+.intro-bottom .center {
+  width: 33.3333333%;
+  text-align: center;
+}
+
+.intro-bottom p {
+  font-size: 44px;
+  margin-bottom: 14px;
+  color: #f4b350;
+  line-height: 1.5;
+  font-weight: 700;
+  font-family: "Cabin", sans-serif;
+}
+
+.intro-bottom h5 {
+  color: #717171;
+  font-size: 17px;
+  line-height: 1.4;
+  font-weight: 600;
 }
