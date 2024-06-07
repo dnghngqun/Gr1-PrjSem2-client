@@ -10,6 +10,7 @@ section#introduce {
   height: 1000px;
 }
 
+/* section1 */
 section#introduce .intro-container {
   display: flex;
   max-width: var(--widthAllPage);
@@ -124,4 +125,346 @@ section#introduce .intro-bottom {
   font-size: 17px;
   line-height: 1.4;
   font-weight: 600;
+}
+
+/* section 3 */
+.section3 {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.container1,
+.container2 {
+  flex: 1 1 calc(50% - 40px);
+  margin-bottom: 20px;
+}
+
+.container1 .feature-img {
+  position: relative;
+}
+
+.container1 .feature-img img {
+  width: 80%;
+  height: auto;
+}
+
+/* Vị trí nội dung nổi bật */
+.feature-content {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 150px;
+  background-color: #fff;
+  padding: 12px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  font-size: 0.85rem;
+  font-family: "Cabin", sans-serif;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+.feature-content h1 {
+  font-size: 16px;
+  margin: 0 0 10px;
+}
+
+.feature-content ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  color: #717171;
+}
+
+.feature-content li {
+  margin-bottom: 10px;
+}
+
+.progress-container {
+  margin: 5px 0;
+}
+
+.progress-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 10px;
+  position: relative;
+}
+
+.progress-bar-inner {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.progress-bar-inner.pink {
+  background-color: #f303ff;
+}
+
+.progress-bar-inner.green {
+  background-color: #127c71;
+}
+
+.progress-bar-inner.blue {
+  background-color: #0063ff;
+}
+
+/* Vòng tròn tiến trình */
+.progress-circle {
+  width: 100px;
+  height: 100px;
+  margin: 10px auto;
+  display: block;
+}
+
+.progress-circle-background {
+  stroke: #e0e0e0;
+  stroke-width: 4;
+  fill: none;
+}
+
+.progress-circle-progress {
+  stroke: #127c71;
+  stroke-width: 4;
+  fill: none;
+  transition: stroke-dashoffset 0.35s;
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+
+.progress-text {
+  fill: #127c71;
+  font-size: 18px;
+  font-weight: bold;
+  text-anchor: middle;
+  /* dominant-baseline: middle; */
+}
+
+/* Hộp thông tin nhỏ */
+.LoremIpsum {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 150px;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.85rem;
+  font-family: "Cabin", sans-serif;
+  font-weight: 400;
+  line-height: 1.75;
+  margin-bottom: 8px;
+}
+
+p {
+  color: #9e9e9e;
+}
+@media screen and (max-width: 768px) {
+  .container1,
+  .container2 {
+    flex-basis: 100%;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1200px) {
+  .container1,
+  .container2 {
+    flex-basis: calc(50% - 40px);
+  }
+}
+
+.headline {
+  position: relative;
+  font-size: 1rem;
+  margin-top: 50px;
+  margin-left: 10px;
+}
+.hightlight {
+  color: #127c71;
+}
+
+.container2 .curve-image {
+  position: absolute;
+  bottom: -5px;
+  left: 45%;
+  transform: translateX(-80%);
+}
+
+.circle-container {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #127c71;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-container svg {
+  width: 60%;
+  height: 60%;
+  fill: #fff;
+}
+
+.benefit-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 100px;
+}
+
+.benefit {
+  flex: 0 1 calc(50% - 10px); /* Mỗi ô chiếm 50% chiều rộng, trừ đi khoảng cách giữa các ô */
+  box-sizing: border-box; /* Đảm bảo padding và border không làm thay đổi kích thước của ô */
+  margin-bottom: 20px; /* Khoảng cách giữa các hàng */
+  padding: 20px;
+}
+
+.benefit:nth-child(odd) {
+  margin-right: 10px; /* Khoảng cách giữa các ô bên trái và bên phải */
+}
+
+.benefit-title {
+  color: #ffaf35;
+}
+
+.benefit {
+  height: 100px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.benefit-one {
+  flex: 1;
+  padding: 10px;
+}
+
+.benefit-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.benefit-description {
+  font-size: 14px;
+}
+
+/* CSS code for responsive design */
+
+/* Thiết lập responsive cho phần avatar */
+.avatar {
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.03);
+  padding: 16px; /* Giảm padding xuống còn 16px */
+  border-radius: 8px; /* Bo tròn góc tăng lên */
+}
+
+/* Thiết lập responsive cho ảnh avatar */
+.avatar img {
+  width: 100%; /* Đảm bảo ảnh avatar luôn đầy đủ chiều rộng */
+  max-width: 60px; /* Đặt giới hạn chiều rộng tối đa */
+  height: auto; /* Chiều cao tự động dựa trên tỉ lệ chiều rộng */
+  border-radius: 50%; /* Bo tròn góc */
+  margin-right: 15px; /* Khoảng cách giữa ảnh avatar và thông tin avatar */
+}
+
+/* Thiết lập responsive cho mũi tên bên phải */
+.arrow-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #127c71;
+  display: inline-block;
+  overflow: hidden;
+  transition: background-color 0.3s;
+}
+
+/* Thiết lập responsive cho màu nền khi hover vào mũi tên bên phải */
+.arrow-wrapper:hover {
+  background-color: #fff;
+}
+
+/* Thiết lập responsive cho màu fill của biểu tượng svg khi hover vào mũi tên bên phải */
+.arrow-wrapper:hover .MuiSvgIcon-root {
+  fill: #127c71;
+}
+
+/* Thiết lập responsive cho biểu tượng svg trong mũi tên bên phải */
+.arrow-wrapper .MuiSvgIcon-root {
+  width: 80%;
+  height: 80%;
+  fill: #fff;
+  transition: fill 0.3s;
+}
+
+/* Thiết lập responsive cho vị trí của mũi tên bên phải */
+.arrow-background {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Thiết lập responsive cho giao diện slider */
+.slick-slider {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Thiết lập responsive cho các slide trong slider */
+.slick-slide {
+  display: none;
+  transition: opacity 0.5s;
+}
+
+/* Thiết lập responsive cho các slide active trong slider */
+.slick-slide.active {
+  display: block;
+  opacity: 1;
+}
+.pictureBigTwo {
+  width: 50%; /* Avatar chiếm 50% chiều rộng của trình duyệt */
+  max-width: 50%;
+}
+
+.pictureBigTwo {
+  width: 100%; /* Hình ảnh chiếm 100% chiều rộng của phần tử cha */
+  max-width: 100%;
+}
+
+/* Media queries cho các thiết bị có kích thước màn hình khác nhau */
+@media only screen and (max-width: 768px) {
+  /* Điều chỉnh các thuộc tính CSS tương ứng cho kích thước màn hình nhỏ hơn hoặc bằng 768px */
+  .avatar {
+    padding: 10px;
+    border-radius: 4px;
+  }
+
+  .avatar img {
+    max-width: 50px;
+  }
 }
