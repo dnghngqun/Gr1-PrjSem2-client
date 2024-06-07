@@ -489,7 +489,6 @@ const Homepage = () => {
               <img src="assets/img/home-testimonial.webp" alt="..." />
             </div>
           </div>
-          <script src="script.js"></script>
         </div>
       </section>
     </div>

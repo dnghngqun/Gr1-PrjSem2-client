@@ -2,7 +2,7 @@ course:
 + id
 + name
 + price
-+ phân loại()
++ category
 + status // trạng thái khoá học, đã bắt đầu, chưa bắt đầu, đã hoàn thành, đang bảo lưu 
 
 account: //chứa cả thông tin admin
@@ -20,11 +20,23 @@ order:
 + totalPrice
 + status
 
+
 OrderDetail:
 + id
 + courseId
 + orderId
 + Date
++ Deal
 + Description
 + Quantity
++ TotalAmount 
 + status //pending, paid, unpaid
+
+Payment:
++ id
++ userID
++ payment_method// phuowng thuwcs thanh toan visa, mastercard
++ orderDetailId
++ amount
++ paymentDate
++ paymentStatus

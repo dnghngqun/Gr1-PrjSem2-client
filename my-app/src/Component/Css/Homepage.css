@@ -5,11 +5,6 @@
   box-sizing: border-box;
 }
 
-/* this function using to test, delete if you like */
-section#introduce {
-  height: 1000px;
-}
-
 /* section1 */
 section#introduce .intro-container {
   display: flex;
@@ -129,8 +124,8 @@ section#introduce .intro-bottom {
 
 /* section 3 */
 .section3 {
+  margin-top: 50px;
   font-family: "Roboto", sans-serif;
-  margin: 0;
   padding: 0;
 }
 
