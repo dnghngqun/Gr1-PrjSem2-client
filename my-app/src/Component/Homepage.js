@@ -1,9 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect } from "react";
+// import Swiper JS
+import Swiper from "swiper";
+// import Swiper styles
+import "swiper/swiper-bundle.css";
 import "./Css/Homepage.css";
 import Navbar from "./Navbar";
 const Homepage = () => {
   useEffect(() => {
+    const swiper = new Swiper(".swiper", {
+      slidesPerView: 3,
+      spaceBetween: 50,
+    });
     const slides = document.querySelectorAll(".slick-slide");
 
     slides.forEach((slide) => {
@@ -91,6 +99,7 @@ const Homepage = () => {
           </div>
         </div>
       </section>
+
       <section className="section3">
         <div className="container">
           <div className="container1">
@@ -488,6 +497,97 @@ const Homepage = () => {
             <div className="pictureBigTwo">
               <img src="assets/img/home-testimonial.webp" alt="..." />
             </div>
+          </div>
+        </div>
+      </section>
+      <section className="section4">
+        <div className="section4-container">
+          <h1>Our Expert Mentors</h1>
+          <div className="swiper-container swiper">
+            <div class="swiper-wrapper">
+              <div key={1} class="swiper-slide mentor">
+                <div className="mentor-container">
+                  <img
+                    src="assets/img/mentor1.webp"
+                    className="mentor-img"
+                    alt="..."
+                  />
+                  <h2 className="mentor-name">Leon S Kennedy</h2>
+                  <div className="mentor-course">Machine Learning</div>
+                  <p className="mentor-title">
+                    Duis aute irure dolor in reprehenderit in voluptate velit
+                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.
+                  </p>
+                  <div className="logo-mentor">TOEIC</div>
+                </div>
+              </div>
+              <div key={2} class="swiper-slide mentor">
+                <div className="mentor-container">
+                  <img
+                    src="assets/img/mentor2.webp"
+                    className="mentor-img"
+                    alt="..."
+                  />
+                  <h2 className="mentor-name">Nguyen Thuy</h2>
+                  <div className="mentor-course">Android Development</div>
+                  <p className="mentor-title">
+                    Duis aute irure dolor in reprehenderit in voluptate velit
+                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.
+                  </p>
+                  <div className="logo-mentor">IELTS</div>
+                </div>
+              </div>
+              <div key={3} class="swiper-slide mentor">
+                <div className="mentor-container">
+                  <img
+                    src="assets/img/mentor3.webp"
+                    className="mentor-img"
+                    alt="..."
+                  />
+                  <h2 className="mentor-name">Rizky Known</h2>
+                  <div className="mentor-course">Fullstack Development</div>
+                  <p className="mentor-title">
+                    Duis aute irure dolor in reprehenderit in voluptate velit
+                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.
+                  </p>
+                  <div className="logo-mentor">TOEIC</div>
+                </div>
+              </div>
+              <div
+                key={4}
+                class="swiper-slide mentor"
+                style={{ display: "none" }}>
+                <div className="mentor-container">
+                  <img
+                    src="assets/img/mentor4.webp"
+                    className="mentor-img"
+                    alt="..."
+                  />
+                  <h2 className="mentor-name">Jhon Dwirian</h2>
+                  <div className="mentor-course">UX/UI Design</div>
+                  <p className="mentor-title">
+                    Duis aute irure dolor in reprehenderit in voluptate velit
+                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.
+                  </p>
+                  <div className="logo-mentor">IELTS</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-pagination"></div>
+
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+            <div class="swiper-scrollbar"></div>
           </div>
         </div>
       </section>

@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  --widthMentorElement: 328px;
+}
+
 /* section1 */
 section#introduce .intro-container {
   display: flex;
@@ -462,4 +466,25 @@ p {
   .avatar img {
     max-width: 50px;
   }
+}
+
+/* section4 */
+section.section4 {
+  max-width: var(--widthAllPage);
+  margin: 0 auto;
+  background-color: #edf3f3;
+}
+
+div.mentor {
+  max-width: 360px;
+  margin: auto;
+}
+
+div.mentor .mentor-container {
+  max-width: var(--widthMentorElement);
+  margin: 10px auto;
+}
+
+.mentor .mentor-container > .mentor-img {
+  width: 100%;
 }

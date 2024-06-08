@@ -90,16 +90,18 @@ CREATE TABLE Order_(
     id INT AUTO_INCREMENT PRIMARY KEY ,
     userId INT,
     totalPrice decimal,
+    createAt DATE,
+    updateAt DATE,
     status TINYINT,
     FOREIGN KEY (userId) REFERENCES Account(id)
 );
+
 
 CREATE TABLE OrderDetail(
     id INT PRIMARY KEY AUTO_INCREMENT,
     courseId INT Not Null ,
     orderId int NOT NULL ,
-    date DATE,
-    deal decimal DEFAULT 0,
+    discount decimal DEFAULT 0,
     quantity int ,
     totalAmount decimal,
     status tinyint,
@@ -117,6 +119,14 @@ CREATE TABLE Payment(
     status tinyint, # trạng thái: paid, outstanding, cancel
     FOREIGN KEY (userId) REFERENCES Account(id),
     FOREIGN KEY (orderDetailId) REFERENCES OrderDetail(id)
+);
+
+CREATE TABLE ImageCourse(
+    id INT AUTO_INCREMENT PRIMARY KEY ,
+    courseId INT,
+    path varchar(255),
+    updateAt DATE,
+    FOREIGN KEY (courseId) REFERENCES Course(id)
 );
 
 SELECT * FROM Account;
