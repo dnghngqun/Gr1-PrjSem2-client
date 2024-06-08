@@ -1,5 +1,4 @@
 CREATE DATABASE CourseManagement;
-
 use CourseManagement;
 
 
@@ -55,6 +54,7 @@ CREATE TABLE Class (
     id INT AUTO_INCREMENT PRIMARY KEY,
     courseId INT NOT NULL,
     instructorId INT NOT NULL,
+    location TEXT,
     startDate DATE,
     endDate DATE,
     status TINYINT,
@@ -130,5 +130,4 @@ CREATE TABLE ImageCourse(
 );
 
 SELECT * FROM Account;
-
 
