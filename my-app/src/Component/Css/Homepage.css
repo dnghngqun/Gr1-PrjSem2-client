@@ -479,19 +479,75 @@ section.section4 .section4-container {
   margin: auto;
 }
 
+.swiper-container {
+  /* margin: 0 auto; */
+  /* width: 1150px; */
+}
+
 div.mentor {
-  max-width: 360px;
-  margin: auto;
-  background-color: #6ccc4f;
-  border-radius: 16px;
+  padding: 20px 20px;
 }
 
 div.mentor .mentor-container {
-  max-width: var(--widthMentorElement);
-  margin: 10px auto;
+  width: var(--widthMentorElement);
+  padding: 16px;
+  box-sizing: content-box;
+  /* margin: 0 auto; */
+  border-radius: 16px;
+  background-color: #fff;
 }
 
 .mentor .mentor-container > .mentor-img {
   width: 100%;
   border-radius: 16px;
+  object-fit: cover;
+  height: 200px;
+}
+
+.mentor .mentor-container > .mentor-course {
+  margin: 10px 0 20px 0;
+  color: #7d7d7d;
+}
+
+.mentor .mentor-container > .mentor-title {
+  color: #717171;
+  font-size: 13.6px;
+  line-height: 1.5;
+}
+
+.mentor .mentor-container > .logo-mentor {
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #ffaf35;
+}
+
+.section4-container > h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin: 40px 0;
+}
+
+.swiper-button {
+  --button-px: 38px;
+  float: inline-end;
+  width: var(--button-px);
+  height: var(--button-px);
+  border-radius: 50%;
+  background-color: #fff;
+  border: 0;
+  margin: 10px 10px;
+  cursor: pointer;
+}
+
+.pagination-style {
+  width: 18% !important;
+  bottom: var(--swiper-pagination-bottom, 20px) !important;
+}
+
+.pagination-style .swiper-pagination-bullet {
+  width: 30px;
+  height: 8px;
+  background-color: #397a71;
+  border-radius: 8px;
 }

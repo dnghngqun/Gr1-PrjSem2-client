@@ -5,16 +5,18 @@ import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 // import Swiper styles
 import "swiper/css";
-import "swiper/css/navigation";
+// import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./Css/Homepage.css";
 import Navbar from "./Navbar";
 const Homepage = () => {
   useEffect(() => {
     const swiper = new Swiper(".swiper", {
-      direction:"horizontal",
-      
-      modules: [Navigation, Pagination],
+      slidesPerView: "3", // show 3 slides
+      direction: "horizontal", // ngang
+      loop: true, // vong lap
+
+      modules: [Navigation, Pagination], // này để sử dụng module được thêm vào
       // If we need pagination
       pagination: {
         el: ".swiper-pagination",
@@ -25,11 +27,15 @@ const Homepage = () => {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false, //stop on hover: no
+      },
 
       // And if we need scrollbar
-      scrollbar: {
-        el: ".swiper-scrollbar",
-      },
+      // scrollbar: {
+      //   el: ".swiper-scrollbar",
+      // },
     });
     const slides = document.querySelectorAll(".slick-slide");
 
@@ -523,8 +529,8 @@ const Homepage = () => {
         <div className="section4-container">
           <h1>Our Expert Mentors</h1>
           <div className="swiper-container swiper">
-            <div class="swiper-wrapper">
-              <div key={1} class="swiper-slide mentor">
+            <div className="swiper-wrapper">
+              <div className="swiper-slide mentor">
                 <div className="mentor-container">
                   <img
                     src="assets/img/mentor1.webp"
@@ -542,7 +548,7 @@ const Homepage = () => {
                   <div className="logo-mentor">TOEIC</div>
                 </div>
               </div>
-              <div key={2} class="swiper-slide mentor">
+              <div className="swiper-slide mentor">
                 <div className="mentor-container">
                   <img
                     src="assets/img/mentor2.webp"
@@ -560,7 +566,7 @@ const Homepage = () => {
                   <div className="logo-mentor">IELTS</div>
                 </div>
               </div>
-              <div key={3} class="swiper-slide mentor">
+              <div className="swiper-slide mentor">
                 <div className="mentor-container">
                   <img
                     src="assets/img/mentor3.webp"
@@ -578,7 +584,7 @@ const Homepage = () => {
                   <div className="logo-mentor">TOEIC</div>
                 </div>
               </div>
-              <div key={4} class="swiper-slide mentor">
+              <div className="swiper-slide mentor">
                 <div className="mentor-container">
                   <img
                     src="assets/img/mentor4.webp"
@@ -598,12 +604,16 @@ const Homepage = () => {
               </div>
             </div>
 
-            <div class="swiper-pagination"></div>
+            <div className="swiper-pagination pagination-style"></div>
 
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <button type="button" className="swiper-button-next swiper-button">
+              <img src="assets/svg/svgexport-10.svg" alt="right" />
+            </button>
+            <button type="button" className="swiper-button-prev swiper-button">
+              <img src="assets/svg/svgexport-6.svg" alt="left" />
+            </button>
 
-            <div class="swiper-scrollbar"></div>
+            {/* <div className="swiper-scrollbar"></div> */}
           </div>
         </div>
       </section>
