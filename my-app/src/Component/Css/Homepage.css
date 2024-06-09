@@ -470,14 +470,20 @@ p {
 
 /* section4 */
 section.section4 {
-  max-width: var(--widthAllPage);
-  margin: 0 auto;
   background-color: #edf3f3;
+  /* this porperty using to test, delete if you like  */
+  height: 1000px;
+}
+section.section4 .section4-container {
+  max-width: var(--widthAllPage);
+  margin: auto;
 }
 
 div.mentor {
   max-width: 360px;
   margin: auto;
+  background-color: #6ccc4f;
+  border-radius: 16px;
 }
 
 div.mentor .mentor-container {
@@ -487,4 +493,5 @@ div.mentor .mentor-container {
 
 .mentor .mentor-container > .mentor-img {
   width: 100%;
+  border-radius: 16px;
 }

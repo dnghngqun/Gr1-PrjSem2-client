@@ -1,17 +1,19 @@
 course:
 + id
-+ name
++ name // a
 + price
 + category
++ description// khoá học bao gồm 2486463e7983
 + status // trạng thái khoá học, đã bắt đầu, chưa bắt đầu, đã hoàn thành, đang bảo lưu 
 
 account: //chứa cả thông tin admin
 + id
-+ userid
++ userName
 + password
 + email
 + phoneNumber
 + role // quyền hạng ( admin, customer, staff,)
+
 
 order:
 + id
@@ -27,7 +29,7 @@ OrderDetail:
 + orderId
 + Date
 + Deal
-+ Description
++ Description//
 + Quantity
 + TotalAmount 
 + status //pending, paid, unpaid
@@ -40,3 +42,11 @@ Payment:
 + amount
 + paymentDate
 + paymentStatus
+
+anhr
+baif viet
+
+deal
++ id
++ mã
++ só tiền giảm được

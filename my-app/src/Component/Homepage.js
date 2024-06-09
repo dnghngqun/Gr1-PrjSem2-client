@@ -2,15 +2,34 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect } from "react";
 // import Swiper JS
 import Swiper from "swiper";
+import { Navigation, Pagination } from "swiper/modules";
 // import Swiper styles
-import "swiper/swiper-bundle.css";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import "./Css/Homepage.css";
 import Navbar from "./Navbar";
 const Homepage = () => {
   useEffect(() => {
     const swiper = new Swiper(".swiper", {
-      slidesPerView: 3,
-      spaceBetween: 50,
+      direction:"horizontal",
+      
+      modules: [Navigation, Pagination],
+      // If we need pagination
+      pagination: {
+        el: ".swiper-pagination",
+      },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+
+      // And if we need scrollbar
+      scrollbar: {
+        el: ".swiper-scrollbar",
+      },
     });
     const slides = document.querySelectorAll(".slick-slide");
 
@@ -559,10 +578,7 @@ const Homepage = () => {
                   <div className="logo-mentor">TOEIC</div>
                 </div>
               </div>
-              <div
-                key={4}
-                class="swiper-slide mentor"
-                style={{ display: "none" }}>
+              <div key={4} class="swiper-slide mentor">
                 <div className="mentor-container">
                   <img
                     src="assets/img/mentor4.webp"
