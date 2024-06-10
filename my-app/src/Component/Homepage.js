@@ -1,14 +1,15 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import React, { useEffect } from "react";
 // import Swiper JS
 import Swiper from "swiper";
-import { Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 // import Swiper styles
 import "swiper/css";
 // import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./Css/Homepage.css";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 const Homepage = () => {
   useEffect(() => {
     const swiper = new Swiper(".swiper", {
@@ -16,7 +17,7 @@ const Homepage = () => {
       direction: "horizontal", // ngang
       loop: true, // vong lap
 
-      modules: [Navigation, Pagination], // này để sử dụng module được thêm vào
+      modules: [Navigation, Pagination, Autoplay], // này để sử dụng module được thêm vào
       // If we need pagination
       pagination: {
         el: ".swiper-pagination",
@@ -28,7 +29,7 @@ const Homepage = () => {
         prevEl: ".swiper-button-prev",
       },
       autoplay: {
-        delay: 2500,
+        delay: 2000,
         disableOnInteraction: false, //stop on hover: no
       },
 
@@ -98,7 +99,6 @@ const Homepage = () => {
                 <span>Get Started</span>
               </button>
               <button className="button btn2">
-                <FontAwesomeIcon icon="fa-solid fa-play" />
                 <span>Watch Video</span>
               </button>
             </div>
@@ -306,7 +306,6 @@ const Homepage = () => {
               </div>
             </div>
           </div>
-
 
           <div className="slick-slider">
             <div className="slick-slide active" tabindex="0">
@@ -633,6 +632,7 @@ const Homepage = () => {
           </div>
         </div>
       </section>
+      <Footer/>
     </div>
   );
 };
