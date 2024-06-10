@@ -105,6 +105,17 @@ const Homepage = () => {
           </div>
           <div className="intro-right">
             <img src="assets/img/home-hero.webp" alt="..." />
+            <div className="certificate">
+              <div className="left">
+                <img src="assets/img/certificate.webp" alt="..." />
+              </div>
+              <div className="right">
+                <h5 className="title">Certificate</h5>
+                <div className="content">
+                  There are certificates for all courses.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="intro-bottom">
@@ -132,6 +143,7 @@ const Homepage = () => {
               <img src="assets/img/home-feature.webp" alt="..." />
               <div className="LoremIpsum">
                 <strong>Lorem ipsum</strong>
+                <p>Lorem ipsum</p>
                 <svg className="progress-circle" viewBox="0 0 100 100">
                   <circle
                     className="progress-circle-background"
@@ -155,7 +167,6 @@ const Homepage = () => {
                     75%
                   </text>
                 </svg>
-                <p>Lorem ipsum</p>
               </div>
 
               <div className="feature-content">
@@ -198,13 +209,17 @@ const Homepage = () => {
           <div className="container2">
             <div className="headline">
               <h1>
-                Make your <span className="hightlight">Learning</span> Enjoyable
+                Make your{" "}
+                <span className="hightlight">
+                  Learning
+                  <img
+                    src="assets/svg/headline-curve.svg"
+                    className="curve-image"
+                    alt="..."
+                  />
+                </span>{" "}
+                Enjoyable
               </h1>
-              <img
-                src="assets/svg/headline-curve.svg"
-                className="curve-image"
-                alt="..."
-              />
             </div>
 
             <div className="benefit-container">
@@ -291,6 +306,7 @@ const Homepage = () => {
               </div>
             </div>
           </div>
+
 
           <div className="slick-slider">
             <div className="slick-slide active" tabindex="0">
