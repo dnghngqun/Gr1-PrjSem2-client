@@ -9,6 +9,7 @@ import "swiper/css/pagination";
 import "./Css/Homepage.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+
 const Homepage = () => {
   useEffect(() => {
     const swiper = new Swiper(".swiper", {
@@ -306,7 +307,6 @@ const Homepage = () => {
           <div className="slick-slider">
             <div className="slick-slide active" tabindex="0">
               <div className="testimonial">
-                <h2>Testimonial: What Our Students Say</h2>
                 <h3>Detail Learning Materials</h3>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
