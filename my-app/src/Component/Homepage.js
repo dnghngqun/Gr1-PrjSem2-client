@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 // import Swiper JS
 import Swiper from "swiper";
@@ -8,8 +7,8 @@ import "swiper/css";
 // import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./Css/Homepage.css";
-import Navbar from "./Navbar";
 import Footer from "./Footer";
+import Navbar from "./Navbar";
 const Homepage = () => {
   useEffect(() => {
     const swiper = new Swiper(".swiper", {
@@ -33,10 +32,7 @@ const Homepage = () => {
         disableOnInteraction: false, //stop on hover: no
       },
 
-      // And if we need scrollbar
-      // scrollbar: {
-      //   el: ".swiper-scrollbar",
-      // },
+      
     });
     const slides = document.querySelectorAll(".slick-slide");
 
@@ -632,7 +628,7 @@ const Homepage = () => {
           </div>
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

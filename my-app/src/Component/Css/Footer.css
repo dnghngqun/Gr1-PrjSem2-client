@@ -1,0 +1,21 @@
+#footer .Fcontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: var(--widthAllPage);
+  margin: auto;
+  color: #fff;
+}
+
+#footer {
+  background-color: #397a71;
+  height: 350px;
+}
+
+.Fcontainer .left {
+  width: 40%;
+}
+
+.Fcontainer .list {
+  width: 20%;
+}
