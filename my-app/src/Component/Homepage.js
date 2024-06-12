@@ -132,7 +132,6 @@ const Homepage = () => {
           </div>
         </div>
       </section>
-
       <section className="section3">
         <div className="container">
           <div className="container1">
@@ -303,7 +302,21 @@ const Homepage = () => {
               </div>
             </div>
           </div>
-
+          <div className="slick-title">
+            <h1>
+              Testimonial:What Our
+              <span className="hightlight">
+                {" "}
+                Students
+                <img
+                  src="assets/svg/headline-curve.svg"
+                  className="curve-image"
+                  alt="..."
+                />
+              </span>{" "}
+              Say
+            </h1>
+          </div>
           <div className="slick-slider">
             <div className="slick-slide active" tabindex="0">
               <div className="testimonial">
@@ -313,10 +326,7 @@ const Homepage = () => {
                   Pariatur placeat quas eligendi. Neque ea quae harum dicta
                   voluptatem odit tempore a at amet fuga, pariatur inventore,
                   quod cupiditate quos rem. Quo necessitatibus at obcaecati
-                  incidunt, nulla eum quod quasi assumenda? Incidunt, velit
-                  itaque doloremque aspernatur ipsa omnis delectus, fugiat
-                  voluptatibus quisquam, reiciendis esse possimus officia nemo
-                  accusamus beatae dolorum tempora!
+                  incidunt, nulla eum quod quasi assumenda?
                 </p>
               </div>
               <div className="avatar">
@@ -326,35 +336,36 @@ const Homepage = () => {
                   <p>Fullstack Developer</p>
                 </div>
               </div>
-              <div className="arrow-wrapper">
-                <div className="arrow-background">
-                  <svg
-                    className="MuiSvgIcon-root"
-                    focusable="false"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    data-testid="ArrowBackIcon">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
-                  </svg>
+              <div className="arrow-container">
+                <div className="arrow-wrapper">
+                  <div className="arrow-background">
+                    <svg
+                      className="MuiSvgIcon-root"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="ArrowBackIcon">
+                      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+                    </svg>
+                  </div>
                 </div>
-              </div>
-              <div className="arrow-wrapper">
-                <div className="arrow-background">
-                  <svg
-                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
-                    focusable="false"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    data-testid="ArrowForwardIcon">
-                    <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
-                  </svg>
+                <div className="arrow-wrapper">
+                  <div className="arrow-background">
+                    <svg
+                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="ArrowForwardIcon">
+                      <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
             <div className="slick-slide" tabindex="1">
               <div className="testimonial">
-                <h2>Testimonial: What Our Students Say</h2>
-                <h3>Detail Learning Materials</h3>
+                <h3>Great Quality!</h3>
                 <p>
                   "The service provided by this company exceeded my
                   expectations. Not only were they professional and efficient,
@@ -365,39 +376,40 @@ const Homepage = () => {
               <div className="avatar">
                 <img src="assets/img/2.webp" alt="Avatar" />
                 <div className="avatar-info">
-                  <h2>Nguyễn Văn</h2>
-                  <p>Fullstack Developer</p>
+                  <h2>Diana Jordan</h2>
+                  <p>SEO Expert</p>
                 </div>
               </div>
-              <div className="arrow-wrapper">
-                <div className="arrow-background">
-                  <svg
-                    className="MuiSvgIcon-root"
-                    focusable="false"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    data-testid="ArrowBackIcon">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
-                  </svg>
+              <div className="arrow-container">
+                <div className="arrow-wrapper">
+                  <div className="arrow-background">
+                    <svg
+                      className="MuiSvgIcon-root"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="ArrowBackIcon">
+                      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+                    </svg>
+                  </div>
                 </div>
-              </div>
-              <div className="arrow-wrapper">
-                <div className="arrow-background">
-                  <svg
-                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
-                    focusable="false"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    data-testid="ArrowForwardIcon">
-                    <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
-                  </svg>
+                <div className="arrow-wrapper">
+                  <div className="arrow-background">
+                    <svg
+                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="ArrowForwardIcon">
+                      <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
             <div className="slick-slide" tabindex="2">
               <div className="testimonial">
-                <h2>Testimonial: What Our Students Say</h2>
-                <h3>Detail Learning Materials</h3>
+                <h3>Very Compelete Class</h3>
                 <p>
                   "I've been using this product for a few weeks now, and I'm
                   incredibly impressed with the results. It's easy to use,
@@ -413,83 +425,79 @@ const Homepage = () => {
                   <p>Fullstack Developer</p>
                 </div>
               </div>
-              <div className="arrow-wrapper">
-                <div className="arrow-background">
-                  <svg
-                    className="MuiSvgIcon-root"
-                    focusable="false"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    data-testid="ArrowBackIcon">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
-                  </svg>
+              <div className="arrow-container">
+                <div className="arrow-wrapper">
+                  <div className="arrow-background">
+                    <svg
+                      className="MuiSvgIcon-root"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="ArrowBackIcon">
+                      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+                    </svg>
+                  </div>
                 </div>
-              </div>
-              <div className="arrow-wrapper">
-                <div className="arrow-background">
-                  <svg
-                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
-                    focusable="false"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    data-testid="ArrowForwardIcon">
-                    <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
-                  </svg>
+                <div className="arrow-wrapper">
+                  <div className="arrow-background">
+                    <svg
+                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="ArrowForwardIcon">
+                      <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
             <div className="slick-slide" tabindex="3">
               <div className="testimonial">
-                <h2>Testimonial: What Our Students Say</h2>
                 <h3>Detail Learning Materials</h3>
                 <p>
                   "As a long-time customer, I can confidently say that this
                   company consistently delivers exceptional products. Their
                   attention to detail, commitment to customer satisfaction, and
-                  innovative approach set them apart from the competition. I
-                  wouldn't hesitate to recommend them to others."
                 </p>
               </div>
               <div className="avatar">
                 <img src="assets/img/4.webp" alt="Avatar" />
                 <div className="avatar-info">
-                  <h2>Nguyễn Văn</h2>
+                  <h2>Ashley Graham</h2>
                   <p>Fullstack Developer</p>
                 </div>
               </div>
-              <div className="arrow-wrapper">
-                <div className="arrow-background">
-                  <svg
-                    className="MuiSvgIcon-root"
-                    focusable="false"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    data-testid="ArrowBackIcon">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
-                  </svg>
+              <div className="arrow-container">
+                <div className="arrow-wrapper">
+                  <div className="arrow-background">
+                    <svg
+                      className="MuiSvgIcon-root"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="ArrowBackIcon">
+                      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+                    </svg>
+                  </div>
                 </div>
-              </div>
-              <div className="arrow-wrapper">
-                <div className="arrow-background">
-                  <svg
-                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
-                    focusable="false"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    data-testid="ArrowForwardIcon">
-                    <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
-                  </svg>
+                <div className="arrow-wrapper">
+                  <div className="arrow-background">
+                    <svg
+                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="ArrowForwardIcon">
+                      <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
             <div className="slick-slide" tabindex="4">
               <div className="testimonial">
-                <h2>
-                  Testimonial: What Our{" "}
-                  <span className="highlight">Students</span> Say
-                </h2>
-
-                <h3>Detail Learning Materials</h3>
+                <h3>Best Quantity Online course</h3>
                 <p>
                   "Working with this team was an absolute pleasure. They were
                   professional, responsive, and dedicated to achieving our
@@ -501,32 +509,34 @@ const Homepage = () => {
               <div className="avatar">
                 <img src="assets/img/5.webp" alt="Avatar" />
                 <div className="avatar-info">
-                  <h2>Nguyễn Văn</h2>
-                  <p>Fullstack Developer</p>
+                  <h2>Luis Sera</h2>
+                  <p>UI/UX Engneer</p>
                 </div>
               </div>
-              <div className="arrow-wrapper">
-                <div className="arrow-background">
-                  <svg
-                    className="MuiSvgIcon-root"
-                    focusable="false"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    data-testid="ArrowBackIcon">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
-                  </svg>
+              <div className="arrow-container">
+                <div className="arrow-wrapper">
+                  <div className="arrow-background">
+                    <svg
+                      className="MuiSvgIcon-root"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="ArrowBackIcon">
+                      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+                    </svg>
+                  </div>
                 </div>
-              </div>
-              <div className="arrow-wrapper">
-                <div className="arrow-background">
-                  <svg
-                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
-                    focusable="false"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    data-testid="ArrowForwardIcon">
-                    <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
-                  </svg>
+                <div className="arrow-wrapper">
+                  <div className="arrow-background">
+                    <svg
+                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="ArrowForwardIcon">
+                      <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>

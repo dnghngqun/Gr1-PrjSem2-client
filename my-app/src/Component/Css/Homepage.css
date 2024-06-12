@@ -127,9 +127,10 @@ section#introduce .intro-bottom {
 }
 
 /* section 3 */
-.section3 {
-  margin-top: 50px;
-  font-family: "Roboto", sans-serif;
+/* Import Google Font */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
   padding: 0;
 }
 
@@ -143,8 +144,7 @@ section#introduce .intro-bottom {
   justify-content: space-between;
 }
 
-.container1,
-.container2 {
+.container1, .container2 {
   flex: 1 1 calc(50% - 40px);
   margin-bottom: 20px;
 }
@@ -254,7 +254,7 @@ section#introduce .intro-bottom {
   font-size: 18px;
   font-weight: bold;
   text-anchor: middle;
-  /* dominant-baseline: middle; */
+  dominant-baseline: middle;
 }
 
 /* Hộp thông tin nhỏ */
@@ -279,15 +279,13 @@ p {
   color: #9e9e9e;
 }
 @media screen and (max-width: 768px) {
-  .container1,
-  .container2 {
+  .container1, .container2 {
     flex-basis: 100%;
   }
 }
 
 @media screen and (min-width: 769px) and (max-width: 1200px) {
-  .container1,
-  .container2 {
+  .container1, .container2 {
     flex-basis: calc(50% - 40px);
   }
 }
@@ -309,6 +307,7 @@ p {
   right: 10px;
   width: 95%;
 }
+
 
 .circle-container {
   width: 40px;
@@ -335,13 +334,13 @@ p {
 
 .benefit {
   flex: 0 1 calc(50% - 10px); /* Mỗi ô chiếm 50% chiều rộng, trừ đi khoảng cách giữa các ô */
-  box-sizing: border-box; /* Đảm bảo padding và border không làm thay đổi kích thước của ô */
+  box-sizing: border-box; 
   margin-bottom: 20px; /* Khoảng cách giữa các hàng */
   padding: 20px;
 }
 
 .benefit:nth-child(odd) {
-  margin-right: 10px; /* Khoảng cách giữa các ô bên trái và bên phải */
+  margin-right: 10px; 
 }
 
 .benefit-title {
@@ -372,25 +371,40 @@ p {
   font-size: 14px;
 }
 
-/* CSS code for responsive design */
-
 /* Thiết lập responsive cho phần avatar */
+.slick-title .curve-image {
+  position: absolute;
+  bottom: -20px;
+  right: 10px;
+  width: 95%;
+}
 .avatar {
   box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.03);
-  padding: 16px; /* Giảm padding xuống còn 16px */
-  border-radius: 8px; /* Bo tròn góc tăng lên */
+  padding: 16px; 
+  border-radius: 8px; 
 }
 
-/* Thiết lập responsive cho ảnh avatar */
+
 .avatar img {
-  width: 100%; /* Đảm bảo ảnh avatar luôn đầy đủ chiều rộng */
-  max-width: 60px; /* Đặt giới hạn chiều rộng tối đa */
-  height: auto; /* Chiều cao tự động dựa trên tỉ lệ chiều rộng */
-  border-radius: 50%; /* Bo tròn góc */
-  margin-right: 15px; /* Khoảng cách giữa ảnh avatar và thông tin avatar */
+  width: 100%; 
+  max-width: 60px; 
+  height: auto; 
+  border-radius: 50%; 
+  margin-right: 15px; 
 }
 
-/* Thiết lập responsive cho mũi tên bên phải */
+
+/* Container bao bọc hai mũi tên */
+.arrow-container {
+  margin-left: 600px; 
+  margin-top: 40px;
+  top: 50%; /* Đặt ở giữa theo chiều dọc */
+  transform: translateY(-50%); /* Căn giữa theo chiều dọc */
+  display: flex;
+  flex-direction: row;
+  gap: 10px; /* Khoảng cách 10px giữa hai mũi tên */
+}
+
 .arrow-wrapper {
   width: 40px;
   height: 40px;
@@ -401,17 +415,14 @@ p {
   transition: background-color 0.3s;
 }
 
-/* Thiết lập responsive cho màu nền khi hover vào mũi tên bên phải */
 .arrow-wrapper:hover {
   background-color: #fff;
 }
 
-/* Thiết lập responsive cho màu fill của biểu tượng svg khi hover vào mũi tên bên phải */
 .arrow-wrapper:hover .MuiSvgIcon-root {
   fill: #127c71;
 }
 
-/* Thiết lập responsive cho biểu tượng svg trong mũi tên bên phải */
 .arrow-wrapper .MuiSvgIcon-root {
   width: 80%;
   height: 80%;
@@ -419,7 +430,6 @@ p {
   transition: fill 0.3s;
 }
 
-/* Thiết lập responsive cho vị trí của mũi tên bên phải */
 .arrow-background {
   width: 100%;
   height: 100%;
@@ -428,45 +438,59 @@ p {
   align-items: center;
 }
 
-/* Thiết lập responsive cho giao diện slider */
 .slick-slider {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; /* Sử dụng flexbox để chia layout */
+  flex-direction: row; /* Chia thành hai cột dọc */
+  align-items: flex-start; /* Căn chỉnh theo chiều dọc */
+  justify-content: space-between; /* Giữ khoảng cách giữa các phần tử */
+  width: 100%;
+ bottom:100px;
 }
 
-/* Thiết lập responsive cho các slide trong slider */
 .slick-slide {
   display: none;
   transition: opacity 0.5s;
+  width: 100%; 
+  position: relative; /* Đặt vị trí tương đối để tiêu đề có thể chồng lên slick-slide */
+  top: 200px; /* Di chuyển phần tử xuống dưới 20px */
 }
 
-/* Thiết lập responsive cho các slide active trong slider */
 .slick-slide.active {
   display: block;
   opacity: 1;
 }
-.pictureBigTwo {
-  width: 50%; /* Avatar chiếm 50% chiều rộng của trình duyệt */
-  max-width: 50%;
-}
 
 .pictureBigTwo {
-  width: 100%; /* Hình ảnh chiếm 100% chiều rộng của phần tử cha */
-  max-width: 100%;
+  flex-basis: 60%; /* Chiếm 60% chiều rộng */
+  max-width: 60%; /* Đảm bảo không vượt quá 60% */
+  margin-left: 60px; /* Khoảng cách bên trái */
 }
 
-/* Media queries cho các thiết bị có kích thước màn hình khác nhau */
-@media only screen and (max-width: 768px) {
-  /* Điều chỉnh các thuộc tính CSS tương ứng cho kích thước màn hình nhỏ hơn hoặc bằng 768px */
-  .avatar {
-    padding: 10px;
-    border-radius: 4px;
-  }
+.slick-title {
+  text-align: center;
+  top: 150px;
+  margin-top: 20px; /* Khoảng cách trên của tiêu đề */
+  margin-bottom: 10px; /* Khoảng cách dưới của tiêu đề */
+  font-weight: 900;
+  font-size: 22px;
+  position: relative; /* Đặt vị trí tương đối */
+  z-index: 1; /* Đảm bảo tiêu đề nằm trên các slick-slide */
+}
 
-  .avatar img {
-    max-width: 50px;
-  }
+/* section4 */
+section.section4 {
+  background-color: #edf3f3;
+  padding-bottom: 20px;
+}
+
+section.section4 .section4-container {
+  max-width: var(--widthAllPage);
+  margin: auto;
+}
+
+.swiper-container {
+  /* margin: 0 auto; */
+  /* width: 1150px; */
 }
 
 /* section4 */
