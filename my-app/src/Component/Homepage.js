@@ -32,8 +32,6 @@ const Homepage = () => {
         delay: 2000,
         disableOnInteraction: false, //stop on hover: no
       },
-
-      
     });
     const slides = document.querySelectorAll(".slick-slide");
 
@@ -132,6 +130,130 @@ const Homepage = () => {
           </div>
         </div>
       </section>
+    {/* section2 */}
+      <section className="section2">
+      <div className="courseContainer">
+        <div className="swiper-container swiper">
+        <div className="course-title">
+          <h1>
+            <strong>
+              Most
+              <br />
+              popular course
+            </strong>
+          </h1>
+          </div>
+          <div className="swiper-wrapper">
+            <div className="swiper-slide">
+              <div className="card">
+                <img
+                  src="https://coursespace.vercel.app/_next/image?url=%2Fimages%2Fcourses%2Falvaro-reyes-qWwpHwip31M-unsplash.jpg&w=828&q=75"
+                  className="card-img-top"
+                  alt="..."
+                />
+                <div className="card-body">
+                  <h5 className="card-title">UI/UX complete guide</h5>
+                  <div className="star">★★★★★</div>
+                  <div className="course-price">$53/course</div>
+                </div>
+              </div>
+            </div>
+            <div className="swiper-slide">
+                <div className="card">
+                  {/* Nội dung card */}
+                  <img
+                    src="https://coursespace.vercel.app/_next/image?url=%2Fimages%2Fcourses%2Fstillness-inmotion-Jh6aQX-25Uo-unsplash.jpg&w=828&q=75"
+                    class="card-img-top"
+                    alt="..."
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">UI/UX complete guide</h5>
+                    <div className="star">★★★★★</div>
+                    <div className="course-price">$53/course</div>
+                  </div>
+                </div>
+              </div>
+              <div className="swiper-slide">
+                <div className="card">
+                  {/* Nội dung card */}
+                  <img
+                    src="https://coursespace.vercel.app/_next/image?url=%2Fimages%2Fcourses%2Fstillness-inmotion-YSCCnRGrD-4-unsplash.jpg&w=828&q=75"
+                    class="card-img-top"
+                    alt="..."
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">UI/UX complete guide</h5>
+                    <div className="star">★★★★★</div>
+                    <div className="course-price">$53/course</div>
+                  </div>
+                </div>
+              </div>
+              <div className="swiper-slide">
+                <div className="card">
+                  {/* Nội dung card */}
+                  <img
+                    src="https://coursespace.vercel.app/_next/image?url=%2Fimages%2Fcourses%2Ftrue-agency-o4UhdLv5jbQ-unsplash.jpg&w=828&q=75"
+                    class="card-img-top"
+                    alt="..."
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">UI/UX complete guide</h5>
+                    <div className="star">★★★★★</div>
+                    <div className="course-price">$53/course</div>
+                  </div>
+                </div>
+              </div>
+              <div className="swiper-slide">
+                <div className="card">
+                  {/* Nội dung card */}
+                  <img
+                    src="https://coursespace.vercel.app/_next/image?url=%2Fimages%2Fcourses%2Fa9e7b27a0c5e986a22416d79e2e9dba9.jpg&w=828&q=75"
+                    class="card-img-top"
+                    alt="..."
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">UI/UX complete guide</h5>
+                    <div className="star">★★★★★</div>
+                    <div className="course-price">$53/course</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="swiper-pagination"></div>
+<div className="arrow-container">
+  <div className="swiper-button-prev">
+    <div className="arrow-wrapper">
+      <div className="arrow-background">
+        <svg
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          data-testid="ArrowForwardIcon">
+          <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div className="swiper-button-next">
+    <div className="arrow-wrapper">
+      <div className="arrow-background">
+        <svg
+          className="MuiSvgIcon-root"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          data-testid="ArrowBackIcon">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+    </section>
+      {/* section3 */}
       <section className="section3">
         <div className="container">
           <div className="container1">

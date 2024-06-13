@@ -125,6 +125,93 @@ section#introduce .intro-bottom {
   line-height: 1.4;
   font-weight: 600;
 }
+/* section2 */
+.section2 {
+  padding: 20px;
+  background-color:#f2f5f5 ;
+}
+
+.courseContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.swiper-container {
+  position: relative;
+}
+
+.swiper-wrapper {
+  display: flex;
+}
+
+.swiper-slide {
+  flex-shrink: 0;
+  width: calc(100% / 3);
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.card-img-top {
+  width: 100%;
+  height: auto;
+  transform: scale(0.9);
+  border-radius: 16px ;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.star {
+  color: gold;
+}
+
+.course-price {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.swiper-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.swiper-container.section2 {
+  position: relative;
+}
+
+.swiper-pagination {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+}
+
+.swiper-pagination-bullet {
+  width: 40px;
+  height: 10px;
+  background-color: #2f5d58;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: #127c71;
+}
 
 /* section 3 */
 /* Import Google Font */
