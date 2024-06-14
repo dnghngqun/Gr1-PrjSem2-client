@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 // import Swiper JS
 import Swiper from "swiper";
-import { Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 // import Swiper styles
 import "swiper/css";
 // import "swiper/css/navigation";
@@ -17,7 +17,7 @@ const Homepage = () => {
       direction: "horizontal", // ngang
       loop: true, // vong lap
 
-      modules: [Navigation, Pagination], // này để sử dụng module được thêm vào
+      modules: [Navigation, Pagination,Autoplay], // này để sử dụng module được thêm vào
       // If we need pagination
       pagination: {
         el: ".swiper-pagination",
@@ -147,7 +147,7 @@ const Homepage = () => {
               <div className="swiper-slide">
                 <div className="card">
                   <img
-                    src="https://coursespace.vercel.app/_next/image?url=%2Fimages%2Fcourses%2Falvaro-reyes-qWwpHwip31M-unsplash.jpg&w=828&q=75"
+                    src="/my-app/public/assets/img/mostCourse1.webp"
                     className="card-img-top"
                     alt="..."
                   />
@@ -162,7 +162,7 @@ const Homepage = () => {
                 <div className="card">
                   {/* Nội dung card */}
                   <img
-                    src="https://coursespace.vercel.app/_next/image?url=%2Fimages%2Fcourses%2Fstillness-inmotion-Jh6aQX-25Uo-unsplash.jpg&w=828&q=75"
+                    src="/my-app/public/assets/img/mostCourse2.webp"
                     class="card-img-top"
                     alt="..."
                   />
@@ -177,7 +177,7 @@ const Homepage = () => {
                 <div className="card">
                   {/* Nội dung card */}
                   <img
-                    src="https://coursespace.vercel.app/_next/image?url=%2Fimages%2Fcourses%2Fstillness-inmotion-YSCCnRGrD-4-unsplash.jpg&w=828&q=75"
+                    src="/my-app/public/assets/img/mostCourse3.webp"
                     class="card-img-top"
                     alt="..."
                   />
@@ -192,7 +192,7 @@ const Homepage = () => {
                 <div className="card">
                   {/* Nội dung card */}
                   <img
-                    src="https://coursespace.vercel.app/_next/image?url=%2Fimages%2Fcourses%2Ftrue-agency-o4UhdLv5jbQ-unsplash.jpg&w=828&q=75"
+                    src="/my-app/public/assets/img/mostCourse4.webp"
                     class="card-img-top"
                     alt="..."
                   />
@@ -207,7 +207,7 @@ const Homepage = () => {
                 <div className="card">
                   {/* Nội dung card */}
                   <img
-                    src="https://coursespace.vercel.app/_next/image?url=%2Fimages%2Fcourses%2Fa9e7b27a0c5e986a22416d79e2e9dba9.jpg&w=828&q=75"
+                    src="/my-app/public/assets/img/mostCourse5.webp"
                     class="card-img-top"
                     alt="..."
                   />
@@ -219,6 +219,12 @@ const Homepage = () => {
                 </div>
               </div>
             </div>
+            <div className="click-button">
+            <div className="link-coursePage">
+            <a href="https://coursespace.vercel.app" target="_blank" rel="noopener noreferrer">
+          View All This Page
+        </a>
+        </div>
             {/* <div className="swiper-pagination"></div> */}
             <div className="arrow-container">
               <div className="swiper-button-next">
@@ -246,6 +252,7 @@ const Homepage = () => {
                       data-testid="ArrowForwardIcon">
                       <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
                     </svg>
+                  </div>
                   </div>
                 </div>
               </div>
