@@ -17,7 +17,7 @@ const Homepage = () => {
       direction: "horizontal", // ngang
       loop: true, // vong lap
 
-      modules: [Navigation, Pagination,Autoplay], // này để sử dụng module được thêm vào
+      modules: [Navigation, Pagination,], // này để sử dụng module được thêm vào
       // If we need pagination
       pagination: {
         el: ".swiper-pagination",
@@ -147,7 +147,7 @@ const Homepage = () => {
               <div className="swiper-slide">
                 <div className="card">
                   <img
-                    src="/my-app/public/assets/img/mostCourse1.webp"
+                    src="assets/img/mostCourse1.webp"
                     className="card-img-top"
                     alt="..."
                   />
@@ -162,7 +162,7 @@ const Homepage = () => {
                 <div className="card">
                   {/* Nội dung card */}
                   <img
-                    src="/my-app/public/assets/img/mostCourse2.webp"
+                    src="assets/img/mostCourse2.webp"
                     class="card-img-top"
                     alt="..."
                   />
@@ -177,7 +177,7 @@ const Homepage = () => {
                 <div className="card">
                   {/* Nội dung card */}
                   <img
-                    src="/my-app/public/assets/img/mostCourse3.webp"
+                    src="assets/img/mostCourse4.webp"
                     class="card-img-top"
                     alt="..."
                   />
@@ -192,7 +192,7 @@ const Homepage = () => {
                 <div className="card">
                   {/* Nội dung card */}
                   <img
-                    src="/my-app/public/assets/img/mostCourse4.webp"
+                    src="assets/img/mostCourse4.webp"
                     class="card-img-top"
                     alt="..."
                   />
@@ -207,7 +207,7 @@ const Homepage = () => {
                 <div className="card">
                   {/* Nội dung card */}
                   <img
-                    src="/my-app/public/assets/img/mostCourse5.webp"
+                    src="assets/img/mostCourse5.webp"
                     class="card-img-top"
                     alt="..."
                   />
