@@ -1,0 +1,207 @@
+
+/* goal */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f2f5f5;
+    padding: 20px;
+    padding-bottom:200px;
+}
+
+.toeic-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px  #ccc;
+    border-radius: 14px;
+    box-shadow: 0 2px 4px rgba(255, 86, 86, 0.1);
+}
+
+.goal-title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px; /* Khoảng cách dưới */
+}
+
+.goal-title h2{
+   margin-left: 30px;
+}
+
+.hightlight {
+    color: #127c71;
+}
+
+.goal-detail {
+    display: flex;
+    gap: 20px; /* Khoảng cách giữa các goal-detail1 và goal-detail2 */
+    margin-top: 20px;
+}
+
+.goal-detail1, .goal-detail2 {
+    flex: 1; /* Căn chỉnh độ rộng của goal-detail1 và goal-detail2 */
+    padding: 15px;
+    border-radius: 14px;
+}
+.goal-detail1{
+flex-basis: 40%;
+background-color: #f2f5f5;
+color: #717171;
+border: 2px solid #127c71 ;
+}
+.goal-detail2{
+flex-basis: 60%;
+background-color:#f2f5f5;
+color: #717171;
+border: 2px solid #127c71 ;
+}
+
+
+/* course-details */
+
+.course-details {
+  margin-top:50px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  
+}
+.course-details h2{
+
+margin-left: 30px;
+}
+
+.course-details .details-list1 {
+  flex: 60%;
+  padding: 20px;
+ border: 2px solid #127c71;
+  border-radius: 16px;
+  background-image: url(./photo-1495465798138-718f86d1a4bc.avif);
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+}
+
+.details-list {
+  display: flex;
+  width: 100%;
+  color: #717171;
+}
+
+.detailsTwo {
+  flex: 40%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.details-list2,
+.details-list3 {
+  margin-bottom: 20px;
+  flex: 20%;
+  border: 2px solid #e69215;
+  padding: 10px;
+  border-radius: 16px;
+}
+
+.details-list2 {
+  padding: 10px;
+  border-radius: 16px;
+}
+
+.details-list3 {
+  padding: 10px;
+  border-radius: 16px;
+}
+
+.course-details li {
+  justify-content: center;
+}
+
+
+/* course-content */
+
+.course-content {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border: 1px solid #ccc; /* Border cho nội dung khóa học */
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  margin-top: 20px;
+}
+
+.course-content h2 {
+  color: #127c71;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.content-table {
+  width: 100%;
+  max-width: 1200px;
+  border: 1px  ; /* Border cho toàn bộ bảng */
+  border-radius: 16px;
+  margin-top: 20px;
+  border-collapse: collapse; /* Collapse border để các ô không bị khoảng trắng */
+}
+
+.content-table th, .content-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.content-table th {
+  background-color: #127c71;
+  color: white;
+}
+
+.content-table td:first-child {
+  font-weight: bold;
+  width: 25%;
+}
+.course-sign {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Chia div course-sign thành 4 cột bằng nhau */
+  gap: 10px; /* Khoảng cách giữa các ô */
+  max-width:1200px;
+}
+.sign-course {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.sigh-schedule {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.sigh-schedule .study-time, .open-date, .teacher  {
+  text-align: center;
+  color:#fff;
+  flex: 1;
+  margin-right: 10px;
+  background-color:#e69215;
+  border-radius: 16px;;
+}
+
+.sigh-schedule a {
+  flex: 1;
+  text-align: center;
+  background-color: #127c71;
+  color: white;
+  text-decoration: none;
+  padding: 4px 4px;
+  border-radius: 16px;
+}
+
+
