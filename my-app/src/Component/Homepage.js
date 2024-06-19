@@ -5,7 +5,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 // import Swiper styles
 import "swiper/css";
 // import "swiper/css/navigation";
-import "swiper/css/pagination";
+
 import "./Css/Homepage.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";

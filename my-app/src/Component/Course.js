@@ -1,5 +1,8 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect } from "react";
 import Swiper from "swiper";
+// import Swiper styles
+import "swiper/css";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "./Css/Course.css";
 import Footer from "./Footer";
@@ -10,9 +13,10 @@ const Course = () => {
       spaceBetween: 300,
       centeredSlides: true,
       loop: true,
+      direction: "horizontal", // ngang
       modules: [Autoplay, Pagination, Navigation],
       autoplay: {
-        delay: 2500,
+        delay: 3500,
         disableOnInteraction: false,
       },
       pagination: {
@@ -27,7 +31,7 @@ const Course = () => {
 
     var popularSwiper = new Swiper(".popular-swiper", {
       slidesPerView: 3,
-      spaceBetween: 0,
+      direction: "horizontal", // ngang
       loop: true,
       modules: [Autoplay, Pagination, Navigation],
       pagination: {
@@ -37,6 +41,10 @@ const Course = () => {
       navigation: {
         nextEl: ".popular-swiper .swiper-button-prev",
         prevEl: ".popular-swiper .swiper-button-next",
+      },
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
       },
     });
   });

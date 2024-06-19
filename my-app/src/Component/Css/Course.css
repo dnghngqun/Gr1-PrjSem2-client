@@ -1,3 +1,6 @@
+:root{
+    --widthAllPage: 1200px;
+}
 #CoursePage {
   position: relative;
   background: #eee;
