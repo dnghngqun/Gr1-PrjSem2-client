@@ -17,7 +17,7 @@ const Homepage = () => {
       direction: "horizontal", // ngang
       loop: true, // vong lap
 
-      modules: [Navigation, Pagination, Autoplay], // này để sử dụng module được thêm vào
+      modules: [Navigation, Pagination, Autoplay],  // này để sử dụng module được thêm vào
       // If we need pagination
       pagination: {
         el: ".swiper-pagination",
