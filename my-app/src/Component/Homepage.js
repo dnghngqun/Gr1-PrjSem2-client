@@ -17,7 +17,7 @@ const Homepage = () => {
       direction: "horizontal", // ngang
       loop: true, // vong lap
 
-      modules: [Navigation, Pagination,], // này để sử dụng module được thêm vào
+      modules: [Navigation, Pagination, Autoplay], // này để sử dụng module được thêm vào
       // If we need pagination
       pagination: {
         el: ".swiper-pagination",
@@ -220,39 +220,42 @@ const Homepage = () => {
               </div>
             </div>
             <div className="click-button">
-            <div className="link-coursePage">
-            <a href="https://coursespace.vercel.app" target="_blank" rel="noopener noreferrer">
-          View All This Page
-        </a>
-        </div>
-            {/* <div className="swiper-pagination"></div> */}
-            <div className="arrow-container">
-              <div className="swiper-button-next">
-                <div className="arrow-wrapper">
-                  <div className="arrow-background">
-                    <svg
-                      className="MuiSvgIcon-root"
-                      focusable="false"
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      data-testid="ArrowBackIcon">
-                      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
-                    </svg>
+              <div className="link-coursePage">
+                <a
+                  href="https://coursespace.vercel.app"
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  View All This Page
+                </a>
+              </div>
+
+              <div className="arrow-container">
+                <div className="swiper-button-prev">
+                  <div className="arrow-wrapper">
+                    <div className="arrow-background">
+                      <svg
+                        className="MuiSvgIcon-root"
+                        focusable="false"
+                        aria-hidden="true"
+                        viewBox="0 0 24 24"
+                        data-testid="ArrowBackIcon">
+                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+                      </svg>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="swiper-button-prev">
-                <div className="arrow-wrapper">
-                  <div className="arrow-background">
-                    <svg
-                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
-                      focusable="false"
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      data-testid="ArrowForwardIcon">
-                      <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
-                    </svg>
-                  </div>
+                <div className="swiper-button-next">
+                  <div className="arrow-wrapper">
+                    <div className="arrow-background">
+                      <svg
+                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
+                        focusable="false"
+                        aria-hidden="true"
+                        viewBox="0 0 24 24"
+                        data-testid="ArrowForwardIcon">
+                        <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
