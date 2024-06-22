@@ -31,7 +31,29 @@ const Login = () => {
             </a>
           </form>
           <b className="text-line">or sign in with</b>
-          <div className="login-other"></div>
+          <div className="login-other">
+            <img
+              src="assets/svg/google.svg"
+              alt=""
+              className="icon-login google-icon"
+            />
+            <img
+              src="assets/svg/Facebook.svg"
+              alt=""
+              className="icon-login facebook-icon"
+            />
+            <img
+              src="assets/svg/SquareXTwitter.svg"
+              alt=""
+              className="icon-login twitter-icon"
+            />
+          </div>
+          <div className="create-account">
+            <a href="#">
+              Create your account{" "}
+              <img src="assets/svg/RightLongSolid.svg" alt="" />
+            </a>
+          </div>
         </div>
       </div>
     </div>
