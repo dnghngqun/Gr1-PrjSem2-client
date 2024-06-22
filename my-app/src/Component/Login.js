@@ -5,7 +5,7 @@ const Login = () => {
     <div id="login">
       <div className="login-container">
         <div className="left">
-          <img src="assets/img/images_login.png" alt="..." />
+          <img src="assets/img/images_login.jpg" alt="..." />
         </div>
         <div className="right">
           <h1 className="title">Member Login</h1>
@@ -32,21 +32,27 @@ const Login = () => {
           </form>
           <b className="text-line">or sign in with</b>
           <div className="login-other">
-            <img
-              src="assets/svg/google.svg"
-              alt=""
-              className="icon-login google-icon"
-            />
-            <img
-              src="assets/svg/Facebook.svg"
-              alt=""
-              className="icon-login facebook-icon"
-            />
-            <img
-              src="assets/svg/SquareXTwitter.svg"
-              alt=""
-              className="icon-login twitter-icon"
-            />
+            <a href="#">
+              <img
+                src="assets/svg/google.svg"
+                alt=""
+                className="icon-login google-icon"
+              />
+            </a>
+            <a href="#">
+              <img
+                src="assets/svg/Facebook.svg"
+                alt=""
+                className="icon-login facebook-icon"
+              />
+            </a>
+            <a href="">
+              <img
+                src="assets/svg/SquareXTwitter.svg"
+                alt=""
+                className="icon-login twitter-icon"
+              />
+            </a>
           </div>
           <div className="create-account">
             <a href="#">
