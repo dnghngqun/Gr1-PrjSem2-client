@@ -1,0 +1,87 @@
+#login {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(to bottom right, #f2b250, #38766d);
+  align-items: center;
+  justify-content: center;
+}
+
+#login .login-container {
+  width: 966px;
+  height: 600px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container .left {
+  width: 47%;
+}
+
+.login-container .left > img {
+  display: block;
+  margin: auto;
+}
+
+.login-container .right {
+  width: 53%;
+}
+
+.right h1.title {
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
+  text-align: center;
+  font-size: 32px;
+  line-height: 38.73px;
+}
+
+.right .login-by-form > .btn {
+  width: 271px;
+  height: 55px;
+  border-radius: 20px;
+  background-color: #d9d9d9;
+  margin: 5px auto;
+  text-align: start;
+}
+
+.right .login-by-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.login-by-form .forgot {
+  text-decoration: none;
+  text-align: center;
+  line-height: 18.15px;
+  color: #929292;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+}
+
+.login-by-form .forgot > span {
+  font-weight: 800;
+}
+
+.login-by-form .btn.btn-submit {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.right b.text-line {
+  display: block;
+  text-align: center;
+}
