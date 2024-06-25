@@ -1,6 +1,38 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Css/Login.css";
-const Login = () => {
+
+const Login = ({ onLogin }) => {
+  const [identify, setIdentify] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/accounts/login",
+        {
+          identify: identify,
+          password: password,
+        }
+      );
+      console.log(response.data);
+      if (response.status === 200) {
+        // login success
+        console.log("Login successful");
+        onLogin(response.data);
+        navigate("/"); //redirect to link /
+      } else {
+        //login failed
+        console.error("Login failed");
+      }
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  };
   return (
     <div id="login">
       <div className="login-container">
@@ -9,17 +41,21 @@ const Login = () => {
         </div>
         <div className="right">
           <h1 className="title">Member Login</h1>
-          <form action="POST" className="login-by-form">
+          <form className="login-by-form" onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Username, email or phone number"
               className="btn username"
+              value={identify} //this value save to identify
+              onChange={(e) => setIdentify(e.target.value)}
             />
 
             <input
               type="password"
               className="btn password"
               placeholder="Password"
+              value={password} //this value save to password
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <button type="submit" className=" btn btn-submit">
@@ -55,7 +91,7 @@ const Login = () => {
             </a>
           </div>
           <div className="create-account">
-            <a href="#">
+            <a href="/register">
               Create your account{" "}
               <img src="assets/svg/RightLongSolid.svg" alt="" />
             </a>

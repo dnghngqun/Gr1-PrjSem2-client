@@ -10,14 +10,14 @@ import "./Css/Homepage.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 
-const Homepage = () => {
+const Homepage = ({ isLoggedIn, onLogout }) => {
   useEffect(() => {
     const swiper = new Swiper(".swiper", {
       slidesPerView: "3", // show 3 slides
       direction: "horizontal", // ngang
       loop: true, // vong lap
 
-      modules: [Navigation, Pagination, Autoplay],  // này để sử dụng module được thêm vào
+      modules: [Navigation, Pagination, Autoplay], // này để sử dụng module được thêm vào
       // If we need pagination
       pagination: {
         el: ".swiper-pagination",
@@ -57,7 +57,7 @@ const Homepage = () => {
 
   return (
     <div id="homepage">
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn}  onLogout={onLogout} />
       <section className="section1" id="introduce">
         <div className="intro-container">
           <div className="intro-left">

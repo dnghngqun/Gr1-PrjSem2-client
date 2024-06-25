@@ -1,6 +1,10 @@
 import React from "react";
 import "./Css/Navbar.css";
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, onLogout }) => {
+  console.log(isLoggedIn);
+  const handleLogout = () => {
+    onLogout(); // Gọi hàm logout khi nhấn nút Logout
+  };
   return (
     <div>
       <header>
@@ -25,12 +29,30 @@ const Navbar = () => {
             </a>
           </div>
           <div className="right">
-            <button className="btn-sign sign-in">
-              <span>Sign In</span>
-            </button>
-            <button className="btn-sign sign-up">
-              <span>Sign Up</span>
-            </button>
+            { isLoggedIn  ? (
+              <>
+                <p>Hello, {isLoggedIn.data.userName}</p>
+                <button className="btn-sign" onClick={handleLogout}>
+                  Logout
+                </button>
+              </>
+            ) : (
+              /* <React.Fragment>  react > 16 viết tắt thành <>
+                tạo wrapper cho nhóm phần tử khi trả về nhiều phần tử con từ 1 component
+             */
+              <>
+                <a href="/login">
+                  <button className="btn-sign sign-in">
+                    <span>Sign In</span>
+                  </button>
+                </a>
+                <a href="#">
+                  <button className="btn-sign sign-up">
+                    <span>Sign Up</span>
+                  </button>
+                </a>
+              </>
+            )}
           </div>
         </nav>
       </header>

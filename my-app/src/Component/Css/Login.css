@@ -24,12 +24,13 @@
 }
 
 .login-container .left {
-  width: 47%;
+  width: 50%;
 }
 
 .login-container .left img {
-  height: 300px;
-  padding-left: 40px;
+  width: 90%;
+  padding-left: 10%;
+  margin-right: 0 !important;
 }
 
 .login-container .left > img {
@@ -38,7 +39,7 @@
 }
 
 .login-container .right {
-  width: 53%;
+  width: 50%;
 }
 
 .right h1.title {
