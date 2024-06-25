@@ -29,7 +29,7 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
             </a>
           </div>
           <div className="right">
-            { isLoggedIn  ? (
+            { isLoggedIn?.data? (
               <>
                 <p>Hello, {isLoggedIn.data.userName}</p>
                 <button className="btn-sign" onClick={handleLogout}>
