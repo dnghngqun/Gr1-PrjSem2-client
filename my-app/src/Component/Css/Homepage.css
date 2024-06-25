@@ -246,6 +246,48 @@ section#introduce .intro-bottom {
 margin-top:60px;
 margin-left:-150px;
 }
+.arrow-container {
+  margin-left: 600px;
+  margin-top: 40px;
+  top: 50%; /* Đặt ở giữa theo chiều dọc */
+  transform: translateY(-50%); /* Căn giữa theo chiều dọc */
+  display: flex;
+  flex-direction: row;
+  gap: 10px; /* Khoảng cách 10px giữa hai mũi tên */
+}
+
+.arrow-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #127c71;
+  display: inline-block;
+  overflow: hidden;
+  transition: background-color 0.3s;
+}
+
+.arrow-wrapper:hover {
+  background-color: #fff;
+}
+
+.arrow-wrapper:hover .MuiSvgIcon-root {
+  fill: #127c71;
+}
+
+.arrow-wrapper .MuiSvgIcon-root {
+  width: 80%;
+  height: 80%;
+  fill: #fff;
+  transition: fill 0.3s;
+}
+
+.arrow-background {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .swiper-container.section2 {
   /* position: relative; */
@@ -517,113 +559,40 @@ p {
 .benefit-description {
   font-size: 14px;
 }
-
-/* Thiết lập responsive cho phần avatar */
-.slick-title .curve-image {
-  position: absolute;
-  bottom: -20px;
-  right: 10px;
-  width: 95%;
-}
-.avatar {
-  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.03);
-  padding: 16px;
-  border-radius: 8px;
+.navbar {
+  margin-top:100px;
+  display: flex; /* Sử dụng flexbox để các button nằm trên cùng một hàng */
+  
 }
 
-.avatar img {
-  width: 100%;
-  max-width: 60px;
-  height: auto;
-  border-radius: 50%;
-  margin-right: 15px;
-}
-
-/* Container bao bọc hai mũi tên */
-.arrow-container {
-  margin-left: 600px;
-  margin-top: 40px;
-  top: 50%; /* Đặt ở giữa theo chiều dọc */
-  transform: translateY(-50%); /* Căn giữa theo chiều dọc */
-  display: flex;
-  flex-direction: row;
-  gap: 10px; /* Khoảng cách 10px giữa hai mũi tên */
-}
-
-.arrow-wrapper {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+.navbar button {
+  color:#fff;
+  width:300px;
+  flex: 1; /* Chia đều không gian giữa các button */
+  padding: 10px; 
+  margin: 5px; 
+  border: none; 
   background-color: #127c71;
-  display: inline-block;
-  overflow: hidden;
-  transition: background-color 0.3s;
+  cursor: pointer; 
 }
 
-.arrow-wrapper:hover {
-  background-color: #fff;
+.navbar button:hover {
+  background-color: #2bc9b9; 
 }
 
-.arrow-wrapper:hover .MuiSvgIcon-root {
-  fill: #127c71;
-}
 
-.arrow-wrapper .MuiSvgIcon-root {
-  width: 80%;
-  height: 80%;
-  fill: #fff;
-  transition: fill 0.3s;
-}
-
-.arrow-background {
-  width: 100%;
-  height: 100%;
+.image-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-.slick-slider {
-  display: flex; /* Sử dụng flexbox để chia layout */
-  flex-direction: row; /* Chia thành hai cột dọc */
-  align-items: flex-start; /* Căn chỉnh theo chiều dọc */
-  justify-content: space-between; /* Giữ khoảng cách giữa các phần tử */
-  width: 100%;
-  bottom: 100px;
-}
-
-.slick-slide {
-  display: none;
-  transition: opacity 0.5s;
-  width: 100%;
-  position: relative; /* Đặt vị trí tương đối để tiêu đề có thể chồng lên slick-slide */
-  top: 200px; /* Di chuyển phần tử xuống dưới 20px */
-}
-
-.slick-slide.active {
-  display: block;
-  opacity: 1;
-}
-
-.pictureBigTwo {
-  flex-basis: 60%; /* Chiếm 60% chiều rộng */
-  max-width: 60%; /* Đảm bảo không vượt quá 60% */
-  margin-left: 60px; /* Khoảng cách bên trái */
-}
-
-.slick-title {
   text-align: center;
-  top: 150px;
-  margin-top: 20px; /* Khoảng cách trên của tiêu đề */
-  margin-bottom: 10px; /* Khoảng cách dưới của tiêu đề */
-  font-weight: 900;
-  font-size: 22px;
-  position: relative; /* Đặt vị trí tương đối */
-  z-index: 1; /* Đảm bảo tiêu đề nằm trên các slick-slide */
+  margin-top: 20px;
 }
-.testimonial p {
-  max-width: 80%; /* Đặt chiều rộng tối đa là 90% của container */
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
 }
+
 
 
 /* section4 */
@@ -845,3 +814,4 @@ div.arrow-container {
   float: right;
   margin-right: 20px;
 }
+

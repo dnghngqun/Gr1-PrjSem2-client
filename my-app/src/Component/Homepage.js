@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+
+import React, { useState,useEffect } from "react";
 // import Swiper JS
 import Swiper from "swiper";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -11,33 +12,31 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 
 const Homepage = ({ isLoggedIn, onLogout }) => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
   useEffect(() => {
-    const swiper = new Swiper(".swiper", {
-      slidesPerView: "3", // show 3 slides
-      direction: "horizontal", // ngang
-      loop: true, // vong lap
-
-      modules: [Navigation, Pagination, Autoplay], // này để sử dụng module được thêm vào
-      // If we need pagination
+    Swiper.use([Navigation, Pagination, Autoplay]);
+    const swiper = new Swiper('.swiper', {
+      slidesPerView: 3, // hiện 3 slide
+      direction: 'horizontal', // ngang
+      loop: true, // vòng lặp
       pagination: {
-        el: ".swiper-pagination",
+        el: '.swiper-pagination',
       },
-
-      // Navigation arrows
       navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
       },
       autoplay: {
         delay: 2000,
-        disableOnInteraction: false, //stop on hover: no
+        disableOnInteraction: false, // dừng khi tương tác: không
       },
     });
-    const slides = document.querySelectorAll(".slick-slide");
 
+    const slides = document.querySelectorAll('.slick-slide');
     slides.forEach((slide) => {
       slide.addEventListener("click", function () {
-        const currentIndex = parseInt(this.getAttribute("tabIndex"));
+        const currentIndex = parseInt(this.getAttribute("tabindex"));
         let nextIndex;
 
         if (currentIndex === slides.length - 1) {
@@ -46,14 +45,16 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
           nextIndex = currentIndex + 1;
         }
 
-        // Xóa lớp active ở tất cả các slick-slide
-        slides.forEach((slide) => slide.classList.remove("active"));
-
-        // Thêm lớp active cho slick-slide tiếp theo
-        slides[nextIndex].classList.add("active");
+        slides.forEach((slide) => slide.classList.remove('active'));
+        slides[nextIndex].classList.add('active');
       });
     });
   }, []);
+
+  const handleClick = (id) => {
+    setSelectedImage(id);
+  };
+
 
   return (
     <div id="homepage">
@@ -450,7 +451,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
             </h1>
           </div>
           <div className="slick-slider">
-            <div className="slick-slide active" tabIndex="0">
+            <div className="slick-slide active" tabindex="0">
               <div className="testimonial">
                 <h3>Detail Learning Materials</h3>
                 <p>
@@ -495,7 +496,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                 </div>
               </div>
             </div>
-            <div className="slick-slide" tabIndex="1">
+            <div className="slick-slide" tabindex="1">
               <div className="testimonial">
                 <h3>Great Quality!</h3>
                 <p>
@@ -539,7 +540,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                 </div>
               </div>
             </div>
-            <div className="slick-slide" tabIndex="2">
+            <div className="slick-slide" tabindex="2">
               <div className="testimonial">
                 <h3>Very Compelete Class</h3>
                 <p>
@@ -584,7 +585,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                 </div>
               </div>
             </div>
-            <div className="slick-slide" tabIndex="3">
+            <div className="slick-slide" tabindex="3">
               <div className="testimonial">
                 <h3>Detail Learning Materials</h3>
                 <p>
@@ -627,7 +628,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                 </div>
               </div>
             </div>
-            <div className="slick-slide" tabIndex="4">
+            <div className="slick-slide" tabindex="4">
               <div className="testimonial">
                 <h3>Best Quantity Online course</h3>
                 <p>
@@ -769,6 +770,12 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
             {/* <div className="swiper-scrollbar"></div> */}
           </div>
         </div>
+      </section>
+      {/* section5 */}
+      <section>
+      <div className="test-box">
+        <a href="#" className="my-button">Mini test for you</a>
+      </div>
       </section>
       <Footer />
     </div>
