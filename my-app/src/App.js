@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Course from "./Component/Course";
 import Homepage from "./Component/Homepage";
@@ -28,7 +28,12 @@ function App() {
             <Homepage isLoggedIn={isLoggedIn} onLogout={handleLogout} />
           }></Route>
         <Route path="/course" element={<Course />}></Route>
-        <Route path="/login" element={<Login onLogin={handleLogin} />}></Route>
+        <Route
+          path="/login"
+          element={
+            isLoggedIn ? <Navigate to="/" replace /> : <Login onLogin={handleLogin} />
+          }
+        />
         <Route path="/register" element={<Register />}></Route>
       </Routes>
     </BrowserRouter>

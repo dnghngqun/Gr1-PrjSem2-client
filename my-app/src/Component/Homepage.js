@@ -37,7 +37,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
 
     slides.forEach((slide) => {
       slide.addEventListener("click", function () {
-        const currentIndex = parseInt(this.getAttribute("tabindex"));
+        const currentIndex = parseInt(this.getAttribute("tabIndex"));
         let nextIndex;
 
         if (currentIndex === slides.length - 1) {
@@ -163,7 +163,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   {/* Nội dung card */}
                   <img
                     src="assets/img/mostCourse2.webp"
-                    class="card-img-top"
+                    className="card-img-top"
                     alt="..."
                   />
                   <div className="card-body">
@@ -178,7 +178,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   {/* Nội dung card */}
                   <img
                     src="assets/img/mostCourse4.webp"
-                    class="card-img-top"
+                    className="card-img-top"
                     alt="..."
                   />
                   <div className="card-body">
@@ -193,7 +193,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   {/* Nội dung card */}
                   <img
                     src="assets/img/mostCourse4.webp"
-                    class="card-img-top"
+                    className="card-img-top"
                     alt="..."
                   />
                   <div className="card-body">
@@ -208,7 +208,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   {/* Nội dung card */}
                   <img
                     src="assets/img/mostCourse5.webp"
-                    class="card-img-top"
+                    className="card-img-top"
                     alt="..."
                   />
                   <div className="card-body">
@@ -450,7 +450,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
             </h1>
           </div>
           <div className="slick-slider">
-            <div className="slick-slide active" tabindex="0">
+            <div className="slick-slide active" tabIndex="0">
               <div className="testimonial">
                 <h3>Detail Learning Materials</h3>
                 <p>
@@ -495,7 +495,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                 </div>
               </div>
             </div>
-            <div className="slick-slide" tabindex="1">
+            <div className="slick-slide" tabIndex="1">
               <div className="testimonial">
                 <h3>Great Quality!</h3>
                 <p>
@@ -539,7 +539,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                 </div>
               </div>
             </div>
-            <div className="slick-slide" tabindex="2">
+            <div className="slick-slide" tabIndex="2">
               <div className="testimonial">
                 <h3>Very Compelete Class</h3>
                 <p>
@@ -584,7 +584,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                 </div>
               </div>
             </div>
-            <div className="slick-slide" tabindex="3">
+            <div className="slick-slide" tabIndex="3">
               <div className="testimonial">
                 <h3>Detail Learning Materials</h3>
                 <p>
@@ -627,7 +627,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                 </div>
               </div>
             </div>
-            <div className="slick-slide" tabindex="4">
+            <div className="slick-slide" tabIndex="4">
               <div className="testimonial">
                 <h3>Best Quantity Online course</h3>
                 <p>
