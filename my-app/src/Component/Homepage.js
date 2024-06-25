@@ -435,248 +435,37 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               </div>
             </div>
           </div>
-          <div className="slick-title">
-            <h1>
-              Testimonial:What Our
-              <span className="hightlight">
-                {" "}
-                Students
-                <img
-                  src="assets/svg/headline-curve.svg"
-                  className="curve-image"
-                  alt="..."
-                />
-              </span>{" "}
-              Say
-            </h1>
-          </div>
-          <div className="slick-slider">
-            <div className="slick-slide active" tabindex="0">
-              <div className="testimonial">
-                <h3>Detail Learning Materials</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Pariatur placeat quas eligendi. Neque ea quae harum dicta
-                  voluptatem odit tempore a at amet fuga, pariatur inventore,
-                  quod cupiditate quos rem. Quo necessitatibus at obcaecati
-                  incidunt, nulla eum quod quasi assumenda?
-                </p>
-              </div>
-              <div className="avatar">
-                <img src="assets/img/1.webp" alt="Avatar" />
-                <div className="avatar-info">
-                  <h2>Nguyễn Văn</h2>
-                  <p>Fullstack Developer</p>
-                </div>
-              </div>
-              <div className="arrow-container">
-                <div className="arrow-wrapper">
-                  <div className="arrow-background">
-                    <svg
-                      className="MuiSvgIcon-root"
-                      focusable="false"
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      data-testid="ArrowBackIcon">
-                      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
-                    </svg>
-                  </div>
-                </div>
-                <div className="arrow-wrapper">
-                  <div className="arrow-background">
-                    <svg
-                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
-                      focusable="false"
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      data-testid="ArrowForwardIcon">
-                      <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="slick-slide" tabindex="1">
-              <div className="testimonial">
-                <h3>Great Quality!</h3>
-                <p>
-                  "The service provided by this company exceeded my
-                  expectations. Not only were they professional and efficient,
-                  but they also went above and beyond to ensure my satisfaction.
-                  I highly recommend them to anyone seeking quality service."
-                </p>
-              </div>
-              <div className="avatar">
-                <img src="assets/img/2.webp" alt="Avatar" />
-                <div className="avatar-info">
-                  <h2>Diana Jordan</h2>
-                  <p>SEO Expert</p>
-                </div>
-              </div>
-              <div className="arrow-container">
-                <div className="arrow-wrapper">
-                  <div className="arrow-background">
-                    <svg
-                      className="MuiSvgIcon-root"
-                      focusable="false"
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      data-testid="ArrowBackIcon">
-                      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
-                    </svg>
-                  </div>
-                </div>
-                <div className="arrow-wrapper">
-                  <div className="arrow-background">
-                    <svg
-                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
-                      focusable="false"
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      data-testid="ArrowForwardIcon">
-                      <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="slick-slide" tabindex="2">
-              <div className="testimonial">
-                <h3>Very Compelete Class</h3>
-                <p>
-                  "I've been using this product for a few weeks now, and I'm
-                  incredibly impressed with the results. It's easy to use,
-                  effective, and has made a noticeable difference in my daily
-                  routine. I can't imagine going back to my old routine without
-                  it."
-                </p>
-              </div>
-              <div className="avatar">
-                <img src="assets/img/3.webp" alt="Avatar" />
-                <div className="avatar-info">
-                  <h2>Nguyễn Văn</h2>
-                  <p>Fullstack Developer</p>
-                </div>
-              </div>
-              <div className="arrow-container">
-                <div className="arrow-wrapper">
-                  <div className="arrow-background">
-                    <svg
-                      className="MuiSvgIcon-root"
-                      focusable="false"
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      data-testid="ArrowBackIcon">
-                      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
-                    </svg>
-                  </div>
-                </div>
-                <div className="arrow-wrapper">
-                  <div className="arrow-background">
-                    <svg
-                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
-                      focusable="false"
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      data-testid="ArrowForwardIcon">
-                      <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="slick-slide" tabindex="3">
-              <div className="testimonial">
-                <h3>Detail Learning Materials</h3>
-                <p>
-                  "As a long-time customer, I can confidently say that this
-                  company consistently delivers exceptional products. Their
-                  attention to detail, commitment to customer satisfaction, and
-                </p>
-              </div>
-              <div className="avatar">
-                <img src="assets/img/4.webp" alt="Avatar" />
-                <div className="avatar-info">
-                  <h2>Ashley Graham</h2>
-                  <p>Fullstack Developer</p>
-                </div>
-              </div>
-              <div className="arrow-container">
-                <div className="arrow-wrapper">
-                  <div className="arrow-background">
-                    <svg
-                      className="MuiSvgIcon-root"
-                      focusable="false"
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      data-testid="ArrowBackIcon">
-                      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
-                    </svg>
-                  </div>
-                </div>
-                <div className="arrow-wrapper">
-                  <div className="arrow-background">
-                    <svg
-                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
-                      focusable="false"
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      data-testid="ArrowForwardIcon">
-                      <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="slick-slide" tabindex="4">
-              <div className="testimonial">
-                <h3>Best Quantity Online course</h3>
-                <p>
-                  "Working with this team was an absolute pleasure. They were
-                  professional, responsive, and dedicated to achieving our
-                  goals. Their expertise and creativity were evident throughout
-                  the project, and I'm thrilled with the final results. I look
-                  forward to collaborating with them again in the future."
-                </p>
-              </div>
-              <div className="avatar">
-                <img src="assets/img/5.webp" alt="Avatar" />
-                <div className="avatar-info">
-                  <h2>Luis Sera</h2>
-                  <p>UI/UX Engneer</p>
-                </div>
-              </div>
-              <div className="arrow-container">
-                <div className="arrow-wrapper">
-                  <div className="arrow-background">
-                    <svg
-                      className="MuiSvgIcon-root"
-                      focusable="false"
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      data-testid="ArrowBackIcon">
-                      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
-                    </svg>
-                  </div>
-                </div>
-                <div className="arrow-wrapper">
-                  <div className="arrow-background">
-                    <svg
-                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lf2qyz"
-                      focusable="false"
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      data-testid="ArrowForwardIcon">
-                      <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="pictureBigTwo">
-              <img src="assets/img/home-testimonial.webp" alt="..." />
-            </div>
-          </div>
+          <div className="navbar">
+          <div className="navcourse1">
+        <button onClick={() => handleClick('ielts')}>IELTS</button>
+        </div>
+        <div className="navcourse2">
+        <button onClick={() => handleClick('toeic4')}>TOEIC 4 Skills</button>
+        </div>
+        <div className="navcourse3">
+        <button onClick={() => handleClick('toeic2')}>TOEIC 2 Skills</button>
+        </div>
+      </div>
+      <div className="image-container">
+        <img
+          id="ielts"
+          src="assets/img/processIelts.png"
+          alt="IELTS"
+          style={{ display: selectedImage === 'ielts' ? 'block' : 'none' }}
+        />
+        <img
+          id="toeic4"
+          src="assets/img/processToeic4skill.png"
+          alt="TOEIC 4 Skills"
+          style={{ display: selectedImage === 'toeic4' ? 'block' : 'none' }}
+        />
+        <img
+          id="toeic2"
+          src="assets/img/processToeic2skill.png"
+          alt="TOEIC 2 Skills"
+          style={{ display: selectedImage === 'toeic2' ? 'block' : 'none' }}
+        />
+      </div>
         </div>
       </section>
       <section className="section4">
