@@ -1,5 +1,4 @@
-
-import React, { useState,useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // import Swiper JS
 import Swiper from "swiper";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -12,20 +11,20 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 
 const Homepage = ({ isLoggedIn, onLogout }) => {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState("ielts");
 
   useEffect(() => {
     Swiper.use([Navigation, Pagination, Autoplay]);
-    const swiper = new Swiper('.swiper', {
+    const swiper = new Swiper(".swiper", {
       slidesPerView: 3, // hiện 3 slide
-      direction: 'horizontal', // ngang
+      direction: "horizontal", // ngang
       loop: true, // vòng lặp
       pagination: {
-        el: '.swiper-pagination',
+        el: ".swiper-pagination",
       },
       navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
       },
       autoplay: {
         delay: 2000,
@@ -33,7 +32,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
       },
     });
 
-    const slides = document.querySelectorAll('.slick-slide');
+    const slides = document.querySelectorAll(".slick-slide");
     slides.forEach((slide) => {
       slide.addEventListener("click", function () {
         const currentIndex = parseInt(this.getAttribute("tabindex"));
@@ -45,8 +44,8 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
           nextIndex = currentIndex + 1;
         }
 
-        slides.forEach((slide) => slide.classList.remove('active'));
-        slides[nextIndex].classList.add('active');
+        slides.forEach((slide) => slide.classList.remove("active"));
+        slides[nextIndex].classList.add("active");
       });
     });
   }, []);
@@ -55,10 +54,9 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
     setSelectedImage(id);
   };
 
-
   return (
     <div id="homepage">
-      <Navbar isLoggedIn={isLoggedIn}  onLogout={onLogout} />
+      <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
       <section className="section1" id="introduce">
         <div className="intro-container">
           <div className="intro-left">
@@ -436,36 +434,40 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
             </div>
           </div>
           <div className="navbar">
-          <div className="navcourse1">
-        <button onClick={() => handleClick('ielts')}>IELTS</button>
-        </div>
-        <div className="navcourse2">
-        <button onClick={() => handleClick('toeic4')}>TOEIC 4 Skills</button>
-        </div>
-        <div className="navcourse3">
-        <button onClick={() => handleClick('toeic2')}>TOEIC 2 Skills</button>
-        </div>
-      </div>
-      <div className="image-container">
-        <img
-          id="ielts"
-          src="assets/img/processIelts.png"
-          alt="IELTS"
-          style={{ display: selectedImage === 'ielts' ? 'block' : 'none' }}
-        />
-        <img
-          id="toeic4"
-          src="assets/img/processToeic4skill.png"
-          alt="TOEIC 4 Skills"
-          style={{ display: selectedImage === 'toeic4' ? 'block' : 'none' }}
-        />
-        <img
-          id="toeic2"
-          src="assets/img/processToeic2skill.png"
-          alt="TOEIC 2 Skills"
-          style={{ display: selectedImage === 'toeic2' ? 'block' : 'none' }}
-        />
-      </div>
+            <div className="navcourse1">
+              <button onClick={() => handleClick("ielts")}>IELTS</button>
+            </div>
+            <div className="navcourse2">
+              <button onClick={() => handleClick("toeic4")}>
+                TOEIC 4 Skills
+              </button>
+            </div>
+            <div className="navcourse3">
+              <button onClick={() => handleClick("toeic2")}>
+                TOEIC 2 Skills
+              </button>
+            </div>
+          </div>
+          <div className="image-container">
+            <img
+              id="ielts"
+              src="assets/img/processIelts.png"
+              alt="IELTS"
+              style={{ display: selectedImage === "ielts" ? "block" : "none" }}
+            />
+            <img
+              id="toeic4"
+              src="assets/img/processToeic4skill.png"
+              alt="TOEIC 4 Skills"
+              style={{ display: selectedImage === "toeic4" ? "block" : "none" }}
+            />
+            <img
+              id="toeic2"
+              src="assets/img/processToeic2skill.png"
+              alt="TOEIC 2 Skills"
+              style={{ display: selectedImage === "toeic2" ? "block" : "none" }}
+            />
+          </div>
         </div>
       </section>
       <section className="section4">
@@ -562,14 +564,13 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
       </section>
       {/* section5 */}
       <section>
-      <div class="test-container">
-    <div class="test-content">
-        <img src="path_to_your_image.jpg" alt="Image" />
-        <p>Text here</p>
-        <a href="#">Link</a>
-    </div>
-</div>
-
+        <div class="test-container">
+          <div class="test-content">
+            <img src="path_to_your_image.jpg" alt="Image" />
+            <p>Text here</p>
+            <a href="#">Link</a>
+          </div>
+        </div>
       </section>
       <Footer />
     </div>
