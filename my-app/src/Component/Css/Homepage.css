@@ -814,4 +814,50 @@ div.arrow-container {
   float: right;
   margin-right: 20px;
 }
+/* section5 */
+section {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.test-container {
+  margin-top: 200px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.test-container {
+  background-color: #ffaf35; /* Màu cam nhạt */
+  width: 1200px; /* Độ rộng của box */
+  padding: 20px; /* Khoảng cách bên trong box */
+  text-align: center; /* Căn giữa nội dung */
+}
+
+.test-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.test-content img {
+  width: 100px; /* Kích thước của hình ảnh */
+  height: 100px; /* Để giữ tỷ lệ hình ảnh */
+  object-fit: cover; /* Đảm bảo hình ảnh không bị bể */
+  border-radius: 50%; /* Bo tròn hình ảnh */
+}
+
+.test-p {
+  margin-top: 10px; /* Khoảng cách giữa hình ảnh và văn bản */
+}
+
+.test-content a {
+  display: block; /* Để căn giữa theo chiều ngang */
+  margin-top: 10px; /* Khoảng cách giữa văn bản và thẻ <a> */
+  text-decoration: none;
+  color: #333; /* Màu chữ của thẻ <a> */
+}
+
+
+
 

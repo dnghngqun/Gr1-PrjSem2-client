@@ -562,9 +562,14 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
       </section>
       {/* section5 */}
       <section>
-      <div className="test-box">
-        <a href="#" className="my-button">Mini test for you</a>
-      </div>
+      <div class="test-container">
+    <div class="test-content">
+        <img src="path_to_your_image.jpg" alt="Image" />
+        <p>Text here</p>
+        <a href="#">Link</a>
+    </div>
+</div>
+
       </section>
       <Footer />
     </div>
