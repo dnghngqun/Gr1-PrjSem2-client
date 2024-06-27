@@ -35,11 +35,13 @@ mark.improve {
   color: #397a71;
   background-color: unset;
   position: relative;
+  padding: 0;
 }
+
 mark.improve > img.headline {
   position: absolute;
   bottom: -20px;
-  left: 0;
+  left: -5px;
   width: 70%;
 }
 
@@ -157,7 +159,7 @@ section#introduce .intro-bottom {
 }
 
 .card {
-  border: 1px  #ccc;
+  border: 1px #ccc;
   border-radius: 16px;
   overflow: hidden;
   background: #fff;
@@ -221,9 +223,9 @@ section#introduce .intro-bottom {
   background-color: #127c71;
   text-decoration: none;
   font-size: 14px;
-  padding: 10px 20px ;
+  padding: 10px 20px;
   border-radius: 5px;
-  margin:1000px 20px 100px 200px;
+  margin: 1000px 20px 100px 200px;
 
   transition: background-color 0.3s, color 0.3s;
 }
@@ -242,9 +244,9 @@ section#introduce .intro-bottom {
   box-shadow: 0 0 0 3px rgba(97, 218, 251, 0.5);
 }
 
-.section2 .link-coursePage{
-margin-top:60px;
-margin-left:-150px;
+.section2 .link-coursePage {
+  margin-top: 60px;
+  margin-left: -150px;
 }
 .arrow-container {
   margin-left: 600px;
@@ -560,26 +562,24 @@ p {
   font-size: 14px;
 }
 .navbar {
-  margin-top:100px;
+  margin-top: 100px;
   display: flex; /* Sử dụng flexbox để các button nằm trên cùng một hàng */
-  
 }
 
 .navbar button {
-  color:#fff;
-  width:300px;
+  color: #fff;
+  width: 300px;
   flex: 1; /* Chia đều không gian giữa các button */
-  padding: 10px; 
-  margin: 5px; 
-  border: none; 
+  padding: 10px;
+  margin: 5px;
+  border: none;
   background-color: #127c71;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .navbar button:hover {
-  background-color: #2bc9b9; 
+  background-color: #2bc9b9;
 }
-
 
 .image-container {
   display: flex;
@@ -592,8 +592,6 @@ p {
   max-width: 100%;
   height: auto;
 }
-
-
 
 /* section4 */
 section.section4 {
@@ -857,7 +855,3 @@ section {
   text-decoration: none;
   color: #333; /* Màu chữ của thẻ <a> */
 }
-
-
-
-

@@ -1,6 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Css/Register.css";
-const Register = () => {
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+const Register = ({onLogin}) => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/api/v1/accounts/currentUser",
+          { withCredentials: true }
+        );
+        if (response.status === 200) {
+          onLogin(response.data);
+          navigate("/");
+        }
+      } catch (error) {
+        console.error("Error checking login status", error);
+      }
+    };
+    checkLoginStatus();
+  },[navigate, onLogin]);
+
   return (
     <div id="register">
       <div className="register-container">
