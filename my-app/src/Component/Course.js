@@ -8,7 +8,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "./Css/Course.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-const Course = () => {
+const Course = ({isLoggedIn, onLogout}) => {
   useEffect(() => {
     // Swiper initialization for course-swiper
     var courseSwiper = new Swiper(".course-swiper", {
@@ -84,7 +84,8 @@ const Course = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
+
       <div id="CoursePage">
         <div className="page-course">
           <div className="introduct-course">

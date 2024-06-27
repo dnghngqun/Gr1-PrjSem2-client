@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Css/Login.css";
 
@@ -8,18 +8,37 @@ const Login = ({ onLogin }) => {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/api/v1/accounts/currentUser",
+          { withCredentials: true }
+        );
+        if (response.status === 200) {
+          onLogin(response.data);
+          navigate("/");
+        }
+      } catch (error) {
+        console.error("Error checking login status", error);
+      }
+    };
+    checkLoginStatus(); //call function to check status login
+  }, [navigate, onLogin]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const response = await axios.post(
         "http://localhost:8080/api/v1/accounts/login",
         {
-          identify: identify,
-          password: password,
-        }
+          identify,
+          password,
+        },
+        { withCredentials: true }
       );
-      console.log(response.data);
+      console.log("data response: ", response.data);
       if (response.status === 200) {
         // login success
         console.log("Login successful");
@@ -41,7 +60,7 @@ const Login = ({ onLogin }) => {
         </div>
         <div className="right">
           <h1 className="title">Member Login</h1>
-          <form className="login-by-form" onSubmit={handleSubmit}>
+          <form className="login-by-form" method="POST" onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Username, email or phone number"

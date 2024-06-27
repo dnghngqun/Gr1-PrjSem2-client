@@ -8,22 +8,42 @@ const Register = () => {
           <img src="assets/img/images_login.jpg" alt="..." />
         </div>
         <div className="right">
-          <h1 className="title">Member register</h1>
+          <h1 className="title">Register</h1>
           <form action="POST" className="register-by-form">
             <input
               type="text"
-              placeholder="Username, email or phone number"
+              placeholder="Username"
               className="btn username"
+              required
+            />
+            <input
+              type="text"
+              placeholder="Phone Number"
+              className="btn phoneNumber"
+              required
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              className="btn email"
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              className="btn password"
+              required
             />
 
             <input
               type="password"
               className="btn password"
-              placeholder="Password"
+              placeholder="Confirm Password"
+              required
             />
 
             <button type="submit" className=" btn btn-submit">
-              <b>Sign in</b>
+              <b>Sign up</b>
             </button>
 
             <a href="#" className="forgot">
@@ -55,9 +75,9 @@ const Register = () => {
             </a>
           </div>
           <div className="create-account">
+            Do you have an account?
             <a href="/login">
-              Create your account{" "}
-              <img src="assets/svg/RightLongSolid.svg" alt="" />
+              Sign in <img src="assets/svg/RightLongSolid.svg" alt="" />
             </a>
           </div>
         </div>
