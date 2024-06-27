@@ -589,8 +589,9 @@ p {
 }
 
 .image-container img {
-  max-width: 100%;
-  height: auto;
+  width: 1200px; 
+  height: auto; 
+  max-height: 1000px; 
 }
 
 /* section4 */
