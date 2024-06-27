@@ -814,44 +814,40 @@ div.arrow-container {
 }
 /* section5 */
 section {
+  
   font-family: "Roboto", sans-serif;
   margin: 0;
   padding: 0;
 }
 
 .test-container {
-  margin-top: 200px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-.test-container {
-  background-color: #ffaf35; /* Màu cam nhạt */
-  width: 1200px; /* Độ rộng của box */
-  padding: 20px; /* Khoảng cách bên trong box */
-  text-align: center; /* Căn giữa nội dung */
-}
 
-.test-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-top: 200px;
+  max-width: 600px; /* Thu nhỏ độ rộng của box */
+  margin: 0 auto; /* Căn giữa box */
+  padding: 20px;
+  background-color: #ffaf35;
+  border-radius: 20px; /* Bo tròn các góc của box */
+  text-align: center;
 }
 
 .test-content img {
-  width: 100px; /* Kích thước của hình ảnh */
-  height: 100px; /* Để giữ tỷ lệ hình ảnh */
-  object-fit: cover; /* Đảm bảo hình ảnh không bị bể */
-  border-radius: 50%; /* Bo tròn hình ảnh */
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .test-p {
-  margin-top: 10px; /* Khoảng cách giữa hình ảnh và văn bản */
+  margin-top: 10px;
 }
 
 .test-content a {
-  display: block; /* Để căn giữa theo chiều ngang */
-  margin-top: 10px; /* Khoảng cách giữa văn bản và thẻ <a> */
+  display: inline-block; /* Để căn giữa theo chiều ngang */
+  margin-top: 10px;
   text-decoration: none;
-  color: #333; /* Màu chữ của thẻ <a> */
+  color: white; /* Màu chữ trắng cho thẻ <a> */
+  background-color: #127c71; /* Màu nền của thẻ <a> */
+  padding: 10px 20px; /* Khoảng cách bên trong thẻ <a> */
+  border-radius: 10px; /* Bo tròn các góc của thẻ <a> */
 }

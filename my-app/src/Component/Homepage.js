@@ -566,9 +566,9 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
       <section>
         <div className="test-container">
           <div className="test-content">
-            <img src="path_to_your_image.jpg" alt="Image" />
-            <p>Text here</p>
-            <a href="#">Link</a>
+            <img src="https://www.euroschoolindia.com/wp-content/uploads/2023/08/study-rewards.jpg" alt="Image" />
+            <p>Mini test for you </p>
+            <a href="#">Click here</a>
           </div>
         </div>
       </section>
