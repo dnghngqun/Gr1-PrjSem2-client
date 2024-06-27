@@ -1,15 +1,16 @@
+
 :root {
   --widthAllPage: 1200px;
 }
+
 #CoursePage {
   position: relative;
   background: #f2f5f5;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 14px;
-  margin: 0;
-  padding: 0;
-  max-width: 1200px;
   margin: 0 auto;
+  max-width: var(--widthAllPage);
+  padding: 0;
 }
 
 .introduct-course .swiper {
@@ -28,7 +29,7 @@
   text-align: center;
   font-size: 18px;
   height: 300px;
-  border-radius: 16px; /* Bo tròn các góc */
+  border-radius: 16px;
   overflow: hidden;
 }
 
@@ -67,13 +68,15 @@
 .introduct-course .swiper-pagination {
   display: none;
 }
+
 /* course-center */
 
 .course-center {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Căn giữa theo chiều dọc */
+  align-items: center;
   margin-top: 100px;
+  margin-left:80px;
   padding-bottom: 100px;
 }
 
@@ -94,19 +97,19 @@
 }
 
 .course-center .search-input {
-  margin-left: 100px; /* Khoảng cách giữa select và input */
+  margin-left: 20px;
 }
 
 .course-center .course-card {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start; /* Căn hàng card theo bên trái */
 }
 
 .course-center .card {
   width: 250px;
-  margin: 10px;
-  border: 1px #ddd;
+  margin: 10px ; 
+  border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
