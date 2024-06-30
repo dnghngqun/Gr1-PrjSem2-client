@@ -1,14 +1,14 @@
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect } from "react";
 import Swiper from "swiper";
 // import Swiper styles
+import "bootstrap/dist/css/bootstrap.min.css";
 import "swiper/css";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "./Css/Course.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-const Course = ({isLoggedIn, onLogout}) => {
+const Course = ({ isLoggedIn, onLogout }) => {
   useEffect(() => {
     // Swiper initialization for course-swiper
     var courseSwiper = new Swiper(".course-swiper", {
@@ -52,34 +52,50 @@ const Course = ({isLoggedIn, onLogout}) => {
     });
 
     // Search functionality
-    document.getElementById('course-select').addEventListener('change', function() {
-      const value = this.value;
-      const englishCourses = document.querySelectorAll('.english-course');
-      const toeicCourses = document.querySelectorAll('.toeic-course');
+    document
+      .getElementById("course-select")
+      .addEventListener("change", function () {
+        const value = this.value;
+        const englishCourses = document.querySelectorAll(".ielts-course");
+        const toeic2Courses = document.querySelectorAll(".toeic2-course");
+        const toeic4Courses = document.querySelectorAll(".toeic4-course");
 
-      // Ẩn tất cả các thẻ card
-      document.querySelectorAll('.card').forEach(course => course.style.display = 'none');
+        // Ẩn tất cả các thẻ card
+        document
+          .querySelectorAll(".card")
+          .forEach((course) => (course.style.display = "none"));
 
-      if (value === 'english-course') {
-        englishCourses.forEach(course => course.style.display = 'block');
-      } else if (value === 'toeic-course') {
-        toeicCourses.forEach(course => course.style.display = 'block');
-      }
-    });
-
-    document.querySelector('.search-input').addEventListener('input', function() {
-      const filter = this.value.toUpperCase();
-      const cards = document.querySelectorAll('.card');
-
-      cards.forEach(card => {
-        const title = card.querySelector('.card-title').textContent.toUpperCase();
-        if (title.includes(filter)) {
-          card.style.display = 'block';
+        if (value === "ielts-course") {
+          englishCourses.forEach((course) => (course.style.display = "block"));
+        } else if (value === "toeic-course") {
+          toeic2Courses.forEach((course) => (course.style.display = "block"));
+        } else if (value === "toeic4-course") {
+          toeic4Courses.forEach((course) => (course.style.display = "block"));
         } else {
-          card.style.display = 'none';
+          // Hiển thị tất cả các khóa học
+          document
+            .querySelectorAll(".card")
+            .forEach((course) => (course.style.display = "block"));
         }
       });
-    });
+
+    document
+      .querySelector(".search-input")
+      .addEventListener("input", function () {
+        const filter = this.value.toUpperCase();
+        const cards = document.querySelectorAll(".card");
+
+        cards.forEach((card) => {
+          const title = card
+            .querySelector(".card-title")
+            .textContent.toUpperCase();
+          if (title.includes(filter)) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
   }, []); // useEffect dependency array is empty to run only once on mount
 
   return (
@@ -131,74 +147,140 @@ const Course = ({isLoggedIn, onLogout}) => {
             </div>
           </div>
           <div className="course-center">
-    <div className="search-course">
-        <select id="course-select" className="form-select">
-        <option value="">SELECTION COURSE</option>
-            <option value="english-course">IELTS COURSE</option>
-            <option value="toeic-course">TOEIC COURSE</option>
-        </select>
-        <input type="text" className="search-input form-control" placeholder="Search courses..." />
-    </div>
-    <div className="course-card">
-        <div className="card english-course">
-            <img src="assets/img/mostCourse1.webp" className="card-img-top" alt="..." />
-            <div className="card-body">
-                <h5 className="card-title">Android Development from zero to hero</h5>
-                <div className="star">★★★★★</div>
-                <div className="course-price">$53/course</div>
+            <div className="course-container ">
+              <div className="search-course">
+                <select id="course-select" className="form-select">
+                  <option value="">SELECTION COURSE</option>
+                  <option value="ielts-course">IELTS COURSE</option>
+                  <option value="toeic2-course">TOEIC 2 SKILLS COURSE</option>
+                  <option value="toeic4-course">TOEIC 4 SKILLS COURSE</option>
+                </select>
+                <input
+                  type="text"
+                  className="search-input form-control"
+                  placeholder="Search courses..."
+                />
+              </div>
+              <div className="course-card container-fluid">
+                <div className="row gy-3">
+                  <div className="card ielts-course col-xxl-2 col-xl-3 col-md-4">
+                    <img
+                      src="assets/img/mostCourse1.webp"
+                      className="card-img-top"
+                      alt="..."
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">
+                        Android Development from zero to hero
+                      </h5>
+                      <div className="card-bottom">
+                        <div className="course-price">$53/course</div>
+                        <div className="star">★★★★★</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card ielts-course col-xxl-2 col-xl-3 col-md-4">
+                    <a href="/view">
+                      <img
+                        src="assets/img/mostCourse1.webp"
+                        className="card-img-top"
+                        alt="..."
+                      />
+                      <div className="card-body">
+                        <h5 className="card-title">
+                          Android Development from zero to hero
+                        </h5>
+                        <div className="card-bottom">
+                          <div className="course-price">$53/course</div>
+                          <div className="star">★★★★★</div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div className="card toeic2-course col-xxl-2 col-xl-3 col-md-4">
+                    <img
+                      src="assets/img/mostCourse1.webp"
+                      className="card-img-top"
+                      alt="..."
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">
+                        Android Development from zero to hero
+                      </h5>
+                      <div className="card-bottom">
+                        <div className="course-price">$53/course</div>
+                        <div className="star">★★★★★</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card ielts-course col-xxl-2 col-xl-3 col-md-4">
+                    <img
+                      src="assets/img/mostCourse1.webp"
+                      className="card-img-top"
+                      alt="..."
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">
+                        Android Development from zero to hero
+                      </h5>
+                      <div className="card-bottom">
+                        <div className="course-price">$53/course</div>
+                        <div className="star">★★★★★</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card toeic2-course col-xxl-2 col-xl-3 col-md-4">
+                    <img
+                      src="assets/img/mostCourse1.webp"
+                      className="card-img-top"
+                      alt="..."
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">
+                        Android Development from zero to hero
+                      </h5>
+                      <div className="card-bottom">
+                        <div className="course-price">$53/course</div>
+                        <div className="star">★★★★★</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card ielts-course col-xxl-2 col-xl-3 col-md-4">
+                    <img
+                      src="assets/img/mostCourse1.webp"
+                      className="card-img-top"
+                      alt="..."
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">
+                        Android Development from zero to hero
+                      </h5>
+                      <div className="card-bottom">
+                        <div className="course-price">$53/course</div>
+                        <div className="star">★★★★★</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card toeic4-course col-xxl-2 col-xl-3 col-md-4">
+                    <img
+                      src="assets/img/mostCourse1.webp"
+                      className="card-img-top"
+                      alt="..."
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">
+                        Android Development from zero to hero
+                      </h5>
+                      <div className="card-bottom">
+                        <div className="course-price">$53/course</div>
+                        <div className="star">★★★★★</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
-        <div className="card english-course">
-            <img src="assets/img/mostCourse2.webp" className="card-img-top" alt="..." />
-            <div className="card-body">
-                <h5 className="card-title">UI/UX complete guide</h5>
-                <div className="star">★★★★★</div>
-                <div className="course-price">$53/course</div>
-            </div>
-        </div>
-        <div className="card english-course">
-            <img src="assets/img/mostCourse4.webp" className="card-img-top" alt="..." />
-            <div className="card-body">
-                <h5 className="card-title">Mastering Data Modeling Fundamentals</h5>
-                <div className="star">★★★★★</div>
-                <div className="course-price">$53/course</div>
-            </div>
-        </div>
-        <div className="card english-course">
-            <img src="assets/img/mostCourse5.webp" className="card-img-top" alt="..." />
-            <div className="card-body">
-                <h5 className="card-title">Adobe Lightroom for Beginners: Complete Photo</h5>
-                <div className="star">★★★★★</div>
-                <div className="course-price">$53/course</div>
-            </div>
-        </div>
-        <div className="card toeic-course">
-            <img src="assets/img/mostCourse6.webp" className="card-img-top" alt="..." />
-            <div className="card-body">
-                <h5 className="card-title">Model React with MUI & Redux</h5>
-                <div className="star">★★★★★</div>
-                <div className="course-price">$53/course</div>
-            </div>
-        </div>
-        <div className="card toeic-course">
-            <img src="assets/img/mostCourse7.webp" className="card-img-top" alt="..." />
-            <div className="card-body">
-                <h5 className="card-title">The Complete Guide to Docker and Kubernetes</h5>
-                <div className="star">★★★★★</div>
-                <div className="course-price">$53/course</div>
-            </div>
-        </div>
-        <div className="card toeic-course">
-            <img src="assets/img/mostCourse8.webp" className="card-img-top" alt="..." />
-            <div className="card-body">
-                <h5 className="card-title">Ethical Hacking Bootcamp: Zero to Mastery</h5>
-                <div className="star">★★★★★</div>
-                <div className="course-price">$53/course</div>
-            </div>
-        </div>
-    </div>
-</div>
-
+          </div>
         </div>
       </div>
       <Footer />

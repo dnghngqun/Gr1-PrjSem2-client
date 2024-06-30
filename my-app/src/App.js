@@ -6,6 +6,7 @@ import Course from "./Component/Course";
 import Homepage from "./Component/Homepage";
 import Login from "./Component/Login";
 import Register from "./Component/Register";
+import ViewDetail from "./Component/ViewDetail";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
@@ -64,6 +65,7 @@ function App() {
         <Route
           path="/register"
           element={isLoggedIn ? <Navigate to="/" /> : <Register />}></Route>
+        <Route path="/view" element={<ViewDetail />}></Route>
       </Routes>
     </BrowserRouter>
   );
