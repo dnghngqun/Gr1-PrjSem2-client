@@ -5,6 +5,7 @@ import "./App.css";
 import Course from "./Component/Course";
 import Homepage from "./Component/Homepage";
 import Login from "./Component/Login";
+import RegisInformation from "./Component/RegisInformation";
 import Register from "./Component/Register";
 import ViewDetail from "./Component/ViewDetail";
 function App() {
@@ -46,6 +47,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route
+          path="/paymentInformation"
+          element={<RegisInformation />}></Route>
         <Route
           path="/"
           element={
