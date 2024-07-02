@@ -1,0 +1,42 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.form-container > .left {
+  width: 62%;
+  margin-right: 3%;
+}
+.form-container > .right {
+  width: 35%;
+}
+
+.form-container .right .course-in4 .left > img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.form-container .right .course-in4 {
+  display: flex;
+}
+
+.course-in4 .right h1.title {
+  margin: 0;
+}
+
+.form-container .left .label {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.form-container .left .birthday {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
