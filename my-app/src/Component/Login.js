@@ -81,7 +81,7 @@ const Login = ({ onLogin }) => {
               <b>Sign in</b>
             </button>
 
-            <a href="#" className="forgot">
+            <a href="/forgot-password" className="forgot">
               Forgot <span>Username/Password?</span>
             </a>
           </form>

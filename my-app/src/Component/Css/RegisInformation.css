@@ -13,13 +13,13 @@
   width: 35%;
 }
 
-.form-container .right .course-in4 .left > img {
+.form-container .right .course-info .left > img {
   width: 100px;
   height: 100px;
   object-fit: cover;
 }
 
-.form-container .right .course-in4 {
+.form-container .right .course-info {
   display: flex;
 }
 

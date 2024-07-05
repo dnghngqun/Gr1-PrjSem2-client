@@ -7,7 +7,9 @@ import Homepage from "./Component/Homepage";
 import Login from "./Component/Login";
 import RegisInformation from "./Component/RegisInformation";
 import Register from "./Component/Register";
+import Thanks from "./Component/Thanks";
 import ViewDetail from "./Component/ViewDetail";
+import ForgotPassword from "./Component/ForgotPassword";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
@@ -70,6 +72,8 @@ function App() {
           path="/register"
           element={isLoggedIn ? <Navigate to="/" /> : <Register />}></Route>
         <Route path="/view" element={<ViewDetail />}></Route>
+        <Route path="/thanks" element={<Thanks />} />
+        <Route path="/forgot-password" element={<ForgotPassword/>}></Route>
       </Routes>
     </BrowserRouter>
   );

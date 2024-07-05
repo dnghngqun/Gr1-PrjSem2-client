@@ -1,52 +1,103 @@
-import React, { useEffect, useState } from "react";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Css/RegisInformation.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-
 const RegisInformation = () => {
-  const [day, setDay] = useState("");
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
+  const navigate = useNavigate();
+  const [fullname, setFullname] = useState("abc");
+  const [phoneNumber, setPhoneNumber] = useState("12345324234");
+  const [email, setEmail] = useState("abc@gmail.com");
+  const [day, setDay] = useState("4");
+  const [month, setMonth] = useState("4");
+  const [year, setYear] = useState("2018");
+  const [editing, setEditing] = useState(false);
+  const [orderDetailId, setOrderDetailId] = useState(null);
+  const [isOrderCreated, setIsOrderCreated] = useState(false);
+  const [paymentId, setPaymentId] = useState("");
+  const srcImg = "assets/img/home-hero.webp";
+  const nameCourse = "Toeic Basic";
+  const Instructor = "Mrs Ly";
+  const learningTime = "8am to 10am";
+  const startDate = "June 15, 2024";
+  const price = "100";
+  const discount = 0;
 
-  useEffect(() => {
-    validateDate();
-  }, [day, month, year]);
-
-  const validateDate = () => {
-    let daysInMonth = 31;
-
-    if (month === "2") {
-      // Kiểm tra năm nhuận
-      if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
-        daysInMonth = 29;
-      } else {
-        daysInMonth = 28;
-      }
-    } else if (["4", "6", "9", "11"].includes(month)) {
-      daysInMonth = 30;
-    }
-
-    if (day > daysInMonth) {
-      setDay(daysInMonth);
-    }
+  const handleEdit = () => {
+    setEditing(true);
   };
 
-  const handleDayChange = (e) => {
-    setDay(e.target.value);
+  const handleSave = () => {
+    setEditing(false);
+    console.log("Saved:", {
+      fullname,
+      phoneNumber,
+      email,
+      day,
+      month,
+      year,
+    });
   };
 
-  const handleMonthChange = (e) => {
-    setMonth(e.target.value);
-  };
+  const handleCreateOrderDetail = () => {
+    const orderDetailData = {
+      course: { id: 1 }, // Replace with actual course ID
+      order: { id: 1 }, // Replace with actual order ID
+      discount: discount, // Replace with actual discount
+      totalAmount: price - price * discount,
+      status: 0, // Set initial status
+    };
 
-  const handleYearChange = (e) => {
-    setYear(e.target.value);
+    axios
+      .post("http://localhost:8080/api/v1/orderDetails/", orderDetailData)
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.status === "ok") {
+          setOrderDetailId(response.data.data.id);
+          setIsOrderCreated(true);
+        }
+      })
+      .catch((error) => {
+        console.error("There was an error creating the order detail!", error);
+      });
+  };
+  const handlePaymentSuccess = (details) => {
+    console.log(details.id, orderDetailId, price);
+    axios
+      .post("http://localhost:8080/api/v1/payments", {
+        paymentId: details.id, // details.id là paymentId do PayPal trả về
+        account: { id: 1 }, // Thay đổi ID của người dùng tương ứng
+        orderDetail: { id: orderDetailId },
+        paymentMethod: "PayPal",
+        amount: price,
+      })
+      .then((response) => {
+        console.log("Payment saved successfully:", response.data);
+        setPaymentId(details.id); // Lưu paymentId vào state nếu cần thiết
+        navigate("/thanks");
+      })
+      .catch((error) => {
+        console.error("Payment saving failed:", error);
+        console.log("Attempting to delete orderDetail with id:", orderDetailId);
+        axios
+          .delete(`http://localhost:8080/api/v1/orderDetails/${orderDetailId}`)
+          .then(() => {
+            console.log("OrderDetail deleted successfully");
+            //window.history.back(); // Quay lại trang trước đó
+          })
+          .catch((deleteError) => {
+            console.error("Failed to delete orderDetail:", deleteError);
+            // Xử lý lỗi khi không thể xóa orderDetail
+          });
+      });
   };
 
   return (
     <div>
       <Navbar />
-      <form className="form-container">
+      <div className="form-container">
         <div className="left">
           <h1 className="title">Course Registration Information </h1>
           <hr className="line line-left" />
@@ -54,18 +105,46 @@ const RegisInformation = () => {
             Fullname
           </label>
           <br />
-          <input type="text" id="fullname" />
+          {editing ? (
+            <input
+              type="text"
+              id="fullname"
+              value={fullname}
+              onChange={(e) => setFullname(e.target.value)}
+            />
+          ) : (
+            <span>{fullname}</span>
+          )}
           <br />
           <label htmlFor="phoneNumber" className="label phoneNumber">
             PhoneNumber
           </label>
           <br />
-          <input type="text" id="phoneNumber" /> <br />
+          {editing ? (
+            <input
+              type="text"
+              id="phoneNumber"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+          ) : (
+            <span>{phoneNumber}</span>
+          )}
+          <br />
           <label htmlFor="email" className="label email">
             Email
           </label>
           <br />
-          <input type="text" id="email" />
+          {editing ? (
+            <input
+              type="text"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          ) : (
+            <span>{email}</span>
+          )}
           <br />
           <label htmlFor="" className="label">
             Birthday
@@ -76,76 +155,123 @@ const RegisInformation = () => {
                 Day
               </label>
               <br />
-              <input
-                type="number"
-                min="1"
-                max="31"
-                step="1"
-                id="day"
-                value={day}
-                onChange={handleDayChange}
-              />
+              {editing ? (
+                <input
+                  type="number"
+                  min="1"
+                  max="31"
+                  step="1"
+                  id="day"
+                  value={day}
+                  onChange={(e) => setDay(e.target.value)}
+                />
+              ) : (
+                <span>{day}</span>
+              )}
             </div>
             <div className="div-month">
               <label htmlFor="month" className="month label">
                 Month
               </label>
               <br />
-              <input
-                type="number"
-                min="1"
-                max="12"
-                step="1"
-                id="month"
-                value={month}
-                onChange={handleMonthChange}
-              />
+              {editing ? (
+                <input
+                  type="number"
+                  min="1"
+                  max="12"
+                  step="1"
+                  id="month"
+                  value={month}
+                  onChange={(e) => setMonth(e.target.value)}
+                />
+              ) : (
+                <span>{month}</span>
+              )}
             </div>
-
             <div className="div-year">
               <label htmlFor="year" className="year label">
                 Year
               </label>
               <br />
-              <input
-                type="number"
-                min="1930"
-                max="2099"
-                step="1"
-                id="year"
-                value={year}
-                onChange={handleYearChange}
-              />
+              {editing ? (
+                <input
+                  type="number"
+                  min="1930"
+                  max="2099"
+                  step="1"
+                  id="year"
+                  value={year}
+                  onChange={(e) => setYear(e.target.value)}
+                />
+              ) : (
+                <span>{year}</span>
+              )}
             </div>
           </div>
-          <button className="button button-submit" type="submit">
-            submit
-          </button>
+          {editing ? (
+            <button onClick={handleSave}>Save</button>
+          ) : (
+            <button onClick={handleEdit}>Edit</button>
+          )}
         </div>
         <div className="right">
-          <div className="course-in4">
+          <div className="course-info">
             <div className="left">
-              <img src="assets/img/home-hero.webp" alt="" />
+              <img src={srcImg} alt="" />
             </div>
             <div className="right">
-              <h1 className="title">Toeic Basic</h1>
+              <h1 className="title">{nameCourse}</h1>
               <p className="content">bởi trung tâm anh ngữ...</p>
             </div>
           </div>
-          <div className="in4-order">
+          <div className="info-order">
             <p>
-              <b>Instructor:</b> Mrs Ly
+              <b>Instructor:</b> {Instructor}
             </p>
             <p>
-              <b>Instructor:</b> Mrs Ly
+              <b>Learning Times:</b> {learningTime}
             </p>
             <p>
-              <b>Instructor:</b> Mrs Ly
+              <b>Expected start date:</b> {startDate}
+            </p>
+            <p>
+              <b>Total price:</b> {price}
             </p>
           </div>
           <hr className="line" />
+          {!isOrderCreated ? (
+            <button onClick={handleCreateOrderDetail}>
+              Proceed to Payment
+            </button>
+          ) : (
+            <PayPalScriptProvider
+              options={{
+                clientId:
+                  "AepPazLLE1Y5T64DNcxC0n1b_tUhBUxwUcF91sF-wzLSuUwm4xEkbMV2PH9ntwLSArE1Hkd-TJ4zU4XC",
+              }}>
+              <PayPalButtons
+                style={{ layout: "horizontal" }}
+                createOrder={(data, actions) => {
+                  return actions.order.create({
+                    purchase_units: [
+                      {
+                        amount: {
+                          value: price.toString(),
+                        },
+                      },
+                    ],
+                  });
+                }}
+                onApprove={(data, actions) => {
+                  return actions.order.capture().then((details) => {
+                    handlePaymentSuccess(details);
+                  });
+                }}
+              />
+            </PayPalScriptProvider>
+          )}
         </div>
-      </form>
+      </div>
       <Footer />
     </div>
   );

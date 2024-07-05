@@ -151,7 +151,7 @@ const ViewDetail = () => {
               <option>Mrs.Hoa</option>
               <option>Mrs.Dung</option>
             </select>
-            <a href="#">Sign up</a>
+            <a href="/paymentInformation">Sign up</a>
           </div>
         </div>
       </div>

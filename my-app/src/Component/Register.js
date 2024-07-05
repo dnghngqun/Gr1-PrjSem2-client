@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import "./Css/Register.css";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
-const Register = ({onLogin}) => {
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Css/Register.css";
+const Register = ({ onLogin }) => {
   const navigate = useNavigate();
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -20,7 +20,7 @@ const Register = ({onLogin}) => {
       }
     };
     checkLoginStatus();
-  },[navigate, onLogin]);
+  }, [navigate, onLogin]);
 
   return (
     <div id="register">
@@ -67,9 +67,9 @@ const Register = ({onLogin}) => {
               <b>Sign up</b>
             </button>
 
-            <a href="#" className="forgot">
+            {/* <a href="#" className="forgot">
               Forgot <span>Username/Password?</span>
-            </a>
+            </a> */}
           </form>
           <b className="text-line">or sign in with</b>
           <div className="register-other">
