@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./Css/RegisInformation.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-const RegisInformation = () => {
+const RegisInformation = ({ isLoggedIn, onLogout }) => {
   const navigate = useNavigate();
   const [fullname, setFullname] = useState("abc");
   const [phoneNumber, setPhoneNumber] = useState("12345324234");
@@ -96,7 +96,7 @@ const RegisInformation = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
       <div className="form-container">
         <div className="left">
           <h1 className="title">Course Registration Information </h1>

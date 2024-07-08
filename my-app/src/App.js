@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Course from "./Component/Course";
+import ForgotPassword from "./Component/ForgotPassword";
 import Homepage from "./Component/Homepage";
 import Login from "./Component/Login";
 import RegisInformation from "./Component/RegisInformation";
 import Register from "./Component/Register";
 import Thanks from "./Component/Thanks";
 import ViewDetail from "./Component/ViewDetail";
-import ForgotPassword from "./Component/ForgotPassword";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
@@ -51,7 +51,9 @@ function App() {
       <Routes>
         <Route
           path="/paymentInformation"
-          element={<RegisInformation />}></Route>
+          element={
+            <RegisInformation isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+          }></Route>
         <Route
           path="/"
           element={
@@ -71,9 +73,16 @@ function App() {
         <Route
           path="/register"
           element={isLoggedIn ? <Navigate to="/" /> : <Register />}></Route>
-        <Route path="/view" element={<ViewDetail />}></Route>
-        <Route path="/thanks" element={<Thanks />} />
-        <Route path="/forgot-password" element={<ForgotPassword/>}></Route>
+        <Route
+          path="/view"
+          element={
+            <ViewDetail isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+          }></Route>
+        <Route
+          path="/thanks"
+          element={<Thanks isLoggedIn={isLoggedIn} onLogout={handleLogout} />}
+        />
+        <Route path="/forgot-password" element={<ForgotPassword />}></Route>
       </Routes>
     </BrowserRouter>
   );

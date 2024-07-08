@@ -3,10 +3,10 @@ import "./Css/ViewDetail.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 
-const ViewDetail = () => {
+const ViewDetail = ({ isLoggedIn, onLogout }) => {
   return (
     <div id="view-course">
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
       <div className="toeic-container">
         <div className="basic-toeic">
           <div className="goal-title">

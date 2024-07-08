@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import "./Css/ForgotPassword.css";
 const ForgotPassword = () => {
   const [method, setMethod] = useState("");
   const [contact, setContact] = useState("");
@@ -60,7 +61,7 @@ const ForgotPassword = () => {
 
   const handleVerifyToken = () => {
     axios
-      .post("http://localhost:8080/api/v1/accounts/verify-token", null, {
+      .post("http://localhost:8080/api/v1/accounts/reset-password", null, {
         params: {
           email: contact,
           token: token,
@@ -85,7 +86,7 @@ const ForgotPassword = () => {
       })
       .then((response) => {
         setConfirmationMessage("Mật khẩu của bạn đã được đặt lại thành công!");
-        setStep(4);
+        setStep(3);
       })
       .catch((error) => {
         console.error("There was an error resetting the password!", error);
@@ -93,81 +94,77 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div>
-      <h2>Quên mật khẩu</h2>
-      <div>
-        <label>
-          <input
-            type="radio"
-            value="email"
-            checked={method === "email"}
-            onChange={handleMethodChange}
-          />
-          Email
-        </label>
-        {method === "email" && step === 1 && (
+    <div id="forgot">
+      <div className=" forgot-container">
+        <h2>Quên mật khẩu</h2>
+        <div>
+          <label>
+            <input
+              type="radio"
+              value="email"
+              checked={method === "email"}
+              onChange={handleMethodChange}
+            />
+            Email
+          </label>
+          {method === "email" && step === 1 && (
+            <div>
+              <input
+                type="text"
+                placeholder="Nhập email"
+                value={contact}
+                onChange={handleContactChange}
+              />
+              <button onClick={handleSendToken}>Gửi mã</button>
+            </div>
+          )}
+        </div>
+        <div>
+          <label>
+            <input
+              type="radio"
+              value="phone"
+              checked={method === "phone"}
+              onChange={handleMethodChange}
+            />
+            Số điện thoại
+          </label>
+          {method === "phone" && step === 1 && (
+            <div>
+              <input
+                type="text"
+                placeholder="Nhập số điện thoại"
+                value={contact}
+                onChange={handleContactChange}
+              />
+              <button onClick={handleSendToken}>Gửi mã</button>
+            </div>
+          )}
+        </div>
+        {step === 2 && (
           <div>
+            <h2>Nhập mã xác thực</h2>
             <input
               type="text"
-              placeholder="Nhập email"
-              value={contact}
-              onChange={handleContactChange}
+              placeholder="Nhập mã xác thực"
+              value={token}
+              onChange={handleTokenChange}
             />
-            <button onClick={handleSendToken}>Gửi mã</button>
+            <input
+              type="password"
+              placeholder="Nhập mật khẩu mới"
+              value={newPassword}
+              onChange={handleNewPasswordChange}
+            />
+            <button onClick={handleResetPassword}>Đặt lại mật khẩu</button>
+          </div>
+        )}
+        {step === 3 && (
+          <div>
+            <h2>{confirmationMessage}</h2>
           </div>
         )}
       </div>
-      <div>
-        <label>
-          <input
-            type="radio"
-            value="phone"
-            checked={method === "phone"}
-            onChange={handleMethodChange}
-          />
-          Số điện thoại
-        </label>
-        {method === "phone" && step === 1 && (
-          <div>
-            <input
-              type="text"
-              placeholder="Nhập số điện thoại"
-              value={contact}
-              onChange={handleContactChange}
-            />
-            <button onClick={handleSendToken}>Gửi mã</button>
-          </div>
-        )}
-      </div>
-      {step === 2 && (
-        <div>
-          <h2>Nhập mã xác thực</h2>
-          <input
-            type="text"
-            placeholder="Nhập mã xác thực"
-            value={token}
-            onChange={handleTokenChange}
-          />
-          <button onClick={handleVerifyToken}>Xác thực mã</button>
-        </div>
-      )}
-      {step === 3 && (
-        <div>
-          <h2>Đặt lại mật khẩu</h2>
-          <input
-            type="password"
-            placeholder="Nhập mật khẩu mới"
-            value={newPassword}
-            onChange={handleNewPasswordChange}
-          />
-          <button onClick={handleResetPassword}>Đặt lại mật khẩu</button>
-        </div>
-      )}
-      {step === 4 && (
-        <div>
-          <h2>{confirmationMessage}</h2>
-        </div>
-      )}
     </div>
   );
 };
