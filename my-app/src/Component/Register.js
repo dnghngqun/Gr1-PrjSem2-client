@@ -1,9 +1,15 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Css/Register.css";
 const Register = ({ onLogin }) => {
   const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [fullName, setFullname] = useState("");
+  const [birthday, setBirthday] = useState("2000-01-01");
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
@@ -22,6 +28,35 @@ const Register = ({ onLogin }) => {
     checkLoginStatus();
   }, [navigate, onLogin]);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/accounts/register",
+        {
+          userName: userName,
+          email: email,
+          password: password,
+          phoneNumber: phoneNumber,
+          fullName: fullName,
+          birthday: birthday,
+        },
+        { withCredentials: true }
+      );
+      console.log("data response: ", response.data);
+      if (response.status === 200) {
+        //regis success
+        console.log("Register Success!");
+        navigate("/login");
+      } else {
+        //login failed
+        console.error("Register Failed");
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
   return (
     <div id="register">
       <div className="register-container">
@@ -30,29 +65,47 @@ const Register = ({ onLogin }) => {
         </div>
         <div className="right">
           <h1 className="title">Register</h1>
-          <form action="POST" className="register-by-form">
+          <form
+            method="POST"
+            className="register-by-form"
+            onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Username"
               className="btn username"
-              required
+              require
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Full Name"
+              className="btn"
+              require
+              value={fullName}
+              onChange={(e) => setFullname(e.target.value)}
             />
             <input
               type="text"
               placeholder="Phone Number"
               className="btn phoneNumber"
               required
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
             />
             <input
               type="email"
               placeholder="Email"
               className="btn email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             <input
               type="password"
               placeholder="Password"
               className="btn password"
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
 

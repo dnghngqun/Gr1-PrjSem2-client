@@ -46,7 +46,7 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                     <span>Sign In</span>
                   </button>
                 </a>
-                <a href="#">
+                <a href="/register">
                   <button className="btn-sign sign-up">
                     <span>Sign Up</span>
                   </button>
