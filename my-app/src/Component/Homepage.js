@@ -564,14 +564,19 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
       </section>
       {/* section5 */}
       <section>
-        <div className="test-container">
-          <div className="test-content">
-            <img src="https://www.euroschoolindia.com/wp-content/uploads/2023/08/study-rewards.jpg" alt="Image" />
-            <p>Mini test for you </p>
-            <a href="#">Click here</a>
-          </div>
-        </div>
-      </section>
+  <div className="test-container">
+    <div className="test-content">
+      <div>
+      <img  src="assets/img/leaf.png" className="deco1"></img>
+        <p>How would you like to assess your proficiency in English?</p>
+        <a href="#"><b>Mini Test For You</b></a>
+      <img  src="assets/img/leaf.png" className="deco2"></img>
+      </div>
+      <img src="assets/img/luyen-de-website.webp" alt="Image" />
+    </div>
+  </div>
+</section>
+
       <Footer />
     </div>
   );

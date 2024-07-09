@@ -815,40 +815,68 @@ div.arrow-container {
 }
 /* section5 */
 section {
-  
-  font-family: "Roboto", sans-serif;
-  margin: 0;
-  padding: 0;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 .test-container {
-
-  margin-top: 200px;
-  max-width: 600px; /* Thu nhỏ độ rộng của box */
+  max-width: 1200px; /* Thu nhỏ độ rộng của box */
   margin: 0 auto; /* Căn giữa box */
   padding: 20px;
   background-color: #ffaf35;
   border-radius: 20px; /* Bo tròn các góc của box */
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.test-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px; /* Khoảng cách giữa hình ảnh và văn bản */
 }
 
 .test-content img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 50%;
+  max-width: 50%;
+  border-radius: 20px;
 }
 
-.test-p {
-  margin-top: 10px;
+.test-content div {
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  max-width: 50%;
+  text-align: center;
 }
-
+.test-content div img {
+max-width: 15%;
+}
+.test-content .deco1{
+margin-right: 300px;
+}
+.test-content .deco2{
+margin-left: 350px;
+}
+.test-content p {
+  color: white;
+  font-size: 1.5em; /* Font chữ to hơn */
+  margin: 0; /* Loại bỏ margin */
+}
 .test-content a {
-  display: inline-block; /* Để căn giữa theo chiều ngang */
+  color: black;
+  font-size: 1.5em; /* Font chữ to hơn */
+  text-decoration: none; /* Bỏ gạch chân của link */
+  display: inline-block;
   margin-top: 10px;
-  text-decoration: none;
-  color: white; /* Màu chữ trắng cho thẻ <a> */
-  background-color: #127c71; /* Màu nền của thẻ <a> */
-  padding: 10px 20px; /* Khoảng cách bên trong thẻ <a> */
-  border-radius: 10px; /* Bo tròn các góc của thẻ <a> */
+  padding: 10px 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
+
+.test-content a:hover {
+  background-color: #127c71;
+}
+
