@@ -1,16 +1,37 @@
+
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Swiper from "swiper";
 // import Swiper styles
-import "bootstrap/dist/css/bootstrap.min.css";
 import "swiper/css";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "./Css/Course.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+
 const Course = ({ isLoggedIn, onLogout }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
-    // Swiper initialization for course-swiper
+    // DOMContentLoaded functionality
+    const dots = document.querySelectorAll(".dot");
+    const cards = document.querySelectorAll(".card");
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", function () {
+        const page = parseInt(this.getAttribute("data-page"));
+
+        // Remove 'active' class from all dots
+        dots.forEach((dot) => dot.classList.remove("active"));
+        // Add 'active' class to the clicked dot
+        this.classList.add("active");
+
+        // Update current page state
+        setCurrentPage(page);
+      });
+    });
+
+    // Initialize Swiper for course-swiper
     var courseSwiper = new Swiper(".course-swiper", {
       spaceBetween: 300,
       centeredSlides: true,
@@ -31,7 +52,7 @@ const Course = ({ isLoggedIn, onLogout }) => {
       },
     });
 
-    // Swiper initialization for popular-swiper
+    // Initialize Swiper for popular-swiper
     var popularSwiper = new Swiper(".popular-swiper", {
       slidesPerView: 3,
       direction: "horizontal",
@@ -97,6 +118,20 @@ const Course = ({ isLoggedIn, onLogout }) => {
         });
       });
   }, []); // useEffect dependency array is empty to run only once on mount
+
+  useEffect(() => {
+    // Update card visibility based on current page state
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach((card, index) => {
+      const cardPage = index < 4 ? 1 : 2; // first 4 cards belong to page 1, rest belong to page 2
+      if (cardPage === currentPage || isNaN(currentPage)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }, [currentPage]);
 
   return (
     <div>
@@ -280,6 +315,20 @@ const Course = ({ isLoggedIn, onLogout }) => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="pagination2">
+            <span
+              className={`dot ${currentPage === 1 ? 'active' : ''}`}
+              data-page="1"
+            >
+              1
+            </span>
+            <span
+              className={`dot ${currentPage === 2 ? 'active' : ''}`}
+              data-page="2"
+            >
+              2
+            </span>
           </div>
         </div>
       </div>
