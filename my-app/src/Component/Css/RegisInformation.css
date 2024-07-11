@@ -1,42 +1,119 @@
+
 .form-container {
   display: flex;
   justify-content: center;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px  #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
 }
 
 .form-container > .left {
   width: 62%;
   margin-right: 3%;
+  padding: 20px;
 }
+
 .form-container > .right {
   width: 35%;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
 .form-container .right .course-info .left > img {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
 }
 
 .form-container .right .course-info {
   display: flex;
+  align-items: center;
 }
 
-.course-in4 .right h1.title {
+.course-info .right h1.title {
   margin: 0;
+  font-size: 24px;
+  color: #333;
 }
 
 .form-container .left .label {
   font-size: 16px;
   font-weight: 700;
-  margin-top: 10px;
+  margin-top: 20px;
+  color: #333;
 }
 
 .form-container .left .birthday {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
 }
 
+.form-container .left input[type="text"],
+.form-container .left input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: 1px  #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
 
+.form-container .left button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #ffaf35;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-container .left button:hover {
+  background-color: #f39509;
+}
+
+.form-container .right .info-order p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.form-container .right .info-order p b {
+  color: #333;
+}
+
+.form-container .right .line {
+  margin: 20px 0;
+}
+
+.form-container .right button {
+  width: 100%;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #127c71;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-container .right button:hover {
+  background-color: #076d63;
+}
+
+.form-container .right .paypal-buttons {
+  margin-top: 20px;
+}
