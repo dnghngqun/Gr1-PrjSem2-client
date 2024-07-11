@@ -31,6 +31,7 @@ const Register = ({ onLogin }) => {
   }, [navigate, onLogin]);
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
     if(passwordAgain === password){
 
