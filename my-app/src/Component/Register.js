@@ -10,6 +10,8 @@ const Register = ({ onLogin }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [fullName, setFullname] = useState("");
   const [birthday, setBirthday] = useState("2000-01-01");
+  const [passwordAgain, setPasswordAgain] = useState("");
+  const [error, setError] = useState("");
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
@@ -30,6 +32,9 @@ const Register = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(passwordAgain === password){
+
+    
     try {
       const response = await axios.post(
         "http://localhost:8080/api/v1/accounts/register",
@@ -55,7 +60,12 @@ const Register = ({ onLogin }) => {
     } catch (error) {
       console.log("Error: ", error);
     }
+  }else{
+    setError("confirm password don't match!")
+    e.preventDefault();
+  }
   };
+
 
   return (
     <div id="register">
@@ -105,6 +115,7 @@ const Register = ({ onLogin }) => {
               type="password"
               placeholder="Password"
               className="btn password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
@@ -112,7 +123,9 @@ const Register = ({ onLogin }) => {
             <input
               type="password"
               className="btn password"
+              value={passwordAgain}
               placeholder="Confirm Password"
+              onChange={(e) => setPasswordAgain(e.target.value)}
               required
             />
 

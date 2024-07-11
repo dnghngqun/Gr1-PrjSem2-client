@@ -83,7 +83,6 @@
 }
 
 /* course-center */
-
 .course-center .course-container {
   max-width: var(--widthAllPage) !important;
   display: flex;
@@ -94,7 +93,7 @@
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 100px;
-  background-color: inherit;
+  /* background-color: #f2f5f5; */
 }
 
 .course-center .search-course {
@@ -125,24 +124,31 @@
 }
 
 .course-center .card {
-  width: 280px;
-  /* margin: 0 !important; */
-  /* border: 1px solid #ddd; */
-  border-radius: 8px;
+  width: 260px;
+  border-radius: 10px;
   overflow: hidden;
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  position: relative; /* Đảm bảo hình ảnh được định vị tương đối với thẻ card */
+  padding: 5px 5px 0 5px;
 }
 
 .course-center .card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 5px;
+  width: 100%; 
+  height: auto; 
+  object-fit: cover; 
+  border-radius: 10px; 
+  display: block; 
+  margin: 0 auto;
+  transform: scale(0.9); /* Phóng to hình ảnh hơn một chút */
+  
 }
 
-.course-center .card-body {
-  padding: 0 15px;
+.course-center .card:hover {
+  transform: scale(1.05); /* Phóng to thẻ card khi hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Thêm hiệu ứng đổ bóng khi hover */
+  transition: all 0.7s ease;
+
 }
+
 
 .course-center .card-body .card-title {
   height: 60px;
@@ -153,13 +159,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 20px;
-  margin-bottom: 5px;
+  /* height: 20px;
+  margin-bottom: 5px; */
 }
 
-.card-bottom .course-price {
+/* .card-bottom .course-price {
   margin: 10px 0;
 }
+.star{
+margin-right:20px;
+} */
 
 .pagination2 {
   text-align: center;

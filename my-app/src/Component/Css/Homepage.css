@@ -14,7 +14,6 @@ section#introduce .intro-container {
   display: flex;
   max-width: var(--widthAllPage);
   margin: 0 auto;
-  padding-top: 80px;
 }
 
 section#introduce .intro-container > .intro-left {
@@ -589,9 +588,9 @@ p {
 }
 
 .image-container img {
-  width: 1200px; 
-  height: auto; 
-  max-height: 1000px; 
+  width: 1200px;
+  height: auto;
+  max-height: 1000px;
 }
 
 /* section4 */
@@ -851,13 +850,13 @@ section {
   text-align: center;
 }
 .test-content div img {
-max-width: 15%;
+  max-width: 15%;
 }
-.test-content .deco1{
-margin-right: 300px;
+.test-content .deco1 {
+  margin-right: 300px;
 }
-.test-content .deco2{
-margin-left: 350px;
+.test-content .deco2 {
+  margin-left: 350px;
 }
 .test-content p {
   color: white;
@@ -879,4 +878,3 @@ margin-left: 350px;
 .test-content a:hover {
   background-color: #127c71;
 }
-
