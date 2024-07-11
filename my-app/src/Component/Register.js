@@ -10,6 +10,7 @@ const Register = ({ onLogin }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [fullName, setFullname] = useState("");
   const [birthday, setBirthday] = useState("2000-01-01");
+
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
@@ -29,6 +30,7 @@ const Register = ({ onLogin }) => {
   }, [navigate, onLogin]);
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
     try {
       const response = await axios.post(
@@ -105,6 +107,7 @@ const Register = ({ onLogin }) => {
               type="password"
               placeholder="Password"
               className="btn password"
+              value = {password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
