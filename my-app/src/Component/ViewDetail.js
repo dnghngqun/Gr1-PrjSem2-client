@@ -93,6 +93,7 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
               <tr>
                 <th>Lessons</th>
                 <th>Topics Covered</th>
+                <th>Outcome</th>
               </tr>
               <tr>
                 <td>Lesson 1 - Lesson 3</td>
@@ -104,16 +105,36 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
                   <br />
                   Mixed pictures
                 </td>
+                <td>
+                  Ability to describe situations related to people, including
+                  appearance, emotional states, and daily activities.
+                  <br />        
+                    Capability to describe and identify common objects through
+                    images, such as utensils, everyday items, and more.
+                  
+                </td>
               </tr>
               <tr>
                 <td>Lesson 4 - Lesson 8</td>
                 <td>Practice Part 2</td>
+                <td>
+                Learn about everyday communication situations, including discussing work and daily life.
+                <br />
+                Expand vocabulary related to topics such as travel, shopping, and entertainment.
+                <br />
+                Practice listening skills and understanding content from simple and useful dialogues.
+                </td>
               </tr>
               <tr>
                 <td>Lesson 9 - Lesson 19</td>
                 <td>
                   Practice Part 3<br />
                   Grammar Part 5-6
+                </td>
+                <td>
+                Study basic grammar structures such as present simple, past simple, and conditional sentences.
+                <br />
+                Apply grammar rules to enhance accuracy and confidence in speaking and writing English.
                 </td>
               </tr>
               <tr>
@@ -124,10 +145,20 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
                   <br />
                   Practice tests
                 </td>
+                <td>
+                Develop the ability to synthesize and apply learned knowledge in real-life situations.
+                <br />
+                Familiarize yourself with high-applicability exercises, such as reading and evaluating information from short passages and articles.
+                </td>
               </tr>
               <tr>
                 <td>Lesson 27</td>
                 <td>Final test</td>
+                <td>
+                Comprehensive assessment of listening, reading, speaking, and writing skills in the TOEIC exam format.
+                <br />
+                Evaluate personal progress and determine readiness for the actual exam.
+                </td>
               </tr>
             </tbody>
           </table>
