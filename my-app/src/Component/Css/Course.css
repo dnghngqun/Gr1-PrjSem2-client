@@ -124,7 +124,7 @@
 }
 
 .course-center .card {
-  width: 260px;
+  width: 280px;
   border-radius: 10px;
   overflow: hidden;
   position: relative; /* Đảm bảo hình ảnh được định vị tương đối với thẻ card */
@@ -132,23 +132,20 @@
 }
 
 .course-center .card img {
-  width: 100%; 
-  height: auto; 
-  object-fit: cover; 
-  border-radius: 10px; 
-  display: block; 
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+  display: block;
   margin: 0 auto;
   transform: scale(0.9); /* Phóng to hình ảnh hơn một chút */
-  
 }
 
 .course-center .card:hover {
-  transform: scale(1.05); /* Phóng to thẻ card khi hover */
+  transform: scale(1.03); /* Phóng to thẻ card khi hover */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Thêm hiệu ứng đổ bóng khi hover */
   transition: all 0.7s ease;
-
 }
-
 
 .course-center .card-body .card-title {
   height: 60px;
@@ -163,6 +160,10 @@
   margin-bottom: 5px; */
 }
 
+.card-body {
+  padding-top: 8px !important;
+}
+
 /* .card-bottom .course-price {
   margin: 10px 0;
 }
@@ -173,7 +174,7 @@ margin-right:20px;
 .pagination2 {
   text-align: center;
   margin-top: 20px;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
 
 .dot {
