@@ -92,7 +92,7 @@
   /* margin-left: 80px; */
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: 100px;
+  /* padding-bottom: 100px; */
   /* background-color: #f2f5f5; */
 }
 
@@ -132,12 +132,13 @@
 }
 
 .course-center .card img {
-  width: 100%;
-  height: auto;
+  width: 243px;
+  height: 243px;
   object-fit: cover;
   border-radius: 5px;
   display: block;
   margin: 0 auto;
+  margin-top: 10px;
   transform: scale(0.9); /* Phóng to hình ảnh hơn một chút */
 }
 
@@ -148,8 +149,9 @@
 }
 
 .course-center .card-body .card-title {
-  height: 60px;
+  height: 50px;
   margin-bottom: 0;
+  margin-left: 8px;
 }
 
 .card-body .card-bottom {
@@ -164,13 +166,12 @@
   padding-top: 8px !important;
 }
 
-/* .card-bottom .course-price {
+.card-bottom .course-price {
   margin: 10px 0;
+  margin-left: 6px;
 }
-.star{
-margin-right:20px;
-} */
 
+/* 
 .pagination2 {
   text-align: center;
   margin-top: 20px;
@@ -193,4 +194,49 @@ margin-right:20px;
 .dot.active {
   background-color: #5dcdc2;
   color: white;
+} */
+
+.link-to-view-page {
+  text-decoration: none;
+  color: #000;
+}
+
+/* css pagination course */
+.pagination_course {
+  width: 500px;
+  margin: 50px auto 100px auto;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.pagination_course li a {
+  margin: 0 10px;
+  border: 1px solid gray;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border-radius: 8px;
+  display: block;
+}
+.pagination__link {
+  text-decoration: none;
+  color: #000;
+}
+.pagination_course li a:hover {
+  background-color: #127c71;
+  color: #fff !important;
+  transition: 0.4s ease;
+}
+.pagination_course li a:hover .pagination__link {
+  color: #fff !important;
+  transition: 0.4s ease;
+}
+
+.pagination__link--active a {
+  /* margin: 0 10px; */
+  background-color: #127c71 !important;
+  color: #fff !important;
 }

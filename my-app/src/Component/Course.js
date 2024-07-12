@@ -1,35 +1,50 @@
-
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Swiper from "swiper";
 // import Swiper styles
+import ReactPaginate from "react-paginate";
 import "swiper/css";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "./Css/Course.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 
+import axios from "axios";
+
 const Course = ({ isLoggedIn, onLogout }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [product, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const productsPerPage = 12;
 
   useEffect(() => {
     // DOMContentLoaded functionality
-    const dots = document.querySelectorAll(".dot");
-    const cards = document.querySelectorAll(".card");
+    // const dots = document.querySelectorAll(".dot");
+    // const cards = document.querySelectorAll(".card");
 
-    dots.forEach((dot, index) => {
-      dot.addEventListener("click", function () {
-        const page = parseInt(this.getAttribute("data-page"));
+    // dots.forEach((dot, index) => {
+    //   dot.addEventListener("click", function () {
+    //     const page = parseInt(this.getAttribute("data-page"));
 
-        // Remove 'active' class from all dots
-        dots.forEach((dot) => dot.classList.remove("active"));
-        // Add 'active' class to the clicked dot
-        this.classList.add("active");
+    //     // Remove 'active' class from all dots
+    //     dots.forEach((dot) => dot.classList.remove("active"));
+    //     // Add 'active' class to the clicked dot
+    //     this.classList.add("active");
 
-        // Update current page state
-        setCurrentPage(page);
+    //     // Update current page state
+    //     setCurrentPage(page);
+    //   });
+    // });
+
+    //get infomation product
+    axios
+      .get("http://localhost:8080/api/v1/courses")
+      .then((response) => {
+        setProducts(response.data);
+        console.log("Response data: ", product);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the products!", error);
       });
-    });
 
     // Initialize Swiper for course-swiper
     var courseSwiper = new Swiper(".course-swiper", {
@@ -88,7 +103,7 @@ const Course = ({ isLoggedIn, onLogout }) => {
 
         if (value === "ielts-course") {
           englishCourses.forEach((course) => (course.style.display = "block"));
-        } else if (value === "toeic-course") {
+        } else if (value === "toeic2-course") {
           toeic2Courses.forEach((course) => (course.style.display = "block"));
         } else if (value === "toeic4-course") {
           toeic4Courses.forEach((course) => (course.style.display = "block"));
@@ -119,20 +134,44 @@ const Course = ({ isLoggedIn, onLogout }) => {
       });
   }, []); // useEffect dependency array is empty to run only once on mount
 
-  useEffect(() => {
-    // Update card visibility based on current page state
-    const cards = document.querySelectorAll(".card");
+  //calculate current product
+  const offset = currentPage * productsPerPage;
+  const currentProducts = product.slice(offset, offset + productsPerPage);
+  const pageCount = Math.ceil(product.length / productsPerPage);
+  const productListRef = useRef(null); // Ref cho danh sách sản phẩm
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected);
+    // Cuộn lên đầu danh sách sản phẩm khi chuyển trang
+    if (productListRef.current) {
+      productListRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  // useEffect(() => {
+  //   // Update card visibility based on current page state
+  //   const cards = document.querySelectorAll(".card");
 
-    cards.forEach((card, index) => {
-      const cardPage = index < 4 ? 1 : 2; // first 4 cards belong to page 1, rest belong to page 2
-      if (cardPage === currentPage || isNaN(currentPage)) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
-    });
-  }, [currentPage]);
+  //   cards.forEach((card, index) => {
+  //     const cardPage = index < 4 ? 1 : 2; // first 4 cards belong to page 1, rest belong to page 2
+  //     if (cardPage === currentPage || isNaN(currentPage)) {
+  //       card.style.display = "block";
+  //     } else {
+  //       card.style.display = "none";
+  //     }
+  //   });
+  // }, [currentPage]);
 
+  const getClassName = (classify) => {
+    switch (classify) {
+      case "TOEIC2":
+        return "toeic2-course";
+      case "IELTS":
+        return "ielts-course";
+      case "TOEIC4":
+        return "toeic4-course";
+      default:
+        return "";
+    }
+  };
   return (
     <div>
       <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
@@ -183,12 +222,12 @@ const Course = ({ isLoggedIn, onLogout }) => {
           </div>
           <div className="course-center">
             <div className="course-container ">
-              <div className="search-course">
+              <div ref={productListRef} className="search-course">
                 <select id="course-select" className="form-select">
                   <option value="">SELECTION COURSE</option>
-                  <option value="ielts-course">IELTS COURSE</option>
-                  <option value="toeic2-course">TOEIC 2 SKILLS COURSE</option>
-                  <option value="toeic4-course">TOEIC 4 SKILLS COURSE</option>
+                  <option value="ielts-course">IELTS</option>
+                  <option value="toeic2-course">TOEIC 2 SKILLS</option>
+                  <option value="toeic4-course">TOEIC 4 SKILLS</option>
                 </select>
                 <input
                   type="text"
@@ -198,138 +237,60 @@ const Course = ({ isLoggedIn, onLogout }) => {
               </div>
               <div className="course-card container-fluid">
                 <div className="row gy-3">
-                  <div className="card ielts-course col-xxl-2 col-xl-3 col-md-4">
-                    <img
-                      src="assets/img/mostCourse1.webp"
-                      className="card-img-top"
-                      alt="..."
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title">
-                        Android Development from zero to hero
-                      </h5>
-                      <div className="card-bottom">
-                        <div className="course-price">$53/course</div>
-                        <div className="star">★★★★★</div>
+                  {currentProducts.map((product) => {
+                    const className = getClassName(product.classify);
+                    if (!className) return null; // Nếu không phải 1 trong 3 loại trên thì không hiển thị
+                    return (
+                      <div
+                        key={product.id}
+                        className={`card ${className} col-xxl-2 col-xl-3 col-md-4`}>
+                        <a href="/course/view" className="link-to-view-page">
+                          <img
+                            src={product.imgLink}
+                            className="card-img-top"
+                            alt={product.name}
+                          />
+                          <div className="card-body">
+                            <h5 className="card-title">{product.name}</h5>
+                            <div className="card-bottom">
+                              <div className="course-price">
+                                ${product.price}/course
+                              </div>
+                              <div className="star">★★★★★</div>
+                            </div>
+                          </div>
+                        </a>
                       </div>
-                    </div>
-                  </div>
-                  <div className="card ielts-course col-xxl-2 col-xl-3 col-md-4">
-                    <a href="/view">
-                      <img
-                        src="assets/img/mostCourse1.webp"
-                        className="card-img-top"
-                        alt="..."
-                      />
-                      <div className="card-body">
-                        <h5 className="card-title">
-                          Android Development from zero to hero
-                        </h5>
-                        <div className="card-bottom">
-                          <div className="course-price">$53/course</div>
-                          <div className="star">★★★★★</div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                  <div className="card toeic2-course col-xxl-2 col-xl-3 col-md-4">
-                    <img
-                      src="assets/img/mostCourse1.webp"
-                      className="card-img-top"
-                      alt="..."
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title">
-                        Android Development from zero to hero
-                      </h5>
-                      <div className="card-bottom">
-                        <div className="course-price">$53/course</div>
-                        <div className="star">★★★★★</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card ielts-course col-xxl-2 col-xl-3 col-md-4">
-                    <img
-                      src="assets/img/mostCourse1.webp"
-                      className="card-img-top"
-                      alt="..."
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title">
-                        Android Development from zero to hero
-                      </h5>
-                      <div className="card-bottom">
-                        <div className="course-price">$53/course</div>
-                        <div className="star">★★★★★</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card toeic2-course col-xxl-2 col-xl-3 col-md-4">
-                    <img
-                      src="assets/img/mostCourse1.webp"
-                      className="card-img-top"
-                      alt="..."
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title">
-                        Android Development from zero to hero
-                      </h5>
-                      <div className="card-bottom">
-                        <div className="course-price">$53/course</div>
-                        <div className="star">★★★★★</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card ielts-course col-xxl-2 col-xl-3 col-md-4">
-                    <img
-                      src="assets/img/mostCourse1.webp"
-                      className="card-img-top"
-                      alt="..."
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title">
-                        Android Development from zero to hero
-                      </h5>
-                      <div className="card-bottom">
-                        <div className="course-price">$53/course</div>
-                        <div className="star">★★★★★</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card toeic4-course col-xxl-2 col-xl-3 col-md-4">
-                    <img
-                      src="assets/img/mostCourse1.webp"
-                      className="card-img-top"
-                      alt="..."
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title">
-                        Android Development from zero to hero
-                      </h5>
-                      <div className="card-bottom">
-                        <div className="course-price">$53/course</div>
-                        <div className="star">★★★★★</div>
-                      </div>
-                    </div>
-                  </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
           </div>
-          <div className="pagination2">
+          <ReactPaginate
+            previousLabel={"<"}
+            nextLabel={">"}
+            pageCount={pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination_course"}
+            previousLinkClassName={"pagination__link pagination_previous"}
+            nextLinkClassName={"pagination__link pagination_next"}
+            activeClassName={"pagination__link--active"}
+          />
+          {/* <div className="pagination2">
             <span
-              className={`dot ${currentPage === 1 ? 'active' : ''}`}
-              data-page="1"
-            >
+              className={`dot ${currentPage === 1 ? "active" : ""}`}
+              data-page="1">
               1
             </span>
             <span
-              className={`dot ${currentPage === 2 ? 'active' : ''}`}
-              data-page="2"
-            >
+              className={`dot ${currentPage === 2 ? "active" : ""}`}
+              data-page="2">
               2
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
       <Footer />

@@ -74,7 +74,7 @@ function App() {
           path="/register"
           element={isLoggedIn ? <Navigate to="/" /> : <Register />}></Route>
         <Route
-          path="/view"
+          path="/course/view"
           element={
             <ViewDetail isLoggedIn={isLoggedIn} onLogout={handleLogout} />
           }></Route>
