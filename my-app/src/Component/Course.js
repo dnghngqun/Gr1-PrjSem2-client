@@ -244,7 +244,9 @@ const Course = ({ isLoggedIn, onLogout }) => {
                       <div
                         key={product.id}
                         className={`card ${className} col-xxl-2 col-xl-3 col-md-4`}>
-                        <a href="/course/view" className="link-to-view-page">
+                        <a
+                          href={`/course/${product.id}`}
+                          className="link-to-view-page">
                           <img
                             src={product.imgLink}
                             className="card-img-top"

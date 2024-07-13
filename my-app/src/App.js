@@ -23,7 +23,7 @@ function App() {
         );
         setIsLoggedIn(response.status === 200 ? response.data : null);
       } catch (error) {
-        console.error("Error checking login staus ", error);
+        console.error("Error checking login status ", error);
         setIsLoggedIn(null);
       }
     };
@@ -74,7 +74,7 @@ function App() {
           path="/register"
           element={isLoggedIn ? <Navigate to="/" /> : <Register />}></Route>
         <Route
-          path="/course/view"
+          path="/course/:courseId"
           element={
             <ViewDetail isLoggedIn={isLoggedIn} onLogout={handleLogout} />
           }></Route>
