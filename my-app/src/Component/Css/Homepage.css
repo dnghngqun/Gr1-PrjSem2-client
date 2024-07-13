@@ -462,6 +462,8 @@ body {
   height: auto;
 }
 
+
+
 /* Vị trí nội dung nổi bật */
 .feature-content {
   position: absolute;
@@ -581,19 +583,6 @@ body {
 
 p {
   color: #9e9e9e;
-}
-@media screen and (max-width: 768px) {
-  .container1,
-  .container2 {
-    flex-basis: 100%;
-  }
-}
-
-@media screen and (min-width: 769px) and (max-width: 1200px) {
-  .container1,
-  .container2 {
-    flex-basis: calc(50% - 40px);
-  }
 }
 
 .headline {
