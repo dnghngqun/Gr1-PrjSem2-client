@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import Swiper JS
 import Swiper from "swiper";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 // import Swiper styles
 import "swiper/css";
 // import "swiper/css/navigation";
@@ -14,7 +14,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
   const [selectedImage, setSelectedImage] = useState("ielts");
 
   useEffect(() => {
-    Swiper.use([Navigation, Pagination, Autoplay]);
+    Swiper.use([Navigation, Pagination]);
     const swiper = new Swiper(".swiper", {
       slidesPerView: 3, // hiện 3 slide
       direction: "horizontal", // ngang
@@ -144,76 +144,92 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
           <div className="swiper-container swiper">
             <div className="swiper-wrapper swiper-el">
               <div className="swiper-slide">
-                <div className="card">
+                <div className="card card-home">
                   <img
                     src="assets/img/mostCourse1.webp"
                     className="card-img-top"
                     alt="..."
                   />
-                  <div className="card-body">
-                    <h5 className="card-title">UI/UX complete guide</h5>
-                    <div className="star">★★★★★</div>
-                    <div className="course-price">$53/course</div>
+                  <div className="card-body card-home-body">
+                    <h5 className="card-title card-home-title">
+                      UI/UX complete guide
+                    </h5>
+                    <div className="card-bottom card-home-bottom">
+                      <div className="course-price">$53/course</div>
+                      <div className="star">★★★★★</div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="swiper-slide">
-                <div className="card">
-                  {/* Nội dung card */}
+                <div className="card card-home">
                   <img
-                    src="assets/img/mostCourse2.webp"
+                    src="assets/img/mostCourse1.webp"
                     className="card-img-top"
                     alt="..."
                   />
-                  <div className="card-body">
-                    <h5 className="card-title">UI/UX complete guide</h5>
-                    <div className="star">★★★★★</div>
-                    <div className="course-price">$53/course</div>
+                  <div className="card-body card-home-body">
+                    <h5 className="card-title card-home-title">
+                      UI/UX complete guide
+                    </h5>
+                    <div className="card-bottom card-home-bottom">
+                      <div className="course-price">$53/course</div>
+                      <div className="star">★★★★★</div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </div>{" "}
               <div className="swiper-slide">
-                <div className="card">
-                  {/* Nội dung card */}
+                <div className="card card-home">
                   <img
-                    src="assets/img/mostCourse4.webp"
+                    src="assets/img/mostCourse1.webp"
                     className="card-img-top"
                     alt="..."
                   />
-                  <div className="card-body">
-                    <h5 className="card-title">UI/UX complete guide</h5>
-                    <div className="star">★★★★★</div>
-                    <div className="course-price">$53/course</div>
+                  <div className="card-body card-home-body">
+                    <h5 className="card-title card-home-title">
+                      UI/UX complete guide
+                    </h5>
+                    <div className="card-bottom card-home-bottom">
+                      <div className="course-price">$53/course</div>
+                      <div className="star">★★★★★</div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </div>{" "}
               <div className="swiper-slide">
-                <div className="card">
-                  {/* Nội dung card */}
+                <div className="card card-home">
                   <img
-                    src="assets/img/mostCourse4.webp"
+                    src="assets/img/mostCourse1.webp"
                     className="card-img-top"
                     alt="..."
                   />
-                  <div className="card-body">
-                    <h5 className="card-title">UI/UX complete guide</h5>
-                    <div className="star">★★★★★</div>
-                    <div className="course-price">$53/course</div>
+                  <div className="card-body card-home-body">
+                    <h5 className="card-title card-home-title">
+                      UI/UX complete guide
+                    </h5>
+                    <div className="card-bottom card-home-bottom">
+                      <div className="course-price">$53/course</div>
+                      <div className="star">★★★★★</div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </div>{" "}
               <div className="swiper-slide">
-                <div className="card">
-                  {/* Nội dung card */}
+                <div className="card card-home">
                   <img
-                    src="assets/img/mostCourse5.webp"
+                    src="assets/img/mostCourse1.webp"
                     className="card-img-top"
                     alt="..."
                   />
-                  <div className="card-body">
-                    <h5 className="card-title">UI/UX complete guide</h5>
-                    <div className="star">★★★★★</div>
-                    <div className="course-price">$53/course</div>
+                  <div className="card-body card-home-body">
+                    <h5 className="card-title card-home-title">
+                      UI/UX complete guide
+                    </h5>
+                    <div className="card-bottom card-home-bottom">
+                      <div className="course-price">$53/course</div>
+                      <div className="star">★★★★★</div>
+                    </div>
                   </div>
                 </div>
               </div>

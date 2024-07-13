@@ -67,7 +67,6 @@
   color: black;
   display: flex;
   flex-direction: column;
-  height: 700px;
 }
 .course-details h2.month {
   /* margin-left: 30px; */
@@ -85,6 +84,7 @@
   text-align: center;
   color: #000;
   background-color: #d9d9d9;
+  height: 700px;
 }
 
 .course-details .details-list2,
