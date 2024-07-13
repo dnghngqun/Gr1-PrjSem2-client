@@ -65,7 +65,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                 Improve
                 <img
                   className="headline"
-                  src="assets/svg/headline-curve.svg"
+                  src="/assets/svg/headline-curve.svg"
                   alt="svg"
                 />
               </mark>
@@ -74,7 +74,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                 your Skill
                 <img
                   className="svg-top-skill"
-                  src="assets/svg/svgexport-2.svg"
+                  src="/assets/svg/svgexport-2.svg"
                   style={{ width: "23px", height: "26px" }}
                   alt="svg-top-skill"
                 />
@@ -98,10 +98,10 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
             </div>
           </div>
           <div className="intro-right">
-            <img src="assets/img/home-hero.webp" alt="..." />
+            <img src="/assets/img/home-hero.webp" alt="..." />
             <div className="certificate">
               <div className="left">
-                <img src="assets/img/certificate.webp" alt="..." />
+                <img src="/assets/img/certificate.webp" alt="..." />
               </div>
               <div className="right">
                 <h5 className="title">Certificate</h5>
@@ -146,7 +146,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               <div className="swiper-slide">
                 <div className="card card-home">
                   <img
-                    src="assets/img/mostCourse1.webp"
+                    src="/assets/img/mostCourse1.webp"
                     className="card-img-top"
                     alt="..."
                   />
@@ -164,7 +164,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               <div className="swiper-slide">
                 <div className="card card-home">
                   <img
-                    src="assets/img/mostCourse1.webp"
+                    src="/assets/img/mostCourse1.webp"
                     className="card-img-top"
                     alt="..."
                   />
@@ -182,7 +182,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               <div className="swiper-slide">
                 <div className="card card-home">
                   <img
-                    src="assets/img/mostCourse1.webp"
+                    src="/assets/img/mostCourse1.webp"
                     className="card-img-top"
                     alt="..."
                   />
@@ -200,7 +200,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               <div className="swiper-slide">
                 <div className="card card-home">
                   <img
-                    src="assets/img/mostCourse1.webp"
+                    src="/assets/img/mostCourse1.webp"
                     className="card-img-top"
                     alt="..."
                   />
@@ -218,7 +218,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               <div className="swiper-slide">
                 <div className="card card-home">
                   <img
-                    src="assets/img/mostCourse1.webp"
+                    src="/assets/img/mostCourse1.webp"
                     className="card-img-top"
                     alt="..."
                   />
@@ -278,7 +278,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
         <div className="container">
           <div className="container1">
             <div className="feature-img">
-              <img src="assets/img/home-feature.webp" alt="..." />
+              <img src="/assets/img/home-feature.webp" alt="..." />
               <div className="LoremIpsum">
                 <strong>Lorem ipsum</strong>
                 <p>Lorem ipsum</p>
@@ -351,7 +351,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                 <span className="hightlight">
                   Learning
                   <img
-                    src="assets/svg/headline-curve.svg"
+                    src="/assets/svg/headline-curve.svg"
                     className="curve-image"
                     alt="..."
                   />
@@ -462,19 +462,19 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
           <div className="image-container">
             <img
               id="ielts"
-              src="assets/img/processIelts.png"
+              src="/assets/img/processIelts.png"
               alt="IELTS"
               style={{ display: selectedImage === "ielts" ? "block" : "none" }}
             />
             <img
               id="toeic4"
-              src="assets/img/processToeic4skill.png"
+              src="/assets/img/processToeic4skill.png"
               alt="TOEIC 4 Skills"
               style={{ display: selectedImage === "toeic4" ? "block" : "none" }}
             />
             <img
               id="toeic2"
-              src="assets/img/processToeic2skill.png"
+              src="/assets/img/processToeic2skill.png"
               alt="TOEIC 2 Skills"
               style={{ display: selectedImage === "toeic2" ? "block" : "none" }}
             />
@@ -489,7 +489,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               <div className="swiper-slide mentor">
                 <div className="mentor-container">
                   <img
-                    src="assets/img/mentor1.webp"
+                    src="/assets/img/mentor1.webp"
                     className="mentor-img"
                     alt="..."
                   />
@@ -507,7 +507,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               <div className="swiper-slide mentor">
                 <div className="mentor-container">
                   <img
-                    src="assets/img/mentor2.webp"
+                    src="/assets/img/mentor2.webp"
                     className="mentor-img"
                     alt="..."
                   />
@@ -525,7 +525,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               <div className="swiper-slide mentor">
                 <div className="mentor-container">
                   <img
-                    src="assets/img/mentor3.webp"
+                    src="/assets/img/mentor3.webp"
                     className="mentor-img"
                     alt="..."
                   />
@@ -543,7 +543,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               <div className="swiper-slide mentor">
                 <div className="mentor-container">
                   <img
-                    src="assets/img/mentor4.webp"
+                    src="/assets/img/mentor4.webp"
                     className="mentor-img"
                     alt="..."
                   />
@@ -563,10 +563,10 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
             <div className="swiper-pagination pagination-style"></div>
 
             <button type="button" className="swiper-button-next swiper-button">
-              <img src="assets/svg/svgexport-10.svg" alt="right" />
+              <img src="/assets/svg/svgexport-10.svg" alt="right" />
             </button>
             <button type="button" className="swiper-button-prev swiper-button">
-              <img src="assets/svg/svgexport-6.svg" alt="left" />
+              <img src="/assets/svg/svgexport-6.svg" alt="left" />
             </button>
 
             {/* <div className="swiper-scrollbar"></div> */}
@@ -578,14 +578,14 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
         <div className="test-container">
           <div className="test-content">
             <div>
-              <img src="assets/img/leaf.png" className="deco1"></img>
+              <img src="/assets/img/leaf.png" className="deco1"></img>
               <p>How would you like to assess your proficiency in English?</p>
               <a href="#">
                 <b>Mini Test For You</b>
               </a>
-              <img src="assets/img/leaf.png" className="deco2"></img>
+              <img src="/assets/img/leaf.png" className="deco2"></img>
             </div>
-            <img src="assets/img/luyen-de-website.webp" alt="Image" />
+            <img src="/assets/img/luyen-de-website.webp" alt="Image" />
           </div>
         </div>
       </section>

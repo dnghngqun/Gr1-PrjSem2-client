@@ -189,7 +189,7 @@ const Course = ({ isLoggedIn, onLogout }) => {
                     </h3>
                   </div>
                   <div className="img-title">
-                    <img src="assets/img/imgCourseSlidePage.png" alt="" />
+                    <img src="/assets/img/imgCourseSlidePage.png" alt="" />
                   </div>
                 </div>
                 <div className="swiper-slide">
@@ -200,7 +200,7 @@ const Course = ({ isLoggedIn, onLogout }) => {
                     </h3>
                   </div>
                   <div className="img-title">
-                    <img src="assets/img/anhnguzim.png" alt="" />
+                    <img src="/assets/img/anhnguzim.png" alt="" />
                   </div>
                 </div>
                 <div className="swiper-slide">
@@ -211,7 +211,7 @@ const Course = ({ isLoggedIn, onLogout }) => {
                     </h3>
                   </div>
                   <div className="img-title">
-                    <img src="assets/img/ielts1.png" alt="" />
+                    <img src="/assets/img/ielts1.png" alt="" />
                   </div>
                 </div>
               </div>

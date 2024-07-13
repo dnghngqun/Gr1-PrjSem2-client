@@ -11,64 +11,64 @@ const Footer = () => {
             since 2018 until now.
           </p>
           <div className="external-link">
-            <img src="assets/svg/facebook.svg" alt="facebook" />
-            <img src="assets/svg/instagram.svg" alt="instagram" />
-            <img src="assets/svg/tiktok.svg" alt="tiktok" />
+            <img src="/assets/svg/facebook.svg" alt="facebook" />
+            <img src="/assets/svg/instagram.svg" alt="instagram" />
+            <img src="/assets/svg/tiktok.svg" alt="tiktok" />
           </div>
         </div>
-          <ul className="list">
-            <li className="list-content list-title">
-              <b>Course</b>
-            </li>
-            <li className="list-content">
-              <a href="#">UI/UX Design</a>
-            </li>
-            <li className="list-content">
-              <a href="#">Mobile Development</a>
-            </li>
-            <li className="list-content">
-              <a href="#">Machine Learning</a>
-            </li>
-            <li className="list-content">
-              <a href="#">Web Development</a>
-            </li>
-          </ul>
-          <ul className="list">
-            <li className="list-content list-title">
-              <b>Menu</b>
-            </li>
-            <li className="list-content">
-              <a href="#">Home</a>
-            </li>
-            <li className="list-content">
-              <a href="#">Courses</a>
-            </li>
-            <li className="list-content">
-              <a href="#">Testimonial</a>
-            </li>
-            <li className="list-content">
-              <a href="#">Mentor</a>
-            </li>
-          </ul>
-          <ul className="list">
-            <li className="list-content list-title">
-              <b>About</b>
-            </li>
-            <li className="list-content">
-              <a href="#">Contact Us</a>
-            </li>
-            <li className="list-content">
-              <a href="#">Privacy & Policy</a>
-            </li>
-            <li className="list-content">
-              <a href="#">Term & Condition</a>
-            </li>
-            <li className="list-content">
-              <a href="#">FAQ</a>
-            </li>
-          </ul>
-        </div>
+        <ul className="list">
+          <li className="list-content list-title">
+            <b>Course</b>
+          </li>
+          <li className="list-content">
+            <a href="#">UI/UX Design</a>
+          </li>
+          <li className="list-content">
+            <a href="#">Mobile Development</a>
+          </li>
+          <li className="list-content">
+            <a href="#">Machine Learning</a>
+          </li>
+          <li className="list-content">
+            <a href="#">Web Development</a>
+          </li>
+        </ul>
+        <ul className="list">
+          <li className="list-content list-title">
+            <b>Menu</b>
+          </li>
+          <li className="list-content">
+            <a href="#">Home</a>
+          </li>
+          <li className="list-content">
+            <a href="#">Courses</a>
+          </li>
+          <li className="list-content">
+            <a href="#">Testimonial</a>
+          </li>
+          <li className="list-content">
+            <a href="#">Mentor</a>
+          </li>
+        </ul>
+        <ul className="list">
+          <li className="list-content list-title">
+            <b>About</b>
+          </li>
+          <li className="list-content">
+            <a href="#">Contact Us</a>
+          </li>
+          <li className="list-content">
+            <a href="#">Privacy & Policy</a>
+          </li>
+          <li className="list-content">
+            <a href="#">Term & Condition</a>
+          </li>
+          <li className="list-content">
+            <a href="#">FAQ</a>
+          </li>
+        </ul>
       </div>
+    </div>
   );
 };
 

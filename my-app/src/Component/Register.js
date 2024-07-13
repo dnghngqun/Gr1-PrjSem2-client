@@ -72,7 +72,7 @@ const Register = ({ onLogin }) => {
     <div id="register">
       <div className="register-container">
         <div className="left">
-          <img src="assets/img/images_login.jpg" alt="..." />
+          <img src="/assets/img/images_login.jpg" alt="..." />
         </div>
         <div className="right">
           <h1 className="title">Register</h1>
@@ -142,21 +142,21 @@ const Register = ({ onLogin }) => {
           <div className="register-other">
             <a href="#">
               <img
-                src="assets/svg/google.svg"
+                src="/assets/svg/google.svg"
                 alt=""
                 className="icon-register google-icon"
               />
             </a>
             <a href="#">
               <img
-                src="assets/svg/Facebook.svg"
+                src="/assets/svg/Facebook.svg"
                 alt=""
                 className="icon-register facebook-icon"
               />
             </a>
             <a href="">
               <img
-                src="assets/svg/SquareXTwitter.svg"
+                src="/assets/svg/SquareXTwitter.svg"
                 alt=""
                 className="icon-register twitter-icon"
               />
@@ -165,7 +165,7 @@ const Register = ({ onLogin }) => {
           <div className="create-account">
             Do you have an account?
             <a href="/login">
-              Sign in <img src="assets/svg/RightLongSolid.svg" alt="" />
+              Sign in <img src="/assets/svg/RightLongSolid.svg" alt="" />
             </a>
           </div>
         </div>

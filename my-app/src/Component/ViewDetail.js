@@ -1,9 +1,39 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import "./Css/ViewDetail.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-
 const ViewDetail = ({ isLoggedIn, onLogout }) => {
+  const [course, setCourse] = useState(null);
+  const [lessons, setLessons] = useState([]);
+  const [sections, setSections] = useState([]);
+
+  useEffect(() => {
+    // Thay đổi ID của khóa học tương ứng
+    const courseId = 1;
+
+    // Lấy thông tin khóa học
+    axios
+      .get(`http://localhost:8080/api/v1/courses/${courseId}`)
+      .then((response) => setCourse(response.data))
+      .catch((error) => console.error("Error fetching course:", error));
+
+    // Lấy danh sách bài học
+    axios
+      .get(`http://localhost:8080/api/v1/courses/${courseId}/lessons`)
+      .then((response) => setLessons(response.data))
+      .catch((error) => console.error("Error fetching lessons:", error));
+
+    // Lấy danh sách các phần
+    axios
+      .get(`http://localhost:8080/api/v1/courses/${courseId}/sections`)
+      .then((response) => setSections(response.data))
+      .catch((error) => console.error("Error fetching sections:", error));
+  }, []);
+
+  console.log("Lessons: ", lessons);
+  if (!course) return <div>Loading...</div>;
+  //else return code into bottom
   return (
     <div id="view-course">
       <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
@@ -11,11 +41,11 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
         <div className="basic-toeic">
           <div className="goal-title">
             <h1 style={{ textAlign: "center" }}>
-              Basic <span className="hightlight">TOEIC</span> Class
+              <span className="hightlight">{course.name}</span> Class
             </h1>
-            <div>
+            {/* <div>
               <h2>Goal: 550+</h2>
-            </div>
+            </div> */}
           </div>
           <div className="goal">
             <div className="goal-detail">
@@ -67,7 +97,7 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
             </div>
             <div className="detailsTwo">
               <div className="details-list2">
-                <img src="assets/img/clock-img.png" className="clock" alt="" />
+                <img src="/assets/img/clock-img.png" className="clock" alt="" />
                 <h2>3 lessons per week</h2>
                 <p>1.5 hours per lesson</p>
                 <p>
@@ -95,71 +125,23 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
                 <th>Topics Covered</th>
                 <th>Outcome</th>
               </tr>
-              <tr>
-                <td>Lesson 1 - Lesson 3</td>
-                <td>
-                  Practice part 1<br />
-                  People description pictures
-                  <br />
-                  Object description pictures
-                  <br />
-                  Mixed pictures
-                </td>
-                <td>
-                  Ability to describe situations related to people, including
-                  appearance, emotional states, and daily activities.
-                  <br />        
-                    Capability to describe and identify common objects through
-                    images, such as utensils, everyday items, and more.
-                  
-                </td>
-              </tr>
-              <tr>
-                <td>Lesson 4 - Lesson 8</td>
-                <td>Practice Part 2</td>
-                <td>
-                Learn about everyday communication situations, including discussing work and daily life.
-                <br />
-                Expand vocabulary related to topics such as travel, shopping, and entertainment.
-                <br />
-                Practice listening skills and understanding content from simple and useful dialogues.
-                </td>
-              </tr>
-              <tr>
-                <td>Lesson 9 - Lesson 19</td>
-                <td>
-                  Practice Part 3<br />
-                  Grammar Part 5-6
-                </td>
-                <td>
-                Study basic grammar structures such as present simple, past simple, and conditional sentences.
-                <br />
-                Apply grammar rules to enhance accuracy and confidence in speaking and writing English.
-                </td>
-              </tr>
-              <tr>
-                <td>Lesson 20 - Lesson 26</td>
-                <td>
-                  Practice part 4<br />
-                  Grammar Part 5-6
-                  <br />
-                  Practice tests
-                </td>
-                <td>
-                Develop the ability to synthesize and apply learned knowledge in real-life situations.
-                <br />
-                Familiarize yourself with high-applicability exercises, such as reading and evaluating information from short passages and articles.
-                </td>
-              </tr>
-              <tr>
-                <td>Lesson 27</td>
-                <td>Final test</td>
-                <td>
-                Comprehensive assessment of listening, reading, speaking, and writing skills in the TOEIC exam format.
-                <br />
-                Evaluate personal progress and determine readiness for the actual exam.
-                </td>
-              </tr>
+              {lessons.map((lesson, index) => (
+                <tr key={index}>
+                  <td className="td-number">{lesson.lessonNumber}</td>
+                  <td className="td-topic">
+                    {lesson.topicsCovered &&
+                      lesson.topicsCovered
+                        .split("\n")
+                        .map((line, index) => <p key={index}>{line}</p>)}
+                  </td>
+                  <td className="td-outcome">
+                    {lesson.outcome &&
+                      lesson.outcome
+                        .split("\n")
+                        .map((line, index) => <p key={index}>{line}</p>)}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
