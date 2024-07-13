@@ -126,6 +126,54 @@ section#introduce .intro-bottom {
   line-height: 1.4;
   font-weight: 600;
 }
+/* ipad pro */
+@media only screen and (max-width: 1024px) and (max-height: 1366px) {
+  section#introduce .intro-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  section#introduce .intro-container > .intro-left,
+  section#introduce .intro-container > .intro-right {
+    width: 100%;
+    text-align: center;
+  }
+
+  section#introduce h2.title {
+    font-size: 48px;
+  }
+
+  section#introduce .intro-left p.content {
+    width: 90%;
+    font-size: 14px;
+  }
+
+  section#introduce .intro-left .button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .intro-bottom .container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .intro-bottom .left,
+  .intro-bottom .right,
+  .intro-bottom .center {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .intro-bottom p {
+    font-size: 36px;
+  }
+
+  .intro-bottom h5 {
+    font-size: 16px;
+  }
+}
+
 /* section2 */
 .section2 {
   background-color: #f2f5f5;
@@ -288,6 +336,67 @@ section#introduce .intro-bottom {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media only screen and (max-width: 1024px) {
+  .section2 {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .courseContainer {
+    margin-top: 50px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .courseContainer > .course-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .courseContainer > .swiper-container {
+    width: 100%;
+  }
+
+  .swiper-slide {
+    width: calc(100% / 2);
+  }
+  .section2 .swiper-container {
+    margin-left: 20px; /* Điều chỉnh giá trị này để dịch chuyển sang phải */
+    width: calc(100% - 20px); /* Đảm bảo phần tử không vượt quá chiều rộng của màn hình */
+  }
+  .swiper-wrapper {
+    flex-direction: row;
+  }
+
+  .swiper-buttons {
+    flex-direction: column;
+  }
+
+  .arrow-container {
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .link-coursePage {
+    margin-left: 0;
+    margin-top: 20px;
+    text-align: center;
+  }
+  .course-title h1 {
+    font-size: 28px; /* Điều chỉnh kích thước font nếu cần */
+    display: flex;
+    justify-content: center;
+  }
+
+  .course-title strong {
+    display: inline; /* Đảm bảo hiển thị theo chiều ngang */
+    white-space: nowrap; /* Không cho phép ngắt dòng */
+    margin-left:-80px;
+  }
+  
 }
 
 .swiper-container.section2 {
