@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Course from "./Component/Course";
@@ -8,27 +8,29 @@ import Homepage from "./Component/Homepage";
 import Login from "./Component/Login";
 import RegisInformation from "./Component/RegisInformation";
 import Register from "./Component/Register";
+import { useEffect } from "react";
 import Thanks from "./Component/Thanks";
 import ViewDetail from "./Component/ViewDetail";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   useEffect(() => {
-    //check login qua session
-    const checkLoginStatus = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8080/api/v1/accounts/currentUser",
-          { withCredentials: true }
-        );
-        setIsLoggedIn(response.status === 200 ? response.data : null);
-      } catch (error) {
-        console.error("Error checking login status ", error);
-        setIsLoggedIn(null);
-      }
-    };
-    checkLoginStatus();
+  //check login qua session
+  const checkLoginStatus = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/api/v1/accounts/currentUser",
+        { withCredentials: true }
+      );
+      setIsLoggedIn(response.status === 200 ? response.data : null);
+    } catch (error) {
+      console.error("Error checking login status ", error);
+      setIsLoggedIn(null);
+    }
+  };
+  checkLoginStatus();
   }, []);
+
 
   const handleLogin = (userData) => {
     setIsLoggedIn(userData);
@@ -52,7 +54,14 @@ function App() {
         <Route
           path="/paymentInformation"
           element={
-            <RegisInformation isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+            !isLoggedIn ? (
+              <Navigate to="/login" />
+            ) : (
+              <RegisInformation
+                isLoggedIn={isLoggedIn}
+                onLogout={handleLogout}
+              />
+            )
           }></Route>
         <Route
           path="/"

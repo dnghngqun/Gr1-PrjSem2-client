@@ -1,29 +1,65 @@
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { format, parse, parseISO } from "date-fns";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Css/RegisInformation.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 const RegisInformation = ({ isLoggedIn, onLogout }) => {
   const navigate = useNavigate();
-  const [fullname, setFullname] = useState("abc");
-  const [phoneNumber, setPhoneNumber] = useState("12345324234");
-  const [email, setEmail] = useState("abc@gmail.com");
-  const [day, setDay] = useState("4");
-  const [month, setMonth] = useState("4");
-  const [year, setYear] = useState("2018");
+
+  const [course, setCourse] = useState(null);
+  const location = useLocation();
+  const { courseId, studyTime, startDate, instructor, totalProgress } =
+    location.state || {};
+  const [fullname, setFullname] = useState(isLoggedIn.data.fullName);
+  const [phoneNumber, setPhoneNumber] = useState(isLoggedIn.data.phoneNumber);
+  const [email, setEmail] = useState(isLoggedIn.data.email);
+
+  const birthday = isLoggedIn.data.birthday;
+
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+
   const [editing, setEditing] = useState(false);
   const [orderDetailId, setOrderDetailId] = useState(null);
   const [isOrderCreated, setIsOrderCreated] = useState(false);
   const [paymentId, setPaymentId] = useState("");
-  const srcImg = "assets/img/home-hero.webp";
-  const nameCourse = "Toeic Basic";
-  const Instructor = "Mrs Ly";
-  const learningTime = "8am to 10am";
-  const startDate = "June 15, 2024";
-  const price = "100";
-  const discount = 0;
+  useEffect(() => {
+    if (birthday) {
+      const parsedDate = parseISO(birthday);
+      setDay(format(parsedDate, "dd"));
+      setMonth(format(parsedDate, "MM"));
+      setYear(format(parsedDate, "yyyy"));
+    } else {
+      setDay("");
+      setMonth("");
+      setYear("");
+    }
+  }, [birthday]); // Chỉ gọi lại khi birthday thay đổi
+
+  useEffect(() => {
+    if (!courseId) return;
+
+    // Lấy thông tin khóa học
+    axios
+      .get(`http://localhost:8080/api/v1/courses/${courseId}`)
+      .then((response) => {
+        setCourse(response.data);
+        console.log("Course fetched:", response.data);
+      })
+      .catch((error) => console.error("Error fetching course:", error));
+  }, [courseId]);
+
+  if (!courseId || !course) return <div>Loading...</div>;
+
+  const srcImg = course.imgLink;
+  const nameCourse = course.name;
+  const price = course.price;
+  const discount = 20;
+  const totalPrice = price - (price * discount) / 100;
 
   const handleEdit = () => {
     setEditing(true);
@@ -31,25 +67,36 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
 
   const handleSave = () => {
     setEditing(false);
-    console.log("Saved:", {
-      fullname,
-      phoneNumber,
-      email,
-      day,
-      month,
-      year,
-    });
+    const dateString = `${year}-${month}-${day}`;
+    const parsedDate = parse(dateString, "yyyy-MM-dd", new Date());
+    const formattedDate = format(parsedDate, "yyyy-MM-dd");
+
+    const updateAccount = {
+      email: email,
+      phoneNumber: phoneNumber,
+      fullName: fullname,
+      birthday: formattedDate,
+    };
+    const userId = isLoggedIn.data.id;
+
+    axios
+      .put(
+        `http://localhost:8080/api/v1/accounts/updateInformation/${userId}`,
+        updateAccount,
+        { withCredentials: true }
+      )
+      .then((response) => console.log("update success"))
+      .catch((error) => console.log("Error to update info: ", error));
   };
 
   const handleCreateOrderDetail = () => {
     const orderDetailData = {
-      course: { id: 1 }, // Replace with actual course ID
+      course: { id: courseId },
       order: { id: 1 }, // Replace with actual order ID
-      discount: discount, // Replace with actual discount
-      totalAmount: price - price * discount,
+      discount: discount,
+      totalAmount: totalPrice,
       status: 0, // Set initial status
     };
-
     axios
       .post("http://localhost:8080/api/v1/orderDetails/", orderDetailData)
       .then((response) => {
@@ -63,35 +110,77 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
         console.error("There was an error creating the order detail!", error);
       });
   };
+
   const handlePaymentSuccess = (details) => {
-    console.log(details.id, orderDetailId, price);
+    const accountId = isLoggedIn.data.id;
     axios
       .post("http://localhost:8080/api/v1/payments", {
         paymentId: details.id, // details.id là paymentId do PayPal trả về
-        account: { id: 1 }, // Thay đổi ID của người dùng tương ứng
+        account: { id: accountId }, // Thay đổi ID của người dùng tương ứng
         orderDetail: { id: orderDetailId },
         paymentMethod: "PayPal",
-        amount: price,
+        amount: totalPrice,
       })
       .then((response) => {
         console.log("Payment saved successfully:", response.data);
-        setPaymentId(details.id); // Lưu paymentId vào state nếu cần thiết
-        navigate("/thanks");
+        setPaymentId(details.id);
+        // navigate("/thanks");
       })
       .catch((error) => {
         console.error("Payment saving failed:", error);
-        console.log("Attempting to delete orderDetail with id:", orderDetailId);
         axios
           .delete(`http://localhost:8080/api/v1/orderDetails/${orderDetailId}`)
           .then(() => {
             console.log("OrderDetail deleted successfully");
-            //window.history.back(); // Quay lại trang trước đó
           })
           .catch((deleteError) => {
             console.error("Failed to delete orderDetail:", deleteError);
-            // Xử lý lỗi khi không thể xóa orderDetail
           });
       });
+    //lấy thông tin class
+    axios
+      .get("http://localhost:8080/api/v1/class/")
+      .then((response) => {
+        // Tìm lớp học thỏa mãn điều kiện
+        const foundClass = response.data.data.find((item) => {
+          return (
+            item.location === studyTime &&
+            item.startDate === startDate &&
+            item.instructor.name === instructor
+          );
+        });
+
+        if (foundClass) {
+          const classId = foundClass.id;
+          console.log("Found class with id:", classId);
+
+          const enrollmentObject = {
+            aClass: {
+              id: classId,
+            },
+            account: {
+              id: accountId,
+            },
+            progress: `0/${totalProgress}`,
+            status: 0,
+          };
+
+          // Tạo enrollment
+          axios
+            .post("http://localhost:8080/api/v1/enrollments", enrollmentObject)
+            .then((response) => {
+              console.log("Create enrollment success!", response.data);
+            })
+            .catch((error) =>
+              console.error("Error create enrollment: ", error)
+            );
+        } else {
+          console.log("No class found matching the criteria.");
+        }
+      })
+      .catch((error) =>
+        console.error("Error fetching class information:", error)
+      );
   };
 
   return (
@@ -220,25 +309,33 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
               <img src={srcImg} alt="" />
             </div>
             <div className="right">
-              <h1 className="title">{nameCourse}</h1>
+              <h1 className="title title-course">{nameCourse}</h1>
               <p className="content">bởi trung tâm anh ngữ...</p>
             </div>
           </div>
           <div className="info-order">
             <p>
-              <b>Instructor:</b> {Instructor}
+              <b>Instructor:</b> {instructor}
             </p>
             <p>
-              <b>Learning Times:</b> {learningTime}
+              <b>Learning Times:</b> {studyTime}
             </p>
             <p>
               <b>Expected start date:</b> {startDate}
             </p>
             <p>
-              <b>Total price:</b> {price}
+              <b>Price:</b> ${price}
             </p>
           </div>
           <hr className="line" />
+          <div className="info-order">
+            <p>
+              <b>Discount:</b> {discount}%
+            </p>
+            <p>
+              <b>Total Price:</b> ${totalPrice}
+            </p>
+          </div>
           {!isOrderCreated ? (
             <button onClick={handleCreateOrderDetail}>
               Proceed to Payment
@@ -256,7 +353,7 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
                     purchase_units: [
                       {
                         amount: {
-                          value: price.toString(),
+                          value: totalPrice.toString(),
                         },
                       },
                     ],

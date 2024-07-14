@@ -1,7 +1,7 @@
 import axios from "axios";
 import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./Css/ViewDetail.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
@@ -15,13 +15,16 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
   const [selectedStudyTime, setSelectedStudyTime] = useState("");
   const [selectedStartDate, setSelectedStartDate] = useState("");
   const [selectedInstructor, setSelectedInstructor] = useState("");
-
+  const navigate = useNavigate();
   console.log("Classin4: ", classIn4);
   useEffect(() => {
     // Lấy thông tin khóa học
     axios
       .get(`http://localhost:8080/api/v1/courses/${courseId}`)
-      .then((response) => setCourse(response.data))
+      .then((response) => {
+        setCourse(response.data);
+        console.log("Course fetched:", response.data);
+      })
       .catch((error) => console.error("Error fetching course:", error));
 
     // Lấy danh sách bài học
@@ -36,17 +39,17 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
       .then((response) => setSections(response.data))
       .catch((error) => console.error("Error fetching sections:", error));
 
-    //lấy thông tin giáo viên
+    // Lấy thông tin giáo viên
     axios
       .get(`http://localhost:8080/api/v1/instructors`)
       .then((response) => setInstructors(response.data))
-      .catch((error) => console.error("Error fetching instructor: ", error));
+      .catch((error) => console.error("Error fetching instructor:", error));
 
     axios
       .get(`http://localhost:8080/api/v1/class/`)
       .then((response) => setClassIn4(response.data.data))
       .catch((error) =>
-        console.error("Error fetching class information: ", error)
+        console.error("Error fetching class information:", error)
       );
   }, [courseId]);
 
@@ -70,7 +73,29 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
     setSelectedInstructor(""); // Đặt lại instructor khi thay đổi start date
   };
 
-  if (!course) return <div>Loading...</div>;
+  // xử lý khi thay đổi instructor
+  const handleInstructor = (e) => {
+    const selectedInstructor = e.target.value;
+    setSelectedInstructor(selectedInstructor);
+  };
+
+  const handleSignUp = () => {
+    if (!selectedStudyTime || !selectedInstructor || !selectedStartDate) {
+      navigate(false);
+      return;
+    }
+    navigate("/paymentInformation", {
+      state: {
+        courseId,
+        studyTime: selectedStudyTime,
+        startDate: selectedStartDate,
+        instructor: selectedInstructor,
+        totalProgress: sections.details,
+      },
+    });
+  };
+
+  if (!course || !sections || !lessons) return <div>Loading...</div>;
   //else return code into bottom
   return (
     <div id="view-course">
@@ -105,12 +130,12 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
           <h2 style={{ color: "black" }}>Course Details</h2>
           <div className="details-list">
             <div className="details-list1">
-              {sections.details &&
+              {/* {sections.details &&
                 sections.details
                   .split("\n")
-                  .map((line, index) => <h2 key={index}>{line}</h2>)}
-              {/* <h2>27 lessons</h2>
-              <h2 className="month">
+                  .map((line, index) => <h2 key={index}>{line}</h2>)} */}
+              <h2>{sections.details} lessons</h2>
+              {/* <h2 className="month">
                 {"("}2 months a week{")"}
               </h2> */}
               <ul>
@@ -196,7 +221,7 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
                   </option>
                 ))}
             </select>
-            <select className="teacher">
+            <select className="teacher" onChange={handleInstructor}>
               <option value="">Choose Instructor</option>
               {instructors
                 .filter((instructor) =>
@@ -213,7 +238,7 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
                   </option>
                 ))}
             </select>
-            <a href="/paymentInformation">Sign up</a>
+            <a onClick={handleSignUp}>Sign up</a>
           </div>
         </div>
       </div>

@@ -1,11 +1,10 @@
-
 .form-container {
   display: flex;
   justify-content: center;
   max-width: 1200px;
   margin: 20px auto;
   padding: 20px;
-  border: 1px  #ddd;
+  border: 1px #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
@@ -55,22 +54,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
 }
 
 .form-container .left input[type="text"],
 .form-container .left input[type="number"] {
   width: 100%;
   padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 20px;
-  border: 1px  #ddd;
+  /* margin-top: 5px; */
+  /* margin-bottom: 20px; */
+  border: 1px #ddd;
   border-radius: 4px;
   font-size: 16px;
 }
 
 .form-container .left button {
-  padding: 10px 20px;
+  padding: 8px 25px;
   border: none;
   border-radius: 4px;
   background-color: #ffaf35;
@@ -78,6 +76,7 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-top: 10px;
 }
 
 .form-container .left button:hover {
@@ -116,4 +115,14 @@
 
 .form-container .right .paypal-buttons {
   margin-top: 20px;
+}
+
+label.day,
+label.month,
+label.year {
+  margin-top: 0 !important;
+}
+
+.course-info .right h1.title-course {
+  text-align: start;
 }
