@@ -12,35 +12,19 @@ import Navbar from "./Navbar";
 import axios from "axios";
 
 const Course = ({ isLoggedIn, onLogout }) => {
-  const [product, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const productsPerPage = 12;
+  const [filteredProducts, setFilteredProducts] = useState([]); //lưu trữ dữ liệu đã lọc
 
   useEffect(() => {
-    // DOMContentLoaded functionality
-    // const dots = document.querySelectorAll(".dot");
-    // const cards = document.querySelectorAll(".card");
-
-    // dots.forEach((dot, index) => {
-    //   dot.addEventListener("click", function () {
-    //     const page = parseInt(this.getAttribute("data-page"));
-
-    //     // Remove 'active' class from all dots
-    //     dots.forEach((dot) => dot.classList.remove("active"));
-    //     // Add 'active' class to the clicked dot
-    //     this.classList.add("active");
-
-    //     // Update current page state
-    //     setCurrentPage(page);
-    //   });
-    // });
-
     //get infomation product
     axios
       .get("http://localhost:8080/api/v1/courses")
       .then((response) => {
         setProducts(response.data);
-        console.log("Response data: ", product);
+        setFilteredProducts(response.data); // Khởi tạo dữ liệu đã lọc
+        console.log("Fetched products: ", response.data);
       })
       .catch((error) => {
         console.error("There was an error fetching the products!", error);
@@ -88,57 +72,100 @@ const Course = ({ isLoggedIn, onLogout }) => {
     });
 
     // Search functionality
-    document
-      .getElementById("course-select")
-      .addEventListener("change", function () {
-        const value = this.value;
-        const englishCourses = document.querySelectorAll(".ielts-course");
-        const toeic2Courses = document.querySelectorAll(".toeic2-course");
-        const toeic4Courses = document.querySelectorAll(".toeic4-course");
+    // document
+    //   .getElementById("course-select")
+    //   .addEventListener("change", function () {
+    //     const value = this.value;
+    //     const englishCourses = document.querySelectorAll(".ielts-course");
+    //     const toeic2Courses = document.querySelectorAll(".toeic2-course");
+    //     const toeic4Courses = document.querySelectorAll(".toeic4-course");
 
-        // Ẩn tất cả các thẻ card
-        document
-          .querySelectorAll(".card")
-          .forEach((course) => (course.style.display = "none"));
+    //     // Ẩn tất cả các thẻ card
+    //     document
+    //       .querySelectorAll(".card")
+    //       .forEach((course) => (course.style.display = "none"));
 
-        if (value === "ielts-course") {
-          englishCourses.forEach((course) => (course.style.display = "block"));
-        } else if (value === "toeic2-course") {
-          toeic2Courses.forEach((course) => (course.style.display = "block"));
-        } else if (value === "toeic4-course") {
-          toeic4Courses.forEach((course) => (course.style.display = "block"));
-        } else {
-          // Hiển thị tất cả các khóa học
-          document
-            .querySelectorAll(".card")
-            .forEach((course) => (course.style.display = "block"));
-        }
-      });
+    //     if (value === "ielts-course") {
+    //       englishCourses.forEach((course) => (course.style.display = "block"));
+    //     } else if (value === "toeic2-course") {
+    //       toeic2Courses.forEach((course) => (course.style.display = "block"));
+    //     } else if (value === "toeic4-course") {
+    //       toeic4Courses.forEach((course) => (course.style.display = "block"));
+    //     } else {
+    //       // Hiển thị tất cả các khóa học
+    //       document
+    //         .querySelectorAll(".card")
+    //         .forEach((course) => (course.style.display = "block"));
+    //     }
+    //   });
 
-    document
-      .querySelector(".search-input")
-      .addEventListener("input", function () {
-        const filter = this.value.toUpperCase();
-        const cards = document.querySelectorAll(".card");
+    // document
+    //   .querySelector(".search-input")
+    //   .addEventListener("input", function () {
+    //     const filter = this.value.toUpperCase();
+    //     const cards = document.querySelectorAll(".card");
 
-        cards.forEach((card) => {
-          const title = card
-            .querySelector(".card-title")
-            .textContent.toUpperCase();
-          if (title.includes(filter)) {
-            card.style.display = "block";
-          } else {
-            card.style.display = "none";
-          }
-        });
-      });
+    //     cards.forEach((card) => {
+    //       const title = card
+    //         .querySelector(".card-title")
+    //         .textContent.toUpperCase();
+    //       if (title.includes(filter)) {
+    //         card.style.display = "block";
+    //       } else {
+    //         card.style.display = "none";
+    //       }
+    //     });
+    //   });
   }, []); // useEffect dependency array is empty to run only once on mount
 
-  //calculate current product
+  //lọc sản phẩm khi search hay chọn lọc
+  useEffect(() => {
+    const courseSelect = document.getElementById("course-select");
+    const searchInput = document.querySelector(".search-input");
+
+    courseSelect.addEventListener("change", filterProducts);
+    searchInput.addEventListener("input", filterProducts);
+
+    return () => {
+      courseSelect.removeEventListener("change", filterProducts);
+      searchInput.removeEventListener("input", filterProducts);
+    };
+  }, [products]);
+
+  const filterProducts = () => {
+    const courseSelectValue = document.getElementById("course-select").value;
+    const searchInputValue = document
+      .querySelector(".search-input")
+      .value.toUpperCase();
+
+    const filtered = products.filter((product) => {
+      const className = getClassName(product.classify);
+      const matchesCourse =
+        !courseSelectValue || className === courseSelectValue;
+      const matchesSearch = product.name
+        .toUpperCase()
+        .includes(searchInputValue);
+      return matchesCourse && matchesSearch;
+    });
+
+    setFilteredProducts(filtered);
+    setCurrentPage(0); // Reset lại trang hiện tại khi lọc
+  };
+
+  // Tính toán vị trí bắt đầu của các sản phẩm hiện tại
   const offset = currentPage * productsPerPage;
-  const currentProducts = product.slice(offset, offset + productsPerPage);
-  const pageCount = Math.ceil(product.length / productsPerPage);
+
+  // Lấy danh sách các sản phẩm hiện tại dựa trên vị trí bắt đầu và số lượng sản phẩm mỗi trang
+  const currentProducts = filteredProducts.slice(
+    offset,
+    offset + productsPerPage
+  );
+
+  // Tính toán số lượng trang dựa trên tổng số sản phẩm đã lọc
+  const pageCount = Math.ceil(filteredProducts.length / productsPerPage);
+
   const productListRef = useRef(null); // Ref cho danh sách sản phẩm
+
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
     // Cuộn lên đầu danh sách sản phẩm khi chuyển trang
@@ -146,19 +173,6 @@ const Course = ({ isLoggedIn, onLogout }) => {
       productListRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
-  // useEffect(() => {
-  //   // Update card visibility based on current page state
-  //   const cards = document.querySelectorAll(".card");
-
-  //   cards.forEach((card, index) => {
-  //     const cardPage = index < 4 ? 1 : 2; // first 4 cards belong to page 1, rest belong to page 2
-  //     if (cardPage === currentPage || isNaN(currentPage)) {
-  //       card.style.display = "block";
-  //     } else {
-  //       card.style.display = "none";
-  //     }
-  //   });
-  // }, [currentPage]);
 
   const getClassName = (classify) => {
     switch (classify) {

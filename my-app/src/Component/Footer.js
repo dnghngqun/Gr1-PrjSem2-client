@@ -5,7 +5,7 @@ const Footer = () => {
     <div id="footer">
       <div className="Fcontainer">
         <div className="left">
-          <h1>Logo</h1>
+          <img src="https://i.imgur.com/8epSVJH.png" alt="" />
           <p className="title">
             Coursespace is an online learning platform that has been operating
             since 2018 until now.

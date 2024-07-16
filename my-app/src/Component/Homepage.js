@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 // import Swiper JS
 import Swiper from "swiper";
-import { Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 // import Swiper styles
 import "swiper/css";
 // import "swiper/css/navigation";
-
+import axios from "axios";
 import "./Css/Homepage.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 
 const Homepage = ({ isLoggedIn, onLogout }) => {
   const [selectedImage, setSelectedImage] = useState("ielts");
-
+  const [instructor, setInstructor] = useState([]);
   useEffect(() => {
-    Swiper.use([Navigation, Pagination]);
+    Swiper.use([Navigation, Pagination, Autoplay]);
     const swiper = new Swiper(".swiper", {
       slidesPerView: 3, // hiện 3 slide
       direction: "horizontal", // ngang
@@ -31,7 +31,9 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
         disableOnInteraction: false, // dừng khi tương tác: không
       },
     });
+  }, [instructor]);
 
+  useEffect(() => {
     const slides = document.querySelectorAll(".slick-slide");
     slides.forEach((slide) => {
       slide.addEventListener("click", function () {
@@ -53,6 +55,15 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
   const handleClick = (id) => {
     setSelectedImage(id);
   };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/v1/instructors")
+      .then((response) => {
+        setInstructor(response.data);
+      })
+      .catch((error) => console.error("Error fetch instructor: ", error));
+  }, []);
 
   return (
     <div id="homepage">
@@ -486,78 +497,22 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
           <h1>Our Expert Mentors</h1>
           <div className="swiper-container swiper">
             <div className="swiper-wrapper">
-              <div className="swiper-slide mentor">
-                <div className="mentor-container">
-                  <img
-                    src="/assets/img/mentor1.webp"
-                    className="mentor-img"
-                    alt="..."
-                  />
-                  <h2 className="mentor-name">Leon S Kennedy</h2>
-                  <div className="mentor-course">Machine Learning</div>
-                  <p className="mentor-title">
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                  </p>
-                  <div className="logo-mentor">TOEIC</div>
-                </div>
-              </div>
-              <div className="swiper-slide mentor">
-                <div className="mentor-container">
-                  <img
-                    src="/assets/img/mentor2.webp"
-                    className="mentor-img"
-                    alt="..."
-                  />
-                  <h2 className="mentor-name">Nguyen Thuy</h2>
-                  <div className="mentor-course">Android Development</div>
-                  <p className="mentor-title">
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                  </p>
-                  <div className="logo-mentor">IELTS</div>
-                </div>
-              </div>
-              <div className="swiper-slide mentor">
-                <div className="mentor-container">
-                  <img
-                    src="/assets/img/mentor3.webp"
-                    className="mentor-img"
-                    alt="..."
-                  />
-                  <h2 className="mentor-name">Rizky Known</h2>
-                  <div className="mentor-course">Fullstack Development</div>
-                  <p className="mentor-title">
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                  </p>
-                  <div className="logo-mentor">TOEIC</div>
-                </div>
-              </div>
-              <div className="swiper-slide mentor">
-                <div className="mentor-container">
-                  <img
-                    src="/assets/img/mentor4.webp"
-                    className="mentor-img"
-                    alt="..."
-                  />
-                  <h2 className="mentor-name">Jhon Dwirian</h2>
-                  <div className="mentor-course">UX/UI Design</div>
-                  <p className="mentor-title">
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                  </p>
-                  <div className="logo-mentor">IELTS</div>
-                </div>
-              </div>
+              {instructor.map((ins, key) => {
+                return (
+                  <div key={key} className="swiper-slide mentor">
+                    <div className="mentor-container">
+                      <img
+                        src={ins.imageLink}
+                        className="mentor-img"
+                        alt="..."
+                      />
+                      <h2 className="mentor-name">{ins.name}</h2>
+                      <p className="mentor-title">{ins.bio}</p>
+                      <div className="logo-mentor">{ins.classify}</div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
 
             <div className="swiper-pagination pagination-style"></div>

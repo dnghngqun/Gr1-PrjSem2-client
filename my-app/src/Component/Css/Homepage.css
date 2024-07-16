@@ -371,7 +371,9 @@ section#introduce .intro-bottom {
   }
   .section2 .swiper-container {
     margin-left: 20px; /* Điều chỉnh giá trị này để dịch chuyển sang phải */
-    width: calc(100% - 20px); /* Đảm bảo phần tử không vượt quá chiều rộng của màn hình */
+    width: calc(
+      100% - 20px
+    ); /* Đảm bảo phần tử không vượt quá chiều rộng của màn hình */
   }
   .swiper-wrapper {
     flex-direction: row;
@@ -400,9 +402,8 @@ section#introduce .intro-bottom {
   .course-title strong {
     display: inline; /* Đảm bảo hiển thị theo chiều ngang */
     white-space: nowrap; /* Không cho phép ngắt dòng */
-    margin-left:-80px;
+    margin-left: -80px;
   }
-  
 }
 
 .swiper-container.section2 {
@@ -461,8 +462,6 @@ body {
   width: 80%;
   height: auto;
 }
-
-
 
 /* Vị trí nội dung nổi bật */
 .feature-content {
@@ -689,12 +688,14 @@ p {
   justify-content: center;
   text-align: center;
   margin-top: 20px;
+  width: 100%;
+  height: 920px;
 }
 
 .image-container img {
-  width: 1200px;
-  height: auto;
-  max-height: 1000px;
+  width: 100%;
+
+  object-fit: contain;
 }
 
 /* section4 */
@@ -729,7 +730,7 @@ section.section4 .section4-container {
 }
 
 div.mentor {
-  padding: 20px 20px;
+  padding: 20px 0px;
 }
 
 div.mentor .mentor-container {
@@ -743,20 +744,21 @@ div.mentor .mentor-container {
 
 .mentor .mentor-container > .mentor-img {
   width: 100%;
+  height: 300px;
   border-radius: 16px;
   object-fit: cover;
-  height: 200px;
 }
-
-.mentor .mentor-container > .mentor-course {
-  margin: 10px 0 20px 0;
-  color: #7d7d7d;
+.mentor .mentor-container > .mentor-name {
+  margin: 10px 0;
 }
 
 .mentor .mentor-container > .mentor-title {
   color: #717171;
-  font-size: 13.6px;
+  font-size: 18px;
   line-height: 1.5;
+  margin: 10px 0;
+  width: 100%;
+  height: 70px;
 }
 
 .mentor .mentor-container > .logo-mentor {
