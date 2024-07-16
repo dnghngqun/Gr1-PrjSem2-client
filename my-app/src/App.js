@@ -11,6 +11,7 @@ import Register from "./Component/Register";
 import { useEffect } from "react";
 import Thanks from "./Component/Thanks";
 import ViewDetail from "./Component/ViewDetail";
+import Admin from "./Component/Admin";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
@@ -92,6 +93,7 @@ function App() {
           element={<Thanks isLoggedIn={isLoggedIn} onLogout={handleLogout} />}
         />
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+        <Route path="Admin" element={<Admin/>}></Route>
       </Routes>
     </BrowserRouter>
   );
