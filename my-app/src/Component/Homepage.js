@@ -16,9 +16,9 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
   useEffect(() => {
     Swiper.use([Navigation, Pagination]);
     const swiper = new Swiper(".swiper", {
-      slidesPerView: 3, // hiện 3 slide
-      direction: "horizontal", // ngang
-      loop: true, // vòng lặp
+      slidesPerView: 3,
+      direction: "horizontal",
+      loop: true,
       pagination: {
         el: ".swiper-pagination",
       },
@@ -28,8 +28,9 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
       },
       autoplay: {
         delay: 2000,
-        disableOnInteraction: false, // dừng khi tương tác: không
+        disableOnInteraction: false,
       },
+      
     });
 
     const slides = document.querySelectorAll(".slick-slide");
@@ -50,6 +51,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
     });
   }, []);
 
+  // Định nghĩa hàm handleClick
   const handleClick = (id) => {
     setSelectedImage(id);
   };
@@ -316,7 +318,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                       <div className="progress-bar">
                         <div
                           className="progress-bar-inner pink"
-                          style={{ width: "80%" }}></div>
+                          style={{ width: "0%" }}></div>
                       </div>
                     </div>
                   </li>
@@ -336,7 +338,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                       <div className="progress-bar">
                         <div
                           className="progress-bar-inner blue"
-                          style={{ width: "90%" }}></div>
+                          style={{ width: "70%" }}></div>
                       </div>
                     </div>
                   </li>
@@ -481,6 +483,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
           </div>
         </div>
       </section>
+      {/* section4 */}
       <section className="section4">
         <div className="section4-container">
           <h1>Our Expert Mentors</h1>

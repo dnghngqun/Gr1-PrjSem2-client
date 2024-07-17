@@ -121,7 +121,7 @@ section#introduce .intro-bottom {
 }
 
 .intro-bottom h5 {
-  color: #717171;
+  color: #464141;
   font-size: 17px;
   line-height: 1.4;
   font-weight: 600;
@@ -171,6 +171,64 @@ section#introduce .intro-bottom {
 
   .intro-bottom h5 {
     font-size: 16px;
+  }
+}
+@media (max-width: 430px) {
+  section#introduce .intro-container {
+    flex-direction: column; /* Đổi layout thành dạng dọc */
+    max-width: 100%; /* Chiếm toàn bộ chiều rộng của màn hình */
+    padding: 0 20px; /* Thêm padding để tạo khoảng cách với mép màn hình */
+  }
+
+  section#introduce .intro-container > .intro-left,
+  section#introduce .intro-container > .intro-right {
+    width: 100%; /* Chiếm toàn bộ chiều rộng */
+  }
+
+  .intro-container .intro-right > img {
+    width: 100%; /* Đảm bảo ảnh trong phần intro-right rộng bằng 100% */
+  }
+
+  section#introduce h2.title {
+    font-size: 32px; /* Giảm kích thước font chữ */
+    line-height: 1.3; /* Điều chỉnh line-height cho phù hợp */
+    padding-top: 15px; /* Giảm khoảng cách phía trên của tiêu đề */
+    text-align: center; /* Căn giữa tiêu đề */
+  }
+
+  section#introduce .intro-left p.content {
+    width: 100%; /* Chiếm toàn bộ chiều rộng của màn hình */
+    font-size: 14px; /* Giảm kích thước font chữ */
+    margin: 20px 0; /* Điều chỉnh margin */
+    text-align: justify; /* Căn đều văn bản */
+  }
+
+  section#introduce .intro-left .button {
+    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    margin: 10px 0; /* Điều chỉnh margin */
+  }
+
+  .intro-bottom .container {
+    flex-direction: column; /* Đổi layout thành dạng dọc */
+    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    padding: 15px 0; /* Điều chỉnh padding */
+  }
+
+  .intro-bottom .left,
+  .intro-bottom .right,
+  .intro-bottom .center {
+    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    text-align: center; /* Căn giữa nội dung */
+    margin-bottom: 20px; /* Điều chỉnh margin */
+  }
+
+  .intro-bottom p {
+    font-size: 28px; /* Giảm kích thước font chữ */
+    margin-bottom: 10px; /* Điều chỉnh margin */
+  }
+
+  .intro-bottom h5 {
+    font-size: 14px; /* Giảm kích thước font chữ */
   }
 }
 
@@ -405,6 +463,7 @@ section#introduce .intro-bottom {
   
 }
 
+
 .swiper-container.section2 {
   /* position: relative; */
 }
@@ -447,9 +506,13 @@ body {
   justify-content: space-between;
 }
 
-.container1,
+.container1 {
+  flex: 1 1 calc(40% - 20px);
+  margin-bottom: 20px;
+}
+
 .container2 {
-  flex: 1 1 calc(50% - 40px);
+  flex: 1 1 calc(60% - 40px);
   margin-bottom: 20px;
 }
 
@@ -627,7 +690,7 @@ p {
 }
 
 .benefit {
-  flex: 0 1 calc(50% - 10px); /* Mỗi ô chiếm 50% chiều rộng, trừ đi khoảng cách giữa các ô */
+  flex: 0 1 calc(50% - 5px); /* Mỗi ô chiếm 50% chiều rộng, trừ đi khoảng cách giữa các ô */
   box-sizing: border-box;
   margin-bottom: 20px; /* Khoảng cách giữa các hàng */
   padding: 20px;
@@ -653,12 +716,13 @@ p {
 
 .benefit-one {
   flex: 1;
-  padding: 10px;
+  padding: 5px;
 }
 
 .benefit-title {
   font-weight: bold;
-  margin-bottom: 5px;
+  font-size: 12px;
+  margin-bottom: 1px;
 }
 
 .benefit-description {
@@ -695,6 +759,64 @@ p {
   width: 1200px;
   height: auto;
   max-height: 1000px;
+}
+
+/* Responsive cho màn hình 1024x1366 */
+@media (max-width: 1024px) {
+  .image-container {
+    margin-top: 10px; /* Giảm margin top để phù hợp với màn hình nhỏ hơn */
+    padding: 0 10px; /* Thêm padding nếu cần thiết */
+  }
+
+  .image-container img {
+    width: 100%; /* Để hình ảnh chiếm 100% chiều rộng của container */
+    max-height: auto; /* Điều chỉnh lại chiều cao tối đa nếu cần */
+  }
+}
+/* update section 3 */
+.feature-content {
+  width: 170px;
+}
+
+.progress-circle-progress,
+.progress-text {
+  stroke: #6dd990;
+}
+
+.progress-text {
+  fill: #6dd990;
+}
+
+.progress-bar {
+  height: 5px;
+}
+
+.progress-bar-inner.green {
+  background-color: #6fe5bf;
+}
+
+.progress-bar-inner.blue {
+}
+
+.LoremIpsum {
+  bottom: 10px;
+  left: -50px;
+  width: 140px;
+}
+.LoremIpsum > strong {
+  font-size: 17px;
+}
+
+.LoremIpsum > p {
+  line-height: 1;
+}
+
+.headline > h1 {
+  font-size: 50px;
+}
+
+.benefit-container {
+  margin-top: 50px;
 }
 
 /* section4 */
@@ -796,7 +918,47 @@ div.mentor .mentor-container {
   background-color: #397a71;
   border-radius: 8px;
 }
+/* Responsive cho màn hình 1024x1366 */
+@media (max-width: 1024px) {
+  section.section4 .section4-container {
+    padding: 0 10px;
+  }
 
+  div.mentor {
+    padding: 10px 10px;
+  }
+
+  div.mentor .mentor-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .mentor .mentor-container > .mentor-img {
+    height: auto;
+  }
+
+  .section4-container > h1 {
+    font-size: 30px;
+    padding: 20px 0;
+  }
+
+  .swiper-button {
+    --button-px: 30px;
+    width: var(--button-px);
+    height: var(--button-px);
+    margin: 5px 5px;
+  }
+
+  .pagination-style {
+    width: 100% !important;
+    bottom: 10px !important;
+  }
+
+  .pagination-style .swiper-pagination-bullet {
+    width: 20px;
+    height: 6px;
+  }
+}
 /* update section 1 */
 .intro-right {
   position: relative;
@@ -849,52 +1011,6 @@ div.mentor .mentor-container {
   line-height: 1.3;
   font-weight: 400;
   color: #7d7d7d;
-}
-
-/* update section 3 */
-.feature-content {
-  width: 200px;
-}
-
-.progress-circle-progress,
-.progress-text {
-  stroke: #6dd990;
-}
-
-.progress-text {
-  fill: #6dd990;
-}
-
-.progress-bar {
-  height: 5px;
-}
-
-.progress-bar-inner.green {
-  background-color: #6fe5bf;
-}
-
-.progress-bar-inner.blue {
-}
-
-.LoremIpsum {
-  bottom: 10px;
-  left: -50px;
-  width: 140px;
-}
-.LoremIpsum > strong {
-  font-size: 17px;
-}
-
-.LoremIpsum > p {
-  line-height: 1;
-}
-
-.headline > h1 {
-  font-size: 50px;
-}
-
-.benefit-container {
-  margin-top: 50px;
 }
 
 /* update section 2 */
@@ -982,3 +1098,4 @@ section {
 .test-content a:hover {
   background-color: #127c71;
 }
+
