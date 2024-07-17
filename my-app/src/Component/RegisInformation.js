@@ -39,7 +39,41 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
       setYear("");
     }
   }, [birthday]); // Chỉ gọi lại khi birthday thay đổi
+  const handleDayChange = (e) => {
+    const value = e.target.value;
+    if (value > 0 && value <= daysInMonth(month, year)) {
+      setDay(value);
+    } else {
+      setDay("");
+    }
+  };
+  const handleMonthChange = (e) => {
+    const value = e.target.value;
+    if (value > 0 && value <= 12) {
+      setMonth(value);
+      if (day > daysInMonth(value, year)) {
+        setDay("");
+      }
+    } else {
+      setMonth("");
+    }
+  };
 
+  const handleYearChange = (e) => {
+    const value = e.target.value;
+    if (value >= 1930 && value <= 2099) {
+      setYear(value);
+      if (day > daysInMonth(month, value)) {
+        setDay("");
+      }
+    } else {
+      setYear("");
+    }
+  };
+
+  const daysInMonth = (month, year) => {
+    return new Date(year, month, 0).getDate();
+  };
   useEffect(() => {
     if (!courseId) return;
 
@@ -252,7 +286,7 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
                   step="1"
                   id="day"
                   value={day}
-                  onChange={(e) => setDay(e.target.value)}
+                  onChange={handleDayChange}
                 />
               ) : (
                 <span>{day}</span>
@@ -271,7 +305,7 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
                   step="1"
                   id="month"
                   value={month}
-                  onChange={(e) => setMonth(e.target.value)}
+                  onChange={handleMonthChange}
                 />
               ) : (
                 <span>{month}</span>
@@ -290,7 +324,7 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
                   step="1"
                   id="year"
                   value={year}
-                  onChange={(e) => setYear(e.target.value)}
+                  onChange={handleYearChange}
                 />
               ) : (
                 <span>{year}</span>
