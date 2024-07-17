@@ -1,37 +1,42 @@
 import axios from "axios";
-import { useState } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import "./App.css";
+import Admin from "./Component/Admin";
 import Course from "./Component/Course";
 import ForgotPassword from "./Component/ForgotPassword";
 import Homepage from "./Component/Homepage";
 import Login from "./Component/Login";
 import RegisInformation from "./Component/RegisInformation";
 import Register from "./Component/Register";
-import { useEffect } from "react";
 import Thanks from "./Component/Thanks";
+import UserCourse from "./Component/UserCourse";
 import ViewDetail from "./Component/ViewDetail";
-import Admin from "./Component/Admin";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   useEffect(() => {
-  //check login qua session
-  const checkLoginStatus = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:8080/api/v1/accounts/currentUser",
-        { withCredentials: true }
-      );
-      setIsLoggedIn(response.status === 200 ? response.data : null);
-    } catch (error) {
-      console.error("Error checking login status ", error);
-      setIsLoggedIn(null);
-    }
-  };
-  checkLoginStatus();
+    //check login qua session
+    const checkLoginStatus = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/api/v1/accounts/currentUser",
+          { withCredentials: true }
+        );
+        setIsLoggedIn(response.status === 200 ? response.data : null);
+      } catch (error) {
+        console.error("Error checking login status ", error);
+        setIsLoggedIn(null);
+      }
+    };
+    checkLoginStatus();
   }, []);
-
 
   const handleLogin = (userData) => {
     setIsLoggedIn(userData);
@@ -51,6 +56,7 @@ function App() {
   };
   return (
     <BrowserRouter>
+      <ScrollToTopOnMount />
       <Routes>
         <Route
           path="/paymentInformation"
@@ -93,10 +99,35 @@ function App() {
           element={<Thanks isLoggedIn={isLoggedIn} onLogout={handleLogout} />}
         />
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
-        <Route path="Admin" element={<Admin/>}></Route>
+        <Route path="/Admin" element={<Admin />}></Route>
+        {/* <Route
+          path="/user/mycourse"
+          element={
+            isLoggedIn ? (
+              <UserCourse isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        /> */}
+        <Route
+          path="/user/mycourse"
+          element={
+            <UserCourse isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
+function ScrollToTopOnMount() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}

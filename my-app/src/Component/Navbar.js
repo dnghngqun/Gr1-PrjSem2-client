@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Css/Navbar.css";
 const Navbar = ({ isLoggedIn, onLogout }) => {
   const [isOn, setIsOn] = useState(false);
@@ -19,18 +20,18 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
             </div>
           </div>
           <div className="center">
-            <a href="/" className="navigation-item">
+            <Link to="/" className="navigation-item">
               Home
-            </a>
-            <a href="/course" className="navigation-item">
+            </Link>
+            <Link to="/course" className="navigation-item">
               Courses
-            </a>
-            <a href="#" className="navigation-item">
+            </Link>
+            <Link to="#" className="navigation-item">
               Testimonial
-            </a>
-            <a href="#" className="navigation-item">
+            </Link>
+            <Link to="#" className="navigation-item">
               Mentor
-            </a>
+            </Link>
           </div>
           <div className="right">
             {isLoggedIn?.data ? (
@@ -59,18 +60,18 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                         <hr className="line-account" />
                         <ul>
                           <li className="li-account">
-                            <a href="#">Edit profile</a>
+                            <Link to="#">Edit profile</Link>
                           </li>
                           <li className="li-account">
-                            <a href="#">Your course</a>
+                            <Link to="/user/mycourse">Your course</Link>
                           </li>
                           <li className="li-account">
-                            <a
-                              href="#"
+                            <Link
+                              to="#"
                               className="button-logout"
                               onClick={handleLogout}>
                               Logout
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                       </div>
@@ -85,16 +86,16 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                 tạo wrapper cho nhóm phần tử khi trả về nhiều phần tử con từ 1 component
              */
               <>
-                <a href="/login">
+                <Link to="/login">
                   <button className="btn-sign sign-in">
                     <span>Sign In</span>
                   </button>
-                </a>
-                <a href="/register">
+                </Link>
+                <Link to="/register">
                   <button className="btn-sign sign-up">
                     <span>Sign Up</span>
                   </button>
-                </a>
+                </Link>
               </>
             )}
           </div>

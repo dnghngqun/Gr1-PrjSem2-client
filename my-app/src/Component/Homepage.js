@@ -6,10 +6,10 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 // import "swiper/css/navigation";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./Css/Homepage.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-
 const Homepage = ({ isLoggedIn, onLogout }) => {
   const [selectedImage, setSelectedImage] = useState("ielts");
   const [instructor, setInstructor] = useState([]);
@@ -247,7 +247,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
             </div>
             <div className="click-button">
               <div className="link-coursePage">
-                <a href="/course">View All This Page</a>
+                <Link to="/course">View All This Page</Link>
               </div>
 
               <div className="arrow-container">
