@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Css/Navbar.css";
 const Navbar = ({ isLoggedIn, onLogout }) => {
+  const [isOn, setIsOn] = useState(false);
+  const handleClickAvatar = () => {
+    setIsOn(!isOn);
+  };
   console.log(isLoggedIn);
   const handleLogout = () => {
     onLogout(); // Gọi hàm logout khi nhấn nút Logout
@@ -10,47 +15,87 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
       <header>
         <nav className="navigation">
           <div className="left">
-            <h1 className="logo">
-              Lo<span style={{ color: "#397A71" }}>go</span>
-            </h1>
+            <div className="logo">
+              <img src="https://i.imgur.com/7CPnvVn.png" alt="" />
+            </div>
           </div>
           <div className="center">
-            <a href="/" className="navigation-item">
+            <Link to="/" className="navigation-item">
               Home
-            </a>
-            <a href="/course" className="navigation-item">
+            </Link>
+            <Link to="/course" className="navigation-item">
               Courses
-            </a>
-            <a href="#" className="navigation-item">
+            </Link>
+            <Link to="#" className="navigation-item">
               Testimonial
-            </a>
-            <a href="#" className="navigation-item">
+            </Link>
+            <Link to="#" className="navigation-item">
               Mentor
-            </a>
+            </Link>
           </div>
           <div className="right">
             {isLoggedIn?.data ? (
               <>
-                <p>Hello, {isLoggedIn.data.fullName}</p>
-                <button className="btn-sign" onClick={handleLogout}>
-                  Logout
-                </button>
+                <div className="account-container">
+                  <img
+                    src={isLoggedIn.data.imageAccount}
+                    className="imageAccount"
+                    alt=""
+                    onClick={handleClickAvatar}
+                  />
+                  {isOn ? (
+                    <>
+                      <div className="account-setting">
+                        <div className="info-account">
+                          <img src={isLoggedIn.data.imageAccount} alt="" />
+                          <div className="content">
+                            <p className="fullname">
+                              {isLoggedIn.data.fullName}
+                            </p>
+                            <div className="username">
+                              {isLoggedIn.data.userName}
+                            </div>
+                          </div>
+                        </div>
+                        <hr className="line-account" />
+                        <ul>
+                          <li className="li-account">
+                            <Link to="#">Edit profile</Link>
+                          </li>
+                          <li className="li-account">
+                            <Link to="/user/mycourse">Your course</Link>
+                          </li>
+                          <li className="li-account">
+                            <Link
+                              to="#"
+                              className="button-logout"
+                              onClick={handleLogout}>
+                              Logout
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
               </>
             ) : (
               /* <React.Fragment>  react > 16 viết tắt thành <>
                 tạo wrapper cho nhóm phần tử khi trả về nhiều phần tử con từ 1 component
              */
               <>
-                <a href="/login">
+                <Link to="/login">
                   <button className="btn-sign sign-in">
                     <span>Sign In</span>
                   </button>
-                </a>
-                <a href="/register">
+                </Link>
+                <Link to="/register">
                   <button className="btn-sign sign-up">
                     <span>Sign Up</span>
                   </button>
-                </a>
+                </Link>
               </>
             )}
           </div>
