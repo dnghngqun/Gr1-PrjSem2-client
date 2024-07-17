@@ -15,15 +15,15 @@
   transform: skewX(-20deg);
 }
 
-.progress-bar__segment.Present {
+.progress-bar__segment.present {
   background-color: #4caf50;
 }
 
-.progress-bar__segment.Absent {
+.progress-bar__segment.absent {
   background-color: #f44336;
 }
 
-.progress-bar__segment.NotStarted {
+.progress-bar__segment.notStart {
   background-color: #ffffff;
 }
 

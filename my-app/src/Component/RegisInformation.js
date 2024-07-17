@@ -161,7 +161,7 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
             account: {
               id: accountId,
             },
-            progress: `0/${totalProgress}`,
+            progress: totalProgress,
             status: 0,
           };
 

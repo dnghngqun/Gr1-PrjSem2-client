@@ -100,7 +100,7 @@ function App() {
         />
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route path="/Admin" element={<Admin />}></Route>
-        {/* <Route
+        <Route
           path="/user/mycourse"
           element={
             isLoggedIn ? (
@@ -109,13 +109,13 @@ function App() {
               <Navigate to="/login" />
             )
           }
-        /> */}
-        <Route
+        />
+        {/* <Route
           path="/user/mycourse"
           element={
             <UserCourse isLoggedIn={isLoggedIn} onLogout={handleLogout} />
           }
-        />
+        /> */}
       </Routes>
     </BrowserRouter>
   );

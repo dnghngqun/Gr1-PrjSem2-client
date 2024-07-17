@@ -8,7 +8,7 @@ const ProgressBar = ({ sessions }) => {
         {sessions.map((session, index) => (
           <div
             key={index}
-            className={`progress-bar__segment ${session.status}`}
+            className={`progress-bar__segment ${session.attendanceStatus}`}
             style={{ width: `calc(100% / ${sessions.length})` }}></div>
         ))}
       </div>
