@@ -22,12 +22,11 @@ header {
   margin: 0 auto;
 }
 
-.navigation .center .navigation-item {
-  margin: 0 24px;
-  text-decoration: none;
-  color: #9e9e9e;
-  font-weight: 600;
-  font-size: 18px;
+header > .navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
 }
 
 .navigation .center {
@@ -92,19 +91,9 @@ button.sign-up {
   background-color: var(--signUpBackgroundColor);
 }
 
-button.sign-in,
-button.sign-up {
-  transition: transform 0.3s ease; /* Hiệu ứng chuyển tiếp */
-}
-
-button.sign-in:hover,
-button.sign-up:hover {
-  transform: scale(1.1); /* Phóng to 1.1 lần kích thước */
-}
 
 .right .imageAccount {
-  width: 55px;
-  height: 55px;
+  width: 50px;
   cursor: pointer;
   border-radius: 50%;
   overflow: hidden;
@@ -118,15 +107,14 @@ button.sign-up:hover {
 
 .right .account-setting {
   position: absolute;
-  top: 70px;
-  left: -210px;
+  top: 60px;
+  left: -200px;
   width: 230px;
-  height: auto;
   padding: 5px 0;
   z-index: 1000;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.3);
   border-radius: 2px;
-  background-color: #ffffff;
+  background-color: var(--accountBackground);
 }
 
 .account-setting ul {
@@ -162,8 +150,6 @@ button.sign-up:hover {
 
 .account-setting .info-account > img {
   width: 58px;
-  height: 58px;
-  object-fit: cover;
   margin: 10px;
   border-radius: 50%;
 }
