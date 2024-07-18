@@ -464,7 +464,6 @@ section#introduce .intro-bottom {
   }
 }
 
-
 .swiper-container.section2 {
   /* position: relative; */
 }
@@ -707,7 +706,7 @@ p {
   height: 100px;
   margin-bottom: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 8px 0px rgba(0, 0, 0, 0.1);
   padding: 20px;
   display: flex;
   align-items: center;
@@ -1100,4 +1099,3 @@ section {
 .test-content a:hover {
   background-color: #127c71;
 }
-
