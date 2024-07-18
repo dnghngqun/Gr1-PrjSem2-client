@@ -10,6 +10,7 @@ import {
 import "./App.css";
 import Admin from "./Component/Admin";
 import Course from "./Component/Course";
+import EditProfile from "./Component/EditProfile";
 import ForgotPassword from "./Component/ForgotPassword";
 import Homepage from "./Component/Homepage";
 import Login from "./Component/Login";
@@ -105,6 +106,16 @@ function App() {
           element={
             isLoggedIn ? (
               <UserCourse isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/user/editprofile"
+          element={
+            isLoggedIn ? (
+              <EditProfile isLoggedIn={isLoggedIn} onLogout={handleLogout} />
             ) : (
               <Navigate to="/login" />
             )

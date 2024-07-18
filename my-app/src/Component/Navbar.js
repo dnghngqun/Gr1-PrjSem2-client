@@ -60,7 +60,7 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                         <hr className="line-account" />
                         <ul>
                           <li className="li-account">
-                            <Link to="#">Edit profile</Link>
+                            <Link to="/user/editprofile">Edit profile</Link>
                           </li>
                           <li className="li-account">
                             <Link to="/user/mycourse">Your course</Link>

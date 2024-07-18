@@ -1,0 +1,120 @@
+.edit-profile {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  width: 800px;
+  /* height: 1000px; */
+  border-radius: 10% 10% 20px 20px;
+  margin: 200px auto 100px auto;
+  /* background-color: rgb(249, 246, 246); */
+  position: relative;
+  padding-bottom: 70px;
+}
+
+.edit-profile .avatar-profile {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  overflow: hidden;
+  /* border: 10px solid linear-gradient(to bottom right, #f2b250, #38766d); */
+  position: absolute;
+  top: -130px;
+  left: calc(100% / 2 - 110px);
+  box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  /* background-image: linear-gradient(to top right, #f3d113, #49ce7c, #ffffff); */
+  background-color: #fff;
+}
+
+.edit-profile .avatar-profile > .img-avt {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* padding: 10px; */
+  border-radius: 50%;
+  /* border: 1px solid #000; */
+}
+
+.edit-profile .form-edit {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: 100px;
+}
+
+.form-edit .label-edit {
+  font-size: 27px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.form-edit input {
+  width: 100%;
+  height: 60px;
+  font-size: 20px;
+  border: 0px;
+  border-radius: 17px;
+  box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease;
+  padding: 10px;
+}
+
+.form-edit input::placeholder {
+  color: rgb(172, 172, 172);
+}
+
+.form-edit input:focus {
+  box-shadow: 0 0px 15px 0px #397a71 !important;
+  /* border-color: #66afe9; */
+}
+
+.form-edit .date-birthday {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-edit .btn-edit {
+  width: 100%;
+  height: 60px;
+  text-decoration: none;
+  display: block;
+  background-image: url(../../../public/assets/img/background_module.webp);
+  /* background-image: linear-gradient(to right, #fb9b0c, #fff); */
+  background-size: 100% 100%;
+  background-size: 120%;
+  /* background-repeat: no-repeat; */
+  color: #000;
+  text-align: center;
+  line-height: 60px;
+  font-size: 25px;
+  font-weight: 700;
+  margin-top: 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-edit .btn-edit::before {
+  content: "";
+  background-image: linear-gradient(
+    to left,
+    transparent,
+    80%,
+    rgba(243, 148, 41, 0.893)
+  );
+  height: 100%;
+  width: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transition: 0.5s linear;
+}
+
+.form-edit .btn-edit:hover::before {
+  width: 90%;
+}
+.form-edit .btn-edit:hover {
+  transform: scale(1.025);
+}
