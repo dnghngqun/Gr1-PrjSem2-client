@@ -220,12 +220,11 @@
   flex: 1;
   text-align: center;
   background-color: #127c71;
-  color: white;
   text-decoration: none;
   padding: 4px 4px;
   border-radius: 16px;
   cursor: pointer;
-  color: #fff;
+  color: #fff !important;
 }
 
 td.td-topic p,

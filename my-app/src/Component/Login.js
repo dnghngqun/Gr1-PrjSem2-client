@@ -1,13 +1,29 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "toastify-js";
+import "toastify-js/src/toastify.css";
 import "./Css/Login.css";
-
 const Login = ({ onLogin }) => {
   const [identify, setIdentify] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+
+  const notifyFail = (err) =>
+    toast({
+      text: err,
+      duration: 3000,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "linear-gradient(to right, #c50e0e, #ec6554)",
+      },
+      close: true,
+      onClick: function () {}, // Callback after click
+    }).showToast();
+
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
@@ -17,7 +33,9 @@ const Login = ({ onLogin }) => {
         );
         if (response.status === 200) {
           onLogin(response.data);
-          navigate("/");
+          if (response.data.data.role === "admin") navigate("/admin"); //redirect to link /
+          if (response.data.data.role === "customer") navigate("/"); //redirect to link /
+          if (response.data.data.role === "staff") navigate("/staff"); //redirect to link /
         }
       } catch (error) {
         console.error("Error checking login status", error);
@@ -43,12 +61,15 @@ const Login = ({ onLogin }) => {
         // login success
         console.log("Login successful");
         onLogin(response.data);
-        navigate("/"); //redirect to link /
+        if (response.data.data.role === "admin") navigate("/admin"); //redirect to link /
+        if (response.data.data.role === "customer") navigate("/"); //redirect to link /
+        if (response.data.data.role === "staff") navigate("/staff"); //redirect to link /
       } else {
         //login failed
-        console.error("Login failed");
+        notifyFail("Login failed, username or password is incorrect!");
       }
     } catch (error) {
+      notifyFail("Login failed, username or password is incorrect!");
       console.error("Error: ", error);
     }
   };

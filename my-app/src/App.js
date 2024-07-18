@@ -9,20 +9,20 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import Admin from "./Component/Admin";
-import Staff from "./Component/Staff";
 import Course from "./Component/Course";
 import EditProfile from "./Component/EditProfile";
 import ForgotPassword from "./Component/ForgotPassword";
 import Homepage from "./Component/Homepage";
 import Login from "./Component/Login";
+import PrivateRoute from "./Component/PrivateRoute";
 import RegisInformation from "./Component/RegisInformation";
 import Register from "./Component/Register";
-import Thanks from "./Component/Thanks";
+import Staff from "./Component/Staff";
 import UserCourse from "./Component/UserCourse";
 import ViewDetail from "./Component/ViewDetail";
-function App(props) {
+function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
-
+  const [refresh, setRefresh] = useState(false);
   useEffect(() => {
     //check login qua session
     const checkLoginStatus = async () => {
@@ -38,12 +38,14 @@ function App(props) {
       }
     };
     checkLoginStatus();
-  }, [props]);
+  }, [refresh]);
 
   const handleLogin = (userData) => {
     setIsLoggedIn(userData);
   };
-
+  const triggerRefresh = () => {
+    setRefresh((prevRefresh) => !prevRefresh); // Chuyển đổi giá trị của refresh
+  };
   const handleLogout = async () => {
     try {
       await axios.post(
@@ -66,9 +68,15 @@ function App(props) {
             !isLoggedIn ? (
               <Navigate to="/login" />
             ) : (
-              <RegisInformation
+              <PrivateRoute
+                element={
+                  <RegisInformation
+                    isLoggedIn={isLoggedIn}
+                    onLogout={handleLogout}
+                  />
+                }
                 isLoggedIn={isLoggedIn}
-                onLogout={handleLogout}
+                allowedRoles={["customer"]}
               />
             )
           }></Route>
@@ -96,13 +104,29 @@ function App(props) {
           element={
             <ViewDetail isLoggedIn={isLoggedIn} onLogout={handleLogout} />
           }></Route>
-        <Route
+        {/* <Route
           path="/thanks"
           element={<Thanks isLoggedIn={isLoggedIn} onLogout={handleLogout} />}
-        />
+        /> */}
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
-        <Route path="/Admin" element={<Admin />}></Route>
-        <Route path="/Staff" element={<Staff />}></Route>
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute
+              element={<Admin onLogout={handleLogout} />}
+              isLoggedIn={isLoggedIn}
+              allowedRoles={["admin"]}
+            />
+          }></Route>
+        <Route
+          path="/staff"
+          element={
+            <PrivateRoute
+              element={<Staff onLogout={handleLogout} />}
+              isLoggedIn={isLoggedIn}
+              allowedRoles={["staff"]}
+            />
+          }></Route>
         <Route
           path="/user/mycourse"
           element={
@@ -117,18 +141,16 @@ function App(props) {
           path="/user/editprofile"
           element={
             isLoggedIn ? (
-              <EditProfile isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+              <EditProfile
+                isLoggedIn={isLoggedIn}
+                onLogout={handleLogout}
+                triggerRefresh={triggerRefresh}
+              />
             ) : (
               <Navigate to="/login" />
             )
           }
         />
-        {/* <Route
-          path="/user/mycourse"
-          element={
-            <UserCourse isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-          }
-        /> */}
       </Routes>
     </BrowserRouter>
   );
