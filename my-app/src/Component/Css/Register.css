@@ -1,3 +1,4 @@
+
 #register {
   margin: 0;
   padding: 0;
@@ -8,7 +9,6 @@
   background-image: linear-gradient(to bottom right, #f2b250, #38766d);
   align-items: center;
   justify-content: center;
-  
 }
 
 #register .register-container {
@@ -125,4 +125,8 @@
   display: flex;
   justify-content: center;
   height: 30px;
+}
+
+@media (max-width: 430px) {
+  
 }

@@ -81,11 +81,22 @@ section#introduce .intro-left .button.btn1 {
   margin-left: 2px;
   color: #fff;
   background-color: #397a71;
+  transition: transform 0.3s ease; /* Thêm hiệu ứng chuyển tiếp */
 }
+
+section#introduce .intro-left .button.btn1:hover {
+  transform: scale(1.1); /* Phóng to kích thước button */
+}
+
 section#introduce .intro-left .button.btn2 {
   width: 156px;
   background-color: #fff;
   color: #397a71;
+  transition: transform 0.3s ease; /* Thêm hiệu ứng chuyển tiếp */
+}
+
+section#introduce .intro-left .button.btn2:hover {
+  transform: scale(1.1); /* Phóng to kích thước button */
 }
 
 section#introduce .intro-bottom {
