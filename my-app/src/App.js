@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import Admin from "./Component/Admin";
+import Staff from "./Component/Staff";
 import Course from "./Component/Course";
 import EditProfile from "./Component/EditProfile";
 import ForgotPassword from "./Component/ForgotPassword";
@@ -101,6 +102,7 @@ function App() {
         />
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route path="/Admin" element={<Admin />}></Route>
+        <Route path="/Staff" element={<Staff />}></Route>
         <Route
           path="/user/mycourse"
           element={
