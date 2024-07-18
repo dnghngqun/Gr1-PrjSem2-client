@@ -19,7 +19,7 @@ import Register from "./Component/Register";
 import Thanks from "./Component/Thanks";
 import UserCourse from "./Component/UserCourse";
 import ViewDetail from "./Component/ViewDetail";
-function App() {
+function App(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ function App() {
       }
     };
     checkLoginStatus();
-  }, []);
+  }, [props]);
 
   const handleLogin = (userData) => {
     setIsLoggedIn(userData);

@@ -26,9 +26,7 @@ const UserCourse = ({ isLoggedIn, onLogout }) => {
 
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:8080/api/v1/enrollments/user/${isLoggedIn.data.id}`
-      )
+      .get(`http://localhost:8080/api/v1/enrollments/user/${isLoggedIn.data.id}`)
       .then((response) => {
         setEnrollments(response.data.data);
       })

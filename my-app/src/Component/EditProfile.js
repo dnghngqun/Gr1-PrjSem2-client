@@ -1,6 +1,7 @@
 import React from "react";
 
-import { format, parseISO } from "date-fns";
+import axios from "axios";
+import { format, parse, parseISO } from "date-fns";
 import { useEffect, useState } from "react";
 import "./Css/EditProfile.css";
 import Footer from "./Footer";
@@ -15,6 +16,39 @@ const EditProfile = ({ isLoggedIn, onLogout }) => {
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
 
+  const [image, setImage] = useState(null);
+  const [message, setMessage] = useState("");
+  const [imageUrl, setImageUrl] = useState(isLoggedIn.data.imageAccount);
+  const handleImageChange = (event) => {
+    setImage(event.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    if (!image) {
+      setMessage("Please select an image to upload.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("image", image);
+
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/api/v1/accounts/${isLoggedIn.data.id}/uploadAvatar`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      );
+      setMessage("Upload avatar successfully!");
+      setImageUrl(response.data.data.imageAccount);
+    } catch (error) {
+      setMessage("Failed to upload avatar.");
+    }
+  };
   useEffect(() => {
     if (birthday) {
       const parsedDate = parseISO(birthday);
@@ -64,14 +98,42 @@ const EditProfile = ({ isLoggedIn, onLogout }) => {
     return new Date(year, month, 0).getDate();
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    const dateString = `${year}-${month}-${day}`;
+    const parsedDate = parse(dateString, "yyyy-MM-dd", new Date());
+    const formattedDate = format(parsedDate, "yyyy-MM-dd");
+
+    const updateAccount = {
+      email: email,
+      phoneNumber: phoneNumber,
+      fullName: fullname,
+      birthday: formattedDate,
+    };
+    const userId = isLoggedIn.data.id;
+    axios
+      .put(
+        `http://localhost:8080/api/v1/accounts/updateInformation/${userId}`,
+        updateAccount,
+        { withCredentials: true }
+      )
+      .then((response) => console.log("update success"))
+      .catch((error) => console.log("Error to update info: ", error));
+  };
   return (
     <div>
       <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
       <div className="edit-profile">
         <div className="avatar-profile">
-          <img src={isLoggedIn.data.imageAccount} className="img-avt" alt="" />
+          <img src={imageUrl} className="img-avt" alt="" />
         </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <input type="file" onChange={handleImageChange} />
+        <button onClick={handleUpload}>Upload Avatar</button>
+        <p>{message}</p>
         <form className="form-edit">
           <label htmlFor="fullname" className="label-edit">
             Fullname:
