@@ -159,13 +159,13 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               <div className="swiper-slide">
                 <div className="card card-home">
                   <img
-                    src="/assets/img/mostCourse1.webp"
+                    src="https://i.imgur.com/8nitwKO.png"
                     className="card-img-top"
                     alt="..."
                   />
                   <div className="card-body card-home-body">
                     <h5 className="card-title card-home-title">
-                      UI/UX complete guide
+                     Toeic Basic
                     </h5>
                     <div className="card-bottom card-home-bottom">
                       <div className="course-price">$53/course</div>
@@ -177,13 +177,13 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               <div className="swiper-slide">
                 <div className="card card-home">
                   <img
-                    src="/assets/img/mostCourse1.webp"
+                    src="https://i.imgur.com/k16v1W1.png"
                     className="card-img-top"
                     alt="..."
                   />
                   <div className="card-body card-home-body">
                     <h5 className="card-title card-home-title">
-                      UI/UX complete guide
+                     Toeic Pre
                     </h5>
                     <div className="card-bottom card-home-bottom">
                       <div className="course-price">$53/course</div>
@@ -195,13 +195,13 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               <div className="swiper-slide">
                 <div className="card card-home">
                   <img
-                    src="/assets/img/mostCourse1.webp"
+                    src="https://i.imgur.com/5OziSxj.png"
                     className="card-img-top"
                     alt="..."
                   />
                   <div className="card-body card-home-body">
                     <h5 className="card-title card-home-title">
-                      UI/UX complete guide
+                      Toeic A
                     </h5>
                     <div className="card-bottom card-home-bottom">
                       <div className="course-price">$53/course</div>
@@ -213,13 +213,13 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               <div className="swiper-slide">
                 <div className="card card-home">
                   <img
-                    src="/assets/img/mostCourse1.webp"
+                    src="https://i.imgur.com/QEeFSXO.png"
                     className="card-img-top"
                     alt="..."
                   />
                   <div className="card-body card-home-body">
                     <h5 className="card-title card-home-title">
-                      UI/UX complete guide
+                      Toeic B
                     </h5>
                     <div className="card-bottom card-home-bottom">
                       <div className="course-price">$53/course</div>
@@ -231,13 +231,13 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               <div className="swiper-slide">
                 <div className="card card-home">
                   <img
-                    src="/assets/img/mostCourse1.webp"
+                    src="https://i.imgur.com/N0IJ9R4.png"
                     className="card-img-top"
                     alt="..."
                   />
                   <div className="card-body card-home-body">
                     <h5 className="card-title card-home-title">
-                      UI/UX complete guide
+                     Toeic Pratice
                     </h5>
                     <div className="card-bottom card-home-bottom">
                       <div className="course-price">$53/course</div>
