@@ -6,6 +6,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./Css/RegisInformation.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import Swal from "sweetalert2";
+
 const RegisInformation = ({ isLoggedIn, onLogout }) => {
   const navigate = useNavigate();
 
@@ -144,7 +146,6 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
         console.error("There was an error creating the order detail!", error);
       });
   };
-
   const handlePaymentSuccess = (details) => {
     const accountId = isLoggedIn.data.id;
     axios
@@ -158,7 +159,62 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
       .then((response) => {
         console.log("Payment saved successfully:", response.data);
         setPaymentId(details.id);
-        // navigate("/thanks");
+  
+        // Hiển thị thông báo SweetAlert2 ở giữa màn hình và chuyển hướng sau khi thông báo hiển thị xong
+        Swal.fire({
+          icon: "success",
+          title: "Payment successful",
+          showConfirmButton: false,
+          timer: 1500
+        }).then(() => {
+          // Chuyển hướng đến trang UserCourse
+          navigate("/user/mycourse");
+        });
+  
+        // Lấy thông tin class
+        axios
+          .get("http://localhost:8080/api/v1/class/")
+          .then((response) => {
+            // Tìm lớp học thỏa mãn điều kiện
+            const foundClass = response.data.data.find((item) => {
+              return (
+                item.location === studyTime &&
+                item.startDate === startDate &&
+                item.instructor.name === instructor
+              );
+            });
+  
+            if (foundClass) {
+              const classId = foundClass.id;
+              console.log("Found class with id:", classId);
+  
+              const enrollmentObject = {
+                aClass: {
+                  id: classId,
+                },
+                account: {
+                  id: accountId,
+                },
+                progress: totalProgress,
+                status: 0,
+              };
+  
+              // Tạo enrollment
+              axios
+                .post("http://localhost:8080/api/v1/enrollments", enrollmentObject)
+                .then((response) => {
+                  console.log("Create enrollment success!", response.data);
+                })
+                .catch((error) =>
+                  console.error("Error create enrollment: ", error)
+                );
+            } else {
+              console.log("No class found matching the criteria.");
+            }
+          })
+          .catch((error) =>
+            console.error("Error fetching class information:", error)
+          );
       })
       .catch((error) => {
         console.error("Payment saving failed:", error);
@@ -171,52 +227,9 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
             console.error("Failed to delete orderDetail:", deleteError);
           });
       });
-    //lấy thông tin class
-    axios
-      .get("http://localhost:8080/api/v1/class/")
-      .then((response) => {
-        // Tìm lớp học thỏa mãn điều kiện
-        const foundClass = response.data.data.find((item) => {
-          return (
-            item.location === studyTime &&
-            item.startDate === startDate &&
-            item.instructor.name === instructor
-          );
-        });
-
-        if (foundClass) {
-          const classId = foundClass.id;
-          console.log("Found class with id:", classId);
-
-          const enrollmentObject = {
-            aClass: {
-              id: classId,
-            },
-            account: {
-              id: accountId,
-            },
-            progress: totalProgress,
-            status: 0,
-          };
-
-          // Tạo enrollment
-          axios
-            .post("http://localhost:8080/api/v1/enrollments", enrollmentObject)
-            .then((response) => {
-              console.log("Create enrollment success!", response.data);
-            })
-            .catch((error) =>
-              console.error("Error create enrollment: ", error)
-            );
-        } else {
-          console.log("No class found matching the criteria.");
-        }
-      })
-      .catch((error) =>
-        console.error("Error fetching class information:", error)
-      );
   };
-
+  
+  
   return (
     <div>
       <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
