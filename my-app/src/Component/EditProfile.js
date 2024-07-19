@@ -1,11 +1,14 @@
 import React from "react";
 
-import { format, parseISO } from "date-fns";
+import axios from "axios";
+import { format, parse, parseISO } from "date-fns";
 import { useEffect, useState } from "react";
+import toast from "toastify-js";
+import "toastify-js/src/toastify.css";
 import "./Css/EditProfile.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-const EditProfile = ({ isLoggedIn, onLogout }) => {
+const EditProfile = ({ isLoggedIn, onLogout, triggerRefresh }) => {
   const [fullname, setFullname] = useState(isLoggedIn.data.fullName);
   const [phoneNumber, setPhoneNumber] = useState(isLoggedIn.data.phoneNumber);
   const [email, setEmail] = useState(isLoggedIn.data.email);
@@ -14,6 +17,64 @@ const EditProfile = ({ isLoggedIn, onLogout }) => {
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
+
+  const [imageFile, setImageFile] = useState(null);
+  const [message, setMessage] = useState("Hello");
+  const [imageUrl, setImageUrl] = useState(isLoggedIn.data.imageAccount);
+
+  const notify = (mess) =>
+    toast({
+      text: mess,
+      duration: 3000,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "linear-gradient(to right, #00b09b, #96c93d)",
+      },
+      close: true,
+      onClick: function () {}, // Callback after click
+    }).showToast();
+
+  const notifyFail = (err) =>
+    toast({
+      text: err,
+      duration: 3000,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "linear-gradient(to right, #c50e0e, #ec6554)",
+      },
+      close: true,
+      onClick: function () {}, // Callback after click
+    }).showToast();
+
+  const handleImageChange = async (event) => {
+    const file = event.target.files[0];
+    setImageFile(file);
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/api/v1/accounts/${isLoggedIn.data.id}/uploadAvatar`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      );
+      notify("Upload avatar successfully!");
+      setImageUrl(response.data.data.imageAccount);
+      triggerRefresh();
+    } catch (error) {
+      notifyFail("Failed to upload avatar.");
+    }
+  };
 
   useEffect(() => {
     if (birthday) {
@@ -64,13 +125,50 @@ const EditProfile = ({ isLoggedIn, onLogout }) => {
     return new Date(year, month, 0).getDate();
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    const dateString = `${year}-${month}-${day}`;
+    const parsedDate = parse(dateString, "yyyy-MM-dd", new Date());
+    const formattedDate = format(parsedDate, "yyyy-MM-dd");
+
+    const updateAccount = {
+      email: email,
+      phoneNumber: phoneNumber,
+      fullName: fullname,
+      birthday: formattedDate,
+    };
+    const userId = isLoggedIn.data.id;
+    axios
+      .put(
+        `http://localhost:8080/api/v1/accounts/updateInformation/${userId}`,
+        updateAccount,
+        { withCredentials: true }
+      )
+      .then((response) => notify("Update information successfully!"))
+      .catch((error) => {
+        console.error("Error to update info: ", error);
+        notifyFail("Error to update information!");
+      });
+  };
   return (
     <div>
       <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
       <div className="edit-profile">
         <div className="avatar-profile">
-          <img src={isLoggedIn.data.imageAccount} className="img-avt" alt="" />
+          <div className="avt-container">
+            <img src={imageUrl} className="img-avt" alt="" />
+            <div className="upload-btn">
+              <label htmlFor="upload-button" className="upload-icon">
+                <img src="/assets/svg/camera-solid.svg" alt="" />
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                style={{ display: "none" }}
+                id="upload-button"
+              />
+            </div>
+          </div>
         </div>
         <form className="form-edit">
           <label htmlFor="fullname" className="label-edit">

@@ -1,4 +1,3 @@
-
 :root {
   --widthAllPage: 1200px;
   --hoverColor: #127c71;
@@ -14,7 +13,7 @@
   --accountBackground: #ffffff;
   --accountHoverBackground: rgb(186, 184, 184);
   --accountHoverColor: #ffffff;
-  --headlineCurve: url('https://coursespace.vercel.app/images/headline-curve.svg');
+  --headlineCurve: url("../../../public/assets/svg/headline-curve.svg");
 }
 
 header {
@@ -35,7 +34,7 @@ header > .navigation {
 }
 
 .navigation-item {
-  margin:  24px;
+  margin: 24px;
   text-decoration: none;
   color: var(--linkColor);
   font-weight: var(--linkFontWeight);
@@ -43,6 +42,7 @@ header > .navigation {
   position: relative;
   padding: 10px;
   display: inline-block;
+  transform: scale(1.125);
 }
 
 .navigation-item:hover {
@@ -53,13 +53,14 @@ header > .navigation {
   content: "";
   position: absolute;
   width: 100%;
-  height: 5px;
+  height: 20px;
   background: var(--headlineCurve) no-repeat center center / contain;
-  background-size:auto 160%; /* Tăng kích thước hình ảnh */
+  background-size: 68% auto; /*Tăng kích thước hình ảnh*/
   left: 0;
-  bottom: -0.1rem;
+  bottom: -3px;
   opacity: 0;
   transition: opacity 0.3s ease;
+  transform: rotate(3deg);
 }
 
 .navigation-item:hover::after {
@@ -72,7 +73,8 @@ header > .navigation {
   justify-content: space-between;
 }
 
-button.sign-in, button.sign-up {
+button.sign-in,
+button.sign-up {
   height: 37px;
   width: 80px;
   border-radius: 12px;
@@ -91,9 +93,9 @@ button.sign-up {
   background-color: var(--signUpBackgroundColor);
 }
 
-
 .right .imageAccount {
   width: 50px;
+  height: 50px;
   cursor: pointer;
   border-radius: 50%;
   overflow: hidden;

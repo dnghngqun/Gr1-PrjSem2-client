@@ -2,6 +2,8 @@ import axios from "axios";
 import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import toast from "toastify-js";
+import "toastify-js/src/toastify.css";
 import "./Css/ViewDetail.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
@@ -16,6 +18,21 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
   const [selectedStartDate, setSelectedStartDate] = useState("");
   const [selectedInstructor, setSelectedInstructor] = useState("");
   const navigate = useNavigate();
+
+  const notifyFail = (err) =>
+    toast({
+      text: err,
+      duration: 3000,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "linear-gradient(to right, #c50e0e, #ec6554)",
+      },
+      close: true,
+      onClick: function () {}, // Callback after click
+    }).showToast();
+
   console.log("Classin4: ", classIn4);
   useEffect(() => {
     // Lấy thông tin khóa học
@@ -80,19 +97,23 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
   };
 
   const handleSignUp = () => {
-    if (!selectedStudyTime || !selectedInstructor || !selectedStartDate) {
-      navigate(false);
-      return;
+    if (isLoggedIn.data.role === "customer") {
+      if (!selectedStudyTime || !selectedInstructor || !selectedStartDate) {
+        navigate(false);
+        return;
+      }
+      navigate("/paymentInformation", {
+        state: {
+          courseId,
+          studyTime: selectedStudyTime,
+          startDate: selectedStartDate,
+          instructor: selectedInstructor,
+          totalProgress: sections.details,
+        },
+      });
+    } else {
+      notifyFail("Sorry, please login with account customer");
     }
-    navigate("/paymentInformation", {
-      state: {
-        courseId,
-        studyTime: selectedStudyTime,
-        startDate: selectedStartDate,
-        instructor: selectedInstructor,
-        totalProgress: sections.details,
-      },
-    });
   };
 
   if (!course || !sections || !lessons) return <div>Loading...</div>;

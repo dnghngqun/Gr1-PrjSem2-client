@@ -69,9 +69,9 @@
   flex-direction: column;
 }
 
-
-.details-list1 ul{
-margin-top: 50px;}
+.details-list1 ul {
+  margin-top: 50px;
+}
 
 .course-details .details-list1 {
   flex: 60%;
@@ -216,14 +216,15 @@ margin-top: 50px;}
   border-radius: 10px;
 }
 
-.sigh-schedule a {
+.sigh-schedule > a {
   flex: 1;
   text-align: center;
   background-color: #127c71;
-  color: white;
   text-decoration: none;
   padding: 4px 4px;
   border-radius: 16px;
+  cursor: pointer;
+  color: #fff !important;
 }
 
 td.td-topic p,

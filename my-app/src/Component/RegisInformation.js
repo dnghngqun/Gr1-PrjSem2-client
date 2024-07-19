@@ -3,6 +3,8 @@ import axios from "axios";
 import { format, parse, parseISO } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import toast from "toastify-js";
+import "toastify-js/src/toastify.css";
 import "./Css/RegisInformation.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
@@ -29,6 +31,35 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
   const [orderDetailId, setOrderDetailId] = useState(null);
   const [isOrderCreated, setIsOrderCreated] = useState(false);
   const [paymentId, setPaymentId] = useState("");
+
+  const notify = (mess) =>
+    toast({
+      text: mess,
+      duration: 3000,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "linear-gradient(to right, #00b09b, #96c93d)",
+      },
+      close: true,
+      onClick: function () {}, // Callback after click
+    }).showToast();
+
+  const notifyFail = (err) =>
+    toast({
+      text: err,
+      duration: 3000,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "linear-gradient(to right, #c50e0e, #ec6554)",
+      },
+      close: true,
+      onClick: function () {}, // Callback after click
+    }).showToast();
+
   useEffect(() => {
     if (birthday) {
       const parsedDate = parseISO(birthday);
@@ -121,8 +152,11 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
         updateAccount,
         { withCredentials: true }
       )
-      .then((response) => console.log("update success"))
-      .catch((error) => console.log("Error to update info: ", error));
+      .then((response) => notify("Update information successfully!"))
+      .catch((error) => {
+        notifyFail("Error to update information!");
+        console.log("Error to update info: ", error);
+      });
   };
 
   const handleCreateOrderDetail = () => {
