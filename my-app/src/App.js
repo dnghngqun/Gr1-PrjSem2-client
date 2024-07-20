@@ -18,8 +18,11 @@ import PrivateRoute from "./Component/PrivateRoute";
 import RegisInformation from "./Component/RegisInformation";
 import Register from "./Component/Register";
 import Staff from "./Component/Staff";
+import StaffClass from "./Component/StaffClass";
+import StaffInstructor from "./Component/StaffInstructor";
 import UserCourse from "./Component/UserCourse";
 import ViewDetail from "./Component/ViewDetail";
+import StaffStudent from "./Component/staffStudent";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [refresh, setRefresh] = useState(false);
@@ -127,6 +130,36 @@ function App() {
               allowedRoles={["staff"]}
             />
           }></Route>
+        <Route
+          path="/staff/student"
+          element={
+            <PrivateRoute
+              element={<StaffStudent onLogout={handleLogout} />}
+              isLoggedIn={isLoggedIn}
+              allowedRoles={["staff"]}
+            />
+          }
+        />
+        <Route
+          path="/staff/class"
+          element={
+            <PrivateRoute
+              element={<StaffClass onLogout={handleLogout} />}
+              isLoggedIn={isLoggedIn}
+              allowedRoles={["staff"]}
+            />
+          }
+        />
+        <Route
+          path="/staff/instructor"
+          element={
+            <PrivateRoute
+              element={<StaffInstructor onLogout={handleLogout} />}
+              isLoggedIn={isLoggedIn}
+              allowedRoles={["staff"]}
+            />
+          }
+        />
         <Route
           path="/user/mycourse"
           element={
