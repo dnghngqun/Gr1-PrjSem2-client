@@ -20,6 +20,8 @@ import Register from "./Component/Register";
 import Staff from "./Component/Staff";
 import UserCourse from "./Component/UserCourse";
 import ViewDetail from "./Component/ViewDetail";
+import Minitest from "./Component/Minitest";
+import ResultPage from "./Component/ResultPage";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [refresh, setRefresh] = useState(false);
@@ -151,6 +153,13 @@ function App() {
             )
           }
         />
+        <Route
+          path="/minitest"
+          element={
+            <Minitest />
+          }
+        />
+            <Route path="/result" element={<ResultPage />} />
       </Routes>
     </BrowserRouter>
   );

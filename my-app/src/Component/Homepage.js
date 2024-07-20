@@ -538,7 +538,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
             <div>
               <img src="/assets/img/leaf.png" className="deco1"></img>
               <p>How would you like to assess your proficiency in English?</p>
-              <a href="#">
+              <a href="http://localhost:3000/Minitest">
                 <b>Mini Test For You</b>
               </a>
               <img src="/assets/img/leaf.png" className="deco2"></img>
