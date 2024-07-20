@@ -126,7 +126,7 @@ const Minitest = () => {
     setUserAnswers([...userAnswers, answerText]); // Lưu câu trả lời của người dùng
     setTimeout(() => {
       handleNextQuestion();
-    }, 1000);
+    }, 100);
   };
 
   const handleNextQuestion = () => {
