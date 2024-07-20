@@ -22,6 +22,8 @@ import StaffClass from "./Component/StaffClass";
 import StaffInstructor from "./Component/StaffInstructor";
 import UserCourse from "./Component/UserCourse";
 import ViewDetail from "./Component/ViewDetail";
+import Minitest from "./Component/Minitest";
+import ResultPage from "./Component/ResultPage";
 import StaffStudent from "./Component/staffStudent";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -184,6 +186,13 @@ function App() {
             )
           }
         />
+        <Route
+          path="/minitest"
+          element={
+            <Minitest />
+          }
+        />
+            <Route path="/result" element={<ResultPage />} />
       </Routes>
     </BrowserRouter>
   );
