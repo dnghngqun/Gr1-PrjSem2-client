@@ -1,8 +1,8 @@
 import React from "react";
-import "./Css/Staff.css";
+// import "./Css/Staff.css";
 import NavStaff from "./NavStaff";
 import SideBarStaff from "./sideBarStaff";
-const StaffInstructor = ({isLoggedIn, onLogout }) => {
+const StaffInstructor = ({ isLoggedIn, onLogout }) => {
   return (
     <div>
       <div

@@ -1,7 +1,9 @@
 import ApexCharts from "apexcharts";
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import "./Css/Admin.css";
+// import "./Css/Admin.css";
+import "./Css/Staff.css";
+
 import "./Css/Simplebar.css";
 const Admin = ({ onLogout }) => {
   const sidebarRef = useRef(null);
@@ -1047,13 +1049,13 @@ const Admin = ({ onLogout }) => {
           </div>
         </div>
       </div>
-      <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+      {/* <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
       <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
       <script src="../assets/js/sidebarmenu.js"></script>
       <script src="../assets/js/app.min.js"></script>
       <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
       <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-      <script src="../assets/js/dashboard.js"></script>
+      <script src="../assets/js/dashboard.js"></script> */}
     </div>
   );
 };

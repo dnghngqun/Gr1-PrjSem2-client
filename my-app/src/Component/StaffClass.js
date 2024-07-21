@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import toast from "toastify-js";
 import "toastify-js/src/toastify.css";
-import "./Css/Staff.css";
+// import "./Css/Staff.css";
 import NavStaff from "./NavStaff";
 import SideBarStaff from "./sideBarStaff";
 const StaffClass = ({ isLoggedIn, onLogout }) => {
@@ -12,6 +13,8 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
   const [editingClassId, setEditingClassId] = useState(null);
   const [editingValues, setEditingValues] = useState({});
   const [shouldFetchClasses, setShouldFetchClasses] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
 
   const notify = (mess) =>
     toast({
@@ -75,7 +78,7 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
         notifyFail(
           "Error to update information, please check error in the console!"
         );
-        console.log("Error to update class: ", err);
+        console.error("Error to update class: ", err);
       });
   };
 
@@ -86,6 +89,39 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
     //prevValues -> giá trị htại của editingValues
     //...prevValues: copy giá trị htại và tạo ra object mới,
     //[name]:value  -> tương ứng key value, dùng [name] thì tên name = key truyền vào là thuộc tính name của trường mình đặt
+  };
+
+  const handleDeleteClass = (id) => {
+    Swal.fire({
+      icon: "warning",
+      title: "Do you want to delete this class?",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:8080/api/v1/class/${id}`)
+          .then((res) => {
+            notify("Delete class successfully!");
+            setShouldFetchClasses((value) => !value);
+          })
+          .catch((err) => {
+            notifyFail(
+              "Error to delete class, please check error in the console!"
+            );
+            console.error("Error to delete class: ", err);
+          });
+      }
+    });
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleStatusFilterChange = (e) => {
+    setStatusFilter(e.target.value);
   };
 
   useEffect(() => {
@@ -108,6 +144,17 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
       .then((res) => setCourse(res.data))
       .catch((err) => console.error("Error to fetch course: ", err));
   }, []);
+
+  const filteredClasses = allClass.filter((cls) => {
+    const matchesSearchTerm = cls.course.name
+      .toLowerCase() //lấy tên khoá học và chuyển thành chữ thường  để so sánh
+      .includes(searchTerm.toLowerCase()); //kiểm tra tên khoá học có chứa chuỗi kĩ tự đó ko
+    //ktra trạng thái khoá học, so sánh value -1 0 1
+    const matchesStatus =
+      statusFilter === "" || cls.status.toString() === statusFilter;
+
+    return matchesSearchTerm && matchesStatus;
+  });
   return (
     <div>
       <div
@@ -134,6 +181,24 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
                     <h5 className="card-title fw-semibold mb-4">
                       All grades available
                     </h5>
+                    <div className="w-100 d-xl-flex align-items-center justify-content-sm-center">
+                      <input
+                        type="text"
+                        className="form-control m-1"
+                        placeholder="Search by course name"
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                      />
+                      <select
+                        className="form-select m-1"
+                        value={statusFilter}
+                        onChange={handleStatusFilterChange}>
+                        <option value="">All statuses</option>
+                        <option value="-1">Canceled</option>
+                        <option value="0">Not Started</option>
+                        <option value="1">Completed</option>
+                      </select>
+                    </div>
                     <div className="table-responsive">
                       <table className="table text-nowrap mb-0 align-middle">
                         <thead className="text-dark fs-4">
@@ -160,11 +225,12 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
                               <h6 className="fw-semibold mb-0">Status</h6>
                             </th>
                             <th className="border-bottom-0"></th>
+                            <th className="border-bottom-0"></th>
                           </tr>
                         </thead>
                         <tbody>
-                          {allClass &&
-                            allClass.map((item, index) => {
+                          {filteredClasses &&
+                            filteredClasses.map((item, index) => {
                               let classStatus = "Not Started";
                               if (parseInt(item.status) === 1)
                                 classStatus = "Completed";
@@ -349,6 +415,16 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
                                         Edit
                                       </button>
                                     )}
+                                  </td>
+                                  <td className="border-bottom-">
+                                    <button
+                                      className="badge bg-danger rounded-3 fw-semibold"
+                                      onClick={() => handleDeleteClass(item.id)}
+                                      style={{
+                                        width: "65px",
+                                      }}>
+                                      Delete
+                                    </button>
                                   </td>
                                 </tr>
                               );
