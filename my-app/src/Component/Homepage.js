@@ -30,7 +30,6 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
         delay: 2000,
         disableOnInteraction: false,
       },
-      
     });
   }, [instructor]);
 
@@ -96,10 +95,9 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               with Different Way
             </h2>
             <p className="content">
-              Let's take an online course to improve your skills in a different
-              way, you can set your own study time according to your learning
-              speed. So you san study comfortable and absorb tge material
-              easily.
+              Let's take an course to improve your skills in a different way,
+              you can set your own study time according to your learning speed.
+              So you san study comfortable and absorb tge material easily.
             </p>
             <div className="btn-intro">
               <button className="button btn1">
@@ -164,9 +162,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                     alt="..."
                   />
                   <div className="card-body card-home-body">
-                    <h5 className="card-title card-home-title">
-                     Toeic Basic
-                    </h5>
+                    <h5 className="card-title card-home-title">Toeic Basic</h5>
                     <div className="card-bottom card-home-bottom">
                       <div className="course-price">$53/course</div>
                       <div className="star">★★★★★</div>
@@ -182,9 +178,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                     alt="..."
                   />
                   <div className="card-body card-home-body">
-                    <h5 className="card-title card-home-title">
-                     Toeic Pre
-                    </h5>
+                    <h5 className="card-title card-home-title">Toeic Pre</h5>
                     <div className="card-bottom card-home-bottom">
                       <div className="course-price">$53/course</div>
                       <div className="star">★★★★★</div>
@@ -200,9 +194,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                     alt="..."
                   />
                   <div className="card-body card-home-body">
-                    <h5 className="card-title card-home-title">
-                      Toeic A
-                    </h5>
+                    <h5 className="card-title card-home-title">Toeic A</h5>
                     <div className="card-bottom card-home-bottom">
                       <div className="course-price">$53/course</div>
                       <div className="star">★★★★★</div>
@@ -218,9 +210,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                     alt="..."
                   />
                   <div className="card-body card-home-body">
-                    <h5 className="card-title card-home-title">
-                      Toeic B
-                    </h5>
+                    <h5 className="card-title card-home-title">Toeic B</h5>
                     <div className="card-bottom card-home-bottom">
                       <div className="course-price">$53/course</div>
                       <div className="star">★★★★★</div>
@@ -237,7 +227,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   />
                   <div className="card-body card-home-body">
                     <h5 className="card-title card-home-title">
-                     Toeic Pratice
+                      Toeic Pratice
                     </h5>
                     <div className="card-bottom card-home-bottom">
                       <div className="course-price">$53/course</div>

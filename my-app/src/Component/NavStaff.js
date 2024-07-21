@@ -15,12 +15,6 @@ const NavStaff = () => {
               <i className="ti ti-menu-2"></i>
             </a>
           </li>
-          <li className="nav-item">
-            <a className="nav-link nav-icon-hover" href="javascript:void(0)">
-              <i className="ti ti-bell-ringing"></i>
-              <div className="notification bg-primary rounded-circle"></div>
-            </a>
-          </li>
         </ul>
         <div
           className="navbar-collapse justify-content-end px-0"
