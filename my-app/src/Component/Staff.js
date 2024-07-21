@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import "./Css/Staff.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import "./Css/Simplebar.css";
 import NavStaff from "./NavStaff";
 import SideBarStaff from "./sideBarStaff";

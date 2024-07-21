@@ -109,13 +109,15 @@ function App() {
           element={
             <ViewDetail isLoggedIn={isLoggedIn} onLogout={handleLogout} />
           }></Route>
-       
+
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route
           path="/admin"
           element={
             <PrivateRoute
-              element={<Admin onLogout={handleLogout} />}
+              element={
+                <Admin onLogout={handleLogout} isLoggedIn={isLoggedIn} />
+              }
               isLoggedIn={isLoggedIn}
               allowedRoles={["admin"]}
             />
@@ -135,7 +137,9 @@ function App() {
           path="/staff/student"
           element={
             <PrivateRoute
-              element={<StaffStudent onLogout={handleLogout} isLoggedIn={isLoggedIn}/>}
+              element={
+                <StaffStudent onLogout={handleLogout} isLoggedIn={isLoggedIn} />
+              }
               isLoggedIn={isLoggedIn}
               allowedRoles={["staff"]}
             />
@@ -145,7 +149,9 @@ function App() {
           path="/staff/class"
           element={
             <PrivateRoute
-              element={<StaffClass onLogout={handleLogout} isLoggedIn={isLoggedIn}/>}
+              element={
+                <StaffClass onLogout={handleLogout} isLoggedIn={isLoggedIn} />
+              }
               isLoggedIn={isLoggedIn}
               allowedRoles={["staff"]}
             />
@@ -155,7 +161,12 @@ function App() {
           path="/staff/instructor"
           element={
             <PrivateRoute
-              element={<StaffInstructor onLogout={handleLogout} isLoggedIn={isLoggedIn}/>}
+              element={
+                <StaffInstructor
+                  onLogout={handleLogout}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
               isLoggedIn={isLoggedIn}
               allowedRoles={["staff"]}
             />

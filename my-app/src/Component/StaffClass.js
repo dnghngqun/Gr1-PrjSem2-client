@@ -4,6 +4,8 @@ import Swal from "sweetalert2";
 import toast from "toastify-js";
 import "toastify-js/src/toastify.css";
 // import "./Css/Staff.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import NavStaff from "./NavStaff";
 import SideBarStaff from "./sideBarStaff";
 const StaffClass = ({ isLoggedIn, onLogout }) => {
