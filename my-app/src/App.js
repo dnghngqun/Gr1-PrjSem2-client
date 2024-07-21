@@ -14,17 +14,17 @@ import EditProfile from "./Component/EditProfile";
 import ForgotPassword from "./Component/ForgotPassword";
 import Homepage from "./Component/Homepage";
 import Login from "./Component/Login";
+import Minitest from "./Component/Minitest";
 import PrivateRoute from "./Component/PrivateRoute";
 import RegisInformation from "./Component/RegisInformation";
 import Register from "./Component/Register";
+import ResultPage from "./Component/ResultPage";
 import Staff from "./Component/Staff";
 import StaffClass from "./Component/StaffClass";
 import StaffInstructor from "./Component/StaffInstructor";
+import StaffStudent from "./Component/staffStudent";
 import UserCourse from "./Component/UserCourse";
 import ViewDetail from "./Component/ViewDetail";
-import Minitest from "./Component/Minitest";
-import ResultPage from "./Component/ResultPage";
-import StaffStudent from "./Component/staffStudent";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [refresh, setRefresh] = useState(false);
@@ -109,10 +109,7 @@ function App() {
           element={
             <ViewDetail isLoggedIn={isLoggedIn} onLogout={handleLogout} />
           }></Route>
-        {/* <Route
-          path="/thanks"
-          element={<Thanks isLoggedIn={isLoggedIn} onLogout={handleLogout} />}
-        /> */}
+       
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route
           path="/admin"
@@ -127,7 +124,9 @@ function App() {
           path="/staff"
           element={
             <PrivateRoute
-              element={<Staff onLogout={handleLogout} />}
+              element={
+                <Staff onLogout={handleLogout} isLoggedIn={isLoggedIn} />
+              }
               isLoggedIn={isLoggedIn}
               allowedRoles={["staff"]}
             />
@@ -136,7 +135,7 @@ function App() {
           path="/staff/student"
           element={
             <PrivateRoute
-              element={<StaffStudent onLogout={handleLogout} />}
+              element={<StaffStudent onLogout={handleLogout} isLoggedIn={isLoggedIn}/>}
               isLoggedIn={isLoggedIn}
               allowedRoles={["staff"]}
             />
@@ -146,7 +145,7 @@ function App() {
           path="/staff/class"
           element={
             <PrivateRoute
-              element={<StaffClass onLogout={handleLogout} />}
+              element={<StaffClass onLogout={handleLogout} isLoggedIn={isLoggedIn}/>}
               isLoggedIn={isLoggedIn}
               allowedRoles={["staff"]}
             />
@@ -156,7 +155,7 @@ function App() {
           path="/staff/instructor"
           element={
             <PrivateRoute
-              element={<StaffInstructor onLogout={handleLogout} />}
+              element={<StaffInstructor onLogout={handleLogout} isLoggedIn={isLoggedIn}/>}
               isLoggedIn={isLoggedIn}
               allowedRoles={["staff"]}
             />
@@ -186,13 +185,8 @@ function App() {
             )
           }
         />
-        <Route
-          path="/minitest"
-          element={
-            <Minitest />
-          }
-        />
-            <Route path="/result" element={<ResultPage />} />
+        <Route path="/minitest" element={<Minitest />} />
+        <Route path="/result" element={<ResultPage />} />
       </Routes>
     </BrowserRouter>
   );

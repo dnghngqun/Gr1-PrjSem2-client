@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./Css/Staff.css";
 import NavStaff from "./NavStaff";
 import SideBarStaff from "./sideBarStaff";
-const StaffStudent = ({ onLogout }) => {
+const StaffStudent = ({isLoggedIn, onLogout }) => {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const StaffStudent = ({ onLogout }) => {
         {/* right */}
         <div className="body-wrapper">
           {/* header */}
-          <NavStaff />
+          <NavStaff isLoggedIn={isLoggedIn}/>
           {/* body */}
           <div className="container-fluid">
             <div className="row">

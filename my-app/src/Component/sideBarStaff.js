@@ -66,6 +66,15 @@ const sideBarStaff = ({ onLogout }) => {
             <li className="sidebar-item">
               <Link
                 className="sidebar-link"
+                to="/user/editprofile"
+                aria-expanded="false">
+                <span></span>
+                <span className="hide-menu">Edit Profile</span>
+              </Link>
+            </li>
+            <li className="sidebar-item">
+              <Link
+                className="sidebar-link"
                 to="#"
                 onClick={handleLogout}
                 aria-expanded="false">

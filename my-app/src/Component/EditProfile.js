@@ -111,7 +111,7 @@ const EditProfile = ({ isLoggedIn, onLogout, triggerRefresh }) => {
 
   const handleYearChange = (e) => {
     const value = e.target.value;
-    if (value >= 1930 && value <= 2099) {
+    if (value >= 1 && value <= 2099) {
       setYear(value);
       if (day > daysInMonth(month, value)) {
         setDay("");

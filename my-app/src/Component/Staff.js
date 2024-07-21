@@ -3,7 +3,7 @@ import "./Css/Admin.css";
 import "./Css/Simplebar.css";
 import NavStaff from "./NavStaff";
 import SideBarStaff from "./sideBarStaff";
-const Staff = ({ onLogout }) => {
+const Staff = ({ isLoggedIn,onLogout }) => {
   const sidebarRef = useRef(null);
   const chart1Ref = useRef(null);
   const chart2Ref = useRef(null);
@@ -216,7 +216,7 @@ const Staff = ({ onLogout }) => {
         {/* right */}
         <div className="body-wrapper">
           {/* header */}
-          <NavStaff />
+          <NavStaff isLoggedIn={isLoggedIn}/>
           {/* body */}
           <div className="container-fluid">
             <div className="row">
