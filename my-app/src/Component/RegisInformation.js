@@ -3,12 +3,12 @@ import axios from "axios";
 import { format, parse, parseISO } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import toast from "toastify-js";
 import "toastify-js/src/toastify.css";
 import "./Css/RegisInformation.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import Swal from "sweetalert2";
 
 const RegisInformation = ({ isLoggedIn, onLogout }) => {
   const navigate = useNavigate();
@@ -94,7 +94,7 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
 
   const handleYearChange = (e) => {
     const value = e.target.value;
-    if (value >= 1930 && value <= 2099) {
+    if (value > 0 && value <= 2099) {
       setYear(value);
       if (day > daysInMonth(month, value)) {
         setDay("");
@@ -193,18 +193,18 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
       .then((response) => {
         console.log("Payment saved successfully:", response.data);
         setPaymentId(details.id);
-  
+
         // Hiển thị thông báo SweetAlert2 ở giữa màn hình và chuyển hướng sau khi thông báo hiển thị xong
         Swal.fire({
           icon: "success",
           title: "Payment successful",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         }).then(() => {
           // Chuyển hướng đến trang UserCourse
           navigate("/user/mycourse");
         });
-  
+
         // Lấy thông tin class
         axios
           .get("http://localhost:8080/api/v1/class/")
@@ -217,11 +217,11 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
                 item.instructor.name === instructor
               );
             });
-  
+
             if (foundClass) {
               const classId = foundClass.id;
               console.log("Found class with id:", classId);
-  
+
               const enrollmentObject = {
                 aClass: {
                   id: classId,
@@ -232,10 +232,13 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
                 progress: totalProgress,
                 status: 0,
               };
-  
+
               // Tạo enrollment
               axios
-                .post("http://localhost:8080/api/v1/enrollments", enrollmentObject)
+                .post(
+                  "http://localhost:8080/api/v1/enrollments",
+                  enrollmentObject
+                )
                 .then((response) => {
                   console.log("Create enrollment success!", response.data);
                 })
@@ -262,8 +265,7 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
           });
       });
   };
-  
-  
+
   return (
     <div>
       <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />

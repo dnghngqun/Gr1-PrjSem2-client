@@ -1,8 +1,8 @@
 import React from "react";
-import "./Css/Staff.css";
+// import "./Css/Staff.css";
 import NavStaff from "./NavStaff";
 import SideBarStaff from "./sideBarStaff";
-const StaffInstructor = ({ onLogout }) => {
+const StaffInstructor = ({ isLoggedIn, onLogout }) => {
   return (
     <div>
       <div
@@ -19,7 +19,7 @@ const StaffInstructor = ({ onLogout }) => {
         {/* right */}
         <div className="body-wrapper">
           {/* header */}
-          <NavStaff />
+          <NavStaff isLoggedIn={isLoggedIn} />
           {/* body */}
           <div className="container-fluid">
             <div className="row">

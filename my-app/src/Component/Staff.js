@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import "./Css/Admin.css";
+import "./Css/Staff.css";
 import "./Css/Simplebar.css";
 import NavStaff from "./NavStaff";
 import SideBarStaff from "./sideBarStaff";
-const Staff = ({ onLogout }) => {
+const Staff = ({ isLoggedIn, onLogout }) => {
   const sidebarRef = useRef(null);
   const chart1Ref = useRef(null);
   const chart2Ref = useRef(null);
@@ -216,7 +216,7 @@ const Staff = ({ onLogout }) => {
         {/* right */}
         <div className="body-wrapper">
           {/* header */}
-          <NavStaff />
+          <NavStaff isLoggedIn={isLoggedIn} />
           {/* body */}
           <div className="container-fluid">
             <div className="row">
@@ -784,13 +784,13 @@ const Staff = ({ onLogout }) => {
           </div>
         </div>
       </div>
-      <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+      {/* <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
       <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
       <script src="../assets/js/sidebarmenu.js"></script>
       <script src="../assets/js/app.min.js"></script>
       <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
       <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-      <script src="../assets/js/dashboard.js"></script>
+      <script src="../assets/js/dashboard.js"></script> */}
     </div>
   );
 };

@@ -8,7 +8,7 @@ const sideBarStaff = ({ onLogout }) => {
     <aside className="left-sidebar">
       <div>
         <div className="brand-logo d-flex align-items-center justify-content-between">
-          <Link to href="/" className="text-nowrap logo-img">
+          <Link to="/staff" className="text-nowrap logo-img">
             <img
               src="https://i.imgur.com/8epSVJH.png"
               style={{ width: "140px", margin: "20px 0 0 30px" }}
@@ -62,6 +62,15 @@ const sideBarStaff = ({ onLogout }) => {
             </li>
             <li className="nav-small-cap">
               <span className="hide-menu">AUTH</span>
+            </li>
+            <li className="sidebar-item">
+              <Link
+                className="sidebar-link"
+                to="/user/editprofile"
+                aria-expanded="false">
+                <span></span>
+                <span className="hide-menu">Edit Profile</span>
+              </Link>
             </li>
             <li className="sidebar-item">
               <Link
