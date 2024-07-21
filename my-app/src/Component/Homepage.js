@@ -14,8 +14,9 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
   const [selectedImage, setSelectedImage] = useState("ielts");
   const [instructor, setInstructor] = useState([]);
   useEffect(() => {
-    Swiper.use([Navigation, Pagination, Autoplay]);
+    // Swiper.use([Navigation, Pagination, Autoplay]);
     const swiper = new Swiper(".swiper", {
+      modules: [Pagination, Navigation, Autoplay],
       slidesPerView: 3,
       direction: "horizontal",
       loop: true,
@@ -30,7 +31,6 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
         delay: 2000,
         disableOnInteraction: false,
       },
-      
     });
   }, [instructor]);
 
@@ -164,11 +164,9 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                     alt="..."
                   />
                   <div className="card-body card-home-body">
-                    <h5 className="card-title card-home-title">
-                     Toeic Basic
-                    </h5>
+                    <h5 className="card-title card-home-title">Toeic Basic</h5>
                     <div className="card-bottom card-home-bottom">
-                      <div className="course-price">$53/course</div>
+                      <div className="course-price">$50/course</div>
                       <div className="star">★★★★★</div>
                     </div>
                   </div>
@@ -182,11 +180,9 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                     alt="..."
                   />
                   <div className="card-body card-home-body">
-                    <h5 className="card-title card-home-title">
-                     Toeic Pre
-                    </h5>
+                    <h5 className="card-title card-home-title">Toeic Pre</h5>
                     <div className="card-bottom card-home-bottom">
-                      <div className="course-price">$53/course</div>
+                      <div className="course-price">$100/course</div>
                       <div className="star">★★★★★</div>
                     </div>
                   </div>
@@ -200,11 +196,9 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                     alt="..."
                   />
                   <div className="card-body card-home-body">
-                    <h5 className="card-title card-home-title">
-                      Toeic A
-                    </h5>
+                    <h5 className="card-title card-home-title">Toeic A</h5>
                     <div className="card-bottom card-home-bottom">
-                      <div className="course-price">$53/course</div>
+                      <div className="course-price">$100/course</div>
                       <div className="star">★★★★★</div>
                     </div>
                   </div>
@@ -218,11 +212,9 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                     alt="..."
                   />
                   <div className="card-body card-home-body">
-                    <h5 className="card-title card-home-title">
-                      Toeic B
-                    </h5>
+                    <h5 className="card-title card-home-title">Toeic B</h5>
                     <div className="card-bottom card-home-bottom">
-                      <div className="course-price">$53/course</div>
+                      <div className="course-price">$100/course</div>
                       <div className="star">★★★★★</div>
                     </div>
                   </div>
@@ -237,10 +229,26 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   />
                   <div className="card-body card-home-body">
                     <h5 className="card-title card-home-title">
-                     Toeic Pratice
+                      Toeic Pratice
                     </h5>
                     <div className="card-bottom card-home-bottom">
-                      <div className="course-price">$53/course</div>
+                      <div className="course-price">$80/course</div>
+                      <div className="star">★★★★★</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="swiper-slide">
+                <div className="card card-home">
+                  <img
+                    src="https://i.imgur.com/VYSM6rM.png"
+                    className="card-img-top"
+                    alt="..."
+                  />
+                  <div className="card-body card-home-body">
+                    <h5 className="card-title card-home-title">Ielts Pre</h5>
+                    <div className="card-bottom card-home-bottom">
+                      <div className="course-price">$100/course</div>
                       <div className="star">★★★★★</div>
                     </div>
                   </div>
