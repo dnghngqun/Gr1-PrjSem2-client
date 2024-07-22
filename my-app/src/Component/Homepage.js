@@ -300,8 +300,8 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
             <div className="feature-img">
               <img src="/assets/img/home-feature.webp" alt="..." />
               <div className="LoremIpsum">
-                <strong>Lorem ipsum</strong>
-                <p>Lorem ipsum</p>
+                <strong>English </strong>
+                <p>English</p>
                 <svg className="progress-circle" viewBox="0 0 100 100">
                   <circle
                     className="progress-circle-background"
@@ -391,8 +391,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   <div className="benefit-title">Easy Accessibility</div>
                   <div className="benefit-description">
                     <p>
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum
+                    Access English lessons anytime, anywhere.
                     </p>
                   </div>
                 </div>
@@ -412,8 +411,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   <div className="benefit-title">More Affordable Cost</div>
                   <div className="benefit-description">
                     <p>
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum
+                    Learn English without breaking the bank.
                     </p>
                   </div>
                 </div>
@@ -434,8 +432,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   <div className="benefit-title">Flexible Study Time</div>
                   <div className="benefit-description">
                     <p>
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum
+                    Study English at your own pace and schedule.
                     </p>
                   </div>
                 </div>
@@ -456,8 +453,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   <div className="benefit-title">Consultation With Mentor</div>
                   <div className="benefit-description">
                     <p>
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum
+                    Get personalized guidance from experienced English mentors.
                     </p>
                   </div>
                 </div>
