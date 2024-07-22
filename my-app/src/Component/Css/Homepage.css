@@ -1111,3 +1111,8 @@ section {
   background-color: #127c71;
   color: #fff;
 }
+
+#testimonial {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}

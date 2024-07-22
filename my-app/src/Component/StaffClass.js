@@ -17,6 +17,7 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
   const [shouldFetchClasses, setShouldFetchClasses] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
+  const [instructorFilter, setInstructorFilter] = useState("");
 
   const notify = (mess) =>
     toast({
@@ -125,6 +126,9 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
   const handleStatusFilterChange = (e) => {
     setStatusFilter(e.target.value);
   };
+  const handleInstructorFilterChange = (e) => {
+    setInstructorFilter(e.target.value);
+  };
 
   useEffect(() => {
     axios
@@ -155,7 +159,12 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
     const matchesStatus =
       statusFilter === "" || cls.status.toString() === statusFilter;
 
-    return matchesSearchTerm && matchesStatus;
+    //ktra instructor
+    const matchesInstructor =
+      instructorFilter === "" ||
+      cls.instructor.id.toString() === instructorFilter;
+
+    return matchesSearchTerm && matchesStatus && matchesInstructor;
   });
   return (
     <div>
@@ -193,12 +202,26 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
                       />
                       <select
                         className="form-select m-1"
+                        value={instructorFilter}
+                        onChange={handleInstructorFilterChange}>
+                        <option value="">All instructors</option>
+                        {instructor &&
+                          instructor.map((instr) => (
+                            <option key={instr.id} value={instr.id}>
+                              {instr.name}
+                            </option>
+                          ))}
+                      </select>
+
+                      <select
+                        className="form-select m-1"
                         value={statusFilter}
                         onChange={handleStatusFilterChange}>
                         <option value="">All statuses</option>
                         <option value="-1">Canceled</option>
                         <option value="0">Not Started</option>
-                        <option value="1">Completed</option>
+                        <option value="1">Started</option>
+                        <option value="2">Completed</option>
                       </select>
                     </div>
                     <div className="table-responsive">
@@ -234,8 +257,10 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
                           {filteredClasses &&
                             filteredClasses.map((item, index) => {
                               let classStatus = "Not Started";
-                              if (parseInt(item.status) === 1)
+                              if (parseInt(item.status) === 2)
                                 classStatus = "Completed";
+                              if (parseInt(item.status) === 1)
+                                classStatus = "Started";
                               if (parseInt(item.status) === -1)
                                 classStatus = "Canceled";
                               const isEditing = editingClassId === item.id;
@@ -387,7 +412,8 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
                                         style={{ width: "100px" }}>
                                         <option value="-1">Canceled</option>
                                         <option value="0">Not Started</option>
-                                        <option value="1">Completed</option>
+                                        <option value="1">Started</option>
+                                        <option value="2">Completed</option>
                                       </select>
                                     ) : (
                                       <h6
