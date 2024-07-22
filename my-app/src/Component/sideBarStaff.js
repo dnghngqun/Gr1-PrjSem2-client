@@ -36,6 +36,15 @@ const sideBarStaff = ({ onLogout }) => {
             <li className="sidebar-item">
               <Link
                 className="sidebar-link"
+                to="/staff/attendance"
+                aria-expanded="false">
+                <span></span>
+                <span className="hide-menu">Attendance</span>
+              </Link>
+            </li>
+            <li className="sidebar-item">
+              <Link
+                className="sidebar-link"
                 to="/staff/student"
                 aria-expanded="false">
                 <span></span>

@@ -25,6 +25,7 @@ import StaffInstructor from "./Component/StaffInstructor";
 import StaffStudent from "./Component/staffStudent";
 import UserCourse from "./Component/UserCourse";
 import ViewDetail from "./Component/ViewDetail";
+import StaffAttendance from "./Component/StaffAttendance";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [refresh, setRefresh] = useState(false);
@@ -139,6 +140,18 @@ function App() {
             <PrivateRoute
               element={
                 <StaffStudent onLogout={handleLogout} isLoggedIn={isLoggedIn} />
+              }
+              isLoggedIn={isLoggedIn}
+              allowedRoles={["staff"]}
+            />
+          }
+        />
+         <Route
+          path="/staff/attendance"
+          element={
+            <PrivateRoute
+              element={
+                <StaffAttendance onLogout={handleLogout} isLoggedIn={isLoggedIn} />
               }
               isLoggedIn={isLoggedIn}
               allowedRoles={["staff"]}

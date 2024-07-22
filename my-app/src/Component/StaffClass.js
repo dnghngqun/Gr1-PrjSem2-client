@@ -220,7 +220,8 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
                         <option value="">All statuses</option>
                         <option value="-1">Canceled</option>
                         <option value="0">Not Started</option>
-                        <option value="1">Completed</option>
+                        <option value="1">Started</option>
+                        <option value="2">Completed</option>
                       </select>
                     </div>
                     <div className="table-responsive">
@@ -256,8 +257,10 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
                           {filteredClasses &&
                             filteredClasses.map((item, index) => {
                               let classStatus = "Not Started";
-                              if (parseInt(item.status) === 1)
+                              if (parseInt(item.status) === 2)
                                 classStatus = "Completed";
+                              if (parseInt(item.status) === 1)
+                                classStatus = "Started";
                               if (parseInt(item.status) === -1)
                                 classStatus = "Canceled";
                               const isEditing = editingClassId === item.id;
@@ -409,7 +412,8 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
                                         style={{ width: "100px" }}>
                                         <option value="-1">Canceled</option>
                                         <option value="0">Not Started</option>
-                                        <option value="1">Completed</option>
+                                        <option value="1">Started</option>
+                                        <option value="2">Completed</option>
                                       </select>
                                     ) : (
                                       <h6
