@@ -17,6 +17,7 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
   const [shouldFetchClasses, setShouldFetchClasses] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
+  const [instructorFilter, setInstructorFilter] = useState("");
 
   const notify = (mess) =>
     toast({
@@ -125,6 +126,9 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
   const handleStatusFilterChange = (e) => {
     setStatusFilter(e.target.value);
   };
+  const handleInstructorFilterChange = (e) => {
+    setInstructorFilter(e.target.value);
+  };
 
   useEffect(() => {
     axios
@@ -155,7 +159,12 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
     const matchesStatus =
       statusFilter === "" || cls.status.toString() === statusFilter;
 
-    return matchesSearchTerm && matchesStatus;
+    //ktra instructor
+    const matchesInstructor =
+      instructorFilter === "" ||
+      cls.instructor.id.toString() === instructorFilter;
+
+    return matchesSearchTerm && matchesStatus && matchesInstructor;
   });
   return (
     <div>
@@ -191,6 +200,19 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
                         value={searchTerm}
                         onChange={handleSearchChange}
                       />
+                      <select
+                        className="form-select m-1"
+                        value={instructorFilter}
+                        onChange={handleInstructorFilterChange}>
+                        <option value="">All instructors</option>
+                        {instructor &&
+                          instructor.map((instr) => (
+                            <option key={instr.id} value={instr.id}>
+                              {instr.name}
+                            </option>
+                          ))}
+                      </select>
+
                       <select
                         className="form-select m-1"
                         value={statusFilter}
