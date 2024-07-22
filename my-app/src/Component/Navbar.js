@@ -26,10 +26,10 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
             <Link to="/course" className="navigation-item">
               Courses
             </Link>
-            <Link to="#" className="navigation-item">
+            <Link to="/#testimonial" className="navigation-item">
               Testimonial
             </Link>
-            <Link to="#" className="navigation-item">
+            <Link to="/#mentor" className="navigation-item">
               Mentor
             </Link>
           </div>

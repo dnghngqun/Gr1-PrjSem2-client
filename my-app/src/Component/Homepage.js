@@ -6,13 +6,25 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 // import "swiper/css/navigation";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Css/Homepage.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 const Homepage = ({ isLoggedIn, onLogout }) => {
+  const location = useLocation();
   const [selectedImage, setSelectedImage] = useState("ielts");
   const [instructor, setInstructor] = useState([]);
+
+  //xử lý cuộn tới phần tử
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.replace("#", ""));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
+
   useEffect(() => {
     // Swiper.use([Navigation, Pagination, Autoplay]);
     const swiper = new Swiper(".swiper", {
@@ -294,7 +306,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
         </div>
       </section>
       {/* section3 */}
-      <section className="section3">
+      <section id="testimonial" className="section3">
         <div className="container">
           <div className="container1">
             <div className="feature-img">
@@ -502,7 +514,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
         </div>
       </section>
       {/* section4 */}
-      <section className="section4">
+      <section id="mentor" className="section4">
         <div className="section4-container">
           <h1>Our Expert Mentors</h1>
           <div className="swiper-container swiper">
