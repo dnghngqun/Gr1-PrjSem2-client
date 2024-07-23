@@ -14,7 +14,6 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
   const location = useLocation();
   const [selectedImage, setSelectedImage] = useState("ielts");
   const [instructor, setInstructor] = useState([]);
-
   //xử lý cuộn tới phần tử
   useEffect(() => {
     if (location.hash) {
