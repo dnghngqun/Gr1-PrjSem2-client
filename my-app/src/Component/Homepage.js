@@ -7,11 +7,11 @@ import "swiper/css";
 // import "swiper/css/navigation";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
+import ScrollToTop from "react-scroll-to-top";
 import ScrollReveal from "scrollreveal";
 import "./Css/Homepage.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-
 const Homepage = ({ isLoggedIn, onLogout }) => {
   const location = useLocation();
   const [selectedImage, setSelectedImage] = useState("ielts");
@@ -567,7 +567,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
           </div>
         </div>
       </section>
-
+      <ScrollToTop smooth />
       <Footer />
     </div>
   );

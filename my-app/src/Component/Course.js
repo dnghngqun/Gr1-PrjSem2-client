@@ -8,7 +8,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "./Css/Course.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-
+import ScrollToTop from "react-scroll-to-top";
 import axios from "axios";
 
 const Course = ({ isLoggedIn, onLogout }) => {
@@ -309,6 +309,7 @@ const Course = ({ isLoggedIn, onLogout }) => {
           </div> */}
         </div>
       </div>
+      <ScrollToTop smooth />
       <Footer />
     </div>
   );
