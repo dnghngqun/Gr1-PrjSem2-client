@@ -13,7 +13,6 @@ const EditProfile = ({ isLoggedIn, onLogout, triggerRefresh }) => {
   const [phoneNumber, setPhoneNumber] = useState(isLoggedIn.data.phoneNumber);
   const [email, setEmail] = useState(isLoggedIn.data.email);
   const birthday = isLoggedIn.data.birthday;
-
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
@@ -136,6 +135,9 @@ const EditProfile = ({ isLoggedIn, onLogout, triggerRefresh }) => {
       fullName: fullname,
       birthday: formattedDate,
     };
+
+   
+
     const userId = isLoggedIn.data.id;
     axios
       .put(

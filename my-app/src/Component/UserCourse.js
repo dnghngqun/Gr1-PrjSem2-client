@@ -7,28 +7,15 @@ import ProgressBar from "./ProgressBar";
 const UserCourse = ({ isLoggedIn, onLogout }) => {
   const [enrollments, setEnrollments] = useState([]);
   const [attendanceMap, setAttendanceMap] = useState({});
-  // const sessions = [
-  //   { status: "Present" },
-  //   { status: "Absent" },
-  //   { status: "NotStarted" },
-  //   // Thêm các buổi học khác theo định dạng trên
-  //   { status: "Present" },
-  //   { status: "Absent" },
-  //   { status: "NotStarted" },
-  //   // ... tổng cộng 35 buổi học
-  // ];
-
-  // Đảm bảo rằng có đủ 35 buổi học
-  // while (sessions.length < 35) {
-  //   sessions.push({ status: "NotStarted" });
-  // }
-  // console.log("isloggedin: ", isLoggedIn);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/v1/enrollments/user/${isLoggedIn.data.id}`)
+      .get(
+        `http://localhost:8080/api/v1/enrollments/user/${isLoggedIn.data.id}`
+      )
       .then((response) => {
         setEnrollments(response.data.data);
+        console.log("Enrollment: ", response.data.data);
       })
       .catch((error) => console.error("Error fetch enrollment: ", error));
   }, []);
@@ -38,13 +25,19 @@ const UserCourse = ({ isLoggedIn, onLogout }) => {
       try {
         // Tạo mảng promise để gọi API lấy dữ liệu điểm danh cho từng enrollment
         const fetchAttendancePromises = enrollments.map(async (enrollment) => {
+          const schedule = await axios
+            .get(
+              `http://localhost:8080/api/v1/attendance/schedule/class/${enrollment.aClass.id}`
+            );
+            let scheduleRes = schedule.data.data;
+           
           const response = await axios.get(
             `http://localhost:8080/api/v1/attendance/enrollment/${enrollment.id}`
           );
           let session = response.data.data;
 
           // Đảm bảo session có đủ số buổi học dựa trên enrollment.progress
-          while (session.length < enrollment.progress) {
+          while (session.length < scheduleRes.length) {
             session.push({ attendanceStatus: "notStarted" });
           }
 

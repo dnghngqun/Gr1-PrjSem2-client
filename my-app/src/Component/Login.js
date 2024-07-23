@@ -34,6 +34,7 @@ const Login = ({ onLogin }) => {
         if (response.status === 200) {
           onLogin(response.data);
           if (response.data.data.role === "admin") navigate("/admin"); //redirect to link /
+          if (response.data.data.role === "instructor") navigate("/instructor"); //redirect to link /
           if (response.data.data.role === "customer") navigate("/"); //redirect to link /
           if (response.data.data.role === "staff") navigate("/staff"); //redirect to link /
         }
@@ -62,6 +63,7 @@ const Login = ({ onLogin }) => {
         console.log("Login successful");
         onLogin(response.data);
         if (response.data.data.role === "admin") navigate("/admin"); //redirect to link /
+        if (response.data.data.role === "instructor") navigate("/instructor"); //redirect to link /
         if (response.data.data.role === "customer") navigate("/"); //redirect to link /
         if (response.data.data.role === "staff") navigate("/staff"); //redirect to link /
       } else {

@@ -107,6 +107,7 @@ const StaffAttendance = ({ isLoggedIn, onLogout }) => {
     const { name, value } = e.target;
     setValueAttendance((prevValue) => ({ ...prevValue, [name]: value }));
   };
+  
   return (
     <div
       className="page-wrapper"

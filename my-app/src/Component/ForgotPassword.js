@@ -1,18 +1,45 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import toast from "toastify-js";
+import "toastify-js/src/toastify.css";
 import "./Css/ForgotPassword.css";
 const ForgotPassword = () => {
-  const [method, setMethod] = useState("");
+  const [account, setAccount] = useState("");
   const [contact, setContact] = useState("");
   const [token, setToken] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmationMessage, setConfirmationMessage] = useState("");
   const [step, setStep] = useState(1);
   const [toastError, setToastError] = useState("");
+  const navigate = useNavigate();
+  const notify = (mess) =>
+    toast({
+      text: mess,
+      duration: 3000,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "linear-gradient(to right, #00b09b, #96c93d)",
+      },
+      close: true,
+      onClick: function () {}, // Callback after click
+    }).showToast();
 
-  const handleMethodChange = (e) => {
-    setMethod(e.target.value);
-  };
+  const notifyFail = (err) =>
+    toast({
+      text: err,
+      duration: 3000,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "linear-gradient(to right, #c50e0e, #ec6554)",
+      },
+      close: true,
+      onClick: function () {}, // Callback after click
+    }).showToast();
 
   const handleContactChange = (e) => {
     setContact(e.target.value);
@@ -27,12 +54,6 @@ const ForgotPassword = () => {
   };
 
   const handleSendToken = () => {
-    console.log(contact); // Log để kiểm tra giá trị của contact
-    if (!contact) {
-      console.error("Email is required.");
-      return;
-    }
-
     axios
       .post("http://localhost:8080/api/v1/accounts/forgot-password", null, {
         params: {
@@ -40,38 +61,11 @@ const ForgotPassword = () => {
         },
       })
       .then((response) => {
-        if (response.data.status === "ok") {
-          setStep(2); // Chuyển sang bước 2 nếu thành công
-        } else {
-          console.log("Failed:", response.data.message); // Log thông báo lỗi nếu cần
-          setToastError(response.data.message); // Đặt trạng thái lỗi với thông báo từ backend
-        }
+        notify("The token has been sent to your email!");
       })
       .catch((error) => {
-        if (error.response && error.response.status === 400) {
-          console.log("Error response:", error.response); // Log phản hồi lỗi từ backend
-          console.log("Error message:", error.message); // Log thông báo lỗi từ error object
-        } else {
-          console.error("There was an error sending the token:", error); // Log lỗi không mong muốn
-          setToastError(error.response.data.message);
-          console.log(toastError);
-        }
-      });
-  };
-
-  const handleVerifyToken = () => {
-    axios
-      .post("http://localhost:8080/api/v1/accounts/reset-password", null, {
-        params: {
-          email: contact,
-          token: token,
-        },
-      })
-      .then((response) => {
-        setStep(3);
-      })
-      .catch((error) => {
-        console.error("There was an error verifying the token!", error);
+        console.error("There was an error sending the token:", error); // Log lỗi không mong muốn
+        notifyFail("Error to sent token! Check error in the console");
       });
   };
 
@@ -79,92 +73,110 @@ const ForgotPassword = () => {
     axios
       .post("http://localhost:8080/api/v1/accounts/reset-password", null, {
         params: {
-          email: contact,
           token: token,
           newPassword: newPassword,
         },
       })
       .then((response) => {
-        setConfirmationMessage("Mật khẩu của bạn đã được đặt lại thành công!");
-        setStep(3);
+        notify("Reset password succesfully!");
+        navigate("/login");
       })
       .catch((error) => {
         console.error("There was an error resetting the password!", error);
+        notifyFail("Token does not match!");
       });
   };
 
+  const handleFindAccount = () => {
+    let isRun = true;
+    if (!contact) {
+      notifyFail("Email is required!");
+      isRun = false;
+    }
+    if (isRun) {
+      axios
+        .get(`http://localhost:8080/api/v1/accounts/email/${contact}`)
+        .then((res) => {
+          setAccount(res.data.data);
+          setStep(2);
+          console.log(res.data.data);
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+  const handleReturnStep1 = () => {
+    setStep(1);
+  };
   return (
     <div id="forgot">
-      <div className=" forgot-container">
-        <h2>Quên mật khẩu</h2>
-        <div>
-          <label>
-            <input
-              type="radio"
-              value="email"
-              checked={method === "email"}
-              onChange={handleMethodChange}
-            />
-            Email
-          </label>
-          {method === "email" && step === 1 && (
-            <div>
-              <input
-                type="text"
-                placeholder="Nhập email"
-                value={contact}
-                onChange={handleContactChange}
-              />
-              <button onClick={handleSendToken}>Gửi mã</button>
-            </div>
-          )}
-        </div>
-        <div>
-          <label>
-            <input
-              type="radio"
-              value="phone"
-              checked={method === "phone"}
-              onChange={handleMethodChange}
-            />
-            Số điện thoại
-          </label>
-          {method === "phone" && step === 1 && (
-            <div>
-              <input
-                type="text"
-                placeholder="Nhập số điện thoại"
-                value={contact}
-                onChange={handleContactChange}
-              />
-              <button onClick={handleSendToken}>Gửi mã</button>
-            </div>
-          )}
-        </div>
-        {step === 2 && (
+      {step === 1 && (
+        <div className="forgot-container">
+          <h2>Find your account</h2>
+          <hr />
           <div>
-            <h2>Nhập mã xác thực</h2>
+            <label htmlFor="email">
+              Please enter email to find your account!
+            </label>
+            <br />
             <input
-              type="text"
-              placeholder="Nhập mã xác thực"
-              value={token}
-              onChange={handleTokenChange}
+              type="email"
+              name="email"
+              placeholder="Enter email"
+              onChange={handleContactChange}
+              className="input-forgot input-forgot-email"
             />
+
+            <hr />
+            <button className="btn-forgot btn-forgot-cancel">Cancel</button>
+            <button
+              className="btn-forgot btn-forgot-find"
+              onClick={handleFindAccount}>
+              Find
+            </button>
+          </div>
+        </div>
+      )}
+      {step === 2 && (
+        <div className="findAccountSuccess">
+          <img src={account && account.imageAccount} alt="" />
+          <h1 className="nameAccount">{account && account.fullName}</h1>
+          <a href="#" onClick={handleReturnStep1}>
+            Not you? Try again!
+          </a>
+          <hr />
+          <div className="box-changePass">
+            <input
+              className="input-forgot input-fotgot-token"
+              type="text"
+              placeholder="Enter token"
+              onChange={handleTokenChange}
+            />{" "}
+            <button
+              className="btn-forgot btn-forgot-sendToken"
+              onClick={handleSendToken}>
+              Send token
+            </button>
+            <br />
             <input
               type="password"
-              placeholder="Nhập mật khẩu mới"
-              value={newPassword}
+              placeholder="Enter new password"
+              className="input-forgot input-forgot-newPass"
               onChange={handleNewPasswordChange}
             />
-            <button onClick={handleResetPassword}>Đặt lại mật khẩu</button>
+            <br />
+            <button
+              className="btn-forgot btn-forgot-submit"
+              onClick={handleResetPassword}>
+              Change Password
+            </button>
           </div>
-        )}
-        {step === 3 && (
-          <div>
-            <h2>{confirmationMessage}</h2>
-          </div>
-        )}
-      </div>
+        </div>
+      )}
+      {step === 3 && (
+        <div>
+          <h2>{confirmationMessage}</h2>
+        </div>
+      )}
     </div>
   );
 };
