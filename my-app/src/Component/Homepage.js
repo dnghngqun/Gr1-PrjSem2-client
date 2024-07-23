@@ -7,9 +7,11 @@ import "swiper/css";
 // import "swiper/css/navigation";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
+import ScrollReveal from "scrollreveal";
 import "./Css/Homepage.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+
 const Homepage = ({ isLoggedIn, onLogout }) => {
   const location = useLocation();
   const [selectedImage, setSelectedImage] = useState("ielts");
@@ -77,27 +79,36 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
       })
       .catch((error) => console.error("Error fetch instructor: ", error));
   }, []);
-
+  useEffect(() => {
+    // Khởi tạo ScrollReveal và cấu hình các hiệu ứng cuộn
+    ScrollReveal().reveal(".reveal", {
+      distance: "50px",
+      duration: 900,
+      easing: "ease-in-out",
+      origin: "bottom",
+      interval: 20,
+    });
+  }, []);
   return (
     <div id="homepage">
       <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
-      <section className="section1" id="introduce">
-        <div className="intro-container">
+      <section className="section1 reveal" id="introduce">
+        <div className="intro-container reveal">
           <div className="intro-left">
             <h2 className="title">
-              <mark className="improve">
+              <mark className="improve reveal">
                 Improve
                 <img
-                  className="headline"
+                  className="headline reveal"
                   src="/assets/svg/headline-curve.svg"
                   alt="svg"
                 />
               </mark>
-              <span className="title-left-svg">
+              <span className="title-left-svg reveal">
                 {" "}
                 your Skill
                 <img
-                  className="svg-top-skill"
+                  className="svg-top-skill reveal"
                   src="/assets/svg/svgexport-2.svg"
                   style={{ width: "23px", height: "26px" }}
                   alt="svg-top-skill"
@@ -106,46 +117,46 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               <br />
               with Different Way
             </h2>
-            <p className="content">
+            <p className="content reveal">
               Let's take an course to improve your skills in a different way,
               you can set your own study time according to your learning speed.
               So you san study comfortable and absorb tge material easily.
             </p>
-            <div className="btn-intro">
-              <button className="button btn1">
+            <div className="btn-intro reveal">
+              <button className="button btn1 reveal">
                 <span>Get Started</span>
               </button>
-              <button className="button btn2">
+              <button className="button btn2 reveal">
                 <span>Watch Video</span>
               </button>
             </div>
           </div>
-          <div className="intro-right">
+          <div className="intro-right reveal">
             <img src="/assets/img/home-hero.webp" alt="..." />
-            <div className="certificate">
-              <div className="left">
+            <div className="certificate reveal">
+              <div className="left reveal">
                 <img src="/assets/img/certificate.webp" alt="..." />
               </div>
-              <div className="right">
-                <h5 className="title">Certificate</h5>
-                <div className="content">
+              <div className="right reveal">
+                <h5 className="title reveal">Certificate</h5>
+                <div className="content reveal">
                   There are certificates for all courses.
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="intro-bottom">
-          <div className="container">
-            <div className="left">
+        <div className="intro-bottom reveal">
+          <div className="container reveal">
+            <div className="left reveal">
               <p>10K+</p>
               <h5>Students</h5>
             </div>
-            <div className="center">
+            <div className="center reveal">
               <p>20+</p>
               <h5>Quality Course</h5>
             </div>
-            <div className="right">
+            <div className="right reveal">
               <p>10+</p>
               <h5>Experience Mentors</h5>
             </div>
@@ -401,9 +412,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                 <div className="benefit-one">
                   <div className="benefit-title">Easy Accessibility</div>
                   <div className="benefit-description">
-                    <p>
-                    Access English lessons anytime, anywhere.
-                    </p>
+                    <p>Access English lessons anytime, anywhere.</p>
                   </div>
                 </div>
               </div>
@@ -421,9 +430,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                 <div className="benefit-one">
                   <div className="benefit-title">More Affordable Cost</div>
                   <div className="benefit-description">
-                    <p>
-                    Learn English without breaking the bank.
-                    </p>
+                    <p>Learn English without breaking the bank.</p>
                   </div>
                 </div>
               </div>
@@ -442,9 +449,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                 <div className="benefit-one">
                   <div className="benefit-title">Flexible Study Time</div>
                   <div className="benefit-description">
-                    <p>
-                    Study English at your own pace and schedule.
-                    </p>
+                    <p>Study English at your own pace and schedule.</p>
                   </div>
                 </div>
               </div>
@@ -464,7 +469,8 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   <div className="benefit-title">Consultation With Mentor</div>
                   <div className="benefit-description">
                     <p>
-                    Get personalized guidance from experienced English mentors.
+                      Get personalized guidance from experienced English
+                      mentors.
                     </p>
                   </div>
                 </div>
