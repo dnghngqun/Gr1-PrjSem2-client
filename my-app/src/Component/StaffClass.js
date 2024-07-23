@@ -430,6 +430,7 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
                                         onClick={() => handleSave(item.id)}
                                         style={{
                                           width: "55px",
+                                          border: "0",
                                         }}>
                                         Save
                                       </button>
@@ -439,17 +440,19 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
                                         onClick={() => handleEdit(item.id)}
                                         style={{
                                           width: "55px",
+                                          border: "0",
                                         }}>
                                         Edit
                                       </button>
                                     )}
                                   </td>
-                                  <td className="border-bottom-">
+                                  <td className="border-bottom-0">
                                     <button
-                                      className="badge bg-danger rounded-3 fw-semibold"
+                                      className=" badge bg-danger rounded-3 fw-semibold"
                                       onClick={() => handleDeleteClass(item.id)}
                                       style={{
                                         width: "65px",
+                                        border: "0",
                                       }}>
                                       Delete
                                     </button>

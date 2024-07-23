@@ -152,7 +152,7 @@ const StaffAttendance = ({ isLoggedIn, onLogout }) => {
                           <th className="border-bottom-0">
                             <h6 className="fw-semibold mb-0">End Date</h6>
                           </th>
-                          <th></th>
+                          <th className="border-bottom-0"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -213,6 +213,7 @@ const StaffAttendance = ({ isLoggedIn, onLogout }) => {
                                         onClick={() => handleHide()}
                                         style={{
                                           width: "153px",
+                                          border: "0",
                                         }}>
                                         Hide Student
                                       </button>
@@ -222,6 +223,7 @@ const StaffAttendance = ({ isLoggedIn, onLogout }) => {
                                         onClick={() => handleShow(item.id)}
                                         style={{
                                           width: "153px",
+                                          border: "0",
                                         }}>
                                         Show Student
                                       </button>
@@ -314,6 +316,7 @@ const StaffAttendance = ({ isLoggedIn, onLogout }) => {
                                                             }
                                                             style={{
                                                               width: "100px",
+                                                              border: "0",
                                                             }}>
                                                             Close
                                                           </button>
@@ -327,6 +330,7 @@ const StaffAttendance = ({ isLoggedIn, onLogout }) => {
                                                             }
                                                             style={{
                                                               width: "100px",
+                                                              border: "0",
                                                             }}>
                                                             Attendance
                                                           </button>
@@ -369,6 +373,7 @@ const StaffAttendance = ({ isLoggedIn, onLogout }) => {
                                                               className="badge bg-warning rounded-3 fw-semibold"
                                                               style={{
                                                                 width: "60px",
+                                                                border: "0",
                                                               }}
                                                               onClick={() =>
                                                                 handleSentAttendance(
