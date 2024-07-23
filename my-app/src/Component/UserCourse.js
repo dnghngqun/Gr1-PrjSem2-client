@@ -30,7 +30,7 @@ const UserCourse = ({ isLoggedIn, onLogout }) => {
               `http://localhost:8080/api/v1/attendance/schedule/class/${enrollment.aClass.id}`
             );
             let scheduleRes = schedule.data.data;
-           
+           console.log("Schedule: ", scheduleRes);
           const response = await axios.get(
             `http://localhost:8080/api/v1/attendance/enrollment/${enrollment.id}`
           );

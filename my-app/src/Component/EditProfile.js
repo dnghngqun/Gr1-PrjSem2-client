@@ -8,7 +8,6 @@ import "toastify-js/src/toastify.css";
 import "./Css/EditProfile.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import ForgotPassword from './ForgotPassword';
 const EditProfile = ({ isLoggedIn, onLogout, triggerRefresh }) => {
   const [fullname, setFullname] = useState(isLoggedIn.data.fullName);
   const [phoneNumber, setPhoneNumber] = useState(isLoggedIn.data.phoneNumber);
@@ -137,8 +136,6 @@ const EditProfile = ({ isLoggedIn, onLogout, triggerRefresh }) => {
       fullName: fullname,
       birthday: formattedDate,
     };
-
-   
 
     const userId = isLoggedIn.data.id;
     axios
@@ -321,9 +318,9 @@ const EditProfile = ({ isLoggedIn, onLogout, triggerRefresh }) => {
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
               </div>
-              <a onClick={handleSubmit} className="btn-edit">
-             Change Password
-            </a>
+              <a onClick={handleSubmitPassword} className="btn-edit">
+                Change Password
+              </a>
             </form>
           </form>
         </div>
