@@ -184,45 +184,45 @@ section#introduce .intro-bottom {
     font-size: 16px;
   }
 }
-@media (max-width: 430px) {
+@media (max-width: 530px) {
   section#introduce .intro-container {
-    flex-direction: column; /* Đổi layout thành dạng dọc */
-    max-width: 100%; /* Chiếm toàn bộ chiều rộng của màn hình */
-    padding: 0 20px; /* Thêm padding để tạo khoảng cách với mép màn hình */
+    flex-direction: column; 
+    max-width: 100%; 
+    padding: 0 20px; 
   }
 
   section#introduce .intro-container > .intro-left,
   section#introduce .intro-container > .intro-right {
-    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    width: 100%; 
   }
 
   .intro-container .intro-right > img {
-    width: 100%; /* Đảm bảo ảnh trong phần intro-right rộng bằng 100% */
+    width: 100%; 
   }
 
   section#introduce h2.title {
-    font-size: 32px; /* Giảm kích thước font chữ */
-    line-height: 1.3; /* Điều chỉnh line-height cho phù hợp */
-    padding-top: 15px; /* Giảm khoảng cách phía trên của tiêu đề */
-    text-align: center; /* Căn giữa tiêu đề */
+    font-size: 32px; 
+    line-height: 1.3; 
+    padding-top: 15px; 
+    text-align: center; 
   }
 
   section#introduce .intro-left p.content {
-    width: 100%; /* Chiếm toàn bộ chiều rộng của màn hình */
-    font-size: 14px; /* Giảm kích thước font chữ */
-    margin: 20px 0; /* Điều chỉnh margin */
-    text-align: justify; /* Căn đều văn bản */
+    width: 100%; 
+    font-size: 14px; 
+    margin: 20px 0; 
+    text-align: justify; 
   }
 
   section#introduce .intro-left .button {
-    width: 100%; /* Chiếm toàn bộ chiều rộng */
-    margin: 10px 0; /* Điều chỉnh margin */
+    width: 100%;
+    margin: 10px 0; 
   }
 
   .intro-bottom .container {
-    flex-direction: column; /* Đổi layout thành dạng dọc */
-    width: 100%; /* Chiếm toàn bộ chiều rộng */
-    padding: 15px 0; /* Điều chỉnh padding */
+    flex-direction: column; 
+    width: 100%; 
+    padding: 15px 0;
   }
 
   .intro-bottom .left,
@@ -241,6 +241,7 @@ section#introduce .intro-bottom {
   .intro-bottom h5 {
     font-size: 14px; /* Giảm kích thước font chữ */
   }
+  
 }
 
 /* section2 */
@@ -749,7 +750,10 @@ p {
   height: 60%;
   fill: #fff;
 }
-
+@media(max-width:530px){
+.circle-container{
+margin:20px;}
+}
 .benefit-container {
   display: flex;
   flex-wrap: wrap;
@@ -802,6 +806,29 @@ p {
 .benefit-description {
   font-size: 14px;
 }
+/* Responsive adjustments for screens with a max width of 430px */
+@media only screen and (max-width: 530px) {
+  .benefit:nth-child(odd) {
+    margin-right: 0; 
+  }
+
+  .benefit {
+    height: auto; /* Allow height to adjust */
+    padding: 10px; /* Adjust padding */
+  }
+
+  .benefit-one {
+    padding: 5px 0; /* Adjust padding */
+  }
+
+  .benefit-title {
+    font-size: 16px; /* Adjust font size */
+  }
+
+  .benefit-description {
+    font-size: 12px; /* Adjust font size */
+  }
+}
 .navbar {
   margin-top: 100px;
   display: flex; /* Sử dụng flexbox để các button nằm trên cùng một hàng */
@@ -836,7 +863,25 @@ p {
 
   object-fit: contain;
 }
+/* Thay đổi cho màn hình có kích thước tối đa là 430px */
+@media only screen and (max-width: 530px) {
+  .image-container {
+    margin-top: 10px; /* Ví dụ thay đổi margin-top */
+    height: 500px; /* Ví dụ thay đổi height */
+  }
 
+  .image-container img {
+    width: 80%; /* Ví dụ thay đổi width */
+  }
+}
+/* CSS cho kích thước nhỏ hơn 430px */
+@media (max-width: 530px) {
+  .navbar {
+    flex-direction: column; /* Chuyển các button thành một cột thay vì một hàng */
+    align-items: center; /* Căn giữa các button theo chiều ngang */
+  }
+
+}
 /* update section 3 */
 .feature-content {
   width: 170px;
@@ -1169,4 +1214,45 @@ section {
 #testimonial {
   max-width: 1200px !important;
   margin: 0 auto !important;
+}
+
+@media only screen and (max-width: 530px) {
+  
+  .test-container {
+    max-width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .test-content {
+    height:100px;
+  }
+
+  .test-content img {
+    max-width: 35%;
+    border-radius: 10px;
+  }
+
+  .test-content div {
+    max-width: 60%;
+  }
+
+  .test-content div img {
+    max-width: 25%;
+  }
+
+  .test-content .deco1, 
+  .test-content .deco2 {
+    margin: 0;
+    max-width: 8%;
+  }
+
+  .test-content p {
+    font-size: 0.8em; 
+  }
+
+  .test-content a {
+    font-size: 0.8em; 
+    padding: 6px 10px;
+  }
 }
