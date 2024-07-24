@@ -40,7 +40,6 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
           {isMenuOpen && (
             <div className="dropdown-menu">
               <Link to="/" className="navigation-item">Home</Link>
-              <button className="close-button" onClick={handleMenuToggle}>×</button>
               <Link to="/course" className="navigation-item">Courses</Link>
               <Link to="/#testimonial" className="navigation-item">Testimonial</Link>
               <Link to="/#mentor" className="navigation-item">Mentor</Link>
@@ -57,6 +56,7 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                   <Link to="/register" className="navigation-item">Sign Up</Link>
                 </>
               )}
+              <button className="close-button" onClick={handleMenuToggle}>×</button>
             </div>
           )}
           <div className="right">
@@ -92,7 +92,20 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                   </div>
                 )}
               </div>
-            ) : null}
+            ) : (
+              <>
+                <Link to="/login">
+                  <button className="btn-sign sign-in">
+                    <span>Sign In</span>
+                  </button>
+                </Link>
+                <Link to="/register">
+                  <button className="btn-sign sign-up">
+                    <span>Sign Up</span>
+                  </button>
+                </Link>
+              </>
+            )}
           </div>
         </nav>
       </header>

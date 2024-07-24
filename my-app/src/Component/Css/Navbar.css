@@ -236,19 +236,67 @@ hr.line-account {
 
 /* Đảm bảo menu dropdown hiện khi cần */
 @media (max-width: 530px) {
-  .navigation .center {
+  header .navigation .center {
     display: none;
   }
 
-  .navigation .menu-button {
+  header .navigation .menu-button {
     margin-right:570px;
     display: block;
     font-size: 20px;
     padding: 12px 16px;
   }
 
-  .navigation .dropdown-menu {
+  header .navigation .dropdown-menu {
     display: block;
   }
 }
 
+/* Đảm bảo các nút "Sign In" và "Sign Up" hiển thị trong phần right */
+header .right {
+  display: flex;
+  align-items: center;
+}
+
+.right .sign-in,
+.right .sign-up {
+  display: block;
+  margin-left: 10px;
+}
+
+/* Responsive cho nút và menu thả xuống */
+@media (max-width: 530px) {
+ header .navigation .center {
+    display: none;
+  }
+
+  header .navigation .menu-button {
+    display: block;
+    font-size: 20px;
+    padding: 12px 16px;
+  }
+
+  header .navigation .dropdown-menu {
+    display: block;
+    top: 60px;
+    right: 0;
+    background: var(--accountBackground);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    z-index: 1000;
+    padding: 10px;
+    min-width: 200px;
+  }
+
+  header .navigation-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px 0;
+    margin: 0;
+  }
+
+  header .close-button {
+    display: block;
+  }
+}
