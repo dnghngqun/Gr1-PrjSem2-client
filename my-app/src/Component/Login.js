@@ -88,7 +88,6 @@ const Login = ({ onLogin }) => {
               type="text"
               placeholder="Username, email or phone number"
               className="btn username"
-              value={identify} //this value save to identify
               onChange={(e) => setIdentify(e.target.value)}
             />
 
@@ -96,7 +95,6 @@ const Login = ({ onLogin }) => {
               type="password"
               className="btn password"
               placeholder="Password"
-              value={password} //this value save to password
               onChange={(e) => setPassword(e.target.value)}
             />
 

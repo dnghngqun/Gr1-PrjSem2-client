@@ -97,22 +97,27 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
   };
 
   const handleSignUp = () => {
-    if (isLoggedIn.data.role === "customer") {
-      if (!selectedStudyTime || !selectedInstructor || !selectedStartDate) {
-        navigate(false);
-        return;
+    if (isLoggedIn) {
+      if (isLoggedIn.data.role === "customer") {
+        if (!selectedStudyTime || !selectedInstructor || !selectedStartDate) {
+          navigate(false);
+          return;
+        }
+        navigate("/paymentInformation", {
+          state: {
+            courseId,
+            studyTime: selectedStudyTime,
+            startDate: selectedStartDate,
+            instructor: selectedInstructor,
+            totalProgress: sections.details,
+          },
+        });
+      } else {
+        notifyFail("Sorry, please login with account customer");
       }
-      navigate("/paymentInformation", {
-        state: {
-          courseId,
-          studyTime: selectedStudyTime,
-          startDate: selectedStartDate,
-          instructor: selectedInstructor,
-          totalProgress: sections.details,
-        },
-      });
-    } else {
-      notifyFail("Sorry, please login with account customer");
+    }else{
+    notifyFail("Please login!");
+    navigate("/login");
     }
   };
 

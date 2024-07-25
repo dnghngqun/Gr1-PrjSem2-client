@@ -31,7 +31,7 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
   const [orderDetailId, setOrderDetailId] = useState(null);
   const [isOrderCreated, setIsOrderCreated] = useState(false);
   const [paymentId, setPaymentId] = useState("");
-
+  const [order, setOrder] = useState();
   const notify = (mess) =>
     toast({
       text: mess,
@@ -115,10 +115,33 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
       .get(`http://localhost:8080/api/v1/courses/${courseId}`)
       .then((response) => {
         setCourse(response.data);
+        axios
+          .get(`http://localhost:8080/api/v1/orders/user/${isLoggedIn.data.id}`)
+          .then((res) => {
+            setOrder(res.data.data);
+            console.log(res.data.data);
+          })
+          .catch((err) => console.error("Err to fetch order: ", err));
         console.log("Course fetched:", response.data);
       })
       .catch((error) => console.error("Error fetching course:", error));
   }, [courseId]);
+
+  useEffect(() => {
+    // Cleanup function để xóa orderDetail khi unmount hoặc khi người dùng điều hướng đi
+    return () => {
+      if (isOrderCreated && orderDetailId) {
+        axios
+          .delete(`http://localhost:8080/api/v1/orderDetails/${orderDetailId}`)
+          .then(() => {
+            console.log("OrderDetail deleted successfully");
+          })
+          .catch((error) => {
+            console.error("Failed to delete orderDetail:", error);
+          });
+      }
+    };
+  }, [isOrderCreated, orderDetailId]);
 
   if (!courseId || !course) return <div>Loading...</div>;
 
@@ -160,9 +183,13 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
   };
 
   const handleCreateOrderDetail = () => {
+    if (!courseId && !order) {
+      notifyFail("Error to process payment!");
+      return;
+    }
     const orderDetailData = {
       course: { id: courseId },
-      order: { id: 1 }, // Replace with actual order ID
+      order: { id: order.id }, // Replace with actual order ID
       discount: discount,
       totalAmount: totalPrice,
       status: 0, // Set initial status
@@ -171,10 +198,9 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
       .post("http://localhost:8080/api/v1/orderDetails/", orderDetailData)
       .then((response) => {
         console.log(response.data);
-        if (response.data.status === "ok") {
-          setOrderDetailId(response.data.data.id);
-          setIsOrderCreated(true);
-        }
+        console.log("Create order details success");
+        setOrderDetailId(response.data.data.id);
+        setIsOrderCreated(true);
       })
       .catch((error) => {
         console.error("There was an error creating the order detail!", error);
