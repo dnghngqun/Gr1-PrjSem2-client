@@ -6,15 +6,15 @@ import NavInstructor from "./NavInstructor";
 import SideBarInstructor from "./SideBarInstructor";
 const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
   const dateToday = new Date();
-  const currentDate =
-    dateToday.getFullYear() +
-    "-" +
-    String(dateToday.getMonth() + 1).padStart(2, "0") +
-    "-" +
-    String(dateToday.getDate()).padStart(2, "0");
-    // const currentDate = "2024-07-27"; //cái này để test cho buổi sau , mấy ngày khác tương tự, có thể xem lịch trong db phần insert schedule
+  //   const currentDate =
+  // dateToday.getFullYear() +
+  // "-" +
+  // String(dateToday.getMonth() + 1).padStart(2, "0") +
+  // "-" +
+  // String(dateToday.getDate()).padStart(2, "0");
+  const currentDate = "2024-07-27"; //cái này để test cho buổi sau , mấy ngày khác tương tự, có thể xem lịch trong db phần insert schedule
 
-    const [isShowWithId, setIsShowWithId] = useState(null);
+  const [isShowWithId, setIsShowWithId] = useState(null);
   const [enrollmentByClassId, setEnrollmentByClassId] = useState([]);
   const [attendanceStatus, setAttendanceStatus] = useState({});
   const [isAttendance, setIsAttendance] = useState({});
@@ -56,13 +56,19 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
       )
       .then((res) => {
         const data = res.data;
+        // Làm mới attendanceStatus cho ngày mới
+        const newAttendanceStatus = {};
         data.forEach((item) => {
-          attendanceStatus[item.enrollment.account.id] = item.attendanceStatus;
+          newAttendanceStatus[item.enrollment.account.id] =
+            item.attendanceStatus;
         });
-        setIsAttendance((prevState) => ({
-          ...prevState,
-          [classId]: true,
-        }));
+        setAttendanceStatus(newAttendanceStatus);
+        if (Object.keys(newAttendanceStatus).length > 0) {
+          setIsAttendance((prevState) => ({
+            ...prevState,
+            [classId]: true,
+          }));
+        }
         console.log("is attendance after: ", isAttendance);
       })
       .catch((err) => {
@@ -72,11 +78,11 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
 
   useEffect(() => {
     // Lấy dữ liệu lịch trình theo ngày hiện tại
-
     axios
       .get(`http://localhost:8080/api/v1/attendance/schedule/${currentDate}`)
       .then((res) => {
         setSchedule(res.data.data);
+        console.log(res.data.data);
         // Tạo một bản đồ điểm danh với giá trị khởi tạo là false
         let dataCurrentDay = res.data.data;
         const attendanceMap = dataCurrentDay.reduce((acc, item) => {
@@ -90,7 +96,6 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
         let dataRes = res.data.data;
         // Kiểm tra trạng thái điểm danh cho tất cả các lớp học
         dataRes.forEach((item) => {
-          console.log("Class id datả: ", item.aClass.id);
           checkAttendanceStatus(item.aClass.id);
         });
       })
@@ -132,7 +137,6 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
 
   const handleUpdateAttendance = (classId, scheduleId) => {
     const attendanceData = enrollmentByClassId.map((student) => {
-      
       return {
         enrollmentId: student.id,
         scheduleId: scheduleId,
@@ -143,7 +147,10 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
     });
 
     axios
-      .put("http://localhost:8080/api/v1/attendance/update/bulk", attendanceData)
+      .put(
+        "http://localhost:8080/api/v1/attendance/update/bulk",
+        attendanceData
+      )
       .then((response) => {
         notify("Attendance update successfully!");
         // Kiểm tra trạng thái điểm danh lại sau khi lưu
@@ -193,14 +200,7 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
               <div className="card w-100">
                 <div className="card-body p-4">
                   <h5 className="card-title fw-semibold mb-4">
-                    Attendance{" "}
-                    {"(" +
-                      dateToday.getDate() +
-                      "/" +
-                      (dateToday.getMonth() + 1) +
-                      "/" +
-                      dateToday.getFullYear() +
-                      ")"}
+                    Attendance {"(" + currentDate + ")"}
                   </h5>
                   <div className="table-responsive">
                     <table className="table text-nowrap mb-0 align-middle">
