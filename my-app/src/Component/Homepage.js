@@ -166,7 +166,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
       {/* section2 */}
       <section className="section2">
         <div className="courseContainer">
-          <div className="course-title">
+          <div className="course-title reveal">
             <h1>
               <strong>
                 Most
@@ -175,7 +175,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               </strong>
             </h1>
           </div>
-          <div className="swiper-container swiper">
+          <div className="swiper-container swiper reveal">
             <div className="swiper-wrapper swiper-el">
               <div className="swiper-slide">
                 <div className="card card-home">
@@ -410,9 +410,9 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   </svg>
                 </div>
                 <div className="benefit-one">
-                  <div className="benefit-title">Easy Accessibility</div>
+                  <div className="benefit-title">Explore with English</div>
                   <div className="benefit-description">
-                    <p>Access English lessons anytime, anywhere.</p>
+                    <p>Learn English, explore the world!</p>
                   </div>
                 </div>
               </div>
@@ -428,9 +428,9 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   </svg>
                 </div>
                 <div className="benefit-one">
-                  <div className="benefit-title">More Affordable Cost</div>
+                  <div className="benefit-title">Connect with Words</div>
                   <div className="benefit-description">
-                    <p>Learn English without breaking the bank.</p>
+                    <p>Every word connects you.</p>
                   </div>
                 </div>
               </div>
@@ -447,9 +447,9 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   </svg>
                 </div>
                 <div className="benefit-one">
-                  <div className="benefit-title">Flexible Study Time</div>
+                  <div className="benefit-title">Cooler with English</div>
                   <div className="benefit-description">
-                    <p>Study English at your own pace and schedule.</p>
+                    <p>English makes everything cooler!</p>
                   </div>
                 </div>
               </div>
@@ -466,11 +466,10 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   </svg>
                 </div>
                 <div className="benefit-one">
-                  <div className="benefit-title">Consultation With Mentor</div>
+                  <div className="benefit-title">Travel with English</div>
                   <div className="benefit-description">
                     <p>
-                      Get personalized guidance from experienced English
-                      mentors.
+                    Travel the world with English!
                     </p>
                   </div>
                 </div>

@@ -10,6 +10,7 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import ScrollToTop from "react-scroll-to-top";
 import axios from "axios";
+import ScrollReveal from "scrollreveal";
 
 const Course = ({ isLoggedIn, onLogout }) => {
   const [products, setProducts] = useState([]);
@@ -186,13 +187,23 @@ const Course = ({ isLoggedIn, onLogout }) => {
         return "";
     }
   };
+  useEffect(() => {
+    // Khởi tạo ScrollReveal và cấu hình các hiệu ứng cuộn
+    ScrollReveal().reveal(".reveal", {
+      distance: "50px",
+      duration: 900,
+      easing: "ease-in-out",
+      origin: "bottom",
+      interval: 400,
+    });
+  }, []);
   return (
     <div>
       <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
 
       <div id="CoursePage">
         <div className="page-course">
-          <div className="introduct-course">
+          <div className="introduct-course reveal">
             <div className="swiper course-swiper">
               <div className="swiper-wrapper">
                 <div className="swiper-slide">
@@ -236,7 +247,7 @@ const Course = ({ isLoggedIn, onLogout }) => {
           </div>
           <div className="course-center">
             <div className="course-container ">
-              <div ref={productListRef} className="search-course">
+              <div ref={productListRef} className="search-course reveal">
                 <select id="course-select" className="form-select">
                   <option value="">SELECTION COURSE</option>
                   <option value="ielts-course">IELTS</option>
@@ -249,7 +260,7 @@ const Course = ({ isLoggedIn, onLogout }) => {
                   placeholder="Search courses..."
                 />
               </div>
-              <div className="course-card container-fluid">
+              <div className="course-card container-fluid reveal">
                 <div className="row gy-3">
                   {currentProducts.map((product) => {
                     const className = getClassName(product.classify);
