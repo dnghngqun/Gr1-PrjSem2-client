@@ -44,6 +44,17 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
         delay: 2000,
         disableOnInteraction: false,
       },
+      breakpoints: {
+        430: {
+          slidesPerView: 1, // Hiển thị 1 slide khi màn hình nhỏ hơn hoặc bằng 530px
+        },
+        768: {
+          slidesPerView: 2, // Hiển thị 2 slide khi màn hình từ 531px đến 768px
+        },
+        1024: {
+          slidesPerView: 3, // Hiển thị 3 slide khi màn hình lớn hơn 1024px
+        },
+      },
     });
   }, [instructor]);
 
@@ -182,7 +193,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   <img
                     src="https://i.imgur.com/8nitwKO.png"
                     className="card-img-top"
-                    alt="..."
+                    alt="Toeic Basic"
                   />
                   <div className="card-body card-home-body">
                     <h5 className="card-title card-home-title">Toeic Basic</h5>
@@ -198,7 +209,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   <img
                     src="https://i.imgur.com/k16v1W1.png"
                     className="card-img-top"
-                    alt="..."
+                    alt="Toeic Pre"
                   />
                   <div className="card-body card-home-body">
                     <h5 className="card-title card-home-title">Toeic Pre</h5>
@@ -208,13 +219,13 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                     </div>
                   </div>
                 </div>
-              </div>{" "}
+              </div>
               <div className="swiper-slide">
                 <div className="card card-home">
                   <img
                     src="https://i.imgur.com/5OziSxj.png"
                     className="card-img-top"
-                    alt="..."
+                    alt="Toeic A"
                   />
                   <div className="card-body card-home-body">
                     <h5 className="card-title card-home-title">Toeic A</h5>
@@ -224,13 +235,13 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                     </div>
                   </div>
                 </div>
-              </div>{" "}
+              </div>
               <div className="swiper-slide">
                 <div className="card card-home">
                   <img
                     src="https://i.imgur.com/QEeFSXO.png"
                     className="card-img-top"
-                    alt="..."
+                    alt="Toeic B"
                   />
                   <div className="card-body card-home-body">
                     <h5 className="card-title card-home-title">Toeic B</h5>
@@ -240,18 +251,16 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                     </div>
                   </div>
                 </div>
-              </div>{" "}
+              </div>
               <div className="swiper-slide">
                 <div className="card card-home">
                   <img
                     src="https://i.imgur.com/N0IJ9R4.png"
                     className="card-img-top"
-                    alt="..."
+                    alt="Toeic Pratice"
                   />
                   <div className="card-body card-home-body">
-                    <h5 className="card-title card-home-title">
-                      Toeic Pratice
-                    </h5>
+                    <h5 className="card-title card-home-title">Toeic Practice</h5>
                     <div className="card-bottom card-home-bottom">
                       <div className="course-price">$80/course</div>
                       <div className="star">★★★★★</div>
@@ -264,7 +273,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   <img
                     src="https://i.imgur.com/VYSM6rM.png"
                     className="card-img-top"
-                    alt="..."
+                    alt="Ielts Pre"
                   />
                   <div className="card-body card-home-body">
                     <h5 className="card-title card-home-title">Ielts Pre</h5>
@@ -280,7 +289,6 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
               <div className="link-coursePage">
                 <Link to="/course">View All This Page</Link>
               </div>
-
               <div className="arrow-container">
                 <div className="swiper-button-prev">
                   <div className="arrow-wrapper">

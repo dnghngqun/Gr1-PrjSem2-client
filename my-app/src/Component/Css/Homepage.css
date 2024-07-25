@@ -459,8 +459,8 @@ section#introduce .intro-bottom {
   }
 
   .link-coursePage {
-    margin-left: 0;
-    margin-top: 20px;
+    margin-right:500px;
+    margin-top: 30px !important;
     text-align: center;
   }
   .course-title h1 {
@@ -476,6 +476,76 @@ section#introduce .intro-bottom {
   }
 }
 
+@media only screen and (max-width: 530px) {
+  .section2 {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .courseContainer {
+    margin-top: 30px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .courseContainer > .course-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .courseContainer > .swiper-container {
+    width: 100%;
+  }
+
+  .swiper-slide {
+    width: 100%;
+  }
+  .section2 .swiper-container {
+    margin-left: 10px; /* Điều chỉnh giá trị này để dịch chuyển sang phải */
+    width: calc(
+      100% - 10px
+    ); /* Đảm bảo phần tử không vượt quá chiều rộng của màn hình */
+  }
+  .swiper-wrapper {
+    flex-direction: row;
+  }
+
+  .swiper-buttons {
+    flex-direction: column;
+  }
+
+  .arrow-container {
+    margin-right: 440px !important;;
+    justify-content: center;
+  }
+
+  .link-coursePage {
+    margin-left: 0;
+    margin-top: 10px;
+    text-align: center;
+  }
+  .course-title h1 {
+    font-size: 20px; /* Điều chỉnh kích thước font nếu cần */
+    display: flex;
+    justify-content: center;
+  }
+
+  .course-title strong {
+    display: inline; /* Đảm bảo hiển thị theo chiều ngang */
+    white-space: nowrap; /* Không cho phép ngắt dòng */
+    margin-left: -800px;
+  }
+  .card-home {
+  width:300px;
+  height:auto;
+  margin-left:880px;
+ 
+  }
+  img.card-img-top{
+   
+  }
+}
 .swiper-container.section2 {
   /* position: relative; */
 }
