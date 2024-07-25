@@ -12,8 +12,9 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
     String(dateToday.getMonth() + 1).padStart(2, "0") +
     "-" +
     String(dateToday.getDate()).padStart(2, "0");
-  //   const [classCurrentDay, setClassCurrentDay] = useState([]);
-  const [isShowWithId, setIsShowWithId] = useState(null);
+    // const currentDate = "2024-07-27"; //cái này để test cho buổi sau
+
+    const [isShowWithId, setIsShowWithId] = useState(null);
   const [enrollmentByClassId, setEnrollmentByClassId] = useState([]);
   const [attendanceStatus, setAttendanceStatus] = useState({});
   const [isAttendance, setIsAttendance] = useState({});
