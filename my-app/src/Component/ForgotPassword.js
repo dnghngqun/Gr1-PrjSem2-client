@@ -11,6 +11,8 @@ const ForgotPassword = () => {
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordAgain, setNewPasswordAgain] = useState("");
   const [step, setStep] = useState(1);
+
+  //use to change class name validate when input
   const [isPWAgainValid, setPWAgainValid] = useState("");
   const [isEmailValid, setIsEmailValid] = useState("");
   const [newPwColor, setNewPwColor] = useState("");
@@ -47,11 +49,11 @@ const ForgotPassword = () => {
     const value = e.target.value;
     let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
     if (value === "") {
-      setIsEmailValid("none");
+      setIsEmailValid("");
     } else if (!value.match(pattern)) {
-      setIsEmailValid("0 0px 15px 0px #B90B0B");
+      setIsEmailValid("falseEmail");
     } else {
-      setIsEmailValid("0 0px 15px 0px #5BF250");
+      setIsEmailValid("trueEmail");
     }
     setContact(value);
   };
@@ -83,14 +85,14 @@ const ForgotPassword = () => {
 
   useEffect(() => {
     if (newPasswordAgain === "") {
-      setPWAgainValid("none");
-      setNewPwColor("none");
+      setPWAgainValid("");
+      setNewPwColor("");
     } else if (newPasswordAgain !== newPassword) {
-      setPWAgainValid("0 0px 15px 0px #B90B0B"); // Đỏ
-      setNewPwColor("none");
+      setPWAgainValid("falsePWAgain"); // Đỏ
+      setNewPwColor("falseNewPW");
     } else {
-      setPWAgainValid("0 0px 15px 0px #5BF250"); // Xanh lá
-      setNewPwColor("0 0px 15px 0px #5BF250");
+      setPWAgainValid("truePWAgain"); // Xanh lá
+      setNewPwColor("trueNewPW");
     }
   }, [newPasswordAgain, newPassword]);
 
@@ -163,11 +165,14 @@ const ForgotPassword = () => {
   const handleReturnStep1 = () => {
     setStep(1);
   };
+  const handleClickCancel = () => {
+    navigate("/login");
+  };
   return (
     <div id="forgot">
       <div className="forgot-container">
         {step === 1 && (
-          <div className="forgot-step1">
+          <div className={`forgot-step1 ${step === 1 ? "active" : ""}`}>
             <h2 className="step1-title">Find your account</h2>
             <hr className="line-forgot1" />
             <div className="step1-input">
@@ -180,10 +185,7 @@ const ForgotPassword = () => {
                 name="email"
                 placeholder="Enter email"
                 onChange={handleContactChange}
-                className="input-forgot input-forgot-email"
-                style={{
-                  boxShadow: isEmailValid,
-                }}
+                className={`${isEmailValid} input-forgot input-forgot-email `}
                 spellCheck="false"
               />
             </div>
@@ -193,11 +195,15 @@ const ForgotPassword = () => {
               onClick={handleFindAccount}>
               Find
             </button>
-            <button className="btn-forgot btn-forgot-cancel">Cancel</button>
+            <button
+              className="btn-forgot btn-forgot-cancel"
+              onClick={handleClickCancel}>
+              Cancel
+            </button>
           </div>
         )}
         {step === 2 && (
-          <div className="forgot-step2">
+          <div className={`forgot-step2 ${step === 2 ? "active" : "exit"}`}>
             <div className="findAccountSuccess">
               <img src={account && account.imageAccount} alt="" />
               <h1 className="nameAccount">{account && account.fullName}</h1>
@@ -223,16 +229,14 @@ const ForgotPassword = () => {
               <input
                 type="password"
                 placeholder="Enter new password"
-                className="input-forgot input-forgot-newPass"
+                className={`${newPwColor} input-forgot input-forgot-newPass`}
                 onChange={handleNewPasswordChange}
-                style={{ boxShadow: newPwColor }}
               />
               <input
                 type="password"
                 placeholder="Enter new password again"
-                className="input-forgot input-forgot-newPass"
-                onInput={handleNewPasswordAgainChange}
-                style={{ boxShadow: isPWAgainValid }}
+                className={`${isPWAgainValid} input-forgot input-forgot-newPassAgain`}
+                onChange={handleNewPasswordAgainChange}
               />
               <br />
               <button
