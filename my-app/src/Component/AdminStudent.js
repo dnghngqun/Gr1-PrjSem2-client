@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 // import "./Css/Staff.css";
-import NavStaff from "./NavStaff";
-import SideBarStaff from "./sideBarStaff";
-const StaffStudent = ({ isLoggedIn, onLogout }) => {
+import NavAdmin from "./NavAdmin";
+import SideBarAdmin from "./sideBarAdmin";
+const AdminStudent = ({ isLoggedIn, onLogout }) => {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
@@ -23,12 +23,12 @@ const StaffStudent = ({ isLoggedIn, onLogout }) => {
         data-sidebar-position="fixed"
         data-header-position="fixed">
         {/* left side-bar */}
-        <SideBarStaff onLogout={onLogout} />
+        <SideBarAdmin onLogout={onLogout} />
 
         {/* right */}
         <div className="body-wrapper">
           {/* header */}
-          <NavStaff isLoggedIn={isLoggedIn} />
+          <NavAdmin isLoggedIn={isLoggedIn} />
           {/* body */}
           <div className="container-fluid">
             <div className="row">
@@ -109,4 +109,4 @@ const StaffStudent = ({ isLoggedIn, onLogout }) => {
   );
 };
 
-export default StaffStudent;
+export default AdminStudent;

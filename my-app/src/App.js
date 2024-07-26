@@ -8,24 +8,25 @@ import {
   useLocation,
 } from "react-router-dom";
 import "./App.css";
-import Admin from "./Component/Admin";
 import Course from "./Component/Course";
 import EditProfile from "./Component/EditProfile";
 import ForgotPassword from "./Component/ForgotPassword";
 import Homepage from "./Component/Homepage";
 import Instructor from "./Component/Instructor";
 import InstructorAttendance from "./Component/InstructorAttendance";
+import InstructorClass from "./Component/InstructorClass";
+import InstructorStudent from "./Component/InstructorStudent";
 import Login from "./Component/Login";
 import Minitest from "./Component/Minitest";
 import PrivateRoute from "./Component/PrivateRoute";
 import RegisInformation from "./Component/RegisInformation";
 import Register from "./Component/Register";
 import ResultPage from "./Component/ResultPage";
-import Staff from "./Component/Staff";
-import StaffAttendance from "./Component/StaffAttendance";
-import StaffClass from "./Component/StaffClass";
-import StaffInstructor from "./Component/StaffInstructor";
-import StaffStudent from "./Component/staffStudent";
+import Admin from "./Component/Admin";
+import AdminAttendance from "./Component/AdminAttendance";
+import AdminClass from "./Component/AdminClass";
+import AdminInstructor from "./Component/AdminInstructor";
+import AdminStudent from "./Component/AdminStudent";
 import UserCourse from "./Component/UserCourse";
 import ViewDetail from "./Component/ViewDetail";
 function App() {
@@ -114,6 +115,7 @@ function App() {
           }></Route>
 
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+        
         <Route
           path="/admin"
           element={
@@ -125,69 +127,58 @@ function App() {
               allowedRoles={["admin"]}
             />
           }></Route>
-        <Route
-          path="/staff"
-          element={
-            <PrivateRoute
-              element={
-                <Staff onLogout={handleLogout} isLoggedIn={isLoggedIn} />
-              }
-              isLoggedIn={isLoggedIn}
-              allowedRoles={["staff"]}
-            />
-          }></Route>
 
         <Route
-          path="/staff/student"
+          path="/admin/student"
           element={
             <PrivateRoute
               element={
-                <StaffStudent onLogout={handleLogout} isLoggedIn={isLoggedIn} />
+                <AdminStudent onLogout={handleLogout} isLoggedIn={isLoggedIn} />
               }
               isLoggedIn={isLoggedIn}
-              allowedRoles={["staff"]}
+              allowedRoles={["admin"]}
             />
           }
         />
         <Route
-          path="/staff/attendance"
+          path="/admin/attendance"
           element={
             <PrivateRoute
               element={
-                <StaffAttendance
+                <AdminStudent
                   onLogout={handleLogout}
                   isLoggedIn={isLoggedIn}
                 />
               }
               isLoggedIn={isLoggedIn}
-              allowedRoles={["staff"]}
+              allowedRoles={["admin"]}
             />
           }
         />
         <Route
-          path="/staff/class"
+          path="/admin/class"
           element={
             <PrivateRoute
               element={
-                <StaffClass onLogout={handleLogout} isLoggedIn={isLoggedIn} />
+                <AdminClass onLogout={handleLogout} isLoggedIn={isLoggedIn} />
               }
               isLoggedIn={isLoggedIn}
-              allowedRoles={["staff"]}
+              allowedRoles={["admin"]}
             />
           }
         />
         <Route
-          path="/staff/instructor"
+          path="/admin/instructor"
           element={
             <PrivateRoute
               element={
-                <StaffInstructor
+                <AdminInstructor
                   onLogout={handleLogout}
                   isLoggedIn={isLoggedIn}
                 />
               }
               isLoggedIn={isLoggedIn}
-              allowedRoles={["staff"]}
+              allowedRoles={["admin"]}
             />
           }
         />
@@ -209,6 +200,36 @@ function App() {
             <PrivateRoute
               element={
                 <InstructorAttendance
+                  onLogout={handleLogout}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
+              isLoggedIn={isLoggedIn}
+              allowedRoles={["instructor"]}
+            />
+          }
+        />
+        <Route
+          path="/instructor/students"
+          element={
+            <PrivateRoute
+              element={
+                <InstructorStudent
+                  onLogout={handleLogout}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
+              isLoggedIn={isLoggedIn}
+              allowedRoles={["instructor"]}
+            />
+          }
+        />
+        <Route
+          path="/instructor/class"
+          element={
+            <PrivateRoute
+              element={
+                <InstructorClass
                   onLogout={handleLogout}
                   isLoggedIn={isLoggedIn}
                 />

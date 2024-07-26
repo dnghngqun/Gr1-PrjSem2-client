@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const sideBarStaff = ({ onLogout }) => {
+const sideBarAdmin = ({ onLogout }) => {
   const handleLogout = () => {
     onLogout(); // Gọi hàm logout khi nhấn nút Logout
   };
@@ -8,7 +8,7 @@ const sideBarStaff = ({ onLogout }) => {
     <aside className="left-sidebar">
       <div>
         <div className="brand-logo d-flex align-items-center justify-content-between">
-          <Link to="/staff" className="text-nowrap logo-img">
+          <Link to="/admin" className="text-nowrap logo-img">
             <img
               src="https://i.imgur.com/8epSVJH.png"
               style={{ width: "140px", margin: "20px 0 0 30px" }}
@@ -25,7 +25,7 @@ const sideBarStaff = ({ onLogout }) => {
               <span className="hide-menu">Home</span>
             </li>
             <li className="sidebar-item">
-              <Link className="sidebar-link" to="/staff" aria-expanded="false">
+              <Link className="sidebar-link" to="/admin" aria-expanded="false">
                 <span></span>
                 <span className="hide-menu">Dashboard</span>
               </Link>
@@ -36,7 +36,7 @@ const sideBarStaff = ({ onLogout }) => {
             <li className="sidebar-item">
               <Link
                 className="sidebar-link"
-                to="/staff/attendance"
+                to="/admin/attendance"
                 aria-expanded="false">
                 <span></span>
                 <span className="hide-menu">Attendance</span>
@@ -45,7 +45,7 @@ const sideBarStaff = ({ onLogout }) => {
             <li className="sidebar-item">
               <Link
                 className="sidebar-link"
-                to="/staff/student"
+                to="/admin/student"
                 aria-expanded="false">
                 <span></span>
                 <span className="hide-menu">Students</span>
@@ -54,7 +54,7 @@ const sideBarStaff = ({ onLogout }) => {
             <li className="sidebar-item">
               <Link
                 className="sidebar-link"
-                to="/staff/class"
+                to="/admin/class"
                 aria-expanded="false">
                 <span></span>
                 <span className="hide-menu">Class</span>
@@ -63,7 +63,7 @@ const sideBarStaff = ({ onLogout }) => {
             <li className="sidebar-item">
               <Link
                 className="sidebar-link"
-                to="/staff/instructor"
+                to="/admin/instructor"
                 aria-expanded="false">
                 <span></span>
                 <span className="hide-menu">Instructor</span>
@@ -98,4 +98,4 @@ const sideBarStaff = ({ onLogout }) => {
   );
 };
 
-export default sideBarStaff;
+export default sideBarAdmin;

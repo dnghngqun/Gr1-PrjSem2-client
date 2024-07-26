@@ -4,11 +4,11 @@ import Swal from "sweetalert2";
 import toast from "toastify-js";
 import "toastify-js/src/toastify.css";
 // import "./Css/Staff.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
-import NavStaff from "./NavStaff";
-import SideBarStaff from "./sideBarStaff";
-const StaffClass = ({ isLoggedIn, onLogout }) => {
+import SideBarAdmin from "./sideBarAdmin";
+import NavAdmin from "./NavAdmin";
+const AdminClass = ({ isLoggedIn, onLogout }) => {
   const [allClass, setAllClass] = useState([]);
   const [instructor, setInstructor] = useState([]);
   const [course, setCourse] = useState([]);
@@ -68,8 +68,6 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
       instructor: { id: editingValues.instructor },
       status: parseInt(editingValues.status),
     };
-
-    console.log(updatedClass);
 
     axios
       .put(`http://localhost:8080/api/v1/class/${id}`, updatedClass)
@@ -177,12 +175,12 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
         data-sidebar-position="fixed"
         data-header-position="fixed">
         {/* left side-bar */}
-        <SideBarStaff onLogout={onLogout} />
+        <SideBarAdmin onLogout={onLogout} />
 
         {/* right */}
         <div className="body-wrapper">
           {/* header */}
-          <NavStaff isLoggedIn={isLoggedIn} />
+          <NavAdmin isLoggedIn={isLoggedIn} />
           {/* body */}
           <div className="container-fluid">
             <div className="row">
@@ -474,4 +472,4 @@ const StaffClass = ({ isLoggedIn, onLogout }) => {
   );
 };
 
-export default StaffClass;
+export default AdminClass;

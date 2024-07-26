@@ -1,6 +1,6 @@
 import React from "react";
 
-const NavStaff = ({ isLoggedIn }) => {
+const NavAdmin = ({ isLoggedIn }) => {
   return (
     <header className="app-header">
       <nav
@@ -27,4 +27,4 @@ const NavStaff = ({ isLoggedIn }) => {
   );
 };
 
-export default NavStaff;
+export default NavAdmin;

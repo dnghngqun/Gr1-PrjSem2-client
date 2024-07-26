@@ -2,9 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "toastify-js";
 import "toastify-js/src/toastify.css";
-import NavStaff from "./NavStaff";
-import SideBarStaff from "./sideBarStaff";
-const StaffAttendance = ({ isLoggedIn, onLogout }) => {
+import SideBarAdmin from "./sideBarAdmin";
+import NavAdmin from "./NavAdmin";
+const AdminAttendance = ({ isLoggedIn, onLogout }) => {
   const [classStarted, setClassStarted] = useState([]);
   const [isShowWithId, setIsShowWithId] = useState(null);
   const [enrollmentByClassId, setEnrollmentByClassId] = useState([]);
@@ -107,7 +107,7 @@ const StaffAttendance = ({ isLoggedIn, onLogout }) => {
     const { name, value } = e.target;
     setValueAttendance((prevValue) => ({ ...prevValue, [name]: value }));
   };
-  
+
   return (
     <div
       className="page-wrapper"
@@ -118,12 +118,12 @@ const StaffAttendance = ({ isLoggedIn, onLogout }) => {
       data-sidebar-position="fixed"
       data-header-position="fixed">
       {/* left side-bar */}
-      <SideBarStaff onLogout={onLogout} />
+      <SideBarAdmin onLogout={onLogout} />
 
       {/* right */}
       <div className="body-wrapper">
         {/* header */}
-        <NavStaff isLoggedIn={isLoggedIn} />
+        <NavAdmin isLoggedIn={isLoggedIn} />
         {/* body */}
         <div className="container-fluid">
           <div className="row">
@@ -416,4 +416,4 @@ const StaffAttendance = ({ isLoggedIn, onLogout }) => {
   );
 };
 
-export default StaffAttendance;
+export default AdminAttendance;

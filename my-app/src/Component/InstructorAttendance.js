@@ -6,13 +6,13 @@ import NavInstructor from "./NavInstructor";
 import SideBarInstructor from "./SideBarInstructor";
 const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
   const dateToday = new Date();
-  //   const currentDate =
-  // dateToday.getFullYear() +
-  // "-" +
-  // String(dateToday.getMonth() + 1).padStart(2, "0") +
-  // "-" +
-  // String(dateToday.getDate()).padStart(2, "0");
-  const currentDate = "2024-07-27"; //cái này để test cho buổi sau , mấy ngày khác tương tự, có thể xem lịch trong db phần insert schedule
+  const currentDate =
+    dateToday.getFullYear() +
+    "-" +
+    String(dateToday.getMonth() + 1).padStart(2, "0") +
+    "-" +
+    String(dateToday.getDate()).padStart(2, "0");
+  //const currentDate = "2024-07-27"; //cái này để test cho buổi sau , mấy ngày khác tương tự, có thể xem lịch trong db phần insert schedule
 
   const [isShowWithId, setIsShowWithId] = useState(null);
   const [enrollmentByClassId, setEnrollmentByClassId] = useState([]);
@@ -79,10 +79,14 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
   useEffect(() => {
     // Lấy dữ liệu lịch trình theo ngày hiện tại
     axios
-      .get(`http://localhost:8080/api/v1/attendance/schedule/${currentDate}`)
+      .get("http://localhost:8080/api/v1/attendance/schedule", {
+        params: {
+          classDate: currentDate,
+          email: isLoggedIn.data.email,
+        },
+      })
       .then((res) => {
         setSchedule(res.data.data);
-        console.log(res.data.data);
         // Tạo một bản đồ điểm danh với giá trị khởi tạo là false
         let dataCurrentDay = res.data.data;
         const attendanceMap = dataCurrentDay.reduce((acc, item) => {
@@ -213,9 +217,6 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
                             <h6 className="fw-semibold mb-0">Name</h6>
                           </th>
                           <th className="border-bottom-0">
-                            <h6 className="fw-semibold mb-0">Instructor</h6>
-                          </th>
-                          <th className="border-bottom-0">
                             <h6 className="fw-semibold mb-0">Study Time</h6>
                           </th>
                           <th className="border-bottom-0">
@@ -231,7 +232,7 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {schedule &&
+                        {schedule && schedule.length > 0 ? (
                           schedule.map((itemSchedule, index) => {
                             let classCurrent = itemSchedule.aClass;
                             let isShow = isShowWithId === classCurrent.id;
@@ -239,6 +240,7 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
                             let status = isAttendance[classCurrent.id]
                               ? "Took attendance"
                               : "No attendance yet";
+
                             return (
                               <>
                                 <tr key={classCurrent.id}>
@@ -253,13 +255,6 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
                                       style={{ width: "100px" }}>
                                       {classCurrent.course.name}
                                     </h6>
-                                  </td>
-                                  <td className="border-bottom-0">
-                                    <p
-                                      className="mb-0 fw-normal"
-                                      style={{ width: "100px" }}>
-                                      {classCurrent.instructor.name}
-                                    </p>
                                   </td>
                                   <td className="border-bottom-0">
                                     <div className="d-flex align-items-center gap-2">
@@ -333,7 +328,7 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
                                 </tr>
                                 {isShow && (
                                   <tr>
-                                    <td colSpan={8}>
+                                    <td colSpan={7}>
                                       <table className="table text-nowrap mb-0 align-middle">
                                         <thead className="text-dark fs-4">
                                           <tr>
@@ -475,7 +470,16 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
                                 )}
                               </>
                             );
-                          })}
+                          })
+                        ) : (
+                          <tr>
+                            <td colSpan={6} className="border-bottom-0">
+                              <h6 className="fw-semibold mb-0">
+                                You don't have any classes to teach today.
+                              </h6>
+                            </td>
+                          </tr>
+                        )}
                       </tbody>
                     </table>
                   </div>

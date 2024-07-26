@@ -154,6 +154,8 @@ button.sign-up {
 
 .account-setting .info-account > img {
   width: 58px;
+  height: 58px;
+  object-fit: cover;
   margin: 10px;
   border-radius: 50%;
 }
