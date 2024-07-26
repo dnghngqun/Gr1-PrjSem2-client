@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "toastify-js";
 import "toastify-js/src/toastify.css";
@@ -9,9 +9,11 @@ const ForgotPassword = () => {
   const [contact, setContact] = useState("");
   const [token, setToken] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [confirmationMessage, setConfirmationMessage] = useState("");
+  const [newPasswordAgain, setNewPasswordAgain] = useState("");
   const [step, setStep] = useState(1);
-  const [toastError, setToastError] = useState("");
+  const [isPWAgainValid, setPWAgainValid] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState("");
+  const [newPwColor, setNewPwColor] = useState("");
   const navigate = useNavigate();
   const notify = (mess) =>
     toast({
@@ -42,18 +44,58 @@ const ForgotPassword = () => {
     }).showToast();
 
   const handleContactChange = (e) => {
-    setContact(e.target.value);
+    const value = e.target.value;
+    let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (value === "") {
+      setIsEmailValid("none");
+    } else if (!value.match(pattern)) {
+      setIsEmailValid("0 0px 15px 0px #B90B0B");
+    } else {
+      setIsEmailValid("0 0px 15px 0px #5BF250");
+    }
+    setContact(value);
   };
 
   const handleTokenChange = (e) => {
     setToken(e.target.value);
   };
+  const handleNewPasswordChange = (e) => setNewPassword(e.target.value);
 
-  const handleNewPasswordChange = (e) => {
-    setNewPassword(e.target.value);
+  const handleNewPasswordAgainChange = (e) => {
+    setNewPasswordAgain(e.target.value);
   };
+  // const handleNewPasswordChange = (e) => {
+  //   setNewPassword(e.target.value);
+  // };
+  // const handleNewPasswordAgainChange = (e) => {
+  //   const value = e.target.value;
+  //   setNewPasswordAgain(value);
+
+  //   if (value === "") {
+  //     setPWAgainValid("none");
+  //   } else if (value !== newPassword) {
+  //     setPWAgainValid("0 0px 15px 0px #B90B0B"); // Đỏ
+  //   } else {
+  //     setPWAgainValid("0 0px 15px 0px #5BF250");
+  //     setNewPwColor("0 0px 15px 0px #5BF250");
+  //   }
+  // };
+
+  useEffect(() => {
+    if (newPasswordAgain === "") {
+      setPWAgainValid("none");
+      setNewPwColor("none");
+    } else if (newPasswordAgain !== newPassword) {
+      setPWAgainValid("0 0px 15px 0px #B90B0B"); // Đỏ
+      setNewPwColor("none");
+    } else {
+      setPWAgainValid("0 0px 15px 0px #5BF250"); // Xanh lá
+      setNewPwColor("0 0px 15px 0px #5BF250");
+    }
+  }, [newPasswordAgain, newPassword]);
 
   const handleSendToken = () => {
+    notify("Token is being sent, please wait a few seconds...");
     axios
       .post("http://localhost:8080/api/v1/accounts/forgot-password", null, {
         params: {
@@ -70,25 +112,36 @@ const ForgotPassword = () => {
   };
 
   const handleResetPassword = () => {
-    axios
-      .post("http://localhost:8080/api/v1/accounts/reset-password", null, {
-        params: {
-          token: token,
-          newPassword: newPassword,
-        },
-      })
-      .then((response) => {
-        notify("Reset password succesfully!");
-        navigate("/login");
-      })
-      .catch((error) => {
-        console.error("There was an error resetting the password!", error);
-        notifyFail("Token does not match!");
-      });
+    let isRun = true;
+    if (newPasswordAgain !== newPassword) {
+      isRun = false;
+      notifyFail("Password again do not match!");
+    }
+    if (isRun) {
+      axios
+        .post("http://localhost:8080/api/v1/accounts/reset-password", null, {
+          params: {
+            token: token,
+            newPassword: newPassword,
+          },
+        })
+        .then((response) => {
+          notify("Reset password succesfully!");
+          navigate("/login");
+        })
+        .catch((error) => {
+          console.error("There was an error resetting the password!", error);
+          notifyFail("Token does not match!");
+        });
+    }
   };
 
   const handleFindAccount = () => {
     let isRun = true;
+    if (!isEmailValid) {
+      isRun = false;
+      notifyFail("Invalid email!");
+    }
     if (!contact) {
       notifyFail("Email is required!");
       isRun = false;
@@ -101,7 +154,10 @@ const ForgotPassword = () => {
           setStep(2);
           console.log(res.data.data);
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          notifyFail("Account not found!");
+          console.error(err);
+        });
     }
   };
   const handleReturnStep1 = () => {
@@ -109,74 +165,85 @@ const ForgotPassword = () => {
   };
   return (
     <div id="forgot">
-      {step === 1 && (
-        <div className="forgot-container">
-          <h2>Find your account</h2>
-          <hr />
-          <div>
-            <label htmlFor="email">
-              Please enter email to find your account!
-            </label>
-            <br />
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter email"
-              onChange={handleContactChange}
-              className="input-forgot input-forgot-email"
-            />
-
-            <hr />
-            <button className="btn-forgot btn-forgot-cancel">Cancel</button>
+      <div className="forgot-container">
+        {step === 1 && (
+          <div className="forgot-step1">
+            <h2 className="step1-title">Find your account</h2>
+            <hr className="line-forgot1" />
+            <div className="step1-input">
+              <label htmlFor="email">
+                Please enter email to find your account!
+              </label>
+              <br />
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter email"
+                onChange={handleContactChange}
+                className="input-forgot input-forgot-email"
+                style={{
+                  boxShadow: isEmailValid,
+                }}
+                spellCheck="false"
+              />
+            </div>
+            <hr className="line-forgot1" />
             <button
               className="btn-forgot btn-forgot-find"
               onClick={handleFindAccount}>
               Find
             </button>
+            <button className="btn-forgot btn-forgot-cancel">Cancel</button>
           </div>
-        </div>
-      )}
-      {step === 2 && (
-        <div className="findAccountSuccess">
-          <img src={account && account.imageAccount} alt="" />
-          <h1 className="nameAccount">{account && account.fullName}</h1>
-          <a href="#" onClick={handleReturnStep1}>
-            Not you? Try again!
-          </a>
-          <hr />
-          <div className="box-changePass">
-            <input
-              className="input-forgot input-fotgot-token"
-              type="text"
-              placeholder="Enter token"
-              onChange={handleTokenChange}
-            />{" "}
-            <button
-              className="btn-forgot btn-forgot-sendToken"
-              onClick={handleSendToken}>
-              Send token
-            </button>
-            <br />
-            <input
-              type="password"
-              placeholder="Enter new password"
-              className="input-forgot input-forgot-newPass"
-              onChange={handleNewPasswordChange}
-            />
-            <br />
-            <button
-              className="btn-forgot btn-forgot-submit"
-              onClick={handleResetPassword}>
-              Change Password
-            </button>
+        )}
+        {step === 2 && (
+          <div className="forgot-step2">
+            <div className="findAccountSuccess">
+              <img src={account && account.imageAccount} alt="" />
+              <h1 className="nameAccount">{account && account.fullName}</h1>
+              <a href="#" onClick={handleReturnStep1}>
+                Not you? Try again!
+              </a>
+            </div>
+
+            <div className="box-changePass">
+              <div className="sendPass">
+                <input
+                  className="input-forgot input-forgot-token"
+                  type="text"
+                  placeholder="Enter token"
+                  onChange={handleTokenChange}
+                />{" "}
+                <button
+                  className="btn-forgot btn-forgot-sendToken"
+                  onClick={handleSendToken}>
+                  Send token
+                </button>
+              </div>
+              <input
+                type="password"
+                placeholder="Enter new password"
+                className="input-forgot input-forgot-newPass"
+                onChange={handleNewPasswordChange}
+                style={{ boxShadow: newPwColor }}
+              />
+              <input
+                type="password"
+                placeholder="Enter new password again"
+                className="input-forgot input-forgot-newPass"
+                onInput={handleNewPasswordAgainChange}
+                style={{ boxShadow: isPWAgainValid }}
+              />
+              <br />
+              <button
+                className="btn-forgot btn-forgot-submit"
+                onClick={handleResetPassword}>
+                Change Password
+              </button>
+            </div>
           </div>
-        </div>
-      )}
-      {step === 3 && (
-        <div>
-          <h2>{confirmationMessage}</h2>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
