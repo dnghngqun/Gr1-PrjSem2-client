@@ -172,7 +172,7 @@ const ForgotPassword = () => {
     <div id="forgot">
       <div className="forgot-container">
         {step === 1 && (
-          <div className={`forgot-step1 ${step === 1 ? "active" : ""}`}>
+          <div className="forgot-step1 ">
             <h2 className="step1-title">Find your account</h2>
             <hr className="line-forgot1" />
             <div className="step1-input">
@@ -203,7 +203,7 @@ const ForgotPassword = () => {
           </div>
         )}
         {step === 2 && (
-          <div className={`forgot-step2 ${step === 2 ? "active" : "exit"}`}>
+          <div className="forgot-step2">
             <div className="findAccountSuccess">
               <img src={account && account.imageAccount} alt="" />
               <h1 className="nameAccount">{account && account.fullName}</h1>
