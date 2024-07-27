@@ -32,7 +32,7 @@ const NavAdmin = ({ isLoggedIn }) => {
         className="navbar navbar-expand-lg navbar-light"
         style={{ marginTop: "12px" }}>
         <div
-          className="navbar-collapse justify-content-end px-0"
+          className="navbar-collapse d-flex justify-content-between px-0"
           id="navbarNav">
           <div>
             <h4 style={{ color: "#495057" }}>

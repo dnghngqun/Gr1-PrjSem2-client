@@ -36,10 +36,10 @@ const sideBarAdmin = ({ onLogout }) => {
             <li className="sidebar-item">
               <Link
                 className="sidebar-link"
-                to="/admin/attendance"
+                to="/admin/account"
                 aria-expanded="false">
                 <span></span>
-                <span className="hide-menu">Attendance</span>
+                <span className="hide-menu">Account</span>
               </Link>
             </li>
             <li className="sidebar-item">
@@ -69,6 +69,7 @@ const sideBarAdmin = ({ onLogout }) => {
                 <span className="hide-menu">Instructor</span>
               </Link>
             </li>
+
             <li className="nav-small-cap">
               <span className="hide-menu">AUTH</span>
             </li>

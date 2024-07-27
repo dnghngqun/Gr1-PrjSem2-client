@@ -2,15 +2,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useRef, useState } from "react";
 import Swiper from "swiper";
 // import Swiper styles
+import axios from "axios";
 import ReactPaginate from "react-paginate";
+import ScrollToTop from "react-scroll-to-top";
+import ScrollReveal from "scrollreveal";
 import "swiper/css";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "./Css/Course.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import ScrollToTop from "react-scroll-to-top";
-import axios from "axios";
-import ScrollReveal from "scrollreveal";
 
 const Course = ({ isLoggedIn, onLogout }) => {
   const [products, setProducts] = useState([]);
@@ -191,7 +191,7 @@ const Course = ({ isLoggedIn, onLogout }) => {
     // Khởi tạo ScrollReveal và cấu hình các hiệu ứng cuộn
     ScrollReveal().reveal(".reveal", {
       distance: "50px",
-      duration: 900,
+      duration: 400,
       easing: "ease-in-out",
       origin: "bottom",
       interval: 400,

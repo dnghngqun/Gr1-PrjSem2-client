@@ -32,6 +32,7 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
   const [isOrderCreated, setIsOrderCreated] = useState(false);
   const [paymentId, setPaymentId] = useState("");
   const [order, setOrder] = useState();
+  const [discount, setDiscount] = useState("");
   const notify = (mess) =>
     toast({
       text: mess,
@@ -148,7 +149,7 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
   const srcImg = course.imgLink;
   const nameCourse = course.name;
   const price = course.price;
-  const discount = 20;
+ 
   const totalPrice = price - (price * discount) / 100;
 
   const handleEdit = () => {
@@ -212,6 +213,7 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
       .post("http://localhost:8080/api/v1/payments", {
         paymentId: details.id, // details.id là paymentId do PayPal trả về
         account: { id: accountId }, // Thay đổi ID của người dùng tương ứng
+        discount: discount,
         orderDetail: { id: orderDetailId },
         paymentMethod: "PayPal",
         amount: totalPrice,
