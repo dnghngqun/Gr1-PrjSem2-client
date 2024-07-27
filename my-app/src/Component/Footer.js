@@ -8,8 +8,10 @@ const Footer = () => {
           <img src="https://i.imgur.com/8epSVJH.png" alt="" />
           <p className="title">
             Coursespace is an online learning platform that has been operating
-            since 2018 until now.
+            since 2018 until now.<br/>
+            Call 19001567 for English consultation.
           </p>
+         
           <div className="external-link">
             <img src="/assets/svg/facebook.svg" alt="facebook" />
             <img src="/assets/svg/instagram.svg" alt="instagram" />
