@@ -32,7 +32,8 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
   const [isOrderCreated, setIsOrderCreated] = useState(false);
   const [paymentId, setPaymentId] = useState("");
   const [order, setOrder] = useState();
-  const [discount, setDiscount] = useState("");
+  const [discount, setDiscount] = useState("0");
+  const [codeDiscount, setCodeDiscount] = useState("");
   const notify = (mess) =>
     toast({
       text: mess,
@@ -60,6 +61,9 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
       close: true,
       onClick: function () {}, // Callback after click
     }).showToast();
+  const handleCodeDiscountChange = (e) => {
+    setCodeDiscount(e.target.value);
+  };
 
   useEffect(() => {
     if (birthday) {
@@ -149,7 +153,7 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
   const srcImg = course.imgLink;
   const nameCourse = course.name;
   const price = course.price;
- 
+
   const totalPrice = price - (price * discount) / 100;
 
   const handleEdit = () => {
@@ -293,7 +297,19 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
           });
       });
   };
-
+  const handleCheckDiscount = () => {
+    // Gọi API để kiểm tra mã giảm giá
+    axios
+      .get(`http://localhost:8080/api/v1/discount/code/${codeDiscount}`)
+      .then((response) => {
+        setDiscount(response.data.value);
+        notify("Discount applied successfully!");
+      })
+      .catch((error) => {
+        notifyFail("Error checking discount code!");
+        console.error("Error checking discount code:", error);
+      });
+  };
   return (
     <div>
       <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
@@ -437,6 +453,14 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
             <p>
               <b>Price:</b> ${price}
             </p>
+          </div>
+          <div>
+            <input
+              type="text "
+              placeholder="Enter discount"
+              onChange={handleCodeDiscountChange}
+            />
+            <button onClick={handleCheckDiscount}>Check</button>
           </div>
           <hr className="line" />
           <div className="info-order">
