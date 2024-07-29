@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "toastify-js";
 import "toastify-js/src/toastify.css";
 import "./Css/Login.css";
@@ -36,7 +36,6 @@ const Login = ({ onLogin }) => {
           if (response.data.data.role === "admin") navigate("/admin"); //redirect to link /
           if (response.data.data.role === "instructor") navigate("/instructor"); //redirect to link /
           if (response.data.data.role === "customer") navigate("/"); //redirect to link /
-         
         }
       } catch (error) {
         console.error("Error checking login status", error);
@@ -65,7 +64,6 @@ const Login = ({ onLogin }) => {
         if (response.data.data.role === "admin") navigate("/admin"); //redirect to link /
         if (response.data.data.role === "instructor") navigate("/instructor"); //redirect to link /
         if (response.data.data.role === "customer") navigate("/"); //redirect to link /
-       
       } else {
         //login failed
         notifyFail("Login failed, username or password is incorrect!");
@@ -102,9 +100,9 @@ const Login = ({ onLogin }) => {
               <b>Sign in</b>
             </button>
 
-            <a href="/forgot-password" className="forgot">
+            <Link to="/forgot-password" className="forgot">
               Forgot <span>Username/Password?</span>
-            </a>
+            </Link>
           </form>
           <b className="text-line">or sign in with</b>
           <div className="login-other">
@@ -131,10 +129,10 @@ const Login = ({ onLogin }) => {
             </a>
           </div>
           <div className="create-account">
-            <a href="/register">
+            <Link to="/register">
               Create your account{" "}
               <img src="/assets/svg/RightLongSolid.svg" alt="" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

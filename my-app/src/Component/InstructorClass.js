@@ -19,6 +19,8 @@ const InstructorClass = ({ isLoggedIn, onLogout }) => {
     "-" +
     String(dateToday.getDate()).padStart(2, "0");
 
+  //const currentDate = "2024-08-08"; //cái này để test cho buổi sau , mấy ngày khác tương tự, có thể xem lịch trong db phần insert schedule
+
   useEffect(() => {
     // Lấy dữ liệu lịch trình theo ngày hiện tại
     axios

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "toastify-js";
 import "toastify-js/src/toastify.css";
 import "./Css/Register.css";
@@ -108,7 +108,7 @@ const Register = ({ onLogin }) => {
         console.log("data response: ", response.data);
         if (response.status === 200) {
           //regis success
-          console.log("Register Success!");
+          notify("Register Success!");
           navigate("/login");
         } else {
           //login failed
@@ -218,9 +218,9 @@ const Register = ({ onLogin }) => {
           </div>
           <div className="create-account">
             Do you have an account?
-            <a href="/login">
+            <Link to="/login">
               Sign in <img src="/assets/svg/RightLongSolid.svg" alt="" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>
