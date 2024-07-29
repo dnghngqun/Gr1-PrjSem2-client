@@ -5,10 +5,10 @@ const sideBarAdmin = ({ onLogout }) => {
     onLogout(); // Gọi hàm logout khi nhấn nút Logout
   };
   return (
-    <aside className="left-sidebar">
+    <aside className="left-sidebar" style={{ width: "240px" }}>
       <div>
         <div className="brand-logo d-flex align-items-center justify-content-between">
-          <Link to="/admin" className="text-nowrap logo-img">
+          <Link to="/" className="text-nowrap logo-img">
             <img
               src="https://i.imgur.com/8epSVJH.png"
               style={{ width: "140px", margin: "20px 0 0 30px" }}
@@ -31,21 +31,12 @@ const sideBarAdmin = ({ onLogout }) => {
               </Link>
             </li>
             <li className="nav-small-cap">
-              <span className="hide-menu">MANAGE</span>
+              <span className="hide-menu">Account</span>
             </li>
             <li className="sidebar-item">
               <Link
                 className="sidebar-link"
-                to="/admin/account"
-                aria-expanded="false">
-                <span></span>
-                <span className="hide-menu">Account</span>
-              </Link>
-            </li>
-            <li className="sidebar-item">
-              <Link
-                className="sidebar-link"
-                to="/admin/student"
+                to="/admin/account/student"
                 aria-expanded="false">
                 <span></span>
                 <span className="hide-menu">Students</span>
@@ -54,22 +45,42 @@ const sideBarAdmin = ({ onLogout }) => {
             <li className="sidebar-item">
               <Link
                 className="sidebar-link"
-                to="/admin/class"
+                to="/admin/account/instructor"
                 aria-expanded="false">
                 <span></span>
-                <span className="hide-menu">Class</span>
+                <span>Instructor</span>
               </Link>
             </li>
             <li className="sidebar-item">
               <Link
                 className="sidebar-link"
-                to="/admin/instructor"
+                to="/admin/class"
                 aria-expanded="false">
-                <span></span>
-                <span className="hide-menu">Instructor</span>
+                <b className="" style={{ fontSize: "12px" }}>
+                  CLASS
+                </b>
               </Link>
             </li>
-
+            <li className="sidebar-item ">
+              <Link
+                className="sidebar-link"
+                to="/admin/instructor"
+                aria-expanded="false">
+                <b className="hide-menu" style={{ fontSize: "12px" }}>
+                  INSTRUCTOR
+                </b>
+              </Link>
+            </li>
+            <li className="sidebar-item">
+              <Link
+                className="sidebar-link"
+                to="/admin/attendance"
+                aria-expanded="false">
+                <b className="" style={{ fontSize: "12px" }}>
+                  VIEW ATTENDANCE
+                </b>
+              </Link>
+            </li>
             <li className="nav-small-cap">
               <span className="hide-menu">AUTH</span>
             </li>

@@ -126,3 +126,24 @@ label.year {
 .course-info .right h1.title-course {
   text-align: start;
 }
+
+.boxCheckDiscount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 34px;
+}
+
+.boxCheckDiscount .inputCheckDiscount {
+  width: 70% !important;
+  height: 100%;
+}
+
+.boxCheckDiscount .btn-checkDiscount {
+  width: 29% !important;
+  text-align: center;
+  height: 100%;
+  margin-left: 1%;
+  padding: 0;
+}

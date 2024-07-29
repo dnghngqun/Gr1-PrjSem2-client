@@ -12,7 +12,7 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
     String(dateToday.getMonth() + 1).padStart(2, "0") +
     "-" +
     String(dateToday.getDate()).padStart(2, "0");
-  //const currentDate = "2024-07-27"; //cái này để test cho buổi sau , mấy ngày khác tương tự, có thể xem lịch trong db phần insert schedule
+  //const currentDate = "2024-07-31"; //cái này để test cho buổi sau , mấy ngày khác tương tự, có thể xem lịch trong db phần insert schedule
 
   const [isShowWithId, setIsShowWithId] = useState(null);
   const [enrollmentByClassId, setEnrollmentByClassId] = useState([]);

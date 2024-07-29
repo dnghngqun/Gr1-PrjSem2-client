@@ -6,8 +6,8 @@ import "toastify-js/src/toastify.css";
 // import "./Css/Staff.css";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
-import SideBarAdmin from "./sideBarAdmin";
 import NavAdmin from "./NavAdmin";
+import SideBarAdmin from "./sideBarAdmin";
 const AdminClass = ({ isLoggedIn, onLogout }) => {
   const [allClass, setAllClass] = useState([]);
   const [instructor, setInstructor] = useState([]);
@@ -182,7 +182,9 @@ const AdminClass = ({ isLoggedIn, onLogout }) => {
           {/* header */}
           <NavAdmin isLoggedIn={isLoggedIn} />
           {/* body */}
-          <div className="container-fluid">
+          <div
+            className="container-fluid"
+            style={{ maxWidth: "100%", paddingLeft: "0", paddingRight: "0" }}>
             <div className="row">
               <div className="col-lg-12 d-flex align-items-stretch">
                 <div className="card w-100">

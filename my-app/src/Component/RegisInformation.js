@@ -437,7 +437,7 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
             </div>
             <div className="right">
               <h1 className="title title-course">{nameCourse}</h1>
-              <p className="content">bởi trung tâm anh ngữ...</p>
+              <p className="content">by learnify</p>
             </div>
           </div>
           <div className="info-order">
@@ -454,13 +454,14 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
               <b>Price:</b> ${price}
             </p>
           </div>
-          <div>
+          <div className="boxCheckDiscount">
             <input
               type="text "
               placeholder="Enter discount"
               onChange={handleCodeDiscountChange}
+              className="inputCheckDiscount"
             />
-            <button onClick={handleCheckDiscount}>Check</button>
+            <button onClick={handleCheckDiscount} className="btn-checkDiscount">Check</button>
           </div>
           <hr className="line" />
           <div className="info-order">

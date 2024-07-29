@@ -1,0 +1,33 @@
+.instruc-classify {
+  color: rgb(231, 183, 61);
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.instruc-name {
+  font-size: 23px;
+  margin-top: 0;
+  padding-top: 0;
+  font-weight: 400;
+}
+
+.img-instructor {
+  width: 250px !important;
+  height: 250px !important;
+  object-fit: cover;
+  border: 5px solid rgb(198, 193, 193);
+}
+
+.infor-title {
+  font-size: 25px;
+  font-weight: 550;
+  text-transform: uppercase;
+}
+
+.info-child-title {
+  font-size: 20px;
+}
+
+.info-child-item {
+  font-size: 18px;
+}

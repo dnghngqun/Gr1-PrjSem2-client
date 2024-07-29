@@ -16,6 +16,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
   const location = useLocation();
   const [selectedImage, setSelectedImage] = useState("ielts");
   const [instructor, setInstructor] = useState([]);
+
   //xử lý cuộn tới phần tử
   useEffect(() => {
     if (location.hash) {
@@ -260,7 +261,9 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                     alt="Toeic Pratice"
                   />
                   <div className="card-body card-home-body">
-                    <h5 className="card-title card-home-title">Toeic Practice</h5>
+                    <h5 className="card-title card-home-title">
+                      Toeic Practice
+                    </h5>
                     <div className="card-bottom card-home-bottom">
                       <div className="course-price">$80/course</div>
                       <div className="star">★★★★★</div>
@@ -476,9 +479,7 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                 <div className="benefit-one">
                   <div className="benefit-title">Travel with English</div>
                   <div className="benefit-description">
-                    <p>
-                    Travel the world with English!
-                    </p>
+                    <p>Travel the world with English!</p>
                   </div>
                 </div>
               </div>

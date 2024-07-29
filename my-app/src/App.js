@@ -8,6 +8,12 @@ import {
   useLocation,
 } from "react-router-dom";
 import "./App.css";
+import Admin from "./Component/Admin";
+import AdminAccountInstructor from "./Component/AdminAccountInstructor";
+import AdminAccountStudent from "./Component/AdminAccountStudent";
+import AdminClass from "./Component/AdminClass";
+import AdminInstructor from "./Component/AdminInstructor";
+import AdminStudent from "./Component/AdminStudent";
 import Course from "./Component/Course";
 import EditProfile from "./Component/EditProfile";
 import ForgotPassword from "./Component/ForgotPassword";
@@ -22,16 +28,13 @@ import PrivateRoute from "./Component/PrivateRoute";
 import RegisInformation from "./Component/RegisInformation";
 import Register from "./Component/Register";
 import ResultPage from "./Component/ResultPage";
-import Admin from "./Component/Admin";
-import AdminAttendance from "./Component/AdminAttendance";
-import AdminClass from "./Component/AdminClass";
-import AdminInstructor from "./Component/AdminInstructor";
-import AdminStudent from "./Component/AdminStudent";
 import UserCourse from "./Component/UserCourse";
 import ViewDetail from "./Component/ViewDetail";
+import AdminAttendance from "./Component/AdminAttendance";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [refresh, setRefresh] = useState(false);
+  
   useEffect(() => {
     //check login qua session
     const checkLoginStatus = async () => {
@@ -115,7 +118,7 @@ function App() {
           }></Route>
 
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
-        
+
         <Route
           path="/admin"
           element={
@@ -145,7 +148,34 @@ function App() {
           element={
             <PrivateRoute
               element={
-                <AdminStudent
+                <AdminAttendance onLogout={handleLogout} isLoggedIn={isLoggedIn} />
+              }
+              isLoggedIn={isLoggedIn}
+              allowedRoles={["admin"]}
+            />
+          }
+        />
+        <Route
+          path="/admin/account/student"
+          element={
+            <PrivateRoute
+              element={
+                <AdminAccountStudent
+                  onLogout={handleLogout}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
+              isLoggedIn={isLoggedIn}
+              allowedRoles={["admin"]}
+            />
+          }
+        />
+        <Route
+          path="/admin/account/instructor"
+          element={
+            <PrivateRoute
+              element={
+                <AdminAccountInstructor
                   onLogout={handleLogout}
                   isLoggedIn={isLoggedIn}
                 />

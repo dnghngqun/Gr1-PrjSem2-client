@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from "react";
-// import "./Css/Staff.css";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import toast from "toastify-js";
 import "toastify-js/src/toastify.css";
 import NavAdmin from "./NavAdmin";
 import SideBarAdmin from "./sideBarAdmin";
-const AdminInstructor = ({ isLoggedIn, onLogout }) => {
-  const [instructor, setIntructor] = useState([]);
-  const [shouldFetch, setShouldFetch] = useState(false);
+const AdminAccountInstructor = ({ isLoggedIn, onLogout }) => {
+  const [accounts, setAccounts] = useState([]);
   const [editingClassId, setEditingClassId] = useState(null);
   const [editingValues, setEditingValues] = useState({});
+  const [shouldFetchClasses, setShouldFetchClasses] = useState(false);
   const [isShowCreate, setIsShowCreate] = useState(false);
-  const [newInstructor, setNewInstructor] = useState({
-    name: "",
+  const [newAccount, setNewAccount] = useState({
+    username: "",
+    password: "",
+    fullName: "",
     email: "",
     phoneNumber: "",
+    birthday: "",
     gender: "",
     bio: "",
     classify: "",
@@ -23,12 +25,23 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
   const [image, setImage] = useState(null);
   const [searchTerm, setSearchTerm] = useState(""); //để tìm kiếm
 
-  const filteredInstructors = instructor.filter((item) =>
-    [item.name, item.email, item.phoneNumber, item.classify].some((field) =>
+  const filteredAccounts = accounts.filter((item) =>
+    [item.userName, item.email, item.phoneNumber, item.fullName].some((field) =>
       field.toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
-
+  //get ALl Student
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/v1/accounts/instructors")
+      .then((res) => {
+        setAccounts(res.data.data);
+        console.log("Get Instructor success!");
+      })
+      .catch((err) => {
+        console.log("Err to fetch instructor: ", err);
+      });
+  }, [shouldFetchClasses]);
   const notify = (mess) =>
     toast({
       text: mess,
@@ -57,18 +70,7 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
       onClick: function () {}, // Callback after click
     }).showToast();
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/v1/instructors")
-      .then((res) => {
-        setIntructor(res.data);
-        console.log("Get Instructor success!");
-      })
-      .catch((err) => {
-        console.log("Err to fetch instructor: ", err);
-      });
-  }, [shouldFetch]);
-  const handleSave = (email) => {
+  const handleSave = (id) => {
     setEditingClassId(null);
     const updatedInfo = {
       ...editingValues, //copy thành 1 object mới
@@ -76,12 +78,12 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
 
     axios
       .put(
-        `http://localhost:8080/api/v1/instructors/email/${email}`,
+        `http://localhost:8080/api/v1/accounts/admin/updateInformation/${id}`,
         updatedInfo
       )
       .then((res) => {
         notify("Update Information Successfully!");
-        setShouldFetch((value) => !value);
+        setShouldFetchClasses((value) => !value);
       })
       .catch((err) => {
         notifyFail(
@@ -93,35 +95,36 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
 
   const handleEdit = (id) => {
     setEditingClassId(id);
-    const item = instructor.find((ins) => ins.id === id);
+    const item = accounts.find((acc) => acc.id === id);
     setEditingValues({
-      name: item.name,
-      bio: item.bio,
+      password: "",
+      fullName: item.fullName,
       email: item.email,
-      gender: item.gender,
       phoneNumber: item.phoneNumber,
-      classify: item.classify,
+      birthday: item.birthday,
     });
   };
 
-  const handleDeleteClass = (email) => {
+  const handleDeleteClass = (id) => {
     Swal.fire({
       icon: "warning",
-      title: "Do you want to delete this instructor?",
+      title: "Do you want to delete this account?",
       showCancelButton: true,
       confirmButtonText: "Yes",
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:8080/api/v1/instructors/${email}`)
+          .delete(`http://localhost:8080/api/v1/accounts/delete/${id}`)
           .then((res) => {
-            notify("Delete instructor successfully!");
-            setShouldFetch((value) => !value);
+            notify("Delete account successfully!");
+            setShouldFetchClasses((value) => !value);
           })
           .catch((err) => {
-            notifyFail("Error to delete, please check error in the console!");
-            console.error("Error to delete: ", err);
+            notifyFail(
+              "Error to delete account, please check error in the console!"
+            );
+            console.error("Error to delete account: ", err);
           });
       }
     });
@@ -131,9 +134,10 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
     const { name, value } = e.target;
     setEditingValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
+
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleCreate = () => {
+  const handleCreateAccount = () => {
     if (isVisible) {
       // Delay hiding the form to allow CSS transition to finish
       setTimeout(() => setIsShowCreate(false), 1000);
@@ -142,25 +146,27 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
     }
     setIsVisible((value) => !value);
   };
-
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
   };
 
-  const handleNewInstructorChange = (e) => {
+  const handleNewAccountChange = (e) => {
     const { name, value } = e.target;
-    setNewInstructor((prevValues) => ({ ...prevValues, [name]: value }));
+    setNewAccount((prevValues) => ({ ...prevValues, [name]: value }));
   };
 
-  const handleSaveNewInstructor = () => {
+  const handleSaveNewAccount = () => {
     if (
-      !newInstructor.name.trim() ||
-      !newInstructor.email.trim() ||
-      !newInstructor.phoneNumber.trim() ||
-      !newInstructor.gender.trim() ||
-      !newInstructor.bio.trim() ||
+      !newAccount.username.trim() ||
+      !newAccount.password.trim() ||
+      !newAccount.fullName.trim() ||
+      !newAccount.email.trim() ||
+      !newAccount.phoneNumber.trim() ||
+      !newAccount.birthday.trim() ||
+      !newAccount.gender.trim() ||
+      !newAccount.bio.trim() ||
       !image ||
-      !newInstructor.classify.trim
+      !newAccount.classify.trim
     ) {
       notifyFail("Please fill in all the fields and upload an image!");
       return;
@@ -170,24 +176,27 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
     formData.append("image", image);
     formData.append(
       "instructor",
-      new Blob([JSON.stringify(newInstructor)], { type: "application/json" })
+      new Blob([JSON.stringify(newAccount)], { type: "application/json" })
     );
     notify("Please wait...");
 
     axios
-      .post("http://localhost:8080/api/v1/instructors", formData, {
+      .post("http://localhost:8080/api/v1/accounts/instructor", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
       .then((res) => {
-        notify("Create new instructor successfully!");
-        setShouldFetch((value) => !value);
+        notify("Create new instructor account successfully!");
+        setShouldFetchClasses((value) => !value);
         setIsShowCreate(false);
-        setNewInstructor({
-          name: "",
+        setNewAccount({
+          username: "",
+          password: "",
+          fullName: "",
           email: "",
           phoneNumber: "",
+          birthday: "",
           gender: "",
           bio: "",
           classify: "",
@@ -201,6 +210,7 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
         console.error("Error to create new account: ", err);
       });
   };
+
   return (
     <div>
       <div
@@ -226,67 +236,77 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
               <div className="col-lg-12 d-flex align-items-stretch">
                 <div className="card w-100">
                   <div className="card-body p-4">
-                    <h5 className="card-title fw-semibold mb-1">
-                      ALl Intructors
+                    <h5 className="card-title fw-semibold mb-0">
+                      All Instructors Accounts
                     </h5>
                     {isShowCreate ? (
                       <button
                         style={{ border: "0", height: "30px" }}
                         className="badge bg-dark rounded-3 fw-semibold mb-2"
-                        onClick={handleCreate}>
+                        onClick={handleCreateAccount}>
                         Close
                       </button>
                     ) : (
                       <button
                         style={{ border: "0", height: "30px" }}
                         className="badge bg-dark rounded-3 fw-semibold mb-2"
-                        onClick={handleCreate}>
-                        Create new instructor
+                        onClick={handleCreateAccount}>
+                        Create new instructor Account
                       </button>
                     )}
-
                     {isShowCreate && (
                       <div className={`fade-in ${isVisible ? "show" : "hide"}`}>
                         <input
                           type="text"
-                          name="name"
-                          placeholder="name"
-                          value={newInstructor.name}
-                          onChange={handleNewInstructorChange}
+                          name="username"
+                          placeholder="Username"
+                          value={newAccount.username}
+                          onChange={handleNewAccountChange}
                           className="form-control mb-2"
                         />
-
+                        <input
+                          type="password"
+                          name="password"
+                          placeholder="Password"
+                          value={newAccount.password}
+                          onChange={handleNewAccountChange}
+                          className="form-control mb-2"
+                        />
+                        <input
+                          type="text"
+                          name="fullName"
+                          placeholder="Full Name"
+                          value={newAccount.fullName}
+                          onChange={handleNewAccountChange}
+                          className="form-control mb-2"
+                        />
                         <input
                           type="email"
                           name="email"
                           placeholder="Email"
-                          value={newInstructor.email}
-                          onChange={handleNewInstructorChange}
+                          value={newAccount.email}
+                          onChange={handleNewAccountChange}
                           className="form-control mb-2"
                         />
                         <input
                           type="text"
                           name="phoneNumber"
                           placeholder="Phone Number"
-                          value={newInstructor.phoneNumber}
-                          onChange={handleNewInstructorChange}
+                          value={newAccount.phoneNumber}
+                          onChange={handleNewAccountChange}
+                          className="form-control mb-2"
+                        />
+                        <input
+                          type="date"
+                          name="birthday"
+                          value={newAccount.birthday}
+                          onChange={handleNewAccountChange}
                           className="form-control mb-2"
                         />
                         <select
-                          name="gender"
-                          value={newInstructor.gender}
-                          onChange={handleNewInstructorChange}
-                          className="form-control mb-2">
-                          <option value="">Select gender</option>
-                          <option value="male">male</option>
-                          <option value="female">female</option>
-                          <option value="other">other</option>
-                        </select>
-
-                        <select
                           name="classify"
-                          value={newInstructor.classify}
-                          onChange={handleNewInstructorChange}
+                          value={newAccount.classify}
+                          onChange={handleNewAccountChange}
                           className="form-control mb-2">
                           <option value="">Select Classify</option>
                           <option value="IELTS">IELTS</option>
@@ -296,10 +316,20 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
                         <textarea
                           name="bio"
                           placeholder="Bio"
-                          value={newInstructor.bio}
-                          onChange={handleNewInstructorChange}
+                          value={newAccount.bio}
+                          onChange={handleNewAccountChange}
                           className="form-control mb-2"
                         />
+                        <select
+                          name="gender"
+                          value={newAccount.gender}
+                          onChange={handleNewAccountChange}
+                          className="form-control mb-2">
+                          <option value="">Select gender</option>
+                          <option value="male">male</option>
+                          <option value="female">female</option>
+                          <option value="other">other</option>
+                        </select>
 
                         <input
                           type="file"
@@ -309,15 +339,14 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
                         />
                         <button
                           className="btn btn-success"
-                          onClick={handleSaveNewInstructor}>
+                          onClick={handleSaveNewAccount}>
                           Save
                         </button>
                       </div>
                     )}
-                    {/* Thêm input tìm kiếm */}
                     <input
                       type="text"
-                      placeholder="Search by name, email, phone number or classify"
+                      placeholder="Search by username, fullName, email,or phone number "
                       className="form-control mb-3"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
@@ -330,25 +359,26 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
                               <h6 className="fw-semibold mb-0">Id</h6>
                             </th>
                             <th className="border-bottom-0">
-                              <h6 className="fw-semibold mb-0">Image</h6>
+                              <h6 className="fw-semibold mb-0">Avatar</h6>
+                            </th>
+
+                            <th className="border-bottom-0">
+                              <h6 className="fw-semibold mb-0">username</h6>
                             </th>
                             <th className="border-bottom-0">
-                              <h6 className="fw-semibold mb-0">Name</h6>
+                              <h6 className="fw-semibold mb-0">password</h6>
                             </th>
                             <th className="border-bottom-0">
-                              <h6 className="fw-semibold mb-0">Gender</h6>
+                              <h6 className="fw-semibold mb-0">Fullname</h6>
                             </th>
                             <th className="border-bottom-0">
                               <h6 className="fw-semibold mb-0">Email</h6>
                             </th>
                             <th className="border-bottom-0">
-                              <h6 className="fw-semibold mb-0">Classify</h6>
+                              <h6 className="fw-semibold mb-0">PhoneNumber</h6>
                             </th>
                             <th className="border-bottom-0">
-                              <h6 className="fw-semibold mb-0">Phone Number</h6>
-                            </th>
-                            <th className="border-bottom-0">
-                              <h6 className="fw-semibold mb-0">Bio</h6>
+                              <h6 className="fw-semibold mb-0">Birthday</h6>
                             </th>
                             <th className="border-bottom-0">
                               <h6 className="fw-semibold mb-0">Action</h6>
@@ -356,7 +386,7 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
                           </tr>
                         </thead>
                         <tbody>
-                          {filteredInstructors.map((item, index) => {
+                          {filteredAccounts.map((item, index) => {
                             const isEditing = editingClassId === item.id;
                             return (
                               <>
@@ -368,50 +398,53 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
                                   </td>
                                   <td className="border-bottom-0">
                                     <img
-                                      src={item.imageLink}
+                                      src={item.imageAccount}
                                       alt=""
-                                      className="offset-1"
+                                      className="rounded-circle offset-1"
                                       style={{
                                         objectFit: "cover",
                                       }}
-                                      width="40px"
-                                      height="40px"
+                                      width="30px"
+                                      height="30px"
                                     />
+                                  </td>
+                                  <td className="border-bottom-0">
+                                    <h6
+                                      className="fw-semibold mb-0"
+                                      style={{ width: "80px" }}>
+                                      {item.userName}
+                                    </h6>
+                                  </td>{" "}
+                                  <td className="border-bottom-0">
+                                    {isEditing ? (
+                                      <input
+                                        type="password"
+                                        name="password"
+                                        onChange={handleChange}
+                                        style={{ width: "70px" }}
+                                      />
+                                    ) : (
+                                      <p
+                                        className="fw-semibold mb-0"
+                                        style={{ width: "70px" }}>
+                                        encrypted
+                                      </p>
+                                    )}
                                   </td>
                                   <td className="border-bottom-0">
                                     {isEditing ? (
                                       <input
                                         type="text"
-                                        name="name"
-                                        placeholder="Name"
-                                        value={editingValues.name}
                                         onChange={handleChange}
+                                        name="fullName"
+                                        value={editingValues.fullName}
                                         style={{ width: "150px" }}
                                       />
                                     ) : (
                                       <h6
                                         className="fw-semibold text-wrap mb-0"
                                         style={{ width: "150px" }}>
-                                        {item.name}
-                                      </h6>
-                                    )}
-                                  </td>{" "}
-                                  <td className="border-bottom-0">
-                                    {isEditing ? (
-                                      <select
-                                        name="gender"
-                                        value={editingValues.gender}
-                                        onChange={handleChange}
-                                        style={{ width: "70px" }}>
-                                        <option value="male">male</option>
-                                        <option value="female">female</option>
-                                        <option value="other">other</option>
-                                      </select>
-                                    ) : (
-                                      <h6
-                                        className="fw-semibold text-wrap mb-0"
-                                        style={{ width: "70px" }}>
-                                        {item.gender}
+                                        {item.fullName}
                                       </h6>
                                     )}
                                   </td>
@@ -435,19 +468,18 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
                                   <td className="border-bottom-0">
                                     <div className="d-flex align-items-center gap-2">
                                       {isEditing ? (
-                                        <select
-                                          name="classify"
-                                          value={editingValues.classify}
+                                        <input
                                           onChange={handleChange}
-                                          style={{ width: "70px" }}>
-                                          <option value="IELTS">IELTS</option>
-                                          <option value="TOEIC">TOEIC</option>
-                                        </select>
+                                          type="number"
+                                          name="phoneNumber"
+                                          value={editingValues.phoneNumber}
+                                          style={{ width: "80px" }}
+                                        />
                                       ) : (
                                         <h6
                                           className="fw-semibold text-wrap mb-0"
-                                          style={{ width: "70px" }}>
-                                          {item.classify}
+                                          style={{ width: "80px" }}>
+                                          {item.phoneNumber}
                                         </h6>
                                       )}
                                     </div>
@@ -455,35 +487,17 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
                                   <td className="border-bottom-0">
                                     {isEditing ? (
                                       <input
-                                        type="text"
-                                        name="phoneNumber"
-                                        placeholder="Phone Number"
-                                        value={editingValues.phoneNumber}
+                                        type="date"
                                         onChange={handleChange}
-                                        style={{ width: "100px" }}
+                                        name="birthday"
+                                        value={editingValues.birthday}
+                                        style={{ width: "75px" }}
                                       />
                                     ) : (
                                       <h6
                                         className="fw-semibold mb-0"
-                                        style={{ width: "100px" }}>
-                                        {item.phoneNumber}
-                                      </h6>
-                                    )}
-                                  </td>{" "}
-                                  <td className="border-bottom-0">
-                                    {isEditing ? (
-                                      <textarea
-                                        name="bio"
-                                        placeholder="Bio"
-                                        value={editingValues.bio}
-                                        onChange={handleChange}
-                                        style={{ width: "170px" }}
-                                      />
-                                    ) : (
-                                      <h6
-                                        className="fw-semibold text-wrap mb-0"
-                                        style={{ width: "170px" }}>
-                                        {item.bio}
+                                        style={{ width: "75px" }}>
+                                        {item.birthday}
                                       </h6>
                                     )}
                                   </td>
@@ -491,7 +505,7 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
                                     {isEditing ? (
                                       <button
                                         className="badge bg-success rounded-3 fw-semibold"
-                                        onClick={() => handleSave(item.email)}
+                                        onClick={() => handleSave(item.id)}
                                         style={{
                                           width: "55px",
                                           border: "0",
@@ -511,9 +525,7 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
                                     )}
                                     <button
                                       className="badge bg-danger rounded-3 fw-semibold"
-                                      onClick={() =>
-                                        handleDeleteClass(item.email)
-                                      }
+                                      onClick={() => handleDeleteClass(item.id)}
                                       style={{
                                         marginLeft: "10px",
                                         width: "70px",
@@ -540,4 +552,4 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
   );
 };
 
-export default AdminInstructor;
+export default AdminAccountInstructor;

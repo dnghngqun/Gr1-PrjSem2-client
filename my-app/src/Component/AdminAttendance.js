@@ -2,14 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "toastify-js";
 import "toastify-js/src/toastify.css";
-import SideBarAdmin from "./sideBarAdmin";
 import NavAdmin from "./NavAdmin";
+import SideBarAdmin from "./sideBarAdmin";
 const AdminAttendance = ({ isLoggedIn, onLogout }) => {
-  const [classStarted, setClassStarted] = useState([]);
-  const [isShowWithId, setIsShowWithId] = useState(null);
-  const [enrollmentByClassId, setEnrollmentByClassId] = useState([]);
-  const [showAttendance, setShowAttendance] = useState(null);
-  const [valueAttendance, setValueAttendance] = useState({});
+  const [allClass, setAllClass] = useState([]);
+  const [showWithClassId, setShowWithClassId] = useState(null);
+  const [stuInClass, setStuInClass] = useState([]);
+  const [attendances, setAttendances] = useState([]);
+  const [selectedStudentId, setSelectedStudentId] = useState(null);
   const notify = (mess) =>
     toast({
       text: mess,
@@ -40,74 +40,70 @@ const AdminAttendance = ({ isLoggedIn, onLogout }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/class/status/started")
-      .then((res) => setClassStarted(res.data.data))
-      .catch((err) => console.error("Error to fetch class started: ", err));
+      .get("http://localhost:8080/api/v1/class/")
+      .then((res) => {
+        setAllClass(res.data.data);
+      })
+      .catch((err) => {
+        console.error("Err to fetch class: ", err);
+      });
   }, []);
 
   const handleShow = (id) => {
-    setIsShowWithId(id);
+    setShowWithClassId(id);
     axios
       .get(`http://localhost:8080/api/v1/enrollments/class/${id}`)
-      .then((res) => setEnrollmentByClassId(res.data.data))
+      .then((res) => setStuInClass(res.data.data))
       .catch((err) => {
         notifyFail("No student in class, if error, please check in console!");
         console.log("Error to fetch student: ", err);
-        setIsShowWithId(null);
+        setShowWithClassId(null);
       });
+    fetchAttendanceDetails(id);
   };
 
   const handleHide = () => {
-    setIsShowWithId(null);
-  };
-  const handleShowAttendance = (id) => {
-    setShowAttendance(id);
+    setShowWithClassId(null);
   };
 
-  const handleSentAttendance = (id) => {
-    const sentAttendance = {
-      ...valueAttendance,
-      enrollment: { id: id },
-    };
+  const fetchAttendanceDetails = (classId) => {
+    axios
+      .get(
+        `http://localhost:8080/api/v1/attendance/class/${classId}/attendances`
+      )
+      .then((res) => {
+        const formattedAttendanceData = res.data.data.reduce((acc, record) => {
+          const { id, enrollment, schedule, attendanceStatus } = record;
+          const { account } = enrollment;
 
-    let isSent = true;
+          if (!acc[account.id]) {
+            acc[account.id] = [];
+          }
 
-    if (
-      sentAttendance.lessonNumber === "" ||
-      sentAttendance.lessonNumber == null
-    ) {
-      notifyFail("Lesson Number is required!");
-      isSent = false;
-    }
-    if (
-      sentAttendance.attendanceStatus === "" ||
-      sentAttendance.attendanceStatus == null
-    ) {
-      notifyFail("Status is required!");
-      isSent = false;
-    }
-    if (isSent) {
-      axios
-        .post("http://localhost:8080/api/v1/attendance/add", sentAttendance)
-        .then((res) => {
-          console.log("Sent attendance successfully! ", res);
-          notify("Attendance successful!");
-        })
-        .catch((err) => {
-          console.log("Error to attendance: ", err);
-          notifyFail("Error to attendance, please check error in the console!");
-        });
-    }
-  };
-  const handleHideAttendance = () => {
-    setShowAttendance(null);
+          acc[account.id].push({
+            lessonNumber: schedule.lessonNumber,
+            classDate: schedule.classDate,
+            attendanceStatus: attendanceStatus,
+          });
+
+          return acc;
+        }, {});
+
+        setAttendances(formattedAttendanceData);
+      })
+      .catch((err) => {
+        notifyFail("Error fetching attendance details");
+        console.error(err);
+      });
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValueAttendance((prevValue) => ({ ...prevValue, [name]: value }));
+  const handleClickDetails = (id) => {
+    setSelectedStudentId(id);
   };
 
+  const handleHideDetails = () => {
+    setSelectedStudentId(null);
+  };
   return (
     <div
       className="page-wrapper"
@@ -125,12 +121,17 @@ const AdminAttendance = ({ isLoggedIn, onLogout }) => {
         {/* header */}
         <NavAdmin isLoggedIn={isLoggedIn} />
         {/* body */}
-        <div className="container-fluid">
+        <div
+          className="container-fluid"
+          style={{ maxWidth: "100%", paddingLeft: "0", paddingRight: "0" }}>
           <div className="row">
             <div className="col-lg-12 d-flex align-items-stretch">
               <div className="card w-100">
                 <div className="card-body p-4">
-                  <h5 className="card-title fw-semibold mb-4">Attendance</h5>
+                  <h5 className="card-title fw-semibold mb-4">
+                    {" "}
+                    View Attendance
+                  </h5>
                   <div className="table-responsive">
                     <table className="table text-nowrap mb-0 align-middle">
                       <thead className="text-dark fs-4">
@@ -142,9 +143,6 @@ const AdminAttendance = ({ isLoggedIn, onLogout }) => {
                             <h6 className="fw-semibold mb-0">Name</h6>
                           </th>
                           <th className="border-bottom-0">
-                            <h6 className="fw-semibold mb-0">Instructor</h6>
-                          </th>
-                          <th className="border-bottom-0">
                             <h6 className="fw-semibold mb-0">Study Time</h6>
                           </th>
                           <th className="border-bottom-0">
@@ -152,17 +150,27 @@ const AdminAttendance = ({ isLoggedIn, onLogout }) => {
                           </th>
                           <th className="border-bottom-0">
                             <h6 className="fw-semibold mb-0">End Date</h6>
+                          </th>{" "}
+                          <th className="border-bottom-0">
+                            <h6 className="fw-semibold mb-0">Status</h6>
                           </th>
                           <th className="border-bottom-0"></th>
                         </tr>
                       </thead>
                       <tbody>
-                        {classStarted &&
-                          classStarted.map((item, index) => {
-                            let isShow = isShowWithId === item.id;
+                        {allClass &&
+                          allClass.map((item, index) => {
+                            let classStatus = "Not Started";
+                            if (parseInt(item.status) === 2)
+                              classStatus = "Completed";
+                            if (parseInt(item.status) === 1)
+                              classStatus = "Started";
+                            if (parseInt(item.status) === -1)
+                              classStatus = "Canceled";
+                            const isShowStu = showWithClassId === item.id;
                             return (
                               <>
-                                <tr key={item.id}>
+                                <tr>
                                   <td className="border-bottom-0">
                                     <h6 className="fw-semibold mb-0">
                                       {index + 1}
@@ -176,22 +184,15 @@ const AdminAttendance = ({ isLoggedIn, onLogout }) => {
                                     </h6>
                                   </td>
                                   <td className="border-bottom-0">
-                                    <p
-                                      className="mb-0 fw-normal"
-                                      style={{ width: "100px" }}>
-                                      {item.instructor.name}
-                                    </p>
+                                  
+                                    <span
+                                      className="badge bg-secondary rounded-3 fw-semibold"
+                                      style={{ width: "90px" }}>
+                                      {item.location}
+                                    </span>
                                   </td>
                                   <td className="border-bottom-0">
-                                    <div className="d-flex align-items-center gap-2">
-                                      <span
-                                        className="badge bg-secondary rounded-3 fw-semibold"
-                                        style={{ width: "90px" }}>
-                                        {item.location}
-                                      </span>
-                                    </div>
-                                  </td>
-                                  <td className="border-bottom-0">
+                                    {" "}
                                     <span
                                       className="badge bg-secondary rounded-3 fw-semibold"
                                       style={{ width: "100px" }}>
@@ -199,47 +200,68 @@ const AdminAttendance = ({ isLoggedIn, onLogout }) => {
                                     </span>
                                   </td>
                                   <td className="border-bottom-0">
-                                    <div className="d-flex align-items-center gap-2">
-                                      <span
-                                        className="badge bg-secondary rounded-3 fw-semibold"
-                                        style={{ width: "100px" }}>
-                                        {item.endDate}
-                                      </span>
-                                    </div>
+                                    {" "}
+                                    <span
+                                      className="badge bg-secondary rounded-3 fw-semibold"
+                                      style={{ width: "100px" }}>
+                                      {item.endDate}
+                                    </span>
                                   </td>
                                   <td className="border-bottom-0">
-                                    {isShow ? (
-                                      <button
-                                        className="badge bg-success rounded-3 fw-semibold"
-                                        onClick={() => handleHide()}
-                                        style={{
-                                          width: "153px",
-                                          border: "0",
-                                        }}>
-                                        Hide Student
-                                      </button>
+                                    {" "}
+                                    <h6
+                                      className="fw-semibold mb-0 fs-4"
+                                      style={{ width: "100px" }}>
+                                      {classStatus}
+                                    </h6>
+                                  </td>
+                                  <td className="border-bottom-0">
+                                    {item.status === 1 || item.status === 2 ? (
+                                      <>
+                                        {isShowStu ? (
+                                          <button
+                                            className="badge bg-success rounded-3 fw-semibold"
+                                            onClick={() => handleHide()}
+                                            style={{
+                                              width: "130px",
+                                              border: "0",
+                                            }}>
+                                            close
+                                          </button>
+                                        ) : (
+                                          <button
+                                            className="badge bg-success rounded-3 fw-semibold"
+                                            onClick={() => handleShow(item.id)}
+                                            style={{
+                                              width: "130px",
+                                              border: "0",
+                                            }}>
+                                            Show Student
+                                          </button>
+                                        )}
+                                      </>
                                     ) : (
-                                      <button
-                                        className="badge bg-success rounded-3 fw-semibold"
-                                        onClick={() => handleShow(item.id)}
-                                        style={{
-                                          width: "153px",
-                                          border: "0",
-                                        }}>
-                                        Show Student
-                                      </button>
+                                      <></>
                                     )}
                                   </td>
                                 </tr>
-                                {isShow ? (
-                                  <tr>
+                                {isShowStu && (
+                                  <tr className={`fade-in ${isShowStu ? "show" : "hide"}`}>
                                     <td colSpan={7}>
+                                      <h6 className="fw-semibold mb-0">
+                                        Total Student: {stuInClass.length}
+                                      </h6>
                                       <table className="table text-nowrap mb-0 align-middle">
                                         <thead className="text-dark fs-4">
                                           <tr>
                                             <th className="border-bottom-0">
                                               <h6 className="fw-semibold mb-0">
                                                 Id
+                                              </h6>
+                                            </th>
+                                            <th className="border-bottom-0">
+                                              <h6 className="fw-semibold mb-0">
+                                                Avatar
                                               </h6>
                                             </th>
                                             <th className="border-bottom-0">
@@ -254,151 +276,193 @@ const AdminAttendance = ({ isLoggedIn, onLogout }) => {
                                             </th>
                                             <th className="border-bottom-0">
                                               <h6 className="fw-semibold mb-0">
-                                                Phone Number
+                                                Number of days present
                                               </h6>
                                             </th>
                                             <th className="border-bottom-0">
                                               <h6 className="fw-semibold mb-0">
-                                                Birthday {"(YYYY/MM/DD)"}
+                                                Number of days absent
                                               </h6>
                                             </th>
                                             <th className="border-bottom-0"></th>
                                           </tr>
                                         </thead>
                                         <tbody>
-                                          {enrollmentByClassId &&
-                                            enrollmentByClassId.map(
-                                              (item, index) => {
-                                                let stu = item.account;
-                                                let enrollmentId = item.id;
-                                                console.log(
-                                                  "enrollmentid: ",
-                                                  enrollmentId
-                                                );
-                                                console.log("item ", item);
-                                                let isShowAttendance =
-                                                  showAttendance === stu.id;
-                                                return (
-                                                  <>
-                                                    <tr key={stu.id}>
-                                                      <td className="border-bottom-0">
-                                                        <h6 className="fw-semibold mb-0">
-                                                          {stu.id}
-                                                        </h6>
-                                                      </td>
-                                                      <td className="border-bottom-0">
-                                                        <h6 className="fw-semibold mb-1">
-                                                          {stu.fullName}
-                                                        </h6>
-                                                      </td>
-                                                      <td className="border-bottom-0">
-                                                        <span className="mb-1 fw-semibold">
-                                                          {stu.email}
-                                                        </span>
-                                                      </td>
-                                                      <td className="border-bottom-0">
-                                                        <div className="d-flex align-items-center gap-2">
-                                                          <span className="fw-semibold">
-                                                            {stu.phoneNumber}
-                                                          </span>
-                                                        </div>
-                                                      </td>
-                                                      <td className="border-bottom-0">
-                                                        <span className="fw-semibold mb-0 fs-4">
-                                                          {stu.birthday}
-                                                        </span>
-                                                      </td>
-                                                      <td className="border-bottom-0">
-                                                        {isShowAttendance ? (
-                                                          <button
-                                                            className="badge bg-warning rounded-3 fw-semibold"
-                                                            onClick={() =>
-                                                              handleHideAttendance()
-                                                            }
-                                                            style={{
-                                                              width: "100px",
-                                                              border: "0",
-                                                            }}>
-                                                            Close
-                                                          </button>
-                                                        ) : (
-                                                          <button
-                                                            className="badge bg-warning rounded-3 fw-semibold"
-                                                            onClick={() =>
-                                                              handleShowAttendance(
-                                                                stu.id
-                                                              )
-                                                            }
-                                                            style={{
-                                                              width: "100px",
-                                                              border: "0",
-                                                            }}>
-                                                            Attendance
-                                                          </button>
-                                                        )}
-                                                      </td>
-                                                    </tr>
-                                                    {isShowAttendance ? (
-                                                      <tr>
-                                                        <td colSpan={6}>
-                                                          <div className="w-100 d-xl-flex align-items-center justify-content-sm-center">
-                                                            <input
-                                                              type="number"
-                                                              min="1"
-                                                              max="100"
-                                                              className="form-control m-1"
-                                                              placeholder="Choose lession"
-                                                              name="lessonNumber"
-                                                              onChange={
-                                                                handleChange
-                                                              }
-                                                            />
-                                                            <select
-                                                              className="form-select m-1"
-                                                              name="attendanceStatus"
-                                                              onChange={
-                                                                handleChange
-                                                              }>
-                                                              <option value="">
-                                                                Select
-                                                                attendance
-                                                              </option>
-                                                              <option value="present">
-                                                                Present
-                                                              </option>
-                                                              <option value="absent">
-                                                                Absent
-                                                              </option>
-                                                            </select>
-                                                            <button
-                                                              className="badge bg-warning rounded-3 fw-semibold"
-                                                              style={{
-                                                                width: "60px",
-                                                                border: "0",
-                                                              }}
-                                                              onClick={() =>
-                                                                handleSentAttendance(
-                                                                  enrollmentId
+                                          {stuInClass.map((item, index) => {
+                                            let user = item.account;
+                                            let attendanceRecords =
+                                              attendances[user.id] || [];
+
+                                            const presentCount =
+                                              attendanceRecords.filter(
+                                                (record) =>
+                                                  record.attendanceStatus ===
+                                                  "present"
+                                              ).length;
+                                            const absentCount =
+                                              attendanceRecords.filter(
+                                                (record) =>
+                                                  record.attendanceStatus ===
+                                                  "absent"
+                                              ).length;
+                                            console.log(attendanceRecords);
+                                            console.log(
+                                              "Present Count:",
+                                              presentCount
+                                            );
+                                            console.log(
+                                              "Absent Count:",
+                                              absentCount
+                                            );
+
+                                            return (
+                                              <>
+                                                <tr key={item.id}>
+                                                  <td className="border-bottom-0">
+                                                    <h6 className="fw-semibold mb-0">
+                                                      {index + 1}
+                                                    </h6>
+                                                  </td>
+                                                  <td className="border-bottom-0">
+                                                    <img
+                                                      src={user.imageAccount}
+                                                      alt=""
+                                                      className="rounded-circle offset-1"
+                                                      style={{
+                                                        objectFit: "cover",
+                                                      }}
+                                                      width="30px"
+                                                      height="30px"
+                                                    />
+                                                  </td>
+                                                  <td className="border-bottom-0">
+                                                    <h6 className="fw-semibold mb-1">
+                                                      {user.fullName}
+                                                    </h6>
+                                                  </td>
+                                                  <td className="border-bottom-0">
+                                                    <span className="mb-1 fw-semibold">
+                                                      {user.email}
+                                                    </span>
+                                                  </td>
+                                                  <td className="border-bottom-0">
+                                                    <div className="d-flex align-items-center gap-2">
+                                                      <span className="fw-semibold">
+                                                        {presentCount}
+                                                      </span>
+                                                    </div>
+                                                  </td>
+                                                  <td className="border-bottom-0">
+                                                    <span className="fw-semibold mb-0 fs-4">
+                                                      {absentCount}
+                                                    </span>
+                                                  </td>
+                                                  <td className="border-bottom-0">
+                                                    {selectedStudentId ===
+                                                    user.id ? (
+                                                      <button
+                                                        className="badge bg-success rounded-3 fw-semibold border-0 "
+                                                        onClick={
+                                                          handleHideDetails
+                                                        }
+                                                        style={{
+                                                          width: "100px",
+                                                        }}>
+                                                        Hide
+                                                      </button>
+                                                    ) : (
+                                                      <button
+                                                        className="badge bg-success rounded-3 fw-semibold border-0 "
+                                                        onClick={() =>
+                                                          handleClickDetails(
+                                                            user.id
+                                                          )
+                                                        }
+                                                        style={{
+                                                          width: "100px",
+                                                        }}>
+                                                        Details
+                                                      </button>
+                                                    )}
+                                                  </td>
+                                                </tr>
+                                                {selectedStudentId ===
+                                                  user.id &&
+                                                  attendances[
+                                                    selectedStudentId
+                                                  ] && (
+                                                    <>
+                                                      <tr className={`fade-in ${selectedStudentId ? "show" : "hide"}`}>
+                                                        <td colSpan={7}>
+                                                          <table className="table text-nowrap mb-0 align-middle">
+                                                            <thead className="text-dark fs-4">
+                                                              <tr>
+                                                                <th className="border-bottom-0">
+                                                                  <h6 className="fw-semibold mb-0">
+                                                                    Lesson
+                                                                    Number
+                                                                  </h6>
+                                                                </th>
+                                                                <th className="border-bottom-0">
+                                                                  <h6 className="fw-semibold mb-0">
+                                                                    Class Date
+                                                                  </h6>
+                                                                </th>
+                                                                <th className="border-bottom-0">
+                                                                  <h6 className="fw-semibold mb-0">
+                                                                    Attendance
+                                                                    Status
+                                                                  </h6>
+                                                                </th>
+                                                              </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                              {attendances[
+                                                                selectedStudentId
+                                                              ].map(
+                                                                (
+                                                                  attendance,
+                                                                  index
+                                                                ) => (
+                                                                  <tr
+                                                                    key={index}>
+                                                                    <td className="border-bottom-0">
+                                                                      <h6 className="fw-semibold mb-0">
+                                                                        {
+                                                                          attendance.lessonNumber
+                                                                        }
+                                                                      </h6>
+                                                                    </td>
+                                                                    <td className="border-bottom-0">
+                                                                      <h6 className="fw-semibold mb-0">
+                                                                        {
+                                                                          attendance.classDate
+                                                                        }
+                                                                      </h6>
+                                                                    </td>
+                                                                    <td className="border-bottom-0">
+                                                                      <h6 className="fw-semibold mb-0">
+                                                                        {
+                                                                          attendance.attendanceStatus
+                                                                        }
+                                                                      </h6>
+                                                                    </td>
+                                                                  </tr>
                                                                 )
-                                                              }>
-                                                              Sent
-                                                            </button>
-                                                          </div>
+                                                              )}
+                                                            </tbody>
+                                                          </table>
                                                         </td>
                                                       </tr>
-                                                    ) : (
-                                                      <></>
-                                                    )}
-                                                  </>
-                                                );
-                                              }
-                                            )}
+                                                    </>
+                                                  )}
+                                              </>
+                                            );
+                                          })}
                                         </tbody>
                                       </table>
                                     </td>
                                   </tr>
-                                ) : (
-                                  <></>
                                 )}
                               </>
                             );

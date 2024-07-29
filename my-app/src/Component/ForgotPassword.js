@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "toastify-js";
 import "toastify-js/src/toastify.css";
@@ -12,6 +12,7 @@ const ForgotPassword = () => {
   const [newPasswordAgain, setNewPasswordAgain] = useState("");
   const [step, setStep] = useState(1);
 
+  const [errMessage, setErrMessage] = useState("");
   //use to change class name validate when input
   const [isPWAgainValid, setPWAgainValid] = useState("");
   const [isEmailValid, setIsEmailValid] = useState("");
@@ -50,10 +51,13 @@ const ForgotPassword = () => {
     let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
     if (value === "") {
       setIsEmailValid("");
+      setErrMessage("");
     } else if (!value.match(pattern)) {
       setIsEmailValid("falseEmail");
+      setErrMessage("Invalid email format!");
     } else {
       setIsEmailValid("trueEmail");
+      setErrMessage("");
     }
     setContact(value);
   };
@@ -61,41 +65,55 @@ const ForgotPassword = () => {
   const handleTokenChange = (e) => {
     setToken(e.target.value);
   };
-  const handleNewPasswordChange = (e) => setNewPassword(e.target.value);
+  const handleNewPasswordChange = (e) => {
+    const value = e.target.value;
+    const passwordPattern = /^(?=.*[A-Z]).{4,}$/;
+    if (value === "") {
+      setNewPwColor("");
+      setErrMessage("");
+    } else if (!value.match(passwordPattern)) {
+      setNewPwColor("falseNewPW"); // Đỏ
+      setErrMessage(
+        "Password needs to be at least 4 characters long with one uppercase letter!"
+      );
+    } else {
+      setNewPwColor("trueNewPW"); // Xanh lá
+      setErrMessage("");
+    }
+    setNewPassword(value);
+    // Reset lại mật khẩu xác nhận và trạng thái lỗi khi mật khẩu mới thay đổi
+    setNewPasswordAgain("");
+    setPWAgainValid("");
+  };
 
   const handleNewPasswordAgainChange = (e) => {
-    setNewPasswordAgain(e.target.value);
-  };
-  // const handleNewPasswordChange = (e) => {
-  //   setNewPassword(e.target.value);
-  // };
-  // const handleNewPasswordAgainChange = (e) => {
-  //   const value = e.target.value;
-  //   setNewPasswordAgain(value);
+    const value = e.target.value;
+    setNewPasswordAgain(value);
 
-  //   if (value === "") {
-  //     setPWAgainValid("none");
-  //   } else if (value !== newPassword) {
-  //     setPWAgainValid("0 0px 15px 0px #B90B0B"); // Đỏ
-  //   } else {
-  //     setPWAgainValid("0 0px 15px 0px #5BF250");
-  //     setNewPwColor("0 0px 15px 0px #5BF250");
-  //   }
-  // };
-
-  useEffect(() => {
-    if (newPasswordAgain === "") {
+    if (value === "") {
       setPWAgainValid("");
-      setNewPwColor("");
-    } else if (newPasswordAgain !== newPassword) {
+      setErrMessage("");
+    } else if (value !== newPassword) {
       setPWAgainValid("falsePWAgain"); // Đỏ
-      setNewPwColor("falseNewPW");
+      setErrMessage("Passwords do not match!");
     } else {
       setPWAgainValid("truePWAgain"); // Xanh lá
-      setNewPwColor("trueNewPW");
+      setErrMessage("");
     }
-  }, [newPasswordAgain, newPassword]);
+  };
 
+  // useEffect(() => {
+  //   if (newPasswordAgain === "") {
+  //     setPWAgainValid("");
+  //     setErrMessage("");
+  //   } else if (newPasswordAgain !== newPassword) {
+  //     setPWAgainValid("falsePWAgain"); // Đỏ
+  //     setErrMessage("Passwords do not match!");
+  //   } else {
+  //     setPWAgainValid("truePWAgain"); // Xanh lá
+  //     setErrMessage("");
+  //   }
+  // }, [newPasswordAgain, newPassword]);
   const handleSendToken = () => {
     notify("Token is being sent, please wait a few seconds...");
     axios
@@ -211,8 +229,8 @@ const ForgotPassword = () => {
                 Not you? Try again!
               </a>
             </div>
-
             <div className="box-changePass">
+              <span className="notify-err">{errMessage}</span>
               <div className="sendPass">
                 <input
                   className="input-forgot input-forgot-token"

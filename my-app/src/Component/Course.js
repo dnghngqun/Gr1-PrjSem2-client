@@ -190,11 +190,11 @@ const Course = ({ isLoggedIn, onLogout }) => {
   useEffect(() => {
     // Khởi tạo ScrollReveal và cấu hình các hiệu ứng cuộn
     ScrollReveal().reveal(".reveal", {
-      distance: "50px",
+      distance: "40px",
       duration: 400,
       easing: "ease-in-out",
       origin: "bottom",
-      interval: 400,
+      interval: 100,
     });
   }, []);
   return (
