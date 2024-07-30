@@ -214,7 +214,7 @@
   flex: 1;
   margin-right: 10px;
   background-color: #fff;
- 
+  border-radius:6px;
 }
 
 .sigh-schedule > a {
