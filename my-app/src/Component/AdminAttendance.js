@@ -92,7 +92,7 @@ const AdminAttendance = ({ isLoggedIn, onLogout }) => {
         setAttendances(formattedAttendanceData);
       })
       .catch((err) => {
-        notifyFail("Error fetching attendance details");
+        console.log("Error fetching attendance details");
         console.error(err);
       });
   };
