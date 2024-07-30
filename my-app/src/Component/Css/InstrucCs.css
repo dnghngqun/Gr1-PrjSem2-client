@@ -31,3 +31,9 @@
 .info-child-item {
   font-size: 18px;
 }
+
+.row-classToday {
+  box-shadow: 0 0 2px 1px rgba(220, 216, 216, 0.436);
+  border-radius: 10px;
+  padding-top: 10px;
+}

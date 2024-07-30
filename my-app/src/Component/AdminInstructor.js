@@ -12,6 +12,8 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
   const [editingClassId, setEditingClassId] = useState(null);
   const [editingValues, setEditingValues] = useState({});
   const [isShowCreate, setIsShowCreate] = useState(false);
+  const [isShowClass, setIsShowClass] = useState(null);
+  const [classShow, setClassShow] = useState([]);
   const [newInstructor, setNewInstructor] = useState({
     name: "",
     email: "",
@@ -201,6 +203,25 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
         console.error("Error to create new account: ", err);
       });
   };
+
+  const handleShowClass = (id, email) => {
+    setIsShowClass(id);
+
+    axios
+      .get(`http://localhost:8080/api/v1/class/instructor/${email}`)
+      .then((res) => {
+        setClassShow(res.data.data);
+      })
+      .catch((err) => {
+        console.error("Err to fetch class by instructor: ", err);
+        notifyFail("The instructor is not teaching any classes at the moment!");
+        setIsShowClass(null);
+        setClassShow([]);
+      });
+  };
+  const handleCloseShowClass = () => {
+    setIsShowClass(null);
+  };
   return (
     <div>
       <div
@@ -351,6 +372,9 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
                               <h6 className="fw-semibold mb-0">Bio</h6>
                             </th>
                             <th className="border-bottom-0">
+                              <h6 className="fw-semibold mb-0">Class</h6>
+                            </th>
+                            <th className="border-bottom-0">
                               <h6 className="fw-semibold mb-0">Action</h6>
                             </th>
                           </tr>
@@ -358,6 +382,7 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
                         <tbody>
                           {filteredInstructors.map((item, index) => {
                             const isEditing = editingClassId === item.id;
+                            const isShowC = isShowClass === item.id;
                             return (
                               <>
                                 <tr key={index}>
@@ -386,12 +411,12 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
                                         placeholder="Name"
                                         value={editingValues.name}
                                         onChange={handleChange}
-                                        style={{ width: "150px" }}
+                                        style={{ width: "120px" }}
                                       />
                                     ) : (
                                       <h6
                                         className="fw-semibold text-wrap mb-0"
-                                        style={{ width: "150px" }}>
+                                        style={{ width: "120px" }}>
                                         {item.name}
                                       </h6>
                                     )}
@@ -488,6 +513,31 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
                                     )}
                                   </td>
                                   <td className="border-bottom-0">
+                                    {isShowC ? (
+                                      <button
+                                        className="badge bg-success rounded-3 fw-semibold"
+                                        onClick={() => handleCloseShowClass()}
+                                        style={{
+                                          width: "55px",
+                                          border: "0",
+                                        }}>
+                                        Close
+                                      </button>
+                                    ) : (
+                                      <button
+                                        className="badge bg-success rounded-3 fw-semibold"
+                                        onClick={() =>
+                                          handleShowClass(item.id, item.email)
+                                        }
+                                        style={{
+                                          width: "55px",
+                                          border: "0",
+                                        }}>
+                                        View
+                                      </button>
+                                    )}
+                                  </td>
+                                  <td className="border-bottom-0">
                                     {isEditing ? (
                                       <button
                                         className="badge bg-success rounded-3 fw-semibold"
@@ -523,6 +573,122 @@ const AdminInstructor = ({ isLoggedIn, onLogout }) => {
                                     </button>
                                   </td>
                                 </tr>
+                                {isShowC && (
+                                  <>
+                                    <tr>
+                                      <td
+                                        className="border-bottom-0"
+                                        colSpan={10}>
+                                        <table className="table text-nowrap mb-0 align-middle">
+                                          <thead className="text-dark fs-4">
+                                            <tr>
+                                              <th className="border-bottom-0">
+                                                <h6 className="fw-semibold mb-0">
+                                                  Id
+                                                </h6>
+                                              </th>
+                                              <th className="border-bottom-0">
+                                                <h6 className="fw-semibold mb-0">
+                                                  Name
+                                                </h6>
+                                              </th>
+                                              <th className="border-bottom-0">
+                                                <h6 className="fw-semibold mb-0">
+                                                  Study Time
+                                                </h6>
+                                              </th>
+                                              <th className="border-bottom-0">
+                                                <h6 className="fw-semibold mb-0">
+                                                  Start Date
+                                                </h6>
+                                              </th>
+                                              <th className="border-bottom-0">
+                                                <h6 className="fw-semibold mb-0">
+                                                  End Date
+                                                </h6>
+                                              </th>{" "}
+                                              <th className="border-bottom-0">
+                                                <h6 className="fw-semibold mb-0">
+                                                  Status
+                                                </h6>
+                                              </th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            {classShow &&
+                                              classShow.map((item, index) => {
+                                                let classStatus = "Not Started";
+                                                if (parseInt(item.status) === 2)
+                                                  classStatus = "Completed";
+                                                if (parseInt(item.status) === 1)
+                                                  classStatus = "Started";
+
+                                                return (
+                                                  <>
+                                                    <tr>
+                                                      <td className="border-bottom-0">
+                                                        <h6 className="fw-semibold mb-0">
+                                                          {index + 1}
+                                                        </h6>
+                                                      </td>
+                                                      <td className="border-bottom-0">
+                                                        <h6
+                                                          className="fw-semibold mb-0"
+                                                          style={{
+                                                            width: "100px",
+                                                          }}>
+                                                          {item.course.name}
+                                                        </h6>
+                                                      </td>
+                                                      <td className="border-bottom-0">
+                                                        <span
+                                                          className="badge bg-secondary rounded-3 fw-semibold"
+                                                          style={{
+                                                            width: "90px",
+                                                          }}>
+                                                          {item.location}
+                                                        </span>
+                                                      </td>
+                                                      <td className="border-bottom-0">
+                                                        {" "}
+                                                        <span
+                                                          className="badge bg-secondary rounded-3 fw-semibold"
+                                                          style={{
+                                                            width: "100px",
+                                                          }}>
+                                                          {item.startDate}
+                                                        </span>
+                                                      </td>
+                                                      <td className="border-bottom-0">
+                                                        {" "}
+                                                        <span
+                                                          className="badge bg-secondary rounded-3 fw-semibold"
+                                                          style={{
+                                                            width: "100px",
+                                                          }}>
+                                                          {item.endDate}
+                                                        </span>
+                                                      </td>
+                                                      <td className="border-bottom-0">
+                                                        {" "}
+                                                        <h6
+                                                          className="fw-semibold mb-0 fs-4"
+                                                          style={{
+                                                            width: "100px",
+                                                          }}>
+                                                          {classStatus}
+                                                        </h6>
+                                                      </td>
+                                                    </tr>
+                                                  </>
+                                                );
+                                              })}
+                                          </tbody>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </>
+                                )}
                               </>
                             );
                           })}

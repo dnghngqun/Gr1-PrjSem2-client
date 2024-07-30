@@ -39,6 +39,9 @@ const Admin = ({ isLoggedIn, onLogout }) => {
     style: "currency",
     currency: "USD",
   });
+
+  const [classToday, setClassToday] = useState([]);
+  const [totalStudent, setTotalStudent] = useState("0");
   //getAllPayment
   useEffect(() => {
     axios
@@ -51,6 +54,28 @@ const Admin = ({ isLoggedIn, onLogout }) => {
         console.error("Err to fetch all payments: ", err);
       });
   }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/v1/accounts/count-customers")
+      .then((res) => {
+        setTotalStudent(res.data);
+      })
+      .catch((err) => {
+        console.error("Err to fetch total student: ", err);
+        setTotalStudent("0");
+      });
+
+    axios
+      .get("http://localhost:8080/api/v1/class/today")
+      .then((res) => {
+        setClassToday(res.data);
+      })
+      .catch((err) => {
+        console.error("error to fetch class today: ", err);
+        setClassToday([]);
+      });
+  });
 
   useEffect(() => {
     axios
@@ -293,6 +318,163 @@ const Admin = ({ isLoggedIn, onLogout }) => {
                         </tbody>
                       </table>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-4">
+                <div className="row">
+                  <div className="col-lg-12">
+                    <div className="card overflow-hidden">
+                      <div className="card-body p-4">
+                        <h5 className="card-title mb-9 fw-semibold">
+                          Total Students
+                        </h5>
+                        <div className="row align-items-center">
+                          <div className="col-8">
+                            <h4 className="fw-semibold mb-3">{totalStudent}</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-12">
+                    <div className="card">
+                      <div className="card-body">
+                        <div className="row alig n-items-start">
+                          <div className="col-8">
+                            <h5
+                              className="card-title mb-9 fw-semibold"
+                              style={{ paddingTop: "1rem" }}>
+                              {" "}
+                              Total Class Today{" "}
+                            </h5>
+                            <h4 className="fw-semibold mb-3">
+                              {classToday && classToday.length}
+                            </h4>
+                          </div>
+                          <div className="col-4">
+                            <div className="d-flex justify-content-end">
+                              <div className="text-white bg-secondary rounded-circle p-6 d-flex align-items-center justify-content-center">
+                                <i className="ti ti-currency-dollar fs-6"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-8 d-flex align-items-strech">
+                <div className="card w-100">
+                  <div className="card-body">
+                    <div className="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                      <div className="mb-3 mb-sm-0">
+                        <h2
+                          className="card-title fw-semibold "
+                          style={{ paddingTop: "1rem" }}>
+                          Class Today
+                        </h2>
+                      </div>
+                    </div>
+                    <table className="table text-nowrap mb-0 align-middle">
+                      <thead className="text-dark fs-4">
+                        <tr>
+                          <th className="border-bottom-0">
+                            <h6 className="fw-semibold mb-0">Id</h6>
+                          </th>
+                          <th className="border-bottom-0">
+                            <h6 className="fw-semibold mb-0">Name</h6>
+                          </th>
+                          <th className="border-bottom-0">
+                            <h6 className="fw-semibold mb-0">Instructor</h6>
+                          </th>
+                          <th className="border-bottom-0">
+                            <h6 className="fw-semibold mb-0">Study Time</h6>
+                          </th>
+                          <th className="border-bottom-0">
+                            <h6 className="fw-semibold mb-0">Start Date</h6>
+                          </th>
+                          <th className="border-bottom-0">
+                            <h6 className="fw-semibold mb-0">End Date</h6>
+                          </th>
+                          <th className="border-bottom-0">
+                            <h6 className="fw-semibold mb-0">Status</h6>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {classToday &&
+                          classToday.map((item, index) => {
+                            let classStatus = "Not Started";
+                            if (parseInt(item.status) === 2)
+                              classStatus = "Completed";
+                            if (parseInt(item.status) === 1)
+                              classStatus = "Started";
+                            if (parseInt(item.status) === -1)
+                              classStatus = "Canceled";
+                            return (
+                              <tr>
+                                <td className="border-bottom-0">
+                                  <h6 className="fw-semibold mb-0">
+                                    {index + 1}
+                                  </h6>
+                                </td>
+                                <td className="border-bottom-0">
+                                  <h6
+                                    className="fw-semibold mb-0"
+                                    style={{ width: "100px" }}>
+                                    {item.course.name}
+                                  </h6>
+                                </td>
+                                <td className="border-bottom-0">
+                                  <p
+                                    className="mb-0 fw-normal"
+                                    style={{ width: "100px" }}>
+                                    {item.instructor.name}
+                                  </p>
+                                </td>
+                                <td className="border-bottom-0">
+                                  <div className="d-flex align-items-center gap-2">
+                                    <span
+                                      className="badge bg-secondary rounded-3 fw-semibold"
+                                      style={{ width: "90px" }}>
+                                      {item.location}
+                                    </span>
+                                  </div>
+                                </td>
+                                <td className="border-bottom-0">
+                                  <div className="d-flex align-items-center gap-2">
+                                    <span
+                                      className="badge bg-secondary rounded-3 fw-semibold"
+                                      style={{ width: "100px" }}>
+                                      {item.startDate}
+                                    </span>
+                                  </div>
+                                </td>
+                                <td className="border-bottom-0">
+                                  <div className="d-flex align-items-center gap-2">
+                                    <span
+                                      className="badge bg-secondary rounded-3 fw-semibold"
+                                      style={{ width: "100px" }}>
+                                      {item.endDate}
+                                    </span>
+                                  </div>
+                                </td>
+                                <td className="border-bottom-0">
+                                  <h6
+                                    className="fw-semibold mb-0 fs-4"
+                                    style={{ width: "100px" }}>
+                                    {classStatus}
+                                  </h6>
+                                </td>
+                              </tr>
+                            );
+                          })}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>

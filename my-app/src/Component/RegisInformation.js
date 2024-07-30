@@ -313,8 +313,9 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
         if (response.data.remaining > 0) {
           setDiscount(response.data.value);
           notify("Discount applied successfully!");
+        } else {
+          notifyFail("Sorry, the discount code has reached its usage limit!");
         }
-        notifyFail("Sorry, the discount code has reached its usage limit!");
       })
       .catch((error) => {
         notifyFail("Error checking discount code!");

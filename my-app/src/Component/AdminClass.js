@@ -223,6 +223,13 @@ const AdminClass = ({ isLoggedIn, onLogout }) => {
                         <option value="1">Started</option>
                         <option value="2">Completed</option>
                       </select>
+                      <select
+                        className="form-select m-1"
+                        onChange={handleSearchChange}>
+                        <option value="">All Course</option>
+                        <option value="Toeic">Toeic</option>
+                        <option value="Ielts">Ielts</option>
+                      </select>
                     </div>
                     <div className="table-responsive">
                       <table className="table text-nowrap mb-0 align-middle">

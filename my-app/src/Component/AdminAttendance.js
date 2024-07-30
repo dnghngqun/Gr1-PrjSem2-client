@@ -42,13 +42,16 @@ const AdminAttendance = ({ isLoggedIn, onLogout }) => {
     axios
       .get("http://localhost:8080/api/v1/class/")
       .then((res) => {
-        setAllClass(res.data.data);
+        // Lọc các lớp học có status = 1 hoặc 2
+        const filteredClasses = res.data.data.filter(
+          (item) => item.status === 1 || item.status === 2
+        );
+        setAllClass(filteredClasses);
       })
       .catch((err) => {
         console.error("Err to fetch class: ", err);
       });
   }, []);
-
   const handleShow = (id) => {
     setShowWithClassId(id);
     axios
@@ -165,8 +168,7 @@ const AdminAttendance = ({ isLoggedIn, onLogout }) => {
                               classStatus = "Completed";
                             if (parseInt(item.status) === 1)
                               classStatus = "Started";
-                            if (parseInt(item.status) === -1)
-                              classStatus = "Canceled";
+
                             const isShowStu = showWithClassId === item.id;
                             return (
                               <>
@@ -184,7 +186,6 @@ const AdminAttendance = ({ isLoggedIn, onLogout }) => {
                                     </h6>
                                   </td>
                                   <td className="border-bottom-0">
-                                  
                                     <span
                                       className="badge bg-secondary rounded-3 fw-semibold"
                                       style={{ width: "90px" }}>
@@ -246,7 +247,10 @@ const AdminAttendance = ({ isLoggedIn, onLogout }) => {
                                   </td>
                                 </tr>
                                 {isShowStu && (
-                                  <tr className={`fade-in ${isShowStu ? "show" : "hide"}`}>
+                                  <tr
+                                    className={`fade-in ${
+                                      isShowStu ? "show" : "hide"
+                                    }`}>
                                     <td colSpan={7}>
                                       <h6 className="fw-semibold mb-0">
                                         Total Student: {stuInClass.length}
@@ -392,7 +396,12 @@ const AdminAttendance = ({ isLoggedIn, onLogout }) => {
                                                     selectedStudentId
                                                   ] && (
                                                     <>
-                                                      <tr className={`fade-in ${selectedStudentId ? "show" : "hide"}`}>
+                                                      <tr
+                                                        className={`fade-in ${
+                                                          selectedStudentId
+                                                            ? "show"
+                                                            : "hide"
+                                                        }`}>
                                                         <td colSpan={7}>
                                                           <table className="table text-nowrap mb-0 align-middle">
                                                             <thead className="text-dark fs-4">

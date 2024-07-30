@@ -394,6 +394,14 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
                                                                 stu.id
                                                               ]
                                                             }
+                                                            style={{
+                                                              color:
+                                                                attendanceStatus[
+                                                                  stu.id
+                                                                ] === "absent"
+                                                                  ? "red"
+                                                                  : "black",
+                                                            }}
                                                             onChange={(e) =>
                                                               handleAttendanceChange(
                                                                 stu.id,
@@ -406,7 +414,11 @@ const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
                                                               defaultValue>
                                                               Present
                                                             </option>
-                                                            <option value="absent">
+                                                            <option
+                                                              value="absent"
+                                                              style={{
+                                                                color: "red",
+                                                              }}>
                                                               Absent
                                                             </option>
                                                           </select>
