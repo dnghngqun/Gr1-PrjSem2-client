@@ -213,8 +213,9 @@
   color: black;
   flex: 1;
   margin-right: 10px;
-  background-color: #fff;
-  border-radius:6px;
+  background-color: #f2f5f5;
+  border-radius:6px ;
+  
 }
 
 .sigh-schedule > a {
