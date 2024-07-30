@@ -16,8 +16,7 @@ const Register = ({ onLogin }) => {
   const [error, setError] = useState("");
 
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const phonePattern =
-    /^(\+?[1-9]\d{1,14}|0[3-9][0-9]{8}|0[2-9][0-9]{1,4}[0-9]{6,8})$/;
+  const phonePattern = /^0\d{9}$/;
   const passwordPattern = /^(?=.*[A-Z]).{4,}$/;
   const notify = (mess) =>
     toast({
