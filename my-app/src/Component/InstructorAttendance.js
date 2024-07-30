@@ -6,13 +6,13 @@ import NavInstructor from "./NavInstructor";
 import SideBarInstructor from "./SideBarInstructor";
 const InstructorAttendance = ({ isLoggedIn, onLogout }) => {
   const dateToday = new Date();
-  const currentDate =
-    dateToday.getFullYear() +
-    "-" +
-    String(dateToday.getMonth() + 1).padStart(2, "0") +
-    "-" +
-    String(dateToday.getDate()).padStart(2, "0");
-  //const currentDate = "2024-07-31"; //cái này để test cho buổi sau , mấy ngày khác tương tự, có thể xem lịch trong db phần insert schedule
+  // const currentDate =
+  //   dateToday.getFullYear() +
+  //   "-" +
+  //   String(dateToday.getMonth() + 1).padStart(2, "0") +
+  //   "-" +
+  //   String(dateToday.getDate()).padStart(2, "0");
+  const currentDate = "2024-08-08"; //cái này để test cho buổi sau , mấy ngày khác tương tự, có thể xem lịch trong db phần insert schedule
 
   const [isShowWithId, setIsShowWithId] = useState(null);
   const [enrollmentByClassId, setEnrollmentByClassId] = useState([]);

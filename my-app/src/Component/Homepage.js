@@ -359,42 +359,6 @@ const Homepage = ({ isLoggedIn, onLogout }) => {
                   </text>
                 </svg>
               </div>
-
-              <div className="feature-content">
-                <h1>Lorem ipsum dolor</h1>
-                <ul>
-                  <li>
-                    <div className="progress-container">
-                      <div className="progress-label">UI/UX Design</div>
-                      <div className="progress-bar">
-                        <div
-                          className="progress-bar-inner pink"
-                          style={{ width: "0%" }}></div>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="progress-container">
-                      <div className="progress-label">Mobile Development</div>
-                      <div className="progress-bar">
-                        <div
-                          className="progress-bar-inner green"
-                          style={{ width: "60%" }}></div>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="progress-container">
-                      <div className="progress-label">Web Development</div>
-                      <div className="progress-bar">
-                        <div
-                          className="progress-bar-inner blue"
-                          style={{ width: "70%" }}></div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
           <div className="container2">
