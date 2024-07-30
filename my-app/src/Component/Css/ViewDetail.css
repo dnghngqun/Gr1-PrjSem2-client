@@ -33,7 +33,7 @@
 .goal-detail {
   display: flex;
   gap: 20px; /* Khoảng cách giữa các goal-detail1 và goal-detail2 */
-  margin-top: 20px;
+  margin-top: 5px;
 }
 
 .goal-detail1,
@@ -197,6 +197,7 @@
   margin-top: 20px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 50px;
 }
 
 .sigh-schedule {

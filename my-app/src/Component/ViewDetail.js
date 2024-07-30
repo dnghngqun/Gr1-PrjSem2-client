@@ -115,9 +115,9 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
       } else {
         notifyFail("Sorry, please login with account customer");
       }
-    }else{
-    notifyFail("Please login!");
-    navigate("/login");
+    } else {
+      notifyFail("Please login!");
+      navigate("/login");
     }
   };
 
@@ -136,7 +136,60 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
               <h2>Goal: 550+</h2>
             </div> */}
           </div>
+          <div className="sign-course">
+            <h2 style={{ color: "#127c71", marginBottom: "10px" }}>
+              Register for the course
+            </h2>
+            <div className="sigh-schedule">
+              <select className="study-time" onChange={handleStudyTimeChange}>
+                <option value="">Study time</option>
+                {classIn4 &&
+                  classIn4
+                    .filter((item) => item.course.id === parseInt(courseId))
+                    .map((item) => {
+                      return (
+                        <option key={item.id} value={item.location}>
+                          {item.location}
+                        </option>
+                      );
+                    })}
+              </select>
+              <select className="open-date" onChange={handleStartDateChange}>
+                <option value="">Choose Start Date</option>
+                {classIn4
+                  .filter(
+                    (item) =>
+                      item.location === selectedStudyTime &&
+                      item.course.id === parseInt(courseId)
+                  )
+                  .map((item) => (
+                    <option key={item.id} value={item.startDate}>
+                      {formatDate(item.startDate)}
+                    </option>
+                  ))}
+              </select>
+              <select className="teacher" onChange={handleInstructor}>
+                <option value="">Choose Instructor</option>
+                {instructors
+                  .filter((instructor) =>
+                    classIn4.some(
+                      (cls) =>
+                        cls.instructor.id === instructor.id &&
+                        cls.location === selectedStudyTime &&
+                        cls.startDate === selectedStartDate
+                    )
+                  )
+                  .map((instructor) => (
+                    <option key={instructor.id} value={instructor.name}>
+                      {instructor.name}
+                    </option>
+                  ))}
+              </select>
+              <a onClick={handleSignUp}>Sign up</a>
+            </div>
+          </div>
           <div className="goal">
+            <h2>Goal Details</h2>
             <div className="goal-detail">
               <div className="goal-detail1">
                 <h3>{sections.goalTitle}</h3>
@@ -214,58 +267,6 @@ const ViewDetail = ({ isLoggedIn, onLogout }) => {
               ))}
             </tbody>
           </table>
-        </div>
-        <div className="sign-course">
-          <h2 style={{ color: "#127c71", marginBottom: "10px" }}>
-            Register for the course
-          </h2>
-          <div className="sigh-schedule">
-            <select className="study-time" onChange={handleStudyTimeChange}>
-              <option value="">Study time</option>
-              {classIn4 &&
-                classIn4
-                  .filter((item) => item.course.id === parseInt(courseId))
-                  .map((item) => {
-                    return (
-                      <option key={item.id} value={item.location}>
-                        {item.location}
-                      </option>
-                    );
-                  })}
-            </select>
-            <select className="open-date" onChange={handleStartDateChange}>
-              <option value="">Choose Start Date</option>
-              {classIn4
-                .filter(
-                  (item) =>
-                    item.location === selectedStudyTime &&
-                    item.course.id === parseInt(courseId)
-                )
-                .map((item) => (
-                  <option key={item.id} value={item.startDate}>
-                    {formatDate(item.startDate)}
-                  </option>
-                ))}
-            </select>
-            <select className="teacher" onChange={handleInstructor}>
-              <option value="">Choose Instructor</option>
-              {instructors
-                .filter((instructor) =>
-                  classIn4.some(
-                    (cls) =>
-                      cls.instructor.id === instructor.id &&
-                      cls.location === selectedStudyTime &&
-                      cls.startDate === selectedStartDate
-                  )
-                )
-                .map((instructor) => (
-                  <option key={instructor.id} value={instructor.name}>
-                    {instructor.name}
-                  </option>
-                ))}
-            </select>
-            <a onClick={handleSignUp}>Sign up</a>
-          </div>
         </div>
       </div>
       <Footer />
