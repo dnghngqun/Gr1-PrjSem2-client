@@ -214,14 +214,22 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
   const handlePaymentSuccess = (details) => {
     const accountId = isLoggedIn.data.id;
     axios
-      .post("http://localhost:8080/api/v1/payments", {
-        paymentId: details.id, // details.id là paymentId do PayPal trả về
-        account: { id: accountId }, // Thay đổi ID của người dùng tương ứng
-        discount: discount,
-        orderDetail: { id: orderDetailId },
-        paymentMethod: "PayPal",
-        amount: totalPrice,
-      })
+      .post(
+        "http://localhost:8080/api/v1/payments",
+        {
+          paymentId: details.id, // details.id là paymentId do PayPal trả về
+          account: { id: accountId }, // Thay đổi ID của người dùng tương ứng
+          discount: discount,
+          orderDetail: { id: orderDetailId },
+          paymentMethod: "PayPal",
+          amount: totalPrice,
+        },
+        {
+          params: {
+            discountCode: codeDiscount,
+          },
+        }
+      )
       .then((response) => {
         console.log("Payment saved successfully:", response.data);
         setPaymentId(details.id);
@@ -302,8 +310,11 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
     axios
       .get(`http://localhost:8080/api/v1/discount/code/${codeDiscount}`)
       .then((response) => {
-        setDiscount(response.data.value);
-        notify("Discount applied successfully!");
+        if (response.data.remaining > 0) {
+          setDiscount(response.data.value);
+          notify("Discount applied successfully!");
+        }
+        notifyFail("Sorry, the discount code has reached its usage limit!");
       })
       .catch((error) => {
         notifyFail("Error checking discount code!");
