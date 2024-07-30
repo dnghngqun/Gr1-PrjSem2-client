@@ -138,6 +138,7 @@ label.year {
 .boxCheckDiscount .inputCheckDiscount {
   width: 70% !important;
   height: 100%;
+  border-radius: 7px;
 }
 
 .boxCheckDiscount .btn-checkDiscount {
@@ -145,5 +146,15 @@ label.year {
   text-align: center;
   height: 100%;
   margin-left: 1%;
-  padding: 0;
+  padding: 0 !important;
+}
+
+.editing-value {
+  display: block;
+  height: 20px;
+  padding: 5px;
+}
+
+.editing-input {
+  height: 40px !important;
 }

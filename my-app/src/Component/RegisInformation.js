@@ -325,11 +325,12 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
             <input
               type="text"
               id="fullname"
+              className="editing-input"
               value={fullname}
               onChange={(e) => setFullname(e.target.value)}
             />
           ) : (
-            <span>{fullname}</span>
+            <span className="editing-value">{fullname}</span>
           )}
           <br />
           <label htmlFor="phoneNumber" className="label phoneNumber">
@@ -340,11 +341,12 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
             <input
               type="text"
               id="phoneNumber"
+              className="editing-input"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
           ) : (
-            <span>{phoneNumber}</span>
+            <span className="editing-value">{phoneNumber}</span>
           )}
           <br />
           <label htmlFor="email" className="label email">
@@ -355,11 +357,12 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
             <input
               type="text"
               id="email"
+              className="editing-input"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           ) : (
-            <span>{email}</span>
+            <span className="editing-value">{email}</span>
           )}
           <br />
           <label htmlFor="" className="label">
@@ -378,11 +381,12 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
                   max="31"
                   step="1"
                   id="day"
+                  className="editing-input"
                   value={day}
                   onChange={handleDayChange}
                 />
               ) : (
-                <span>{day}</span>
+                <span className="editing-value">{day}</span>
               )}
             </div>
             <div className="div-month">
@@ -395,13 +399,14 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
                   type="number"
                   min="1"
                   max="12"
+                  className="editing-input"
                   step="1"
                   id="month"
                   value={month}
                   onChange={handleMonthChange}
                 />
               ) : (
-                <span>{month}</span>
+                <span className="editing-value">{month}</span>
               )}
             </div>
             <div className="div-year">
@@ -414,13 +419,14 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
                   type="number"
                   min="1930"
                   max="2099"
+                  className="editing-input"
                   step="1"
                   id="year"
                   value={year}
                   onChange={handleYearChange}
                 />
               ) : (
-                <span>{year}</span>
+                <span className="editing-value">{year}</span>
               )}
             </div>
           </div>
@@ -461,7 +467,9 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
               onChange={handleCodeDiscountChange}
               className="inputCheckDiscount"
             />
-            <button onClick={handleCheckDiscount} className="btn-checkDiscount">Check</button>
+            <button onClick={handleCheckDiscount} className="btn-checkDiscount">
+              Check
+            </button>
           </div>
           <hr className="line" />
           <div className="info-order">
