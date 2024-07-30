@@ -210,11 +210,11 @@
 .open-date,
 .teacher {
   text-align: center;
-  color: #fff;
+  color: black;
   flex: 1;
   margin-right: 10px;
-  background-color: #e69215;
-  border-radius: 10px;
+  background-color: #fff;
+ 
 }
 
 .sigh-schedule > a {
