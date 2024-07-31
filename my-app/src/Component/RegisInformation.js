@@ -192,6 +192,10 @@ const RegisInformation = ({ isLoggedIn, onLogout }) => {
       notifyFail("Error to process payment!");
       return;
     }
+    if (totalPrice === null || totalPrice === undefined) {
+      notifyFail("Err total price!");
+      return;
+    }
     const orderDetailData = {
       course: { id: courseId },
       order: { id: order.id }, // Replace with actual order ID
